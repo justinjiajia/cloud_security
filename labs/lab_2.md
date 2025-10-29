@@ -82,7 +82,7 @@ In this task, you will use the VPC and more option in the VPC console to create 
      - Change Public subnet CIDR block in us-east-1a to *10.0.0.0/24*
      - Change Private subnet CIDR block in us-east-1a to *10.0.1.0/24*
 
-   <img width="370" height="431" alt="image" src="https://github.com/user-attachments/assets/b7abaaef-1bda-4cb1-b697-30499f210e52" />
+     <img width="370" height="431" alt="image" src="https://github.com/user-attachments/assets/b7abaaef-1bda-4cb1-b697-30499f210e52" />
 
        
 
@@ -124,13 +124,12 @@ In this task, you will use the VPC and more option in the VPC console to create 
 
 5. At the bottom of the screen, choose *Create VPC*.
 
-  <img width="783" height="531" alt="image" src="https://github.com/user-attachments/assets/d1e10581-0109-4275-80fd-2615cae42655" />
-
-<img width="728" height="441" alt="image" src="https://github.com/user-attachments/assets/efb48c63-2d96-4eae-9db4-6eac2d858906" />
+<img width="728" height="441" alt="image" src="https://github.com/user-attachments/assets/47d7d162-76a9-4d3d-aecd-35ee1c34802f" />
 
    
 
 The VPC resources are created. The NAT Gateway will take a few minutes to activate. Please wait until all the resources are created before proceeding to the next step.
+
 
    
 
@@ -165,7 +164,8 @@ After creating a VPC as you have already done, you can still configure it furthe
 
 1. In the left navigation pane, choose *Subnets*.
 
-   ![image-20251030010659550](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030010659550.png)
+   <img width="151" height="296" alt="image" src="https://github.com/user-attachments/assets/ee88fa36-5532-416f-93d8-1097c719b8b5" />
+
 
  
 
@@ -179,9 +179,10 @@ After creating a VPC as you have already done, you can still configure it furthe
 
    - IPv4 CIDR block: *10.0.2.0/24*
 
-     - The subnet will have all IP addresses starting with *10.0.2.x*.
+     > The subnet will have all IP addresses starting with *10.0.2.x*.
 
-       ![image-20251030011307668](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030011307668.png)
+     <img width="710" height="596" alt="image" src="https://github.com/user-attachments/assets/8bf9e588-4f17-412c-aa98-9f7a16b4aca7" />
+
 
 
 
@@ -194,13 +195,12 @@ After creating a VPC as you have already done, you can still configure it furthe
 
    - IPv4 CIDR block: *10.0.3.0/24*
 
-     - The subnet will have all IP addresses starting with *10.0.3.x*.
+     > The subnet will have all IP addresses starting with *10.0.3.x*.
 
-       ![image-20251030011652372](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030011652372.png)
+     <img width="712" height="557" alt="image" src="https://github.com/user-attachments/assets/c2b0591d-27e2-444d-b05c-d30294f567b3" />
+
 
        
-
- 
 
 4. Choose *Create subnet* to create two new subnets as configured
 
@@ -214,8 +214,7 @@ Now, you will first configure the new private subnet to route internet-bound tra
 
 5. In the lower pane, choose *Route tables*.
 
-![image-20251030012007929](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030012007929.png)
-
+<img width="156" height="286" alt="image" src="https://github.com/user-attachments/assets/7eea32e4-c55b-4bc5-a8b7-0b307a553822" />
 
 
 > Note: If the newly created routes are not visible, choose refresh  button at the top to update the list of routes.
