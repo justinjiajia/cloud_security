@@ -29,7 +29,7 @@ In this lab you build the following infrastructure:
 
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_foundation/L2-architecture.png" alt="Architecture" />
 
----
+
 
 ## Task 1: Create Your VPC
 
@@ -248,7 +248,8 @@ Now, the VPC has public and private subnets configured in two Availability Zones
 
 
 
- 
+
+
 
 ## Task 3: Launch a Web Server Instance
 
@@ -258,20 +259,23 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
 
 1. In the search box to the right of  Services, search for and choose EC2 to open the EC2 console.
 
-   ![image-20251030014812836](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030014812836.png)
+   <img width="760" height="269" alt="image" src="https://github.com/user-attachments/assets/41ed54cd-6247-44e4-8291-b2c423a27749" />
+
 
    
 
 2. From the Launch instance tile choose Launch instance.
 
-   ![image-20251030014937286](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030014937286.png)
+   <img width="569" height="142" alt="image" src="https://github.com/user-attachments/assets/5651eeb2-74ed-4988-b8a8-a14e282e2333" />
+
 
    
 
 3. Configure the instance:
 
    - Name: *Web Server 1*
-     When you name your instance, AWS creates a tag and associates it with the instance. A tag is a key value pair. The key for this pair is *Name*, and the value is the name you enter for your EC2 instance.
+
+     > When you name your instance, AWS creates a tag and associates it with the instance. A tag is a key value pair. The key for this pair is *Name*, and the value is the name you enter for your EC2 instance.
 
    - In the list of available Quick Start AMIs, keep the default Amazon Linux selected.
 
@@ -279,7 +283,8 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
 
      > The type of Amazon Machine Image (AMI) you choose determines the Operating System that will run on the EC2 instance that you launch.
 
-    ![image-20251030015435353](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030015435353.png)
+     <img width="820" height="716" alt="image" src="https://github.com/user-attachments/assets/8b917728-8fbf-4765-8093-ae27e66dfc15" />
+
 
    - In the Instance type panel, choose *t3.large* from the dropdown menu.
 
@@ -289,7 +294,8 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
 
      > The vockey key pair you selected will allow you to connect to this instance via SSH after it has launched. Although you will not need to do that in this lab, it is still required to identify an existing key pair, or create a new one, or choose to proceed without a key pair, when you launch an instance.
 
-   ![image-20251030015527328](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030015527328.png)
+   <img width="813" height="305" alt="image" src="https://github.com/user-attachments/assets/6692d961-1d30-4d47-a22c-298a4ae409d8" />
+
 
  
 
@@ -302,7 +308,8 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
      - Subnet:  ***\<your student ID\>-subnet-public2*** (not Private!)
      - Auto-assign public IP: *Enable*
 
-     ![image-20251030015801737](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030015801737.png)
+     <img width="813" height="233" alt="image" src="https://github.com/user-attachments/assets/b00267d2-426c-452f-8ab3-194077ddedfb" />
+
 
      
 
@@ -316,7 +323,8 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
 
          
 
-         ![image-20251030020513542](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030020513542.png)
+         <img width="812" height="200" alt="image" src="https://github.com/user-attachments/assets/2d1a8617-792c-4a1a-ba9b-d7a5332d109c" />
+
 
          
 
@@ -328,8 +336,7 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
 
        - Description: *Permit web requests*
 
-       ![image-20251030020613311](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030020613311.png)
-
+       <img width="797" height="277" alt="image" src="https://github.com/user-attachments/assets/c2a67c8a-177c-45be-ac61-1131c1eb695b" />
 
 
 
@@ -358,7 +365,8 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
      service httpd start
      ```
 
-     ![image-20251030021037045](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030021037045.png)
+     <img width="818" height="374" alt="image" src="https://github.com/user-attachments/assets/6e941701-43f5-4132-b616-9e5de4f43275" />
+
 
      
 
@@ -386,7 +394,8 @@ You will now connect to the web server running on the EC2 instance.
 
     
 
-![image-20251030021355694](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030021355694.png)
+<img width="1070" height="655" alt="image" src="https://github.com/user-attachments/assets/cf9dc19e-2607-479d-8d63-f976d4b169dc" />
+
 
 
 
@@ -396,7 +405,8 @@ You will now connect to the web server running on the EC2 instance.
 
 12. Open a new web browser tab, paste the Public DNS value or the Public IPv4 address value and press Enter. You should see a web page displaying the AWS logo and instance meta-data values.
 
-![image-20251030021737839](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030021737839.png)
+<img width="1159" height="412" alt="image" src="https://github.com/user-attachments/assets/4e4e4d4e-23df-475b-9ee6-548c7d408f36" />
+
 
 The complete architecture you deployed is:
 
