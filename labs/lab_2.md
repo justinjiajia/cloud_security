@@ -54,6 +54,7 @@ In this task, you will use the VPC and more option in the VPC console to create 
      
 
    - Next, choose Create VPC.
+     
      <img width="271" height="59" alt="image" src="https://github.com/user-attachments/assets/315cd7ff-ed6c-4501-90e2-67398fff83cc" />
 
      
@@ -69,8 +70,6 @@ In this task, you will use the VPC and more option in the VPC console to create 
 
      <img width="371" height="431" alt="image" src="https://github.com/user-attachments/assets/5f66a9c6-2333-4eb9-93e9-91c44844dd34" />
 
-
-      
 
    - For Number of Availability Zones, choose *1*.
 
@@ -94,7 +93,7 @@ In this task, you will use the VPC and more option in the VPC console to create 
    - Keep both DNS hostnames and DNS resolution enabled.
 
 
-   ![image-20251030004501629](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030004501629.png)
+   <img width="372" height="360" alt="image" src="https://github.com/user-attachments/assets/c9b6db18-aaa3-46bb-9818-e661aa254bc6" />
 
 
 
@@ -125,7 +124,8 @@ In this task, you will use the VPC and more option in the VPC console to create 
 
 5. At the bottom of the screen, choose *Create VPC*.
 
-   ![image-20251030005258707](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030005258707.png)
+  <img width="783" height="531" alt="image" src="https://github.com/user-attachments/assets/d1e10581-0109-4275-80fd-2615cae42655" />
+
 
    
 
@@ -141,11 +141,12 @@ The wizard has provisioned a VPC with a public subnet and a private subnet in on
 
 To view the settings of these resources, browse through the VPC console links that display the resource details. For example, choose Subnets to view the subnet details and choose Route tables to view the route table details. 
 
-   ![image-20251030010204115](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030010204115.png)
+<img width="1228" height="526" alt="image" src="https://github.com/user-attachments/assets/aaf20d45-d175-4718-8f06-d0215924dcd6" />
 
-   
 
-   The diagram below summarizes the VPC resources you have just created and how they are configured.<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_foundation/L2-task1.png" alt="Task 1" />
+The diagram below summarizes the VPC resources you have just created and how they are configured.
+
+<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_foundation/L2-task1.png" alt="Task 1" />
 
 ​         
 
