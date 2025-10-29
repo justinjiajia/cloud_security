@@ -126,6 +126,7 @@ In this task, you will use the VPC and more option in the VPC console to create 
 
   <img width="783" height="531" alt="image" src="https://github.com/user-attachments/assets/d1e10581-0109-4275-80fd-2615cae42655" />
 
+<img width="728" height="441" alt="image" src="https://github.com/user-attachments/assets/efb48c63-2d96-4eae-9db4-6eac2d858906" />
 
    
 
