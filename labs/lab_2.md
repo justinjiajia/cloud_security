@@ -41,9 +41,8 @@ In this task, you will use the VPC and more option in the VPC console to create 
 
 1. In the search box at the top left of the screen, search for and choose *VPC* to open the VPC console.
 
-   
+   <img width="784" height="140" alt="image" src="https://github.com/user-attachments/assets/2e5083b4-573c-45ae-90ca-1f77e6ec12ed" />
 
-   ![image-20251030003416762](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030003416762.png)
 
    
 
@@ -51,13 +50,11 @@ In this task, you will use the VPC and more option in the VPC console to create 
 
    - In the top right of the screen, verify that N. Virginia (us-east-1) is the region.
    
-     <img width="784" height="140" alt="image" src="https://github.com/user-attachments/assets/2e5083b4-573c-45ae-90ca-1f77e6ec12ed" />
-
-
+     <img width="310" height="91" alt="image" src="https://github.com/user-attachments/assets/dfbe62a0-db65-4c8c-abeb-889809af69ed" />
      
 
    - Next, choose Create VPC.
-     <img width="310" height="91" alt="image" src="https://github.com/user-attachments/assets/dfbe62a0-db65-4c8c-abeb-889809af69ed" />
+     
      
 
 3. Configure the VPC details in the VPC settings panel on the left:
