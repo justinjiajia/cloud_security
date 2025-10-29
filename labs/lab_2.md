@@ -212,22 +212,15 @@ Now, you will first configure the new private subnet to route internet-bound tra
 
 
 
-5. In the lower pane, choose *Route tables*.
 
-<img width="156" height="286" alt="image" src="https://github.com/user-attachments/assets/7eea32e4-c55b-4bc5-a8b7-0b307a553822" />
+5. Select  the ***\<your student ID\>-subnet-private2*** subnet.
 
+6. In the lower pane, choose the *Route table* tab, then choose *Edit route table association*.
 
-> Note: If the newly created routes are not visible, choose refresh  button at the top to update the list of routes.
+7. Choose ***\<your student ID\>-rtb-private1-us-east-1a*** from the menu for Route table ID, then Choose *Save*
 
+   <img width="790" height="358" alt="image" src="https://github.com/user-attachments/assets/8b23f509-dcc8-4736-b6cb-abaf36403bd3" />
 
-
-6. Select  the ***\<your student ID\>-subnet-private2*** subnet.
-
-7. In the lower pane, choose the *Route table* tab, then choose *Edit route table association*.
-
-8. Choose ***\<your student ID\>-rtb-private1-us-east-1a*** from the menu for Route table ID, then Choose *Save*
-
-   ![image-20251030013906059](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030013906059.png)
 
 Note that Destination *0.0.0.0/0* is set to Target *nat-xxxxxxxx*. This means that traffic destined for the internet (*0.0.0.0/0*) will be sent to the NAT Gateway. The NAT Gateway will then forward the traffic to the internet.
 
@@ -237,12 +230,14 @@ Next, you will configure the Route Table that is used by the Public Subnets.
 
 
 
-9. Select  the ***\<your student ID\>-subnet-public2*** subnet.
+8. Select  the ***\<your student ID\>-subnet-public2*** subnet.
 
-10. In the lower pane, choose the *Route table* tab, then choose *Edit route table association*.
-11. Choose ***\<your student ID\>-rtb-public*** from the menu for Route table ID, then Choose *Save*
+9. In the lower pane, choose the *Route table* tab, then choose *Edit route table association*.
 
-![image-20251030014405563](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030014405563.png)
+10. Choose ***\<your student ID\>-rtb-public*** from the menu for Route table ID, then Choose *Save*
+
+    <img width="792" height="373" alt="image" src="https://github.com/user-attachments/assets/4c82675a-3bcb-4a74-bd45-0ceb05af5bf3" />
+
 
 Note that Destination *0.0.0.0/0* is set to Target *igw-xxxxxxxx*, which is an Internet Gateway. This means that internet-bound traffic will be sent straight to the internet via this Internet Gateway.
 
