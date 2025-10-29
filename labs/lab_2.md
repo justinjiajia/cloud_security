@@ -54,6 +54,8 @@ In this task, you will use the VPC and more option in the VPC console to create 
      
 
    - Next, choose Create VPC.
+     <img width="271" height="59" alt="image" src="https://github.com/user-attachments/assets/315cd7ff-ed6c-4501-90e2-67398fff83cc" />
+
      
      
 
@@ -65,7 +67,8 @@ In this task, you will use the VPC and more option in the VPC console to create 
 
    - Keep the IPv4 CIDR block set to 10.0.0.0/16
 
-     ![image-20251030022102671](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030022102671.png)
+     <img width="371" height="431" alt="image" src="https://github.com/user-attachments/assets/5f66a9c6-2333-4eb9-93e9-91c44844dd34" />
+
 
       
 
@@ -80,7 +83,9 @@ In this task, you will use the VPC and more option in the VPC console to create 
      - Change Public subnet CIDR block in us-east-1a to *10.0.0.0/24*
      - Change Private subnet CIDR block in us-east-1a to *10.0.1.0/24*
 
-     ![image-20251030004338041](C:\Users\justi\AppData\Roaming\Typora\typora-user-images\image-20251030004338041.png)
+   <img width="370" height="431" alt="image" src="https://github.com/user-attachments/assets/b7abaaef-1bda-4cb1-b697-30499f210e52" />
+
+       
 
    - Set NAT gateways to *In 1 AZ*.
 
