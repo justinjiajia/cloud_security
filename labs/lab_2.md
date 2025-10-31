@@ -466,4 +466,10 @@ Now that you have a terminal session, you will interact with the Apache web serv
 Now, refresh the tab, and the Web page should now be accessible again.
 
 
+# Task 5: Terminate your instance
+
+Remember to terminate all running EC2 instances in your console to avoid unnecessary charges and clean up resources.
+
+<img width="1006" height="494" alt="image" src="https://github.com/user-attachments/assets/6f714399-4947-4986-8991-f0e572c24cf9" />
+
 
