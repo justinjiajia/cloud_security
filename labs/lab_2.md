@@ -360,7 +360,7 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
      dnf install -y httpd
      systemctl enable httpd
      systemctl start httpd
-     echo '<html><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.html
+     echo '<html><img src="https://raw.githubusercontent.com/justinjiajia/cloud_security/refs/heads/main/labs/resources/AWS_logo_RGB.png" /><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.html
      ```
 
      <img width="818" height="374" alt="image" src="https://github.com/user-attachments/assets/6e941701-43f5-4132-b616-9e5de4f43275" />
