@@ -418,7 +418,7 @@ The complete architecture you deployed is:
 
 # Task 4: Connect to Your Amazon EC2 Instance
 
-In this task, you will connect to the EC2 instance using *EC2 Instance Connect*, which provides access to a browser-embeded terminal that  You'll then turn on and off the Web service from within the instance.
+In this task, you will connect to the EC2 instance using *EC2 Instance Connect*, which initiates a browser-embeded terminal that mouts your to the EC2 instance. You'll then turn on and off the Web service from within the instance.
 
 In the AWS Management Console, in the search box next to Services , search for and select EC2.
 
