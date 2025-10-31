@@ -466,7 +466,7 @@ Now that you have a terminal session, you will interact with the Apache web serv
 Now, refresh the tab, and the Web page should now be accessible again.
 
 
-# Task 5: Terminate your instance
+# Task 5: Terminate your EC2 instances
 
 Remember to terminate all running EC2 instances in your console to avoid unnecessary charges and clean up resources.
 
