@@ -431,8 +431,21 @@ In this task, you will connect to the EC2 instance using *EC2 Instance Connect*,
 
    <img width="1636" height="614" alt="image" src="https://github.com/user-attachments/assets/54622489-d72c-4f43-9665-bf144c5f66bd" />
 
+An EC2 Instance Connect terminal session opens and displays a `$` prompt.
 
-An EC2 Instance Connect terminal session opens and displays a $ prompt.
+   ```shell
+   sudo netstat -plnt | grep httpd
+   ```
+
+   ```shell
+   sudo systemctl stop httpd
+   sudo netstat -plnt | grep httpd
+   ```
+
+   ```shell
+   sudo systemctl start httpd
+   sudo netstat -plnt | grep httpd
+   ```
 
 <img width="750" height="275" alt="image" src="https://github.com/user-attachments/assets/3416ca35-24d0-45cf-beb0-a72ccea9ba54" />
 
