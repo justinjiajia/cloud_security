@@ -363,7 +363,8 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
      echo '<html><img src="https://raw.githubusercontent.com/justinjiajia/cloud_security/refs/heads/main/labs/resources/AWS_logo_RGB.png" /><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.html
      ```
 
-     <img width="818" height="374" alt="image" src="https://github.com/user-attachments/assets/6e941701-43f5-4132-b616-9e5de4f43275" />
+     <img width="717" height="497" alt="image" src="https://github.com/user-attachments/assets/8958fd92-f591-4d4a-b2ed-da03da363e9e" />
+
   
      Remember that your instance is running Amazon Linux 2023. The shell script above will run with root user permissions when the instance launches for the first time. The script will:
 
