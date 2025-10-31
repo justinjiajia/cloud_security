@@ -357,22 +357,20 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
 
      ```shell
      #!/bin/bash
-     # Install Apache Web Server and PHP
-     dnf install -y httpd wget php mariadb105-server
-     # Download Lab files
-     wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-ACCLFO-2/2-lab2-vpc/s3/lab-app.zip
-     unzip lab-app.zip -d /var/www/html/
-     # Turn on web server
+     dnf install -y httpd
      systemctl enable httpd
      systemctl start httpd
+     echo '<html><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.html
      ```
 
      <img width="818" height="374" alt="image" src="https://github.com/user-attachments/assets/6e941701-43f5-4132-b616-9e5de4f43275" />
+  
+     Remember that your instance is running Amazon Linux 2023. The shell script above will run with root user permissions when the instance launches for the first time. The script will:
 
-
-     
-
-     > This script will run with root user permissions on the operating system of the instance. It will run automatically when the instance launches for the first time. The script installs a web server, a database, and PHP libraries, and then it downloads and installs a PHP web application on the web server.
+     - Install an Apache web server (`httpd`);
+     - Configure the web server to automatically start on boot;
+     - Run the Web server once it has finished installing;
+     - Create a simple Web page.
 
 
 
