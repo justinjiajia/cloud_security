@@ -407,7 +407,8 @@ You will now connect to the web server running on the EC2 instance.
 12. Open a new web browser tab, paste the Public DNS value or the Public IPv4 address value and press Enter. You should see a test page displaying the AWS logo and your instance's metadata.
     **Keep this tab open for later steps.**
 
-<img width="1159" height="412" alt="image" src="https://github.com/user-attachments/assets/4e4e4d4e-23df-475b-9ee6-548c7d408f36" />
+<img width="559" height="230" alt="image" src="https://github.com/user-attachments/assets/b4727c00-5fe5-4189-868d-6b672193d4c4" />
+
 
 
 The complete architecture you deployed is:
