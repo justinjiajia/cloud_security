@@ -345,7 +345,7 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
 
 5. In the *Configure storage* section, keep the default settings.
 
-   > Note: The default settings specify that the root volume of the instance, which will host the Amazon Linux guest operating system that you specified earlier, will run on a general purpose SSD (gp3) hard drive that is 8 GiB in size. You could add more storage volumes, however that is not needed in this lab.
+   > Note: The default settings specify that the root volume of the instance, which will host the Amazon Linux operating system that you specified earlier, will run on a general purpose SSD (gp3) hard drive that is 8 GiB in size. You could add more storage volumes, however that is not needed in this lab.
 
  
 
@@ -372,7 +372,7 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
 
      
 
-     > This script will run with root user permissions on the guest OS of the instance. It will run automatically when the instance launches for the first time. The script installs a web server, a database, and PHP libraries, and then it downloads and installs a PHP web application on the web server.
+     > This script will run with root user permissions on the operating system of the instance. It will run automatically when the instance launches for the first time. The script installs a web server, a database, and PHP libraries, and then it downloads and installs a PHP web application on the web server.
 
 
 
@@ -418,14 +418,21 @@ The complete architecture you deployed is:
 
 # Task 4: Connect to Your Amazon EC2 Instance
 
-In this task, you will connect to the EC2 instance using *EC2 Instance Connect*, which initiates a browser-embeded terminal that mouts your to the EC2 instance. You'll then turn on and off the Web service from within the instance.
+In this task, you will connect to the EC2 instance using *EC2 Instance Connect*, which initiates a browser-embeded terminal that mounts you to the EC2 instance. You'll then turn on and off the Web service from within the instance.
 
-In the AWS Management Console, in the search box next to Services , search for and select EC2.
 
-Choose Instances.
 
-Select the Lab instance, and then choose Connect.
+1. Select the instance we just created, and then choose *Connect*.
 
-On the EC2 Instance Connect tab, choose Connect.
+   <img width="1014" height="233" alt="image" src="https://github.com/user-attachments/assets/e55f6f89-ffe1-47e5-aadb-0862f07631f0" />
+
+
+2. On the *EC2 Instance Connect* tab, choose *Connect*.
+
+   <img width="1636" height="614" alt="image" src="https://github.com/user-attachments/assets/54622489-d72c-4f43-9665-bf144c5f66bd" />
+
 
 An EC2 Instance Connect terminal session opens and displays a $ prompt.
+
+<img width="750" height="275" alt="image" src="https://github.com/user-attachments/assets/3416ca35-24d0-45cf-beb0-a72ccea9ba54" />
+
