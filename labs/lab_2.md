@@ -433,7 +433,6 @@ The complete architecture you deployed is:
 
    <img width="1636" height="614" alt="image" src="https://github.com/user-attachments/assets/54622489-d72c-4f43-9665-bf144c5f66bd" />
 
-An EC2 Instance Connect terminal session opens and displays a `$` prompt.
 
 A new browser tab will open with a terminal session, presenting a command prompt (`$`). You are now securely connected to your EC2 instance.
 
