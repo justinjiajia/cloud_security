@@ -363,8 +363,8 @@ In this task, you will launch an Amazon EC2 instance into the new VPC. You will 
      wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-ACCLFO-2/2-lab2-vpc/s3/lab-app.zip
      unzip lab-app.zip -d /var/www/html/
      # Turn on web server
-     chkconfig httpd on
-     service httpd start
+     systemctl enable httpd
+     systemctl start httpd
      ```
 
      <img width="818" height="374" alt="image" src="https://github.com/user-attachments/assets/6e941701-43f5-4132-b616-9e5de4f43275" />
