@@ -21,6 +21,8 @@ After completing this lab, you should be able to do the following:
 
 - Launch an EC2 instance into a VPC.
 
+- Connect to the EC2 instance and deploy a Web service
+
   
 
 ## Scenario
@@ -412,3 +414,18 @@ The complete architecture you deployed is:
 
 
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_foundation/L2-end-architecture.png" alt="Architecture" />
+
+
+# Task 4: Connect to Your Amazon EC2 Instance
+
+In this task, you will connect to the EC2 instance using *EC2 Instance Connect*, which provides access to a browser-embeded terminal that  You'll then turn on and off the Web service from within the instance.
+
+In the AWS Management Console, in the search box next to Services , search for and select EC2.
+
+Choose Instances.
+
+Select the Lab instance, and then choose Connect.
+
+On the EC2 Instance Connect tab, choose Connect.
+
+An EC2 Instance Connect terminal session opens and displays a $ prompt.
