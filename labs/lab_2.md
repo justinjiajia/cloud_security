@@ -416,36 +416,55 @@ The complete architecture you deployed is:
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_foundation/L2-end-architecture.png" alt="Architecture" />
 
 
-# Task 4: Connect to Your Amazon EC2 Instance
+# Task 4: Connect to and Manage Your Amazon EC2 Instance
 
-In this task, you will connect to the EC2 instance using *EC2 Instance Connect*, which initiates a browser-embeded terminal that mounts you to the EC2 instance. You'll then turn on and off the Web service from within the instance.
+ In this task, you will establish a secure connection to your EC2 instance using the browser-based *EC2 Instance Connect*. Once connected, you will use the Linux command line to verify, stop, and restart the Apache web service.
 
 
 
-1. Select the instance we just created, and then choose *Connect*.
+1. Select the instance we just created
+   
+2. Click the *Connect* button at the top of the console.
 
    <img width="1014" height="233" alt="image" src="https://github.com/user-attachments/assets/e55f6f89-ffe1-47e5-aadb-0862f07631f0" />
 
 
-2. On the *EC2 Instance Connect* tab, choose *Connect*.
+3. On the *EC2 Instance Connect* tab, leave all the settings as their defaults, then choose *Connect*.
 
    <img width="1636" height="614" alt="image" src="https://github.com/user-attachments/assets/54622489-d72c-4f43-9665-bf144c5f66bd" />
 
 An EC2 Instance Connect terminal session opens and displays a `$` prompt.
 
+A new browser tab will open with a terminal session, presenting a command prompt (`$`). You are now securely connected to your EC2 instance.
+
+<img width="507" height="158" alt="image" src="https://github.com/user-attachments/assets/ea038428-76b7-4623-a260-6dda7157214a" />
+
+Now that you have a terminal session, you will interact with the Apache web server (also known as `httpd`).
+
+4. Run the following command to confirm that the Apache web server is active and listening for connections.
+
    ```shell
-   sudo netstat -plnt | grep httpd
+   sudo systemctl status httpd
    ```
+
+<img width="1029" height="390" alt="image" src="https://github.com/user-attachments/assets/5fb3e3ae-ca40-455d-8a26-fd26ef7336f7" />
+
+
+5. Stop the HTTP Web service. Now, you will stop the web server to simulate taking it offline and verify the service has stopped.
 
    ```shell
    sudo systemctl stop httpd
-   sudo netstat -plnt | grep httpd
+   sudo systemctl status httpd
    ```
+ The output should now show ***inactive (dead)***.  Switch to the browser tab displaying your Web page and refresh the page. The page should now be inaccessible
 
+ 6. Restart the web server to bring it back online.
    ```shell
    sudo systemctl start httpd
-   sudo netstat -plnt | grep httpd
+   sudo systemctl status httpd
    ```
 
-<img width="750" height="275" alt="image" src="https://github.com/user-attachments/assets/3416ca35-24d0-45cf-beb0-a72ccea9ba54" />
+Now, refresh the tab, and the Web page should now be accessible again.
+
+
 
