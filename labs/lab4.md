@@ -105,4 +105,41 @@ aws s3 ls
 
 <img width="712" height="258" alt="image" src="https://github.com/user-attachments/assets/e12220f5-1061-4c55-8748-12371d8417f8" />
 
+```shell
+wget https://raw.githubusercontent.com/justinjiajia/cloud_security/refs/heads/main/labs/resources/AWS_logo_RGB.png
+```
 
+```shell
+aws s3api get-object --bucket ust-cloud-security-test --key AWS_logo_RGB.png downloaded.png
+```
+
+<img width="1161" height="95" alt="image" src="https://github.com/user-attachments/assets/1916d426-e4d4-4f45-929d-30788737629f" />
+
+
+now edit bukkect policy
+
+<img width="888" height="622" alt="image" src="https://github.com/user-attachments/assets/79fd766d-fbb5-4795-abab-e0f48661022c" />
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::245221346334:user/admin"
+            },
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::ust-cloud-security-test",
+                "arn:aws:s3:::ust-cloud-security-test/*"
+            ]
+        }
+    ]
+}
+```
+```shell
+aws s3api get-object --bucket ust-cloud-security-test --key AWS_logo_RGB.png downloaded.png
+```
+
+<img width="1011" height="253" alt="image" src="https://github.com/user-attachments/assets/66d82873-db7f-42c6-8cc8-4842bf109a28" />
