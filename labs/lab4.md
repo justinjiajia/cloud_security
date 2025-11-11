@@ -1,5 +1,137 @@
 
 
+
+create an S3 bucket
+
+Name: ust-justinjia-production-bucket-001
+
+<img width="1050" height="532" alt="image" src="https://github.com/user-attachments/assets/f4f06901-250f-487a-a488-002e0f0f6aac" />
+
+
+Create another S3 bucket
+Name: ust-justinjia-production-bucket-002
+
+
+Create an IAM policy
+
+
+Select S3 from the Service dropdown menu
+<img width="781" height="453" alt="image" src="https://github.com/user-attachments/assets/c194487e-39b4-4e46-b993-7950973cf8d9" />
+
+Tick the checkbox for *All S3 actions (s3:*)*
+<img width="762" height="180" alt="image" src="https://github.com/user-attachments/assets/c93dd0c6-2f57-44a2-a73e-6266386c87da" />
+
+
+Locate the *bucket* field under the Resources section, choose *Add ARNs* to restrict access.
+
+<img width="761" height="75" alt="image" src="https://github.com/user-attachments/assets/58da9c79-950f-49d5-a05f-390eb0b26f56" />
+
+
+Choose *Add ARNs*
+<img width="807" height="290" alt="image" src="https://github.com/user-attachments/assets/2acf102c-4a7d-4d1c-871d-52d056233245" />
+
+
+Locate the *object* field under the Resources section, choose *Add ARNs* to restrict access.
+<img width="759" height="77" alt="image" src="https://github.com/user-attachments/assets/8f32d257-5391-43ac-bfa3-9c263724adee" />
+
+
+Fill in the *Resource bucket name* field with the bucket name, tick the checkbox for *Any object name*
+<img width="807" height="347" alt="image" src="https://github.com/user-attachments/assets/6d9f2acf-8b43-407c-87a9-56573c44a53e" />
+
+Click Next
+
+Policy name: *CrossAccountAccessToS3Bucket*
+
+<img width="766" height="388" alt="image" src="https://github.com/user-attachments/assets/34130ccf-c019-4823-91d9-170257cde025" />
+
+
+To use the policy, I need to associate it with an IAM principal, 
+
+Next, I'll create an IAM role and attach this *CrossAccountAccessToS3Bucket* policy to it
+
+Select *AWS account*
+
+<img width="769" height="464" alt="image" src="https://github.com/user-attachments/assets/c1b264d5-da70-4ebf-816f-9aa45e5ebe39" />
+
+ 
+
+
+
+<img width="760" height="356" alt="image" src="https://github.com/user-attachments/assets/68fd6ec9-021d-4109-92c6-21cf0cc048e0" />
+
+<img width="252" height="448" alt="image" src="https://github.com/user-attachments/assets/c20719b6-677b-438e-9129-ff5bd00c087e" />
+
+
+<img width="782" height="298" alt="image" src="https://github.com/user-attachments/assets/39adf3bd-f155-4ce7-8402-2e9e387faf0d" />
+
+
+Call the role: AccessS3BucketFromAnotherAccount
+
+<img width="765" height="384" alt="image" src="https://github.com/user-attachments/assets/e4b7539b-3e26-4088-a65a-64d2b7242fc6" />
+
+
+<img width="773" height="324" alt="image" src="https://github.com/user-attachments/assets/e74842e2-e8fe-4ef7-9110-c56ecf153c4f" />
+
+https://signin.aws.amazon.com/switchrole?roleName=AccessS3BucketFromAnotherAccount&account=135056809391
+
+ARN:  *arn:aws:iam::135056809391:role/AccessS3BucketFromAnotherAccount*
+
+
+
+now configure your *admin* user to have an inline policy
+
+<img width="800" height="302" alt="image" src="https://github.com/user-attachments/assets/cf118876-39b4-4695-a737-7ccc63649243" />
+
+copy and paste the json policy:
+
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": "sts:AssumeRole",
+			"Resource": "arn:aws:iam::<account-id>:role/AccessS3BucketFromAnotherAccount"
+		}
+	]
+}
+```
+
+name this inline policy *AccessToS3BucketFromAnotherAccount*
+and create it
+
+<img width="817" height="226" alt="image" src="https://github.com/user-attachments/assets/19265a3f-9399-4812-b635-7a099c19ba99" />
+
+
+Now I want to log in as the admin user
+
+<img width="799" height="409" alt="image" src="https://github.com/user-attachments/assets/01e3cc34-6b67-477e-a5ef-51220bcd57be" />
+
+copy the *Console sign-in link*, and Choose *enable console access*
+
+<img width="526" height="269" alt="image" src="https://github.com/user-attachments/assets/e4da86cb-5ed4-433b-a365-a3551227cafc" />
+
+<img width="524" height="352" alt="image" src="https://github.com/user-attachments/assets/c4a3b200-c449-461b-9471-ec473e5e9e57" />
+
+copy and paste console password
+
+<img width="332" height="388" alt="image" src="https://github.com/user-attachments/assets/0ab32235-7901-4d25-a050-ea1952e75048" />
+
+
+Choose Switch role.
+
+If you have opted in to multi-session support, choose Add session and select Switch role.
+<img width="280" height="162" alt="image" src="https://github.com/user-attachments/assets/175bf20b-322d-4583-ae41-ce91cbdc6354" />
+
+
+ARN:  *arn:aws:iam::135056809391:role/AccessS3BucketFromAnotherAccount*
+
+
+<img width="814" height="591" alt="image" src="https://github.com/user-attachments/assets/5000d4bb-00c0-4373-a919-6e91cf8c7abd" />
+
+<img width="1038" height="400" alt="image" src="https://github.com/user-attachments/assets/8dd7acad-ba16-40d5-8ade-7b316d628ec7" />
+
+
 https://github.com/justinjiajia/certifications/blob/main/aws/cloud_security/labs/lab6.md
 
 
