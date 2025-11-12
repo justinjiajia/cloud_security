@@ -45,6 +45,47 @@ Policy name: *CrossAccountAccessToS3Bucket*
 <img width="766" height="388" alt="image" src="https://github.com/user-attachments/assets/34130ccf-c019-4823-91d9-170257cde025" />
 
 
+permissions defined in the *CrossAccountAccessToS3Bucket* policy
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAccessPointsForObjectLambda",
+                "s3:GetAccessPoint",
+                "s3:PutAccountPublicAccessBlock",
+                "s3:ListAccessPoints",
+                "s3:CreateStorageLensGroup",
+                "s3:ListJobs",
+                "s3:PutStorageLensConfiguration",
+                "s3:ListMultiRegionAccessPoints",
+                "s3:ListStorageLensGroups",
+                "s3:ListStorageLensConfigurations",
+                "s3:GetAccountPublicAccessBlock",
+                "s3:ListAllMyBuckets",
+                "s3:ListAccessGrantsInstances",
+                "s3:PutAccessPointPublicAccessBlock",
+                "s3:CreateJob"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::ust-justinjia-production-bucket-001/*",
+                "arn:aws:s3:::ust-justinjia-production-bucket-001"
+            ]
+        }
+    ]
+}
+```
+
+
 To use the policy, I need to associate it with an IAM principal, 
 
 Next, I'll create an IAM role and attach this *CrossAccountAccessToS3Bucket* policy to it
@@ -76,6 +117,23 @@ https://signin.aws.amazon.com/switchrole?roleName=AccessS3BucketFromAnotherAccou
 
 ARN:  *arn:aws:iam::135056809391:role/AccessS3BucketFromAnotherAccount*
 
+
+Trusted policy of the *AccessS3BucketFromAnotherAccount* role
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::245221346334:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {}
+        }
+    ]
+}
+```
 
 
 now configure your *admin* user to have an inline policy
