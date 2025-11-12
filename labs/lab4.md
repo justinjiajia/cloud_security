@@ -106,9 +106,10 @@ Select *AWS account*
 <img width="782" height="298" alt="image" src="https://github.com/user-attachments/assets/39adf3bd-f155-4ce7-8402-2e9e387faf0d" />
 
 
-Call the role: AccessS3BucketFromAnotherAccount
+Call the role: AccessToS3BucketFromOtherAccountsRole
 
-<img width="765" height="384" alt="image" src="https://github.com/user-attachments/assets/e4b7539b-3e26-4088-a65a-64d2b7242fc6" />
+<img width="1098" height="378" alt="image" src="https://github.com/user-attachments/assets/3e04af27-bb0b-43df-8b20-0511907e33ad" />
+
 
 
 <img width="773" height="324" alt="image" src="https://github.com/user-attachments/assets/e74842e2-e8fe-4ef7-9110-c56ecf153c4f" />
