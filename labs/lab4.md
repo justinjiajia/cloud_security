@@ -204,11 +204,14 @@ copy and paste console password
 
 Choose Switch role.
 
-If you have opted in to multi-session support, choose Add session and select Switch role.
+If you have opted in multi-session support, choose Add session and select Switch role.
 <img width="280" height="162" alt="image" src="https://github.com/user-attachments/assets/175bf20b-322d-4583-ae41-ce91cbdc6354" />
 
 
-ARN:  *arn:aws:iam::135056809391:role/AccessS3BucketFromAnotherAccount*
+ARN:  *arn:aws:iam::135056809391:role/AccessToS3BucketFromOtherAccountsRole*
+
+
+
 
 
 <img width="814" height="591" alt="image" src="https://github.com/user-attachments/assets/5000d4bb-00c0-4373-a919-6e91cf8c7abd" />
