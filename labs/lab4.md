@@ -106,20 +106,37 @@ Select *AWS account*
 <img width="782" height="298" alt="image" src="https://github.com/user-attachments/assets/39adf3bd-f155-4ce7-8402-2e9e387faf0d" />
 
 
-Call the role: AccessToS3BucketFromOtherAccountsRole
+Call the role: *AccessToS3BucketFromOtherAccountsRole*
 
 <img width="1098" height="378" alt="image" src="https://github.com/user-attachments/assets/3e04af27-bb0b-43df-8b20-0511907e33ad" />
 
+Trust policy
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+                "AWS": "245221346334"
+            },
+            "Condition": {}
+        }
+    ]
+}
+```
+
+<img width="1101" height="587" alt="image" src="https://github.com/user-attachments/assets/d1af6ed6-f09a-4883-bbba-1c2e04635d2c" />
 
 
-<img width="773" height="324" alt="image" src="https://github.com/user-attachments/assets/e74842e2-e8fe-4ef7-9110-c56ecf153c4f" />
+Link to switch roles in console: *https://signin.aws.amazon.com/switchrole?roleName=AccessToS3BucketFromOtherAccountsRole&account=135056809391*
 
-https://signin.aws.amazon.com/switchrole?roleName=AccessS3BucketFromAnotherAccount&account=135056809391
-
-ARN:  *arn:aws:iam::135056809391:role/AccessS3BucketFromAnotherAccount*
+ARN:  *arn:aws:iam::135056809391:role/AccessToS3BucketFromOtherAccountsRole*
 
 
-Trusted policy of the *AccessS3BucketFromAnotherAccount* role
+Trusted entities of the *AccessS3BucketFromAnotherAccount* role
 ```json
 {
     "Version": "2012-10-17",
@@ -136,12 +153,19 @@ Trusted policy of the *AccessS3BucketFromAnotherAccount* role
 }
 ```
 
+---
+
+<in my account>
 
 now configure your *admin* user to have an inline policy
 
 <img width="800" height="302" alt="image" src="https://github.com/user-attachments/assets/cf118876-39b4-4695-a737-7ccc63649243" />
 
-copy and paste the json policy:
+Choose JSON, then copy and paste the JSON policy below:
+
+<img width="1022" height="378" alt="image" src="https://github.com/user-attachments/assets/ff288f55-5603-4a7d-bc92-684af4908b6e" />
+
+
 
 ```json
 {
@@ -150,16 +174,17 @@ copy and paste the json policy:
 		{
 			"Effect": "Allow",
 			"Action": "sts:AssumeRole",
-			"Resource": "arn:aws:iam::<account-id>:role/AccessS3BucketFromAnotherAccount"
+			"Resource": "arn:aws:iam::135056809391:role/AccessToS3BucketFromOtherAccountsRole"
 		}
 	]
 }
 ```
 
-name this inline policy *AccessToS3BucketFromAnotherAccount*
+name this inline policy *AccessToS3BucketInAnotherAccountPolicy*
 and create it
 
-<img width="817" height="226" alt="image" src="https://github.com/user-attachments/assets/19265a3f-9399-4812-b635-7a099c19ba99" />
+<img width="1018" height="504" alt="image" src="https://github.com/user-attachments/assets/12d56852-b3a6-4a7d-aba3-08a4489148e2" />
+
 
 
 Now I want to log in as the admin user
