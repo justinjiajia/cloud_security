@@ -1,5 +1,5 @@
-<img width="1015" height="514" alt="image" src="https://github.com/user-attachments/assets/d1344b0b-f7b4-4a9e-847d-327e6ba68635" />
-# Lab 3 Using Resource-Based Policies to Secure an S3 Bucket
+ 
+# Lab 2 Using Resource-Based Policies to Secure an S3 Bucket
 
 
 ## Lab overview and objectives
@@ -136,6 +136,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 16. Select *DeveloperGroup* to add the user to this user group
     <img width="1019" height="440" alt="image" src="https://github.com/user-attachments/assets/aae595e9-c320-476b-8cf2-206aa33080fc" />
+
  
 ## Task 1: Creating 3 S3 Buckets
 
