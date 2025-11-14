@@ -1,4 +1,9 @@
 
+```shell
+aws organizations create-account --email "mars.earth.venus@gmail.com" --account-name "ISOM5140_identity_2"
+aws organizations list-roots | grep "Id"
+aws organizations move-account --account-id 066712929430 --source-parent-id r-mdvy --destination-parent-id ou-mdvy-d9xaqunq
+```
 
 
 create an S3 bucket
