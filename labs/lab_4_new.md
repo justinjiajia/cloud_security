@@ -1,4 +1,4 @@
-
+<img width="1015" height="514" alt="image" src="https://github.com/user-attachments/assets/d1344b0b-f7b4-4a9e-847d-327e6ba68635" />
 # Lab 3 Using Resource-Based Policies to Secure an S3 Bucket
 
 
@@ -43,7 +43,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 3. . This brings you to the IAM console:
 <img width="926" height="214" alt="image" src="https://github.com/user-attachments/assets/5eb0f770-f3f5-4493-997a-c6765a910004" />
 
-4. Choose *Policies*, then choose *Create policy*
+4. In the left navigation pane, choose *Policies*, then choose *Create policy*
   
    <img width="201" height="209" alt="image" src="https://github.com/user-attachments/assets/975d03ef-9fee-47eb-a3a8-56356ffb9a2e" />
    <img width="363" height="63" alt="image" src="https://github.com/user-attachments/assets/b02bdab5-9dc1-41f2-ba84-f6362eacb813" />
@@ -88,30 +88,55 @@ By the end of this lab, you will have created the architecture shown in the foll
    ```
   
    - Notice that the policy does not allow any Amazon EC2 actions.
-   - Notice the IAM actions that the policy allows. When you accessed the IAM dashboard, you saw a message that stated that you did not have iam:GetAccountSummary authorization. That action is not permitted in this policy document. However, many read-level IAM permissions are granted. For example, you are able to review the details for this policy.
+   - Notice the IAM actions that the policy allows. When you accessed the IAM dashboard, you saw a message that stated that you did not have `iam:GetAccountSummary` authorization. That action is not permitted in this policy document. However, many read-level IAM permissions are granted. For example, you are able to review the details for this policy.
    - Notice the Amazon S3 actions that the policy allows. No object-related actions are granted, but some actions related to buckets are allowed.
 
+6. Name the policy *DeveloperGroupPolicy*. Scroll down to the bottom and choose *Create policy*
+   <img width="671" height="353" alt="image" src="https://github.com/user-attachments/assets/b6722a0e-9f51-43a0-82ab-69944082bffc" />
+
    
-4. Choose *User groups*
+7. In the left navigation pane, choose *User groups*
 
-<img width="199" height="207" alt="image" src="https://github.com/user-attachments/assets/4d848555-8d95-41c7-8837-0554abb8d09b" />
+   <img width="199" height="207" alt="image" src="https://github.com/user-attachments/assets/4d848555-8d95-41c7-8837-0554abb8d09b" />
 
 
-5. Choose *Create group*
+8. Choose *Create group*
 
    <img width="1023" height="192" alt="image" src="https://github.com/user-attachments/assets/fb5d1b91-b803-403c-a52e-ed956de8ce70" />
 
-6.  *DeveloperGroup*
+9.  *DeveloperGroup*
 
    <img width="1011" height="204" alt="image" src="https://github.com/user-attachments/assets/bd8c0500-48f2-4551-b59c-f049658719ce" />
 
 
-- On the lower portion of the page, choose the  plus icon to the left of `DeveloperGroupPolicy` to display the policy details.
+10. In the *Attach permissions policies* pane, search for the policy we just created. Tick the checkbox to attach the policy to the user group to be created:
 
-- Review the JSON policy details, and recall the level of access that you had for Amazon EC2 and Amazon S3 in the previous task.
+    <img width="1005" height="356" alt="image" src="https://github.com/user-attachments/assets/6584991c-9f4b-4ce1-9669-b7372ac87e63" />
 
+11. Choose *Create user group* to create the *DeveloperGroup* goup.
+
+12. Choose the Permissions tab. Notice that an IAM policy named `DeveloperGroupPolicy` is attached to this IAM group. Choose the plus icon to the left of `DeveloperGroupPolicy` to display the policy details.
+    
+    <img width="1057" height="636" alt="image" src="https://github.com/user-attachments/assets/894a23ab-bee4-4b9f-81f8-8604c1f86a98" />
+
+
+    Review the IAM policy details.
+
+13. In the left navigation pane, choose *Users*, then choose *Create user*
+    
+    <img width="154" height="172" alt="image" src="https://github.com/user-attachments/assets/cd1094a9-dbf2-40d3-87dc-86e4f026d432" />
+
+
+14. Name the user *devuser*, select the checkbox *Provide user access to the AWS Management Console - optional*. Choose *Custom password*. Deselect *Users must create a new password at next sign-in - Recommended*
+    
+<img width="1015" height="514" alt="image" src="https://github.com/user-attachments/assets/8beae043-7ad5-4fef-8ef0-1a323ca4e8fc" />
+
+15. Choose *Next*
+    
+
+16. Select *DeveloperGroup* to add the user to this user group
+    <img width="1019" height="440" alt="image" src="https://github.com/user-attachments/assets/aae595e9-c320-476b-8cf2-206aa33080fc" />
  
-
 ## Task 1: Creating 3 S3 Buckets
 
 
@@ -224,11 +249,10 @@ You have observed how the devuser IAM user is unable to access certain informati
 - Choose the DeveloperGroup group name.
   On the Users tab, notice that `devuser` is a member of this IAM group.
 
-- Choose the Permissions tab.
-  Notice that an IAM policy named `DeveloperGroupPolicy` is attached to this IAM group.
+- 
 
   > Note: When a policy is attached to a group, the policy applies to any IAM users who are members of the group. Therefore, this policy currently governs your access to the console, because you are logged in as devuser, who is a member of this IAM group.
 
  
 
-9. Review the IAM policy details:
+9. 
