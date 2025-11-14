@@ -40,16 +40,20 @@ By the end of this lab, you will have created the architecture shown in the foll
   <img width="363" height="559" alt="image" src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
 
 
-3. . This brings you to the IAM console:
-<img width="926" height="214" alt="image" src="https://github.com/user-attachments/assets/5eb0f770-f3f5-4493-997a-c6765a910004" />
+## Task 2: Create an IAM user group and a user
 
-4. In the left navigation pane, choose *Policies*, then choose *Create policy*
+
+3. In the search box at the top left of the screen, search for and choose *IAM*. This brings you to the IAM console:
+   
+   <img width="926" height="214" alt="image" src="https://github.com/user-attachments/assets/5eb0f770-f3f5-4493-997a-c6765a910004" />
+
+5. In the left navigation pane, choose *Policies*, then choose *Create policy*
   
    <img width="201" height="209" alt="image" src="https://github.com/user-attachments/assets/975d03ef-9fee-47eb-a3a8-56356ffb9a2e" />
    <img width="363" height="63" alt="image" src="https://github.com/user-attachments/assets/b02bdab5-9dc1-41f2-ba84-f6362eacb813" />
 
 
-5. Choose JSON, and copy and paste the following JSON policy into the *Policy editor* text area:
+6. Choose JSON, and copy and paste the following JSON policy into the *Policy editor* text area:
    ```json
    {
        "Version": "2012-10-17",
@@ -91,20 +95,20 @@ By the end of this lab, you will have created the architecture shown in the foll
    - Notice the IAM actions that the policy allows. When you accessed the IAM dashboard, you saw a message that stated that you did not have `iam:GetAccountSummary` authorization. That action is not permitted in this policy document. However, many read-level IAM permissions are granted. For example, you are able to review the details for this policy.
    - Notice the Amazon S3 actions that the policy allows. No object-related actions are granted, but some actions related to buckets are allowed.
 
-6. Name the policy *DeveloperGroupPolicy*. Scroll down to the bottom and choose *Create policy*
+7. Name the policy *DeveloperGroupPolicy*. Scroll down to the bottom and choose *Create policy*
    <img width="671" height="353" alt="image" src="https://github.com/user-attachments/assets/b6722a0e-9f51-43a0-82ab-69944082bffc" />
 
    
-7. In the left navigation pane, choose *User groups*
+8. In the left navigation pane, choose *User groups*
 
    <img width="199" height="207" alt="image" src="https://github.com/user-attachments/assets/4d848555-8d95-41c7-8837-0554abb8d09b" />
 
 
-8. Choose *Create group*
+9. Choose *Create group*
 
    <img width="1023" height="192" alt="image" src="https://github.com/user-attachments/assets/fb5d1b91-b803-403c-a52e-ed956de8ce70" />
 
-9.  *DeveloperGroup*
+10.  *DeveloperGroup*
 
    <img width="1011" height="204" alt="image" src="https://github.com/user-attachments/assets/bd8c0500-48f2-4551-b59c-f049658719ce" />
 
@@ -134,11 +138,17 @@ By the end of this lab, you will have created the architecture shown in the foll
 15. Choose *Next*
     
 
-16. Select *DeveloperGroup* to add the user to this user group
+16. Select *DeveloperGroup* to add the user to this user group. Then choose *Next*.
     <img width="1019" height="440" alt="image" src="https://github.com/user-attachments/assets/aae595e9-c320-476b-8cf2-206aa33080fc" />
 
+17. Review the detail and choose *Create user*
+
+You can download the user credential for later use.
+
+<img width="1013" height="291" alt="image" src="https://github.com/user-attachments/assets/39db57dd-fc6b-4041-a4ca-14bb0d321011" />
+
  
-## Task 1: Creating 3 S3 Buckets
+## Task 3: Creating 3 S3 Buckets
 
 
  
