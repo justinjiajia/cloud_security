@@ -51,7 +51,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 5. Choose JSON, and copy and paste the following JSON policy into the *Policy editor* text area:
 
-    <details><summary>Policy attached to user <strong><i>devuser</i></strong></summary>
+  <details><summary>Policy attached to user <strong><i>devuser</i></strong></summary>
   <pre lang="json"><code>
   {
       "Version": "2012-10-17",
