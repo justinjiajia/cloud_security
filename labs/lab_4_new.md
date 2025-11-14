@@ -50,45 +50,42 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 
 5. Choose JSON, and copy and paste the following JSON policy into the *Policy editor* text area:
-
-  <details><summary>Policy attached to user <strong><i>devuser</i></strong></summary>
-  <pre lang="json"><code>
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Action": [
-                  "cloudformation:Describe*",
-                  "cloudformation:Get*",
-                  "cloudformation:List*",
-                  "iam:Describe*",
-                  "iam:GetAccountAuthorizationDetails",
-                  "iam:GetGroup",
-                  "iam:GetGroupPolicy",
-                  "iam:GetPolicy",
-                  "iam:GetRole",
-                  "iam:GetRolePolicy",
-                  "iam:GetUser",
-                  "iam:GetUserPolicy",
-                  "iam:List*",
-                  "logs:Desc*",
-                  "logs:Get*",
-                  "logs:List*",
-                  "s3:CreateBucket",
-                  "s3:ListAllMyBuckets",
-                  "s3:ListBucket",
-                  "s3:PutAccountPublicAccessBlock",
-                  "s3:PutBucketOwnershipControls",
-                  "s3:PutBucketPublicAccessBlock",
-                  "sts:AssumeRole"
-              ],
-              "Resource": "*",
-              "Effect": "Allow"
-          }
-      ]
-  }
-  </code></pre>
-  </details>
+   ```json
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Action": [
+                   "cloudformation:Describe*",
+                   "cloudformation:Get*",
+                   "cloudformation:List*",
+                   "iam:Describe*",
+                   "iam:GetAccountAuthorizationDetails",
+                   "iam:GetGroup",
+                   "iam:GetGroupPolicy",
+                   "iam:GetPolicy",
+                   "iam:GetRole",
+                   "iam:GetRolePolicy",
+                   "iam:GetUser",
+                   "iam:GetUserPolicy",
+                   "iam:List*",
+                   "logs:Desc*",
+                   "logs:Get*",
+                   "logs:List*",
+                   "s3:CreateBucket",
+                   "s3:ListAllMyBuckets",
+                   "s3:ListBucket",
+                   "s3:PutAccountPublicAccessBlock",
+                   "s3:PutBucketOwnershipControls",
+                   "s3:PutBucketPublicAccessBlock",
+                   "sts:AssumeRole"
+               ],
+               "Resource": "*",
+               "Effect": "Allow"
+           }
+       ]
+   }
+   ```
   
    - Notice that the policy does not allow any Amazon EC2 actions.
    - Notice the IAM actions that the policy allows. When you accessed the IAM dashboard, you saw a message that stated that you did not have iam:GetAccountSummary authorization. That action is not permitted in this policy document. However, many read-level IAM permissions are granted. For example, you are able to review the details for this policy.
