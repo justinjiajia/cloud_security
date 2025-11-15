@@ -24,65 +24,70 @@ You'll also create an IAM role, which allows access to certain buckets and their
 By the end of this lab, you will have created the architecture shown in the following diagram.
 
 
-<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab3/end-arch.png"  width=600 />
+<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab3/end-arch.png"  width=800 />
 
  
 
-## Login
+## Task 1: Log into the account root user
 
 
-1. Choose *Multi-session enabled* from the dropdown menu
+1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu at the top right corner
 
-<img width="567" height="151" alt="image" src="https://github.com/user-attachments/assets/c0fa4abd-534e-4635-a38f-6c58060e5cfc" />
+   <img width="500" height="151" alt="image" src="https://github.com/user-attachments/assets/c0fa4abd-534e-4635-a38f-6c58060e5cfc" />
 
-2. Choose *Sign-in with root user email*, then follow the instructions to log into your account
+2. Choose *Sign-in with root user email*, then follow the instructions to log into your root account
 
   <img width="363" height="559" alt="image" src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
+
+  Note that you may need to access the authenticator app and find the MFA code if MFA has been turn on for your root account.
 
 
 ## Task 2: Create an IAM user group and a user
 
 
-3. In the search box at the top left of the screen, search for and choose *IAM*. This brings you to the IAM console:
+1. In the search box at the top left of the screen, search for and choose *IAM*. This brings you to the IAM console:
    
-   <img width="926" height="214" alt="image" src="https://github.com/user-attachments/assets/5eb0f770-f3f5-4493-997a-c6765a910004" />
+   <img width="800" height="214" alt="image" src="https://github.com/user-attachments/assets/5eb0f770-f3f5-4493-997a-c6765a910004" />
 
-5. In the left navigation pane, choose *Policies*, then choose *Create policy*
+2. In the left navigation pane, choose *Policies*. Then choose *Create policy*
   
-   <img width="201" height="209" alt="image" src="https://github.com/user-attachments/assets/975d03ef-9fee-47eb-a3a8-56356ffb9a2e" />
-   <img width="363" height="63" alt="image" src="https://github.com/user-attachments/assets/b02bdab5-9dc1-41f2-ba84-f6362eacb813" />
+   <img width="250" height="209" alt="image" src="https://github.com/user-attachments/assets/975d03ef-9fee-47eb-a3a8-56356ffb9a2e" />
+   
+   <img width="400" height="63" alt="image" src="https://github.com/user-attachments/assets/b02bdab5-9dc1-41f2-ba84-f6362eacb813" />
 
 
-6. Choose JSON, and copy and paste the following JSON policy into the *Policy editor* text area:
+3. Choose the edit the policy using the JSON editor. Copy and paste the following JSON policy into the *Policy editor* text area:
    ```json
    {
        "Version": "2012-10-17",
        "Statement": [
            {
                "Action": [
-                   "cloudformation:Describe*",
-                   "cloudformation:Get*",
-                   "cloudformation:List*",
-                   "iam:Describe*",
-                   "iam:GetAccountAuthorizationDetails",
-                   "iam:GetGroup",
-                   "iam:GetGroupPolicy",
-                   "iam:GetPolicy",
-                   "iam:GetRole",
-                   "iam:GetRolePolicy",
-                   "iam:GetUser",
-                   "iam:GetUserPolicy",
-                   "iam:List*",
-                   "logs:Desc*",
-                   "logs:Get*",
-                   "logs:List*",
-                   "s3:CreateBucket",
-                   "s3:ListAllMyBuckets",
-                   "s3:ListBucket",
-                   "s3:PutAccountPublicAccessBlock",
-                   "s3:PutBucketOwnershipControls",
-                   "s3:PutBucketPublicAccessBlock",
-                   "sts:AssumeRole"
+	                "cloudformation:Describe*",
+	                "cloudformation:Get*",
+	                "cloudformation:List*",
+	                "iam:Describe*",
+	                "iam:GetAccountAuthorizationDetails",
+	                "iam:GetGroup",
+	                "iam:GetGroupPolicy",
+	                "iam:GetPolicy",
+	                "iam:GetRole",
+	                "iam:GetRolePolicy",
+	                "iam:GetUser",
+	                "iam:GetUserPolicy",
+	                "iam:GetPolicyVersion",
+	                "iam:List*",
+	                "logs:Desc*",
+	                "logs:Get*",
+	                "logs:List*",
+	                "s3:CreateBucket",
+	                "s3:ListAllMyBuckets",
+	                "s3:ListBucket",
+	                "s3:PutAccountPublicAccessBlock",
+	                "s3:PutBucketOwnershipControls",
+	                "s3:PutBucketPublicAccessBlock",
+	                "s3:PutEncryptionConfiguration",
+	                "sts:AssumeRole"
                ],
                "Resource": "*",
                "Effect": "Allow"
