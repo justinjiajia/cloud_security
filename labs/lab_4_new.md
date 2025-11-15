@@ -293,7 +293,7 @@ A message displays *Upload failed*.
 
 4. Review the policy details for Amazon S3 access:
 
-   Return to the text editor where you copied the DeveloperGroupPolicy.json document.
+   Return to the text editor where you copied the *DeveloperGroupPolicy.json* document.
 
    Review the policy details to understand why you were able to create an S3 bucket but couldn't upload objects to it.
 
@@ -303,47 +303,104 @@ Tip: The Service Authorization Reference document provides a list of actions tha
 
 1. Keep the current tab open. Switch to the tab that holds the session for your account root user. Then navigate to the S3 console
 
-2. choose the bucket named *"ust-\<your ITSC account string\>-bucket1"* from the *General purpose buckets* list.
+2. choose the bucket named *"ust-\<ITSC account string\>-bucket1"* from the *General purpose buckets* list.
 
 3. Choose the *Permissions* tab, and locate the *Bucket policy* section. Then choose *Edit*.
-<img width="981" height="448" alt="image" src="https://github.com/user-attachments/assets/26611be2-1a57-4711-bd7c-4ce1b4d72b18" />
+ 
 
-<img width="1059" height="634" alt="image" src="https://github.com/user-attachments/assets/3fca7de3-38f7-496f-982f-0b81bdc3b7d1" />
+   <img width="1059" height="634" alt="image" src="https://github.com/user-attachments/assets/3fca7de3-38f7-496f-982f-0b81bdc3b7d1" />
 
 
 4. Copy and paste the JSON policy below into the *Policy* text area. Then choose *Save changes*
-```json
-{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Principal": {
-				"AWS": "arn:aws:iam::245221346334:user/devuser"
+   
+	```json
+	{
+		"Version": "2012-10-17",
+		"Statement": [
+			{
+				"Effect": "Allow",
+				"Principal": {
+					"AWS": "arn:aws:iam::245221346334:user/devuser"
+				},
+				"Action": "s3:*",
+				"Resource": [
+					"arn:aws:s3:::ust-justinjia-bucket1",
+					"arn:aws:s3:::ust-justinjia-bucket1/*"
+				]
 			},
-			"Action": "s3:*",
-			"Resource": [
-				"arn:aws:s3:::ust-justinjia-bucket1",
-				"arn:aws:s3:::ust-justinjia-bucket1/*"
-			]
-		},
-		{
-			"Effect": "Deny",
-			"Principal": {
-				"AWS": "arn:aws:iam::245221346334:user/devuser"
-			},
-			"Action": "s3:DeleteBucket",
-			"Resource": "arn:aws:s3:::ust-justinjia-bucket1"
-		}
-	]
-}
-```
+			{
+				"Effect": "Deny",
+				"Principal": {
+					"AWS": "arn:aws:iam::245221346334:user/devuser"
+				},
+				"Action": "s3:DeleteBucket",
+				"Resource": "arn:aws:s3:::ust-justinjia-bucket1"
+			}
+		]
+	}
+	```
 
 
 
-<img width="1055" height="496" alt="image" src="https://github.com/user-attachments/assets/64fefee6-12ba-49db-9976-55e2561e4819" />
+    <img width="1055" height="496" alt="image" src="https://github.com/user-attachments/assets/64fefee6-12ba-49db-9976-55e2561e4819" />
 
-5. Keep the current tab open. Switch to the tab that holds the session for the *devuser* user
+5. Keep the current tab open. Switch to the tab that holds the session for the *devuser* user.
 
+6. Choose *"ust-\<ITSC account string\>-bucket1"* again, and attempt to upload the *DeveloperGroupPolicy.json* document again. This time the file was uploaded successfully. 
+
+7. Select the *DeveloperGroupPolicy.json* document from the *Objects*list. Choose *Delete*. Follow the instruction to confirm deletion in the *Delete objects* wizard. The file was successfully deleted.
+
+   <img width="1177" height="312" alt="image" src="https://github.com/user-attachments/assets/4f2f9b7a-d5e9-4cb8-b887-bd2b7c50d239" />
+
+8. From the breadcrumbs in the upper-left corner of the page, choose *Buckets*.
+   
+   <img width="350" height="34" alt="image" src="https://github.com/user-attachments/assets/a1c77933-1cc9-4720-9da0-65002f1b62e9" />
+
+9. Select *"ust-\<ITSC account string\>-bucket1"*. Then choose *Delete*, and confirm deletion in the *Delete bucket* wizard.
+    
+    <img width="785" height="415" alt="image" src="https://github.com/user-attachments/assets/57ac67e6-4176-4478-87f7-ada882990f1a" />
+
+   A message displays *"You are not authorized to perform this operation.*.
+
+   <img width="1174" height="195" alt="image" src="https://github.com/user-attachments/assets/3f0d9282-940c-4b12-87ed-403c339f54dc" />
 
 -
+
+
+##
+
+
+1. Keep the current tab open. Switch to the tab that holds the session for the account root user.
+2. Open the *IAM* console, and choose *Policies* in the left navigation pane
+3. Choose *Create policy*. This time, you'll use the visual policy editor to create and configure a policy 
+
+4. Select S3 from the Service dropdown menu
+   
+   <img width="781" height="453" alt="image" src="https://github.com/user-attachments/assets/c194487e-39b4-4e46-b993-7950973cf8d9" />
+
+
+
+
+Tick the checkbox for *All S3 actions (s3:*)*
+<img width="762" height="180" alt="image" src="https://github.com/user-attachments/assets/c93dd0c6-2f57-44a2-a73e-6266386c87da" />
+
+
+Locate the *bucket* field under the Resources section, choose *Add ARNs* to restrict access.
+
+<img width="761" height="75" alt="image" src="https://github.com/user-attachments/assets/58da9c79-950f-49d5-a05f-390eb0b26f56" />
+
+
+Choose *Add ARNs*
+<img width="807" height="290" alt="image" src="https://github.com/user-attachments/assets/2acf102c-4a7d-4d1c-871d-52d056233245" />
+
+
+Locate the *object* field under the Resources section, choose *Add ARNs* to restrict access.
+<img width="759" height="77" alt="image" src="https://github.com/user-attachments/assets/8f32d257-5391-43ac-bfa3-9c263724adee" />
+
+
+Fill in the *Resource bucket name* field with the bucket name, tick the checkbox for *Any object name*
+<img width="807" height="347" alt="image" src="https://github.com/user-attachments/assets/6d9f2acf-8b43-407c-87a9-56573c44a53e" />
+
+Click Next
+
+Policy name: *CrossAccountAccessToS3Bucket*
