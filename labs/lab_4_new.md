@@ -28,7 +28,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
  
 
-## Task 1: Log in as the account root user
+## Task 1: Logging in as the account root user
 
 
 1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu in the top right of the screen.
@@ -42,7 +42,10 @@ By the end of this lab, you will have created the architecture shown in the foll
    Note that you may need to access the authenticator app on your phone and find the MFA code if MFA has been turned on for your root account.
 
 
-## Task 2: Create an IAM user group and a user
+<br/>
+
+   
+## Task 2: Creating an IAM user group and a IAM user
 
 
 1. In the search box at the top left of the screen, search for and choose *IAM*. This brings you to the IAM console:
@@ -56,7 +59,7 @@ By the end of this lab, you will have created the architecture shown in the foll
    <img width="400"  src="https://github.com/user-attachments/assets/b02bdab5-9dc1-41f2-ba84-f6362eacb813" />
 
 
-3. Choose the edit the policy using the JSON editor. Copy and paste the following JSON policy into the *Policy editor* text area:
+3. Choose the edit the policy using the JSON editor. Copy and paste the following JSON-formatted policy into the *Policy editor* text area:
    
    ```json
    {
@@ -165,7 +168,8 @@ By the end of this lab, you will have created the architecture shown in the foll
     You can download the user credential for later use.
 
 
-
+<br/>
+   
  
 ## Task 3: Creating S3 Buckets
 
@@ -201,20 +205,22 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 <br/>
    
-## Task 4: Log in as an IAM user
+## Task 4: Logging in as an IAM user
 
 
 1. Get back to the IAM console. Choose *Users* in the left navigation pane. Then choose *devuser*.
  
    <img width="800" src="https://github.com/user-attachments/assets/7b1310c6-8003-4e4b-bc03-8790491b8915" />
 
-2. Copy the *Console sign-in link*, open a new browser tab, and paste the url into the address bar. Then hit Enter.
+2. Copy the value of the *Console sign-in link* field.
+   
+3. Keep open the current tab that hosts the session for the account root user. Open a new browser tab, and paste the URL you just copy into the address bar. Then hit Enter.
 
-3. Choose *Sign into new session* to proceed to the sign-in page
+4. Choose *Sign into new session* to proceed to the sign-in page
 
    <img width="600" src="https://github.com/user-attachments/assets/163bb537-f888-4994-9292-446e2f0bcacb" />
 
-3. Log in as the IAM user named `devuser`. 
+5. Log in as the IAM user named `devuser`. 
 
    <img width="400"   src="https://github.com/user-attachments/assets/000c0354-9772-49e7-8aa6-c0a9c77bfdbe" />
 
@@ -223,7 +229,7 @@ By the end of this lab, you will have created the architecture shown in the foll
    - Note that the pre-populated *Account ID or alias* field should contain a different account ID in your case.
    - Choose *Sign in*.
 
-4. The AWS Management Console displays. Make sure you're in the *us-east-1* Region.   
+6. The AWS Management Console displays. Make sure you're in the *us-east-1* Region.   
 
    <img width="400" alt="image" src="https://github.com/user-attachments/assets/e3634272-d421-4d83-8046-4d5eed754757" />
 
@@ -243,23 +249,23 @@ Now that you are logged in to the console as the IAM user named *devuser*, you w
    
    <img width="250" src="https://github.com/user-attachments/assets/8306b25e-9e72-4400-b4dd-93d99d56c0b7" />
 
-Many  API Error messages display. This is expected.
+   Many API Error messages display. This is expected.
 
 
 3. Attempt some actions in the Amazon EC2 console:
 
    - In the left navigation pane, choose *Instances*.
 
-   - In the *Instances* list, a message displays *"You are not authorized to perform this operation. User: arn:aws:iam::245221346334:user/devuser is not authorized to perform: ec2:DescribeInstances because no identity-based policy allows the ec2:DescribeInstances action"*.
+   - In the *Instances* list, a message displays *"You are not authorized to perform this operation. User: arn:aws:iam::\<account-id\>:user/devuser is not authorized to perform: ec2:DescribeInstances because no identity-based policy allows the ec2:DescribeInstances action"*.
 
 
 4. Choose Launch instances. Scroll down and choose the *Key pair name* drop down list.
 
-A message displays *"You are not authorized to perform this operation."*
+   A message displays *"You are not authorized to perform this operation."*
 
-<img width="831" height="339" alt="image" src="https://github.com/user-attachments/assets/bf76d4fa-4b21-4592-aa31-77782a31b311" />
+   <img width="800"  src="https://github.com/user-attachments/assets/bf76d4fa-4b21-4592-aa31-77782a31b311" />
 
-Notice that Key pair name is a required setting that must be configured if you want to launch an instance. This is just one of many indications that you will not be able to launch an EC2 instance with the permissions that have been granted to you as the devuser.
+   Notice that Key pair name is a required setting that must be configured if you want to launch an instance. This is just one of many indications that you will not be able to launch an EC2 instance with the permissions that have been granted to you as the devuser.
 
 5. In the *Summary* panel on the right, choose *Cancel*.
 
@@ -267,78 +273,90 @@ Notice that Key pair name is a required setting that must be configured if you w
 
 7. Open the IAM dashboard page, notice that you do not have permissions to view certain parts of the page. The message states *"User: arn:aws:iam:::user/devuser is not authorized to perform: iam:GetAccountSummary on resource:"*. 
 
-## Task 3: Analyzing the identity-based policy applied to the IAM user
+
+<br/>
+
+## Task 6: Analyzing the identity-based policy applied to the IAM user
 
 In this task, you will look at the IAM policy details that apply to *devuser* to understand why you can't perform these actions.
 
 
-1. Access the IAM console, and observe user and group membership settings:
+1. Keep the current browser tab open. Switch to the browser tab that hosts the session for the account root uers.
+
+2. Access the IAM console, and observe user and group membership settings:
 
 - In the left navigation pane, choose *User groups*.
 - Choose the *DeveloperGroup* group name. On the Users tab, notice that `devuser` is a member of this IAM group.
 
-
   > Note: When a policy is attached to a group, the policy applies to any IAM users who are members of the group. Therefore, this policy currently governs your access to the console, because you are logged in as devuser, who is a member of this IAM group.
 
  
-2. Save the policy to a file on your computer:
-To copy the JSON-formatted policy to your clipboard, choose Copy.
-Open a text editor on your local computer, and paste the policy that you just copied.
-Save the policy document as DeveloperGroupPolicy.json to a location on your computer that you will remember.
+3. Save the policy to a file on your computer:
+   
+   - To copy the JSON-formatted policy to your clipboard, choose *Copy*.
+   - Open a text editor on your local computer, and paste the policy that you just copied.
+   - Save the policy document as *DeveloperGroupPolicy.json* to a location on your computer that you will remember.
 
 
-## Task 4: Attempting write-level access to AWS services
+<br/>
 
-Any action that you attempt when you interact with an AWS service is an API call, whether you are using the console, AWS Command Line Interface (AWS CLI), or AWS software development kits (SDKs). All attempted API calls are recorded in the AWS CloudTrail event logs.
+## Task 7: Attempting write-level access to AWS services
 
-In this task, you will attempt to make two API calls that require write-level access within Amazon S3. The first action is to create an S3 bucket, and the second action is to upload an object to that bucket. After you attempt the two tasks, you will again analyze the policy attached to the IAM group to analyze why you could or could not perform the specific API calls.
+In this task, you will attempt to perform two actions that require write-level access within Amazon S3.  The first action is to create an S3 bucket, and the second action is to upload an object to that bucket. 
 
-1. Attempt to create an S3 bucket:
+After you attempt the two tasks, you will again analyze the policy attached to the IAM group to analyze why you could or could not perform the specific actions.
+
+1. Keep the current browser tab open. Switch to the browser tab that hosts the session for the *devuser* user.
+
+2. Attempt to create an S3 bucket:
+   
    - Navigate to the Amazon S3 console.
    - Choose Create bucket
    - For Bucket name, enter *ust-* followed by your initials and a random four-digit number; for example, *ust-zbq1234*.
 
- 
-You successfully created an S3 bucket.
 
-2. Access the bucket, and attempt to upload an object:
+   You successfully created an S3 bucket.
+
+3. Access the bucket, and attempt to upload an object:
 
    - Choose the bucket named *"ust-\<your ITSC account string\>-bucket1"* from the *General purpose buckets* list.
    - Choose *Upload*, and then choose *Add files*.
    - Browse to and choose the *DeveloperGroupPolicy.json* file that you saved earlier.
    - Choose *Upload*.
 
-A message displays *Upload failed*.
+   A message displays *Upload failed*.
 
-3.  On the *Files and folders* tab on the lower part of the page, in the Error column, choose the *Access Denied* link.
+4. On the *Files and folders* tab on the lower part of the page, in the Error column, choose the *Access Denied* link.
 
-    <img width="449" height="113" alt="image" src="https://github.com/user-attachments/assets/0b1663c2-6a2b-402a-aec9-03267c9de99f" />
+    <img width="500"  src="https://github.com/user-attachments/assets/0b1663c2-6a2b-402a-aec9-03267c9de99f" />
 
     The message states *"You don't have permissions to upload files and folders"*. Choose *Close*.
 
-4. You can repeat the previous steps for the rest of the general purpose buckets. You'll encounter the same error when attempting upload files
+5. You can repeat the previous steps for the rest of the general purpose buckets. You'll encounter the same error when attempting upload files
 
-4. Review the policy details for Amazon S3 access:
+6. Review the policy details for Amazon S3 access:
 
-   Return to the text editor where you copied the *DeveloperGroupPolicy.json* document.
-
-   Review the policy details to understand why you were able to create an S3 bucket but couldn't upload objects to it.
+   Return to the text editor where you copied the *DeveloperGroupPolicy.json* document. Review the policy details to understand why you were able to create an S3 bucket but couldn't upload objects to an existing bucket.
 
 Tip: The Service Authorization Reference document provides a list of actions that each AWS service supports. For information about Amazon S3 actions, open the IAM documentation page, and then open the Service Authorization Reference document. In the left navigation pane, expand Actions, resources, and condition keys, and then choose Amazon S3. In the Actions defined by Amazon S3 section, the table lists every possible Amazon S3 action that can be granted or denied, along with a description of the action.
 
-## Task 4: Add a resource-based policy 
 
-1. Keep the current tab open. Switch to the tab that holds the session for your account root user. Then navigate to the S3 console
+## Task 8: Configuring a resource-based policy 
 
-2. choose the bucket named *"ust-\<ITSC account string\>-bucket1"* from the *General purpose buckets* list.
+In this task, you'll configure a resource-based policy to allow an existing S3 bucket to accept file uploads. This will show you how resource-based policies can grant IAM identities permissions to perform actions, as long as those actions aren't explicitly denied by their identity-based policies.
+
+
+1. Keep the current browswer tab open. Switch to the tab that holds the session for your account root user. Then navigate to the Amazon S3 console
+
+2. Choose the bucket named *"ust-\<ITSC account string\>-bucket1"* from the *General purpose buckets* list.
 
 3. Choose the *Permissions* tab, and locate the *Bucket policy* section. Then choose *Edit*.
  
 
-   <img width="1059" height="634" alt="image" src="https://github.com/user-attachments/assets/3fca7de3-38f7-496f-982f-0b81bdc3b7d1" />
+   <img width="800" src="https://github.com/user-attachments/assets/3fca7de3-38f7-496f-982f-0b81bdc3b7d1" />
 
 
-4. Copy and paste the JSON policy below into the *Policy* text area. Then choose *Save changes*
+4. Copy and paste the JSON-formatted policy below into the *Policy* text area. Be sure to replace all placeholders to define correct ARNs. Then choose *Save changes*
    
 	```json
 	{
@@ -347,49 +365,47 @@ Tip: The Service Authorization Reference document provides a list of actions tha
 			{
 				"Effect": "Allow",
 				"Principal": {
-					"AWS": "arn:aws:iam::245221346334:user/devuser"
+					"AWS": "arn:aws:iam::<account-id>:user/devuser"
 				},
 				"Action": "s3:*",
 				"Resource": [
-					"arn:aws:s3:::ust-justinjia-bucket1",
-					"arn:aws:s3:::ust-justinjia-bucket1/*"
+					"arn:aws:s3:::ust-<ITSC account string>-bucket1",
+					"arn:aws:s3:::ust-<ITSC account string>-bucket1/*"
 				]
 			},
 			{
 				"Effect": "Deny",
 				"Principal": {
-					"AWS": "arn:aws:iam::245221346334:user/devuser"
+					"AWS": "arn:aws:iam::<account-id>:user/devuser"
 				},
 				"Action": "s3:DeleteBucket",
-				"Resource": "arn:aws:s3:::ust-justinjia-bucket1"
+				"Resource": "arn:aws:s3:::ust-<ITSC account string>-bucket1"
 			}
 		]
 	}
 	```
 
-
-
-    <img width="1055" height="496" alt="image" src="https://github.com/user-attachments/assets/64fefee6-12ba-49db-9976-55e2561e4819" />
+    <img width="800" src="https://github.com/user-attachments/assets/64fefee6-12ba-49db-9976-55e2561e4819" />
 
 5. Keep the current tab open. Switch to the tab that holds the session for the *devuser* user.
 
-6. Choose *"ust-\<ITSC account string\>-bucket1"* again, and attempt to upload the *DeveloperGroupPolicy.json* document again. This time the file was uploaded successfully. 
+6. Choose *"ust-\<ITSC account string\>-bucket1"*, and attempt to upload the *DeveloperGroupPolicy.json* document again. This time the file was uploaded successfully. 
 
-7. Select the *DeveloperGroupPolicy.json* document from the *Objects*list. Choose *Delete*. Follow the instruction to confirm deletion in the *Delete objects* wizard. The file was successfully deleted.
+7. Select the uploaded *DeveloperGroupPolicy.json* document from the *Objects*list. Choose *Delete*. Follow the instruction to confirm the deletion in the *Delete objects* wizard. The file was successfully deleted.
 
-   <img width="1177" height="312" alt="image" src="https://github.com/user-attachments/assets/4f2f9b7a-d5e9-4cb8-b887-bd2b7c50d239" />
+   <img width="800" src="https://github.com/user-attachments/assets/4f2f9b7a-d5e9-4cb8-b887-bd2b7c50d239" />
 
 8. From the breadcrumbs in the upper-left corner of the page, choose *Buckets*.
    
-   <img width="350" height="34" alt="image" src="https://github.com/user-attachments/assets/a1c77933-1cc9-4720-9da0-65002f1b62e9" />
+   <img width="400"   src="https://github.com/user-attachments/assets/a1c77933-1cc9-4720-9da0-65002f1b62e9" />
 
-9. Select *"ust-\<ITSC account string\>-bucket1"*. Then choose *Delete*, and confirm deletion in the *Delete bucket* wizard.
+9. Select *"ust-\<ITSC account string\>-bucket1"*. Then choose *Delete*, and confirm the deletion in the *Delete bucket* wizard.
     
-    <img width="785" height="415" alt="image" src="https://github.com/user-attachments/assets/57ac67e6-4176-4478-87f7-ada882990f1a" />
+    <img width="800" src="https://github.com/user-attachments/assets/57ac67e6-4176-4478-87f7-ada882990f1a" />
 
    A message displays *"You are not authorized to perform this operation.*.
 
-   <img width="1174" height="195" alt="image" src="https://github.com/user-attachments/assets/3f0d9282-940c-4b12-87ed-403c339f54dc" />
+   <img width="800" src="https://github.com/user-attachments/assets/3f0d9282-940c-4b12-87ed-403c339f54dc" />
 
 -
 
@@ -461,7 +477,7 @@ To use the policy, you need to associate it with an IAM principal,  Next, you'll
 
     <img width="976" height="505" alt="image" src="https://github.com/user-attachments/assets/f319c720-421f-40a8-9043-38d2b14d70e4" />
 
-19. Copy and paste the JSON policy below to the *Edit trust policy* text area. Choose *Update policy*
+19. Copy and paste the JSON-formatted policy below to the *Edit trust policy* text area. Choose *Update policy*
     ```json
     {
 		"Version": "2012-10-17",
