@@ -456,15 +456,27 @@ To use the policy, you need to associate it with an IAM principal,  Next, you'll
 
 21. Open a new browser tab, and paste the URL into the address bar. Hit *Enter*
 22. Choose *devuser* under the *Switch from* section. Then choose *Switch role*
+    
     <img width="812" height="578" alt="image" src="https://github.com/user-attachments/assets/55fb4aa8-7d6f-41ef-8cb1-cefa2b28f5c2" />
 
 Now you're log in as the *Bucket2AccessRole* role.
+
     <img width="430" height="91" alt="image" src="https://github.com/user-attachments/assets/4be2b921-9346-4fcc-be57-3bde04d990fd" />
 
 You can navigate to the S3 console and check if you're able to upload files into the *ust-\<ITSC account string\>-bucket2*.
 
-23. Close the tab after your experimentation.
-24. Open a new browswer tab, and paste the URL copied from the *Link to switch roles in console*  into the address bar. This time, choose switch role from the root user account. You'll run into an error message as follows:
+23. After experimentation, choose the downward pointing triangle to the right of *Sign out of all sessions*. Choose *Sign out of current session* to only log off the current role session.
+   <img width="264" height="545" alt="image" src="https://github.com/user-attachments/assets/351f7470-25f9-468e-a63e-42b427c6187e" />
+
+	
+25. Open a new browswer tab, and paste the URL copied from the *Link to switch roles in console*  into the address bar. This time, choose switch role from the root user account. You'll run into an error message as follows:
     
     <img width="812" height="121" alt="image" src="https://github.com/user-attachments/assets/5341773b-eb72-44f5-ac91-5a10afde1819" />
 
+
+## Cross account access
+
+1. Switch to the tab that holds the session for your root user account
+2. Open the IAM console, Choose *Roles* in the left navigation pane, and then choose the *Bucket2AccessRole* role from the *Roles* list.
+3. Choose the *Trust relationships* tab. Then choose *Edit trust policy*
+4. Edit the *Principal* block to allow *devuser* in one of your neighbor's account to assume the *Bucket2AcessRole* in your account.
