@@ -17,7 +17,7 @@ After completing this lab, you should be able to do the following:
 ## Scenario
 
 
-You'll create a user group called *DeveloperGroup* for developers with a specific policy attached, then create a user named *devuser*, and assign it to the *DeveloperGroup* group. Then, you'll create three Amazon S3 buckets: bucket1, bucket2, and bucket3, and explore how the group policy governs your access to these buckets.
+You'll create a user group called *DeveloperGroup* for developers with a specific policy attached, then create an IAM user named *devuser*, and assign it to the *DeveloperGroup* group. Then, you'll create three Amazon S3 buckets: bucket1, bucket2, and bucket3, and explore how the group policy governs your access to these buckets.
 
 You'll also create an IAM role, which allows access to certain buckets and their objects when the role is assumed. You will analyze different policies to better understand how they control your access level.
 
@@ -113,36 +113,42 @@ By the end of this lab, you will have created the architecture shown in the foll
    <img width="250"  src="https://github.com/user-attachments/assets/4d848555-8d95-41c7-8837-0554abb8d09b" />
 
 
-6. Choose *Create group*
+6. Choose *Create group*.
 
-   <img width="800" height="192" alt="image" src="https://github.com/user-attachments/assets/fb5d1b91-b803-403c-a52e-ed956de8ce70" />
+   <img width="800"    src="https://github.com/user-attachments/assets/fb5d1b91-b803-403c-a52e-ed956de8ce70" />
 
-7.  *DeveloperGroup*
+7.  Type *DeveloperGroup* in the *User group name* field.
 
-   <img width="1011" height="204" alt="image" src="https://github.com/user-attachments/assets/bd8c0500-48f2-4551-b59c-f049658719ce" />
+   <img width="800"  src="https://github.com/user-attachments/assets/bd8c0500-48f2-4551-b59c-f049658719ce" />
 
 
-10. In the *Attach permissions policies* pane, search for the policy we just created. Tick the checkbox to attach the policy to the user group to be created:
+8. In the *Attach permissions policies* pane, search for the policy we just created. Tick the checkbox to attach the policy to the user group to be created.
 
-    <img width="1005" height="356" alt="image" src="https://github.com/user-attachments/assets/6584991c-9f4b-4ce1-9669-b7372ac87e63" />
+    <img width="800"   src="https://github.com/user-attachments/assets/6584991c-9f4b-4ce1-9669-b7372ac87e63" />
 
-11. Choose *Create user group* to create the *DeveloperGroup* goup.
+9. Choose *Create user group* to create the goup.
 
-12. Choose the Permissions tab. Notice that an IAM policy named `DeveloperGroupPolicy` is attached to this IAM group. Choose the plus icon to the left of `DeveloperGroupPolicy` to display the policy details.
+10. Choose the *Permissions* tab. Notice that an IAM policy named *DeveloperGroupPolicy* is attached to this IAM group. Choose the plus icon to the left of *DeveloperGroupPolicy* to display the policy details.
     
-    <img width="1057" height="636" alt="image" src="https://github.com/user-attachments/assets/894a23ab-bee4-4b9f-81f8-8604c1f86a98" />
+    <img width="800"  src="https://github.com/user-attachments/assets/894a23ab-bee4-4b9f-81f8-8604c1f86a98" />
 
 
-    Review the IAM policy details.
+    Review the IAM policy details. Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group.
 
-13. In the left navigation pane, choose *Users*, then choose *Create user*
+11. In the left navigation pane, choose *Users*, then choose *Create user*.
     
-    <img width="154" height="172" alt="image" src="https://github.com/user-attachments/assets/cd1094a9-dbf2-40d3-87dc-86e4f026d432" />
+    <img width="250"  src="https://github.com/user-attachments/assets/cd1094a9-dbf2-40d3-87dc-86e4f026d432" />
 
 
-14. Name the user *devuser*, select the checkbox *Provide user access to the AWS Management Console - optional*. Choose *Custom password*. Deselect *Users must create a new password at next sign-in - Recommended*
+12. Configure the IAM user details:
+
+    - Name: *devuser*
+    - Tick the checkbox for *Provide user access to the AWS Management Console - optional*.
+    - Choose *Custom password*.
+    - Password: isom5140_devuser*
+    - Deselect *Users must create a new password at next sign-in - Recommended*
     
-<img width="1015" height="514" alt="image" src="https://github.com/user-attachments/assets/8beae043-7ad5-4fef-8ef0-1a323ca4e8fc" />
+    <img width="800" height="514" alt="image" src="https://github.com/user-attachments/assets/8beae043-7ad5-4fef-8ef0-1a323ca4e8fc" />
 
 15. Choose *Next*
     
