@@ -276,7 +276,7 @@ You successfully created an S3 bucket.
 
 2. Access the bucket, and attempt to upload an object:
 
-   - Choose the name of the bucket that you just created.
+   - Choose the bucket named *"ust-\<your ITSC account string\>-bucket1"* from the *General purpose buckets* list.
    - Choose *Upload*, and then choose *Add files*.
    - Browse to and choose the *DeveloperGroupPolicy.json* file that you saved earlier.
    - Choose *Upload*.
@@ -289,7 +289,7 @@ A message displays *Upload failed*.
 
     The message states *"You don't have permissions to upload files and folders"*. Choose *Close*.
 
-
+4. You can repeat the previous steps for the rest of the general purpose buckets. You'll encounter the same error when attempting upload files
 
 4. Review the policy details for Amazon S3 access:
 
@@ -299,39 +299,51 @@ A message displays *Upload failed*.
 
 Tip: The Service Authorization Reference document provides a list of actions that each AWS service supports. For information about Amazon S3 actions, open the IAM documentation page, and then open the Service Authorization Reference document. In the left navigation pane, expand Actions, resources, and condition keys, and then choose Amazon S3. In the Actions defined by Amazon S3 section, the table lists every possible Amazon S3 action that can be granted or denied, along with a description of the action.
 
+## Task 4: Add a resource-based policy 
 
+1. Keep the current tab open. Switch to the tab that holds the session for your account root user. Then navigate to the S3 console
 
-Keep the current tab open. Switch to the tab that holds the session for the account root user
-Navigate to the s3 console
-choose ""
+2. choose the bucket named *"ust-\<your ITSC account string\>-bucket1"* from the *General purpose buckets* list.
 
+3. Choose the *Permissions* tab, and locate the *Bucket policy* section. Then choose *Edit*.
+<img width="981" height="448" alt="image" src="https://github.com/user-attachments/assets/26611be2-1a57-4711-bd7c-4ce1b4d72b18" />
 
 <img width="1059" height="634" alt="image" src="https://github.com/user-attachments/assets/3fca7de3-38f7-496f-982f-0b81bdc3b7d1" />
 
-Choose *Edit*
 
+4. Copy and paste the JSON policy below into the *Policy* text area. Then choose *Save changes*
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "arn:aws:iam::245221346334:user/devuser"
-            },
-            "Action": "s3:*",
-            "Resource": [
-                "arn:aws:s3:::ust-justinjia-bucket1",
-                "arn:aws:s3:::ust-justinjia-bucket1/*"
-            ]
-        }
-    ]
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "arn:aws:iam::245221346334:user/devuser"
+			},
+			"Action": "s3:*",
+			"Resource": [
+				"arn:aws:s3:::ust-justinjia-bucket1",
+				"arn:aws:s3:::ust-justinjia-bucket1/*"
+			]
+		},
+		{
+			"Effect": "Deny",
+			"Principal": {
+				"AWS": "arn:aws:iam::245221346334:user/devuser"
+			},
+			"Action": "s3:DeleteBucket",
+			"Resource": "arn:aws:s3:::ust-justinjia-bucket1"
+		}
+	]
 }
 ```
 
-copy and paste the json policy into the *Policy* text area. Then Choose *Save changes*
+
 
 <img width="1055" height="496" alt="image" src="https://github.com/user-attachments/assets/64fefee6-12ba-49db-9976-55e2561e4819" />
 
-Keep the current tab open. Switch to the tab that holds the session for the *devuser* user
+5. Keep the current tab open. Switch to the tab that holds the session for the *devuser* user
 
+
+-
