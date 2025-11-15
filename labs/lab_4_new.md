@@ -33,11 +33,11 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu in the top right of the screen.
 
-   <img width="500" height="151" alt="image" src="https://github.com/user-attachments/assets/c0fa4abd-534e-4635-a38f-6c58060e5cfc" />
+   <img width="500"  src="https://github.com/user-attachments/assets/c0fa4abd-534e-4635-a38f-6c58060e5cfc" />
 
 2. Choose *Sign-in using root user email*. Then follow the instructions to log into your root account.
 
-   <img width="363" height="559" alt="image" src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
+   <img width="400"  src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
 
    Note that you may need to access the authenticator app on your phone and find the MFA code if MFA has been turned on for your root account.
 
@@ -47,7 +47,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 1. In the search box at the top left of the screen, search for and choose *IAM*. This brings you to the IAM console:
    
-   <img width="800" height="214" alt="image" src="https://github.com/user-attachments/assets/5eb0f770-f3f5-4493-997a-c6765a910004" />
+   <img width="800"  src="https://github.com/user-attachments/assets/5eb0f770-f3f5-4493-997a-c6765a910004" />
 
 2. In the left navigation pane, choose *Policies*. Then choose *Create policy*
   
@@ -117,7 +117,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
    <img width="800"    src="https://github.com/user-attachments/assets/fb5d1b91-b803-403c-a52e-ed956de8ce70" />
 
-7.  Type *DeveloperGroup* in the *User group name* field.
+7. Type *DeveloperGroup* in the *User group name* field.
 
    <img width="800"  src="https://github.com/user-attachments/assets/bd8c0500-48f2-4551-b59c-f049658719ce" />
 
@@ -170,28 +170,32 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 1. In the search box at the top left of the screen, search for and choose *S3* and open the *S3* console:
 
-
-   <img width="753" height="197" alt="image" src="https://github.com/user-attachments/assets/c3818b20-9b71-4c2c-a58c-98e0413a7809" />
+   <img width="800"  src="https://github.com/user-attachments/assets/c3818b20-9b71-4c2c-a58c-98e0413a7809" />
 
 2. Choose *Create bucket*
-   <img width="312" height="176" alt="image" src="https://github.com/user-attachments/assets/95c03432-69ee-4102-ae6e-842acfb0a3dc" />
+   
+   <img width="400" src="https://github.com/user-attachments/assets/95c03432-69ee-4102-ae6e-842acfb0a3dc" />
 
-3. Configure the bucket details in the Create bucket wizard:
-   - ***IMPORTANT FOR GRADING*** Bucket name: *ust-\<ITSC accoutn string\>-bucket1*
+3. Configure the bucket details in the *Create bucket* wizard:
+   
+   - **(IMPORTANT FOR GRADING!)** Bucket name: *ust-\<ITSC accoutn string\>-bucket1*
      <img width="1223" height="375" alt="image" src="https://github.com/user-attachments/assets/c5684ece-213d-4e96-9bff-687a1e0f2930" />
 
-   - Keep the default settings for the rest of the options
+   - Keep the default settings for the rest of the options.
+     
      > Note: By default, new buckets don't allow public access. Diving deeper into this goes beyond the scope of this lab, but it's important to note.
+   
    - Review the settings, and then choose *Create bucket* at the bottom of the page. 
      
 
 4. Repeat step 3 to create two more buckets. Name them *ust-\<ITSC accoutn string\>-bucket2* and *ust-\<ITSC accoutn string\>-bucket3*, respectively.
 
-In the end, you should see three buckets present in the *General purpose buckets* list.
 
-<img width="816" height="240" alt="image" src="https://github.com/user-attachments/assets/d2b8be79-db12-44ee-b238-183cbba158a4" />
+   In the end, you should see 3 buckets present in the *General purpose buckets* list.
 
-<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab3/start-arch.png" alt="Starting architecture with an IAM user, group, and policy, and S3 buckets" />
+   <img width="800"   src="https://github.com/user-attachments/assets/d2b8be79-db12-44ee-b238-183cbba158a4" />
+
+
 
 
    
