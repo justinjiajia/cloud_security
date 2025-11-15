@@ -31,11 +31,11 @@ By the end of this lab, you will have created the architecture shown in the foll
 ## Task 1: Log into the account root user
 
 
-1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu at the top right corner
+1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu at the top right.
 
    <img width="500" height="151" alt="image" src="https://github.com/user-attachments/assets/c0fa4abd-534e-4635-a38f-6c58060e5cfc" />
 
-2. Choose *Sign-in using root user email*. Then follow the instructions to log into your root account
+2. Choose *Sign-in using root user email*. Then follow the instructions to log into your root account.
 
    <img width="363" height="559" alt="image" src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
 
@@ -98,24 +98,26 @@ By the end of this lab, you will have created the architecture shown in the foll
    ```
   
    - Notice that the policy does not allow any Amazon EC2 actions.
+     
    - Notice the IAM actions that the policy allows. When you access the IAM dashboard later via *devuser*, you'll see a message that states that you do not have `iam:GetAccountSummary` authorization. That action is not permitted in this policy document. However, many read-level IAM permissions are granted. For example, you are able to review the details for this policy.
+     
    - Notice the Amazon S3 actions that the policy allows. No object-related actions are granted, but some actions related to buckets are allowed.
 
-4. Name the policy *DeveloperGroupPolicy*. Scroll down to the bottom and choose *Create policy*
+4. Name the policy *DeveloperGroupPolicy*. Scroll down to the bottom and choose *Create policy*.
    
-   <img width="800" height="353" alt="image" src="https://github.com/user-attachments/assets/b6722a0e-9f51-43a0-82ab-69944082bffc" />
+   <img width="800"   src="https://github.com/user-attachments/assets/b6722a0e-9f51-43a0-82ab-69944082bffc" />
 
    
-9. In the left navigation pane, choose *User groups*
+5. In the left navigation pane, choose *User groups*.
 
-   <img width="199" height="207" alt="image" src="https://github.com/user-attachments/assets/4d848555-8d95-41c7-8837-0554abb8d09b" />
+   <img width="250"  src="https://github.com/user-attachments/assets/4d848555-8d95-41c7-8837-0554abb8d09b" />
 
 
-10. Choose *Create group*
+6. Choose *Create group*
 
-   <img width="1023" height="192" alt="image" src="https://github.com/user-attachments/assets/fb5d1b91-b803-403c-a52e-ed956de8ce70" />
+   <img width="800" height="192" alt="image" src="https://github.com/user-attachments/assets/fb5d1b91-b803-403c-a52e-ed956de8ce70" />
 
-11.  *DeveloperGroup*
+7.  *DeveloperGroup*
 
    <img width="1011" height="204" alt="image" src="https://github.com/user-attachments/assets/bd8c0500-48f2-4551-b59c-f049658719ce" />
 
