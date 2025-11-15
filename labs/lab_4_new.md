@@ -24,7 +24,7 @@ You'll also create an IAM role, which allows access to certain buckets and their
 By the end of this lab, you will have created the architecture shown in the following diagram.
 
 
-<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab3/end-arch.png" alt="Architecture now includes a state machine, three Lambda functions, SNS topic, and email report" />
+<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab3/end-arch.png"  width=600 />
 
  
 
