@@ -150,120 +150,188 @@ You can download the user credential for later use.
  
 ## Task 3: Creating 3 S3 Buckets
 
+1. In the search box at the top left of the screen, search for and choose *S3* and open the *S3* console:
+
+
+   <img width="753" height="197" alt="image" src="https://github.com/user-attachments/assets/c3818b20-9b71-4c2c-a58c-98e0413a7809" />
+
+2. Choose *Create bucket*
+   <img width="312" height="176" alt="image" src="https://github.com/user-attachments/assets/95c03432-69ee-4102-ae6e-842acfb0a3dc" />
+
+3. Configure the bucket details in the Create bucket wizard:
+   - ***IMPORTANT FOR GRADING*** Bucket name: *ust-\<ITSC accoutn string\>-bucket1*
+     <img width="1223" height="375" alt="image" src="https://github.com/user-attachments/assets/c5684ece-213d-4e96-9bff-687a1e0f2930" />
+
+   - Keep the default settings for the rest of the options
+     > Note: By default, new buckets don't allow public access. Diving deeper into this goes beyond the scope of this lab, but it's important to note.
+   - Review the settings, and then choose *Create bucket* at the bottom of the page. 
+     
+
+4. Repeat step 3 to create two more buckets. Name them *ust-\<ITSC accoutn string\>-bucket2* and *ust-\<ITSC accoutn string\>-bucket3*, respectively.
+
+In the end, you should see three buckets present in the *General purpose buckets* list.
+
+<img width="816" height="240" alt="image" src="https://github.com/user-attachments/assets/d2b8be79-db12-44ee-b238-183cbba158a4" />
+
+<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab3/start-arch.png" alt="Starting architecture with an IAM user, group, and policy, and S3 buckets" />
+
+
+   
+## Task 4: Accessing the console as an IAM user
+
+1. Get back to the IAM console. Choose *Users* in the left navigation pane. Then choose *devuser*.
+ 
+<img width="1057" height="376" alt="image" src="https://github.com/user-attachments/assets/7b1310c6-8003-4e4b-bc03-8790491b8915" />
+
+2. Copy the *Console sign-in link*, open a new browser tab, and paste the url into the address bar. Then hit Enter.
+3. Choose *Sign into new session* to proceed to the sign-in page
+
+<img width="777" height="52" alt="image" src="https://github.com/user-attachments/assets/163bb537-f888-4994-9292-446e2f0bcacb" />
+
+3. Log in as the IAM user named `devuser`. 
+
+   <img width="335" height="534" alt="image" src="https://github.com/user-attachments/assets/000c0354-9772-49e7-8aa6-c0a9c77bfdbe" />
+
+   - For IAM user name, enter *devuser*
+   - For Password, enter *isom5140_devuser* (the password you created before for this IAM user).
+   - Note that the pre-populated *Account ID or alias* field should contain a different account ID in your case.
+   - Choose *Sign in*.
+
+4. The AWS Management Console displays. Make sure you're in the *us-east-1* Region.   
+
+   <img width="317" height="211" alt="image" src="https://github.com/user-attachments/assets/e3634272-d421-4d83-8046-4d5eed754757" />
 
  
 
-## Task 1: Accessing the console as an IAM user
+## Task 4: Attempting read-level access to AWS services
 
-At the top of these instructions, choose  Start Lab.
-
-The lab session starts.
-
-A timer displays at the top of the page and shows the time remaining in the session.
-
- Tip: To refresh the session length at any time, choose  Start Lab again before the timer reaches 00:00.
+Now that you are logged in to the console as the IAM user named *devuser*, you will explore the level of access that you have to a few AWS services, including Amazon Elastic Compute Cloud (Amazon EC2), Amazon S3, and IAM.
 
  
+1. Open the Amazon EC2 console
 
-Before you continue, wait until the circle icon to the right of the AWS  link in the upper-left corner turns green. When the lab environment is ready, the AWS Details panel will also display.
-
- Warning: Do NOT choose the AWS link to connect to the console in this lab. You will access the console in a different way than you do in most labs.
-
- 
-
-Log in as the IAM user named `devuser`:
-
-Choose the  AWS Details link at the top of the page.
-| Key       | Value                         |
-|------------------------|--------------------------------------------------------|
-| IAMUserPassword        | igw-0fac7dc1135331224                                  |
-| AccountID              | 219682743605                                           |
-| IAMUserLoginURL        | https://219682743605.signin.aws.amazon.com/console     |
-| Region                 | us-east-1                                              |
+   <img width="1014" height="284" alt="image" src="https://github.com/user-attachments/assets/5e54946d-e198-4887-9c9f-733557ee0e38" />
 
 
-Copy the IAMUserLoginURL value, and load it in a new browser tab.
-
-For IAM user name, enter devuser
-
-For Password, enter the IAMUserPassword value from the AWS Details panel on the lab instructions page.
-
-Choose Sign in.
-
-The AWS Management Console displays.
-
- Warning: To avoid issues, do NOT change the Region during this lab unless instructed.
-
-
-Logged in as 
-
-<img width="250" alt="image" src="https://github.com/user-attachments/assets/41b3995d-7516-4e54-b123-ccacf84749b0" />
-
-
-
-
-Arrange the AWS Management Console tab so that it displays next to these instructions. Ideally, you will be able to see both browser tabs at the same time so that you can follow the lab steps more easily.
- 
-
-## Task 2: Attempting read-level access to AWS services
-
-Now that you are logged in to the console as the IAM user named devuser, you will explore the level of access that you have to a few AWS services, including Amazon Elastic Compute Cloud (Amazon EC2), Amazon S3, and IAM.
-
- 
-
-Open the Amazon EC2 console:
-
-From the  Services menu, choose Compute > EC2.
-
-In the left navigation pane, choose EC2 Dashboard.
+2. In the left navigation pane, choose *EC2* > *Dashboard*.
+   <img width="213" height="440" alt="image" src="https://github.com/user-attachments/assets/8306b25e-9e72-4400-b4dd-93d99d56c0b7" />
 
 Many  API Error messages display. This is expected.
 
-Attempt some actions in the Amazon EC2 console:
 
-In the left navigation pane, choose Instances.
+3. Attempt some actions in the Amazon EC2 console:
 
-In the Instances list, a message displays You are not authorized to perform this operation.
+   - In the left navigation pane, choose *Instances*.
 
-Choose Launch instances
+   - In the *Instances* list, a message displays *"You are not authorized to perform this operation. User: arn:aws:iam::245221346334:user/devuser is not authorized to perform: ec2:DescribeInstances because no identity-based policy allows the ec2:DescribeInstances action"*.
 
-Scroll down and choose the Key pair name drop down list.
 
-A message displays You are not authorized to perform this operation.
+4. Choose Launch instances. Scroll down and choose the *Key pair name* drop down list.
+
+A message displays *"You are not authorized to perform this operation."*
+
+<img width="831" height="339" alt="image" src="https://github.com/user-attachments/assets/bf76d4fa-4b21-4592-aa31-77782a31b311" />
 
 Notice that Key pair name is a required setting that must be configured if you want to launch an instance. This is just one of many indications that you will not be able to launch an EC2 instance with the permissions that have been granted to you as the devuser.
 
-In the Summary panel on the right, choose Cancel.
+5. In the *Summary* panel on the right, choose *Cancel*.
 
- 
+6. Open the Amazon S3 console to explore what you can access. Three buckets are listed with unique names.
 
-To explore what you can access in the Amazon S3 console, from the  Services menu, choose Storage > S3.
-
-Three buckets are listed. The bucket names are unique, but one bucket name contains bucket1, another contains bucket2, and the third contains bucket3.
-
-In the list of buckets, notice that the Access column displays the message  Insufficient permissions for all three buckets. This is expected.
-
- 
+7. Open the IAM dashboard page, notice that you do not have permissions to view certain parts of the page. The message states *"User: arn:aws:iam:::user/devuser is not authorized to perform: iam:GetAccountSummary on resource:"*. 
 
 ## Task 3: Analyzing the identity-based policy applied to the IAM user
 
-You have observed how the devuser IAM user is unable to access certain information and actions in both the Amazon S3 console and Amazon EC2 console. In this task, you will look at the IAM policy details that apply to devuser to understand why you can't perform these actions.
+In this task, you will look at the IAM policy details that apply to *devuser* to understand why you can't perform these actions.
 
- 
 
-8. Access the IAM console, and observe user and group membership settings:
+1. Access the IAM console, and observe user and group membership settings:
 
-- From the  Services menu, choose Security, Identity, & Compliance > IAM.
-  On the IAM dashboard page, notice that you do not have permissions to view certain parts of the page. Both messages state User: arn:aws:iam:::user/devuser is not authorized to perform: iam:GetAccountSummary on resource: *. This is expected.
+- In the left navigation pane, choose *User groups*.
+- Choose the *DeveloperGroup* group name. On the Users tab, notice that `devuser` is a member of this IAM group.
 
-- In the left navigation pane, choose User groups.
-- Choose the DeveloperGroup group name.
-  On the Users tab, notice that `devuser` is a member of this IAM group.
-
-- 
 
   > Note: When a policy is attached to a group, the policy applies to any IAM users who are members of the group. Therefore, this policy currently governs your access to the console, because you are logged in as devuser, who is a member of this IAM group.
 
  
+2. Save the policy to a file on your computer:
+To copy the JSON-formatted policy to your clipboard, choose Copy.
+Open a text editor on your local computer, and paste the policy that you just copied.
+Save the policy document as DeveloperGroupPolicy.json to a location on your computer that you will remember.
 
-9. 
+
+## Task 4: Attempting write-level access to AWS services
+
+Any action that you attempt when you interact with an AWS service is an API call, whether you are using the console, AWS Command Line Interface (AWS CLI), or AWS software development kits (SDKs). All attempted API calls are recorded in the AWS CloudTrail event logs.
+
+In this task, you will attempt to make two API calls that require write-level access within Amazon S3. The first action is to create an S3 bucket, and the second action is to upload an object to that bucket. After you attempt the two tasks, you will again analyze the policy attached to the IAM group to analyze why you could or could not perform the specific API calls.
+
+1. Attempt to create an S3 bucket:
+   - Navigate to the Amazon S3 console.
+   - Choose Create bucket
+   - For Bucket name, enter *ust-* followed by your initials and a random four-digit number; for example, *ust-zbq1234*.
+
+ 
+You successfully created an S3 bucket.
+
+2. Access the bucket, and attempt to upload an object:
+
+   - Choose the name of the bucket that you just created.
+   - Choose *Upload*, and then choose *Add files*.
+   - Browse to and choose the *DeveloperGroupPolicy.json* file that you saved earlier.
+   - Choose *Upload*.
+
+A message displays *Upload failed*.
+
+3.  On the *Files and folders* tab on the lower part of the page, in the Error column, choose the *Access Denied* link.
+
+    <img width="449" height="113" alt="image" src="https://github.com/user-attachments/assets/0b1663c2-6a2b-402a-aec9-03267c9de99f" />
+
+    The message states *"You don't have permissions to upload files and folders"*. Choose *Close*.
+
+
+
+4. Review the policy details for Amazon S3 access:
+
+   Return to the text editor where you copied the DeveloperGroupPolicy.json document.
+
+   Review the policy details to understand why you were able to create an S3 bucket but couldn't upload objects to it.
+
+Tip: The Service Authorization Reference document provides a list of actions that each AWS service supports. For information about Amazon S3 actions, open the IAM documentation page, and then open the Service Authorization Reference document. In the left navigation pane, expand Actions, resources, and condition keys, and then choose Amazon S3. In the Actions defined by Amazon S3 section, the table lists every possible Amazon S3 action that can be granted or denied, along with a description of the action.
+
+
+
+Keep the current tab open. Switch to the tab that holds the session for the account root user
+Navigate to the s3 console
+choose ""
+
+
+<img width="1059" height="634" alt="image" src="https://github.com/user-attachments/assets/3fca7de3-38f7-496f-982f-0b81bdc3b7d1" />
+
+Choose *Edit*
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::245221346334:user/devuser"
+            },
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::ust-justinjia-bucket1",
+                "arn:aws:s3:::ust-justinjia-bucket1/*"
+            ]
+        }
+    ]
+}
+```
+
+copy and paste the json policy into the *Policy* text area. Then Choose *Save changes*
+
+<img width="1055" height="496" alt="image" src="https://github.com/user-attachments/assets/64fefee6-12ba-49db-9976-55e2561e4819" />
+
+Keep the current tab open. Switch to the tab that holds the session for the *devuser* user
+
