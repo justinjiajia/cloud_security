@@ -135,7 +135,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
     Review the IAM policy details. Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group.
 
-11. In the left navigation pane, choose *Users*, then choose *Create user*.
+11. In the left navigation pane, choose *Users*. Then choose *Create user*.
     
     <img width="250"  src="https://github.com/user-attachments/assets/cd1094a9-dbf2-40d3-87dc-86e4f026d432" />
 
@@ -145,22 +145,25 @@ By the end of this lab, you will have created the architecture shown in the foll
     - Name: *devuser*
     - Tick the checkbox for *Provide user access to the AWS Management Console - optional*.
     - Choose *Custom password*.
-    - Password: isom5140_devuser*
-    - Deselect *Users must create a new password at next sign-in - Recommended*
+    - Password: *isom5140_devuser*
+    - Deselect *Users must create a new password at next sign-in - Recommended* <br/>
     
     <img width="800" height="514" alt="image" src="https://github.com/user-attachments/assets/8beae043-7ad5-4fef-8ef0-1a323ca4e8fc" />
 
-15. Choose *Next*
+    Choose *Next*
     
 
-16. Select *DeveloperGroup* to add the user to this user group. Then choose *Next*.
-    <img width="1019" height="440" alt="image" src="https://github.com/user-attachments/assets/aae595e9-c320-476b-8cf2-206aa33080fc" />
+13. Select *DeveloperGroup* to add the user to this user group. Then choose *Next*.
+    
+    <img width="800" src="https://github.com/user-attachments/assets/aae595e9-c320-476b-8cf2-206aa33080fc" />
 
-17. Review the detail and choose *Create user*
+14. Review the detail and choose *Create user*
 
-You can download the user credential for later use.
+	<img width="800"  src="https://github.com/user-attachments/assets/39db57dd-fc6b-4041-a4ca-14bb0d321011" />
 
-<img width="1013" height="291" alt="image" src="https://github.com/user-attachments/assets/39db57dd-fc6b-4041-a4ca-14bb0d321011" />
+    You can download the user credential for later use.
+
+
 
  
 ## Task 3: Creating 3 S3 Buckets
