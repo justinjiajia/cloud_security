@@ -28,7 +28,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
  
 
-## Task 1: Log into the account root user
+## Task 1: Log in as the account root user
 
 
 1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu in the top right of the screen.
@@ -178,7 +178,8 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 3. Configure the bucket details in the *Create bucket* wizard:
    
-   - **(IMPORTANT FOR GRADING!)** Bucket name: *ust-\<ITSC accoutn string\>-bucket1*
+   - **(IMPORTANT FOR GRADING!)** Bucket name: *ust-\<ITSC accoutn string\>-bucket1*.
+     
      <img width="1223" height="375" alt="image" src="https://github.com/user-attachments/assets/c5684ece-213d-4e96-9bff-687a1e0f2930" />
 
    - Keep the default settings for the rest of the options.
@@ -197,22 +198,24 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 
 
-
+<br/>
    
-## Task 4: Accessing the console as an IAM user
+## Task 4: Log in as an IAM user
+
 
 1. Get back to the IAM console. Choose *Users* in the left navigation pane. Then choose *devuser*.
  
-<img width="1057" height="376" alt="image" src="https://github.com/user-attachments/assets/7b1310c6-8003-4e4b-bc03-8790491b8915" />
+   <img width="800" src="https://github.com/user-attachments/assets/7b1310c6-8003-4e4b-bc03-8790491b8915" />
 
 2. Copy the *Console sign-in link*, open a new browser tab, and paste the url into the address bar. Then hit Enter.
+
 3. Choose *Sign into new session* to proceed to the sign-in page
 
-<img width="777" height="52" alt="image" src="https://github.com/user-attachments/assets/163bb537-f888-4994-9292-446e2f0bcacb" />
+   <img width="600" src="https://github.com/user-attachments/assets/163bb537-f888-4994-9292-446e2f0bcacb" />
 
 3. Log in as the IAM user named `devuser`. 
 
-   <img width="335" height="534" alt="image" src="https://github.com/user-attachments/assets/000c0354-9772-49e7-8aa6-c0a9c77bfdbe" />
+   <img width="400"   src="https://github.com/user-attachments/assets/000c0354-9772-49e7-8aa6-c0a9c77bfdbe" />
 
    - For IAM user name, enter *devuser*
    - For Password, enter *isom5140_devuser* (the password you created before for this IAM user).
@@ -221,7 +224,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 4. The AWS Management Console displays. Make sure you're in the *us-east-1* Region.   
 
-   <img width="317" height="211" alt="image" src="https://github.com/user-attachments/assets/e3634272-d421-4d83-8046-4d5eed754757" />
+   <img width="400" alt="image" src="https://github.com/user-attachments/assets/e3634272-d421-4d83-8046-4d5eed754757" />
 
  
 
