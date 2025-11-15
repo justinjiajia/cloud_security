@@ -145,9 +145,10 @@ By the end of this lab, you will have created the architecture shown in the foll
     - Name: *devuser*
     - Tick the checkbox for *Provide user access to the AWS Management Console - optional*.
     - Choose *Custom password*.
-    - Password: *isom5140_devuser*
-    - Deselect *Users must create a new password at next sign-in - Recommended* <br/>
-    
+    - Password: *isom5140_devuser*.
+    - Deselect *Users must create a new password at next sign-in - Recommended*.
+      
+    <br/>
     <img width="800" height="514" alt="image" src="https://github.com/user-attachments/assets/8beae043-7ad5-4fef-8ef0-1a323ca4e8fc" />
 
     Choose *Next*
@@ -166,7 +167,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 
  
-## Task 3: Creating 3 S3 Buckets
+## Task 3: Creating S3 Buckets
 
 1. In the search box at the top left of the screen, search for and choose *S3* and open the *S3* console:
 
@@ -228,18 +229,19 @@ By the end of this lab, you will have created the architecture shown in the foll
 
  
 
-## Task 4: Attempting read-level access to AWS services
+## Task 5: Attempting read-level access to AWS services
 
 Now that you are logged in to the console as the IAM user named *devuser*, you will explore the level of access that you have to a few AWS services, including Amazon Elastic Compute Cloud (Amazon EC2), Amazon S3, and IAM.
 
  
 1. Open the Amazon EC2 console
 
-   <img width="1014" height="284" alt="image" src="https://github.com/user-attachments/assets/5e54946d-e198-4887-9c9f-733557ee0e38" />
+   <img width="800"   src="https://github.com/user-attachments/assets/5e54946d-e198-4887-9c9f-733557ee0e38" />
 
 
-2. In the left navigation pane, choose *EC2* > *Dashboard*.
-   <img width="213" height="440" alt="image" src="https://github.com/user-attachments/assets/8306b25e-9e72-4400-b4dd-93d99d56c0b7" />
+2. In the left navigation pane, choose *Dashboard*.
+   
+   <img width="250" src="https://github.com/user-attachments/assets/8306b25e-9e72-4400-b4dd-93d99d56c0b7" />
 
 Many  API Error messages display. This is expected.
 
