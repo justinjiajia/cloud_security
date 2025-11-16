@@ -226,9 +226,10 @@ In the end, you should see 3 buckets present in the *General purpose buckets* li
 ## Task 4: Logging in as an IAM user
 
 
-1. Open the IAM console. Choose *Users* in the left navigation pane. Then choose *devuser* in the *Users* pane
+1. Open the IAM console. Choose *Users* in the left navigation pane. Then choose *devuser* in the *Users* pane.
  
-   <img width="800" src="https://github.com/user-attachments/assets/7b1310c6-8003-4e4b-bc03-8790491b8915" />
+   <img width="800" src="https://github.com/user-attachments/assets/628cb403-3c9a-4d5d-a1c8-9b9433d6f626" />
+
 
 
 2. Click on the *Security credentials* tab, and copy the link shown in the *Console sign-in link* field.
@@ -259,7 +260,7 @@ In the end, you should see 3 buckets present in the *General purpose buckets* li
 
 Now that you are logged in to the console as the IAM user named *devuser*, you will explore the level of access that you have to a few AWS services, including Amazon Elastic Compute Cloud (Amazon EC2), Amazon S3, and IAM.
 
-1. Open the Amazon EC2 console
+1. Open the Amazon EC2 console.
 
    <img width="800"  src="https://github.com/user-attachments/assets/5e54946d-e198-4887-9c9f-733557ee0e38" />
 
