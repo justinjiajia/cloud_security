@@ -524,7 +524,9 @@ Next, you'll test if you can assume the *Bucket2AccessRole* role while logged in
     
 11. Choose *devuser* under the *Switch from* section. Then choose *Switch role*.
     
-    <img width="800" src="https://github.com/user-attachments/assets/55fb4aa8-7d6f-41ef-8cb1-cefa2b28f5c2" />
+
+	<img width="600" src="https://github.com/user-attachments/assets/2889a249-dadd-4af3-866f-9d8361793470" />
+
 
 Now you're logged in as the *Bucket2AccessRole* role.
 
