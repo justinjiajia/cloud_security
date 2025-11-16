@@ -49,7 +49,8 @@ Once logged in, let's verify that your account is part of an AWS Organization.
 
    This will bring you to the AWS Organizations console, where you have limited access.
    
-   <img width="800" src="https://github.com/user-attachments/assets/1034e3e1-1174-4437-a6df-54dfea554c54" />
+   <img width="800" src="https://github.com/user-attachments/assets/e7aa9550-f831-4689-8f9a-9700aa63b597" />
+
 
 4. Select *Leave this organization*. You will encounter the following error message:
    
