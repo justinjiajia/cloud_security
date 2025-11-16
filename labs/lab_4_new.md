@@ -517,6 +517,9 @@ The trust policy for the role we just created doesn't fully meet our requirement
 Next, you'll test if you can assume the *Bucket2AccessRole* role while logged in as the IAM user *devuser*.
 
 9. Copy the URL in the *Link to switch roles in console* field
+
+   <img width="800" src="https://github.com/user-attachments/assets/7151a16e-2a28-417d-be54-2c7e372a9f79" />
+
     
 	<img width="800" src="https://github.com/user-attachments/assets/dbce9432-fae2-4543-b5a8-803b49ea8109" />
 
