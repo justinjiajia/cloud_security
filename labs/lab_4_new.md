@@ -177,9 +177,10 @@ Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group
     
     <img width="800" src="https://github.com/user-attachments/assets/aae595e9-c320-476b-8cf2-206aa33080fc" />
 
-14. Review the detail and choose *Create user*
+14. Review the details and choose *Create user*
 
-	<img width="800"  src="https://github.com/user-attachments/assets/39db57dd-fc6b-4041-a4ca-14bb0d321011" />
+	<img width="800" src="https://github.com/user-attachments/assets/39a500a4-27b5-48f2-bd3b-9b657737b052" />
+
 
     You can download the user credential for later use.
 
