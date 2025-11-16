@@ -175,7 +175,7 @@ Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group
 
    <img width="800"  src="https://github.com/user-attachments/assets/c3818b20-9b71-4c2c-a58c-98e0413a7809" />
 
-2. Choose *Create bucket*
+2. Choose *Create bucket*.
    
    <img width="400" src="https://github.com/user-attachments/assets/95c03432-69ee-4102-ae6e-842acfb0a3dc" />
 
@@ -206,7 +206,7 @@ In the end, you should see 3 buckets present in the *General purpose buckets* li
 ## Task 4: Logging in as an IAM user
 
 
-1. Open the IAM console. Choose *Users* in the left navigation pane. Then choose *devuser*.
+1. Open the IAM console. Choose *Users* in the left navigation pane. Then choose *devuser* in the *Users* pane
  
    <img width="800" src="https://github.com/user-attachments/assets/7b1310c6-8003-4e4b-bc03-8790491b8915" />
 
