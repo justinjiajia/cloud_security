@@ -45,7 +45,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 <br/>
 
    
-## Task 2: Creating an IAM user group and a IAM user
+## Task 2: Creating an IAM user group and an IAM user
 
 
 1. In the search box at the top left of the screen, search for and choose *IAM*. This brings you to the IAM console:
