@@ -37,7 +37,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 2. Choose *Sign-in using root user email*. Then follow the instructions to log into your root account.
 
-   <img width="400"  src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
+   <img width="300"  src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
 
    Note that you may need to access the authenticator app on your phone and provide the MFA code if MFA has been turned on for your account root user.
 
@@ -223,7 +223,7 @@ In the end, you should see 3 buckets present in the *General purpose buckets* li
 
 5. Log in using the IAM user named *devuser*. Please note that the pre-populated Account ID or alias field will show a different account ID on your end.
 
-   <img width="400"  src="https://github.com/user-attachments/assets/000c0354-9772-49e7-8aa6-c0a9c77bfdbe" />
+   <img width="300"  src="https://github.com/user-attachments/assets/000c0354-9772-49e7-8aa6-c0a9c77bfdbe" />
 
    - For IAM user name, enter *devuser*
    - For Password, enter *isom5140_devuser* (the password you created before for this IAM user).
@@ -233,16 +233,15 @@ In the end, you should see 3 buckets present in the *General purpose buckets* li
 
    <img width="400" alt="image" src="https://github.com/user-attachments/assets/e3634272-d421-4d83-8046-4d5eed754757" />
 
- 
+ <br/>
 
 ## Task 5: Attempting read-level access to AWS services
 
 Now that you are logged in to the console as the IAM user named *devuser*, you will explore the level of access that you have to a few AWS services, including Amazon Elastic Compute Cloud (Amazon EC2), Amazon S3, and IAM.
 
- 
 1. Open the Amazon EC2 console
 
-   <img width="800"   src="https://github.com/user-attachments/assets/5e54946d-e198-4887-9c9f-733557ee0e38" />
+   <img width="800"  src="https://github.com/user-attachments/assets/5e54946d-e198-4887-9c9f-733557ee0e38" />
 
 
 2. In the left navigation pane, choose *Dashboard*.
@@ -259,7 +258,7 @@ Now that you are logged in to the console as the IAM user named *devuser*, you w
    - In the *Instances* list, a message displays *"You are not authorized to perform this operation. User: arn:aws:iam::\<account-id\>:user/devuser is not authorized to perform: ec2:DescribeInstances because no identity-based policy allows the ec2:DescribeInstances action"*.
 
 
-4. Choose Launch instances. Scroll down and choose the *Key pair name* drop down list.
+4. Choose *Launch instances*. Scroll down and choose the *Key pair name* drop down list.
 
    A message displays *"You are not authorized to perform this operation."*
 
@@ -302,7 +301,7 @@ In this task, you will look at the IAM policy details that apply to *devuser* to
 
 ## Task 7: Attempting write-level access to AWS services
 
-In this task, you will attempt to perform two actions that require write-level access within Amazon S3.  The first action is to create an S3 bucket, and the second action is to upload an object to that bucket. 
+In this task, you will attempt to perform two actions that require write-level access within Amazon S3. The first action is to create an S3 bucket, and the second action is to upload an object to that bucket. 
 
 After you attempt the two tasks, you will again analyze the policy attached to the IAM group to analyze why you could or could not perform the specific actions.
 
@@ -317,7 +316,7 @@ After you attempt the two tasks, you will again analyze the policy attached to t
 
    You successfully created an S3 bucket.
 
-3. Access the bucket, and attempt to upload an object:
+3. Access the *ust-\<your ITSC account string\>-bucket1* bucket, and attempt to upload an object:
 
    - Choose the bucket named *"ust-\<your ITSC account string\>-bucket1"* from the *General purpose buckets* list.
    - Choose *Upload*, and then choose *Add files*.
@@ -326,7 +325,7 @@ After you attempt the two tasks, you will again analyze the policy attached to t
 
    A message displays *Upload failed*.
 
-4. On the *Files and folders* tab on the lower part of the page, in the Error column, choose the *Access Denied* link.
+4. On the *Files and folders* tab on the lower part of the page, in the *Error* column, choose the *Access Denied* link.
 
     <img width="500"  src="https://github.com/user-attachments/assets/0b1663c2-6a2b-402a-aec9-03267c9de99f" />
 
@@ -334,11 +333,9 @@ After you attempt the two tasks, you will again analyze the policy attached to t
 
 5. You can repeat the previous steps for the rest of the general purpose buckets. You'll encounter the same error when attempting upload files
 
-6. Review the policy details for Amazon S3 access:
+6. Return to the text editor where you copied the *DeveloperGroupPolicy.json* document. Review the policy details to understand why you were able to create an S3 bucket but couldn't upload objects to an existing bucket.
 
-   Return to the text editor where you copied the *DeveloperGroupPolicy.json* document. Review the policy details to understand why you were able to create an S3 bucket but couldn't upload objects to an existing bucket.
-
-Tip: The Service Authorization Reference document provides a list of actions that each AWS service supports. For information about Amazon S3 actions, open the IAM documentation page, and then open the Service Authorization Reference document. In the left navigation pane, expand Actions, resources, and condition keys, and then choose Amazon S3. In the Actions defined by Amazon S3 section, the table lists every possible Amazon S3 action that can be granted or denied, along with a description of the action.
+Tip: The *Service Authorization Reference* document provides a list of actions that each AWS service supports. For information about Amazon S3 actions, open the [IAM documentation](https://docs.aws.amazon.com/iam/) page, and then open the *Service Authorization Reference* document. In the left navigation pane, expand Actions, resources, and condition keys, and then choose Amazon S3. In the Actions defined by Amazon S3 section, the table lists every possible Amazon S3 action that can be granted or denied, along with a description of the action
 
 
 ## Task 8: Configuring a resource-based policy 
@@ -346,17 +343,17 @@ Tip: The Service Authorization Reference document provides a list of actions tha
 In this task, you'll configure a resource-based policy to allow an existing S3 bucket to accept file uploads. This will show you how resource-based policies can grant IAM identities permissions to perform actions, as long as those actions aren't explicitly denied by their identity-based policies.
 
 
-1. Keep the current browswer tab open. Switch to the tab that holds the session for your account root user. Then navigate to the Amazon S3 console
+1. Keep the current browswer tab open. Switch back to the tab where you're signed in as the root user. Then navigate to the Amazon S3 console.
 
-2. Choose the bucket named *"ust-\<ITSC account string\>-bucket1"* from the *General purpose buckets* list.
+2. From the *General purpose buckets* list, select the bucket named *"ust-\<ITSC account string\>-bucket1"*.
 
-3. Choose the *Permissions* tab, and locate the *Bucket policy* section. Then choose *Edit*.
+3. Click on the *Permissions* tab, find the *Bucket policy* section, and then click *Edit*.
  
 
    <img width="800" src="https://github.com/user-attachments/assets/3fca7de3-38f7-496f-982f-0b81bdc3b7d1" />
 
 
-4. Copy and paste the JSON-formatted policy below into the *Policy* text area. Be sure to replace all placeholders to define correct ARNs. Then choose *Save changes*
+4. Copy and paste the JSON policy below into the *Policy* text area. Make sure to replace all ARNs having placeholders in place with the correct ARNs in your environment. Then choose *Save changes*
    
 	```json
 	{
@@ -365,7 +362,7 @@ In this task, you'll configure a resource-based policy to allow an existing S3 b
 			{
 				"Effect": "Allow",
 				"Principal": {
-					"AWS": "arn:aws:iam::<account-id>:user/devuser"
+					"AWS": "arn:aws:iam::<account id>:user/devuser"
 				},
 				"Action": "s3:*",
 				"Resource": [
@@ -376,7 +373,7 @@ In this task, you'll configure a resource-based policy to allow an existing S3 b
 			{
 				"Effect": "Deny",
 				"Principal": {
-					"AWS": "arn:aws:iam::<account-id>:user/devuser"
+					"AWS": "arn:aws:iam::<account id>:user/devuser"
 				},
 				"Action": "s3:DeleteBucket",
 				"Resource": "arn:aws:s3:::ust-<ITSC account string>-bucket1"
@@ -387,17 +384,17 @@ In this task, you'll configure a resource-based policy to allow an existing S3 b
 
     <img width="800" src="https://github.com/user-attachments/assets/64fefee6-12ba-49db-9976-55e2561e4819" />
 
-5. Keep the current tab open. Switch to the tab that holds the session for the *devuser* user.
+5. Keep the current tab open. Now switch to the browser tab where you're signed in as *devuser*.
 
-6. Choose *"ust-\<ITSC account string\>-bucket1"*, and attempt to upload the *DeveloperGroupPolicy.json* document again. This time the file was uploaded successfully. 
+6. Choose *"ust-\<ITSC account string\>-bucket1"*, and try uploading the *DeveloperGroupPolicy.json* file again. This time, the upload should succeed!
 
-7. Select the uploaded *DeveloperGroupPolicy.json* document from the *Objects*list. Choose *Delete*. Follow the instruction to confirm the deletion in the *Delete objects* wizard. The file was successfully deleted.
+7. Select the uploaded *DeveloperGroupPolicy.json* document from the *Objects* list. Choose *Delete*. Follow the instructions in the *Delete objects* wizard to confirm. The file should then be successfully deleted.
 
    <img width="800" src="https://github.com/user-attachments/assets/4f2f9b7a-d5e9-4cb8-b887-bd2b7c50d239" />
 
 8. From the breadcrumbs in the upper-left corner of the page, choose *Buckets*.
    
-   <img width="400"   src="https://github.com/user-attachments/assets/a1c77933-1cc9-4720-9da0-65002f1b62e9" />
+   <img width="400"  src="https://github.com/user-attachments/assets/a1c77933-1cc9-4720-9da0-65002f1b62e9" />
 
 9. Select *"ust-\<ITSC account string\>-bucket1"*. Then choose *Delete*, and confirm the deletion in the *Delete bucket* wizard.
     
@@ -407,57 +404,57 @@ In this task, you'll configure a resource-based policy to allow an existing S3 b
 
    <img width="800" src="https://github.com/user-attachments/assets/3f0d9282-940c-4b12-87ed-403c339f54dc" />
 
--
+
+<br/>
 
 
 ## Task 9: Assuming an IAM role to access AWS resources
 
 In this task, you will try to access *bucket2* by using a role while logged in as the devuser IAM user. 
 
-1. Keep the current tab open. Switch to the tab that holds the session for the account root user.
-2. Open the *IAM* console, and choose *Policies* in the left navigation pane
+1. Keep the current tab open. Switch to the browser tab  where you're signed in as the root user.
+2. Open the *IAM* console, and choose *Policies* in the left navigation pane.
    
 3. Choose *Create policy*. This time, you'll explore how to use the visual policy editor to create and configure a policy. 
 
-   - Select S3 from the Service dropdown menu
+   - Select S3 from the Service dropdown menu.
    
      <img width="800" src="https://github.com/user-attachments/assets/c194487e-39b4-4e46-b993-7950973cf8d9" />
 
-   - Tick the checkbox for *All S3 actions (s3:*)*
+   - Tick the checkbox for *All S3 actions (s3:*)*.
    
      <img width="800" src="https://github.com/user-attachments/assets/c93dd0c6-2f57-44a2-a73e-6266386c87da" />
 
 
-   - Locate the *bucket* field under the *Resources* section, choose *Add ARNs* to restrict access.
+   - In the *Resources* section, find the *bucket* field, and click *Add ARNs* to specify which bucket this applies to.
 
      <img width="800" src="https://github.com/user-attachments/assets/58da9c79-950f-49d5-a05f-390eb0b26f56" />
 
-   - Type the name of the 2nd bucket, i.e., *ust-\<ITSC account string\>-bucket2*: in the *Resource bucket name* field on the popup window. Then choose *Add ARN*
+   - In the popup window, type the name of the 2nd bucket, i.e., *ust-\<ITSC account string\>-bucket2*: in the *Resource bucket name* field. Then choose *Add ARN*.
 
      <img width="600" src="https://github.com/user-attachments/assets/e70750a9-b4cd-4170-8eb1-d10019393d81" />
 
-   - Locate the *object* field under the *Resources* section, choose *Add ARNs* to restrict access.
+   - Find the *object* field and click *Add ARNs* to specify which objects this policy applies to.
    
      <img width="800" alt="image" src="https://github.com/user-attachments/assets/8f32d257-5391-43ac-bfa3-9c263724adee" />
 
 
-   - Fill in the *Resource bucket name* field with the same bucket name, and tick the checkbox for *Any object name*. Then choose *Add ARN*
+   - Fill in the *Resource bucket name* field with the same bucket name, and tick the checkbox for *Any object name*. Then choose *Add ARN*.
 
      <img width="600" src="https://github.com/user-attachments/assets/69f45872-dabe-4962-9a89-ee3ba13309c7" />
 
 
-   - Click Next
+   - Click *Next*.
 
-   - Type *Bucket2AccessPolicy* in the *Policy name* field. Then choose *Create policy* at the bottom right corner.
+   - Type *Bucket2AccessPolicy* in the *Policy name* field. Then choose *Create policy* at the bottom right of the page.
 
      <img width="800" src="https://github.com/user-attachments/assets/e5d2fede-c69a-423f-9b4b-7b63b116fd3f" />
 
-4. Search for the policy you just created. Click the plus icon to the left of the policy name to review the policy
+4. In the *Policies* pane, search for the policy you just created. Click the plus icon to the left of the policy name to review the policy.
 
    <img width="800" src="https://github.com/user-attachments/assets/82278249-8c2e-4b17-a6c3-04176b4d2199" />
 
-
-To use the policy, you need to associate it with an IAM principal. Next, you'll create an IAM role and attach this *Bucket2AccessPolicy* policy to it
+Next, you'll create an IAM role and attach this *Bucket2AccessPolicy* policy to it (Remember: to use the policy, you need to associate it with an IAM principal).
 
 5. Choose *Roles* in the left navigation pane. Then choose *Create roles*, and configure the role settings:
     
@@ -473,18 +470,18 @@ To use the policy, you need to associate it with an IAM principal. Next, you'll 
     
      <img width="800" src="https://github.com/user-attachments/assets/0495b9f1-eb0a-49a1-baa8-0c678a167ed9" />
 
+The trust policy for the role we just created doesn't fully meet our requirements. Next, you'll refine it to restrict access so that only the IAM user *devuser* can assume this role.
 
-The trust policy for the role we just created does not meet our need fully. Next, you'll refine it to restrict access only to the IAM user *devuser*.
-
-6. Choose the *Bucket2AccessRole* role from the *Roles* list
+6. Choose the *Bucket2AccessRole* role from the *Roles* list.
    
     <img width="800" src="https://github.com/user-attachments/assets/9b18bf1a-3902-4fdf-9967-89d3b6555f2b" />
 
-7. Choose the *Trust relationships* tab. Then choose *Edit trust policy*
+7. Click on the *Trust relationships* tab. Then choose *Edit trust policy*.
 
     <img width="800" src="https://github.com/user-attachments/assets/f319c720-421f-40a8-9043-38d2b14d70e4" />
 
-8. Locate the *Principal* block in the *Edit trust policy* text area and replace *root* after the account ID in the ARN with *user/devuser*. Then choose *Update policy*.
+
+8. In the *Edit trust policy* text area, find the *Principal* block. Replace the *root* part of the ARN with *user/devuser* (keeping the account ID). Then click *Update policy*.
 
 
 Note: Using *"arn:aws:iam::\<account id\>:root"* in an IAM policy does not restrict access to just the root user. Instead, it grants access to the entire AWS account, meaning it can apply to any user or role within it. In this step, you're actually making the policy more secure by narrowing that broad access down to a specific IAM user.
@@ -496,7 +493,7 @@ Next, you'll test if you can assume the *Bucket2AccessRole* role while logged in
     
 	<img width="800" src="https://github.com/user-attachments/assets/dbce9432-fae2-4543-b5a8-803b49ea8109" />
 
-10. Open a new browser tab, and paste the URL into the address bar. Then hit *Enter*.
+10. Open a new browser tab, and paste the URL into the address bar. Then press *Enter*.
     
 11. Choose *devuser* under the *Switch from* section. Then choose *Switch role*.
     
@@ -514,14 +511,27 @@ You can head over to the Amazon S3 console and test whether you can upload files
 
 Next, you'll test if you can assume the *Bucket2AccessRole* role while signed in as the account root user.
 
-13. Open a new browswer tab, and paste the URL copied from the *Link to switch roles in console*  into the address bar. This time, try to switch roles from the account root user. You'll encounter the following error message:
+13. Open a new browswer tab, and paste the URL copied from the *Link to switch roles in console* into the address bar. This time, try to switch roles from the account root user. You'll encounter the following error message:
     
     <img width="800"  src="https://github.com/user-attachments/assets/5341773b-eb72-44f5-ac91-5a10afde1819" />
 
 
-## Cross account access
+## Challenge tasks
 
-1. Switch to the tab that holds the session for your root user account
-2. Open the IAM console, Choose *Roles* in the left navigation pane, and then choose the *Bucket2AccessRole* role from the *Roles* list.
-3. Choose the *Trust relationships* tab. Then choose *Edit trust policy*
-4. Edit the *Principal* block to allow *devuser* in one of your neighbor's account to assume the *Bucket2AcessRole* in your account.
+### Challenge task 1: Verifying the role of the "sts:AssumeRole" action
+
+1. Switch to the browser tab where you are signed in as the root user.
+2. In the IAM console, locate the *DeveloperGroupPolicy* policy and edit it to remove the "sts:AssumeRole" action from its policy statement.
+3. Save the policy changes.
+4. Switch back to the browser tab where you are logged in as the IAM user *devuser*.
+5. Attempt to assume the *Bucket2AccessRole* again. Verify whether the action is still permitted.
+6. Switch to the browser tab where you are signed in as the root user. Add the "sts:AssumeRole" action back to the *DeveloperGroupPolicy* policy.
+
+
+### Challenge task 2: Allowing cross-account access
+
+1. Remain in the browser tab where you are signed in as the root user.
+2. In the IAM console, locate the *Bucket2AccessRole* role.
+3. Ask a neighbor for their AWS Account ID.
+4. Edit the role's *Trust Policy*. Add a new principal that specifies your neighbor's account ID, granting them permission to assume this role.
+5. Copy the *Link to switch roles in console* for the role and share it with your neighbor. Verify if they can successfully assume the role and access the three S3 buckets in your account.
