@@ -131,7 +131,7 @@ Once logged in, let's verify that your account is part of an AWS Organization.
    
 5. In the left navigation pane, choose *User groups*.
 
-   <img width="250"  src="https://github.com/user-attachments/assets/4d848555-8d95-41c7-8837-0554abb8d09b" />
+   <img width="200"  src="https://github.com/user-attachments/assets/4d848555-8d95-41c7-8837-0554abb8d09b" />
 
 
 6. Choose *Create group*.
@@ -159,7 +159,7 @@ Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group
 
 11. In the left navigation pane, choose *Users*. Then choose *Create user*.
     
-    <img width="250"  src="https://github.com/user-attachments/assets/cd1094a9-dbf2-40d3-87dc-86e4f026d432" />
+    <img width="200"  src="https://github.com/user-attachments/assets/cd1094a9-dbf2-40d3-87dc-86e4f026d432" />
 
 
 12. Configure the IAM user details:
@@ -267,7 +267,7 @@ Now that you are logged in to the console as the IAM user named *devuser*, you w
 
 2. In the left navigation pane, choose *Dashboard*.
    
-   <img width="250" src="https://github.com/user-attachments/assets/8306b25e-9e72-4400-b4dd-93d99d56c0b7" />
+   <img width="200" src="https://github.com/user-attachments/assets/8306b25e-9e72-4400-b4dd-93d99d56c0b7" />
 
    Many API Error messages display. This is expected.
 
@@ -306,6 +306,7 @@ In this task, you will look at the IAM policy details that apply to *devuser* to
 2. Access the IAM console, and observe user and group membership settings:
 
    - In the left navigation pane, choose *User groups*.
+     
    - Choose the *DeveloperGroup* group name. On the Users tab, notice that `devuser` is a member of this IAM group.
 
    > Note: When a policy is attached to a group, the policy applies to any IAM users who are members of the group. Therefore, this policy currently governs your access to the console, because you are logged in as devuser, who is a member of this IAM group.
