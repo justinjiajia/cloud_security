@@ -170,7 +170,7 @@ Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group
     - Deselect *Users must create a new password at next sign-in - Recommended*.
     - Choose *Next*  
     <br/>
-    <img width="800" height="514" alt="image" src="https://github.com/user-attachments/assets/8beae043-7ad5-4fef-8ef0-1a323ca4e8fc" />
+    <img width="800" src="https://github.com/user-attachments/assets/8beae043-7ad5-4fef-8ef0-1a323ca4e8fc" />
 
     
 13. Select *DeveloperGroup* to add the user to this user group. Then choose *Next*.
