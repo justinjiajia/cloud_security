@@ -1,5 +1,5 @@
  
-# Lab 2 Using Resource-Based Policies to Secure an S3 Bucket
+# Lab 2 Using IAM to secure AWS resources
 
 
 ## Lab overview and objectives
