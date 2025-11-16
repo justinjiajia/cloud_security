@@ -39,7 +39,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
    <img width="400"  src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
 
-   Note that you may need to access the authenticator app on your phone and find the MFA code if MFA has been turned on for your root account.
+   Note that you may need to access the authenticator app on your phone and provide the MFA code if MFA has been turned on for your account root user.
 
 
 <br/>
@@ -484,31 +484,39 @@ The trust policy for the role we just created does not meet our need fully. Next
 
     <img width="800" src="https://github.com/user-attachments/assets/f319c720-421f-40a8-9043-38d2b14d70e4" />
 
-8. Locate the *Principal* block in the *Edit trust policy* text area to include *user/devuser* after the account ID. Then choose *Update policy*.
+8. Locate the *Principal* block in the *Edit trust policy* text area and replace *root* after the account ID in the ARN with *user/devuser*. Then choose *Update policy*.
+
+
+Note: Using *"arn:aws:iam::\<account id\>:root"* in an IAM policy does not restrict access to just the root user. Instead, it grants access to the entire AWS account, meaning it can apply to any user or role within it. In this step, you're actually making the policy more secure by narrowing that broad access down to a specific IAM user.
     
 
-20. Copy the URL in the *Link to switch roles in console* field
-    
-	<img width="972" height="485" alt="image" src="https://github.com/user-attachments/assets/dbce9432-fae2-4543-b5a8-803b49ea8109" />
+Next, you'll test if you can assume the *Bucket2AccessRole* role while logged in as the IAM user *devuser*.
 
-21. Open a new browser tab, and paste the URL into the address bar. Hit *Enter*
-22. Choose *devuser* under the *Switch from* section. Then choose *Switch role*
+9. Copy the URL in the *Link to switch roles in console* field
+    
+	<img width="800" src="https://github.com/user-attachments/assets/dbce9432-fae2-4543-b5a8-803b49ea8109" />
+
+10. Open a new browser tab, and paste the URL into the address bar. Then hit *Enter*.
+    
+11. Choose *devuser* under the *Switch from* section. Then choose *Switch role*.
     
     <img width="812" height="578" alt="image" src="https://github.com/user-attachments/assets/55fb4aa8-7d6f-41ef-8cb1-cefa2b28f5c2" />
 
-Now you're log in as the *Bucket2AccessRole* role.
+Now you're logged in as the *Bucket2AccessRole* role.
 
-    <img width="430" height="91" alt="image" src="https://github.com/user-attachments/assets/4be2b921-9346-4fcc-be57-3bde04d990fd" />
+    <img width="500" alt="image" src="https://github.com/user-attachments/assets/4be2b921-9346-4fcc-be57-3bde04d990fd" />
 
-You can navigate to the S3 console and check if you're able to upload files into the *ust-\<ITSC account string\>-bucket2*.
+You can head over to the Amazon S3 console and test whether you can upload files into the *ust-\<ITSC account string\>-bucket2* bucket.
 
-23. After experimentation, choose the downward pointing triangle to the right of *Sign out of all sessions*. Choose *Sign out of current session* to only log off the current role session.
-   <img width="264" height="545" alt="image" src="https://github.com/user-attachments/assets/351f7470-25f9-468e-a63e-42b427c6187e" />
+12. Once you've finished testing, look for and click your profile at the top right of the screen. Then in the dropdown menu, choose the down-pointing triangle next to *Sign out of all sessions*. Choose *Sign out of current session* to only log out of the current IAM role session.
 
-	
-24. Open a new browswer tab, and paste the URL copied from the *Link to switch roles in console*  into the address bar. This time, choose switch role from the root user account. You'll run into an error message as follows:
+    <img width="300" src="https://github.com/user-attachments/assets/351f7470-25f9-468e-a63e-42b427c6187e" />
+
+Next, you'll test if you can assume the *Bucket2AccessRole* role while signed in as the account root user.
+
+13. Open a new browswer tab, and paste the URL copied from the *Link to switch roles in console*  into the address bar. This time, try to switch roles from the account root user. You'll encounter the following error message:
     
-    <img width="812" height="121" alt="image" src="https://github.com/user-attachments/assets/5341773b-eb72-44f5-ac91-5a10afde1819" />
+    <img width="800"  src="https://github.com/user-attachments/assets/5341773b-eb72-44f5-ac91-5a10afde1819" />
 
 
 ## Cross account access
