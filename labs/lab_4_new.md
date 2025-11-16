@@ -516,6 +516,8 @@ Next, you'll test if you can assume the *Bucket2AccessRole* role while signed in
     <img width="800"  src="https://github.com/user-attachments/assets/5341773b-eb72-44f5-ac91-5a10afde1819" />
 
 
+<br/>
+
 ## Challenge tasks
 
 ### Challenge task 1: Verifying the role of the "sts:AssumeRole" action
@@ -527,6 +529,7 @@ Next, you'll test if you can assume the *Bucket2AccessRole* role while signed in
 5. Attempt to assume the *Bucket2AccessRole* again. Verify whether the action is still permitted.
 6. Switch to the browser tab where you are signed in as the root user. Add the "sts:AssumeRole" action back to the *DeveloperGroupPolicy* policy.
 
+<br/>
 
 ### Challenge task 2: Allowing cross-account access
 
