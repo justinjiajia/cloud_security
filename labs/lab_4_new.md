@@ -421,7 +421,7 @@ In this task, you'll configure a resource-based policy to allow an existing S3 b
     
     <img width="800" src="https://github.com/user-attachments/assets/57ac67e6-4176-4478-87f7-ada882990f1a" />
 
-   A message displays *"You are not authorized to perform this operation.*.
+   A message displays *"You are not authorized to perform this operation"*.
 
    <img width="800" src="https://github.com/user-attachments/assets/3f0d9282-940c-4b12-87ed-403c339f54dc" />
 
