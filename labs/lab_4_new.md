@@ -402,8 +402,9 @@ In this task, you'll configure a resource-based policy to allow an existing S3 b
 		]
 	}
 	```
+ 
+	<img width="800" src="https://github.com/user-attachments/assets/e4ad384b-0fbc-4952-a8c3-e2b55e5229e7" />
 
-    <img width="800" src="https://github.com/user-attachments/assets/64fefee6-12ba-49db-9976-55e2561e4819" />
 
 5. Keep the current tab open. Now switch to the browser tab where you're signed in as *devuser*.
 
