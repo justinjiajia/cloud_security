@@ -125,18 +125,18 @@ By the end of this lab, you will have created the architecture shown in the foll
    <img width="800"  src="https://github.com/user-attachments/assets/bd8c0500-48f2-4551-b59c-f049658719ce" />
 
 
-8. In the *Attach permissions policies* pane, search for the policy we just created. Tick the checkbox to attach the policy to the user group to be created.
+8. In the *Attach permissions policies* pane, search for the policy we just created. Tick the checkbox next to it to attach this policy to the new user group.
 
     <img width="800"   src="https://github.com/user-attachments/assets/6584991c-9f4b-4ce1-9669-b7372ac87e63" />
 
 9. Choose *Create user group* to create the goup.
 
-10. Choose the *Permissions* tab. Notice that an IAM policy named *DeveloperGroupPolicy* is attached to this IAM group. Choose the plus icon to the left of *DeveloperGroupPolicy* to display the policy details.
+10. Choose the *Permissions* tab. Notice that an IAM policy named *DeveloperGroupPolicy* is attached to this IAM group. Choose the plus icon to the left of *DeveloperGroupPolicy* to display the policy details. Review the IAM policy details.
     
     <img width="800"  src="https://github.com/user-attachments/assets/894a23ab-bee4-4b9f-81f8-8604c1f86a98" />
 
 
-    Review the IAM policy details. Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group.
+Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group.
 
 11. In the left navigation pane, choose *Users*. Then choose *Create user*.
     
@@ -150,13 +150,11 @@ By the end of this lab, you will have created the architecture shown in the foll
     - Choose *Custom password*.
     - Password: *isom5140_devuser*.
     - Deselect *Users must create a new password at next sign-in - Recommended*.
-      
+    - Choose *Next*  
     <br/>
     <img width="800" height="514" alt="image" src="https://github.com/user-attachments/assets/8beae043-7ad5-4fef-8ef0-1a323ca4e8fc" />
 
-    Choose *Next*
     
-
 13. Select *DeveloperGroup* to add the user to this user group. Then choose *Next*.
     
     <img width="800" src="https://github.com/user-attachments/assets/aae595e9-c320-476b-8cf2-206aa33080fc" />
@@ -171,9 +169,9 @@ By the end of this lab, you will have created the architecture shown in the foll
 <br/>
    
  
-## Task 3: Creating S3 Buckets
+## Task 3: Creating three S3 Buckets
 
-1. In the search box at the top left of the screen, search for and choose *S3* and open the *S3* console:
+1. In the search box at the top left of the screen, search for and choose *S3* to open the *S3* console:
 
    <img width="800"  src="https://github.com/user-attachments/assets/c3818b20-9b71-4c2c-a58c-98e0413a7809" />
 
@@ -197,7 +195,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 4. Repeat step 3 to create two more buckets. Name them *ust-\<ITSC accoutn string\>-bucket2* and *ust-\<ITSC accoutn string\>-bucket3*, respectively.
 
 
-   In the end, you should see 3 buckets present in the *General purpose buckets* list.
+In the end, you should see 3 buckets present in the *General purpose buckets* list.
 
    <img width="800"   src="https://github.com/user-attachments/assets/d2b8be79-db12-44ee-b238-183cbba158a4" />
 
@@ -208,7 +206,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 ## Task 4: Logging in as an IAM user
 
 
-1. Get back to the IAM console. Choose *Users* in the left navigation pane. Then choose *devuser*.
+1. Open the IAM console. Choose *Users* in the left navigation pane. Then choose *devuser*.
  
    <img width="800" src="https://github.com/user-attachments/assets/7b1310c6-8003-4e4b-bc03-8790491b8915" />
 
