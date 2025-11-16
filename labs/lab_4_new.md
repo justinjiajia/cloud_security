@@ -305,10 +305,10 @@ In this task, you will look at the IAM policy details that apply to *devuser* to
 
 2. Access the IAM console, and observe user and group membership settings:
 
-- In the left navigation pane, choose *User groups*.
-- Choose the *DeveloperGroup* group name. On the Users tab, notice that `devuser` is a member of this IAM group.
+   - In the left navigation pane, choose *User groups*.
+   - Choose the *DeveloperGroup* group name. On the Users tab, notice that `devuser` is a member of this IAM group.
 
-  > Note: When a policy is attached to a group, the policy applies to any IAM users who are members of the group. Therefore, this policy currently governs your access to the console, because you are logged in as devuser, who is a member of this IAM group.
+   > Note: When a policy is attached to a group, the policy applies to any IAM users who are members of the group. Therefore, this policy currently governs your access to the console, because you are logged in as devuser, who is a member of this IAM group.
 
  
 3. Save the policy to a file on your computer:
