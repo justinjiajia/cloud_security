@@ -17,7 +17,7 @@ After completing this lab, you should be able to do the following:
 ## Scenario
 
 
-You'll create a user group called *DeveloperGroup* for developers with a specific policy attached, then create an IAM user named *devuser*, and assign it to the *DeveloperGroup* group. Then, you'll create three Amazon S3 buckets: bucket1, bucket2, and bucket3, and explore how the group policy governs your access to these buckets.
+You'll create a user group called *DeveloperGroup* for developers with a specific policy attached, then create an IAM user named *devuser*, and assign it to the *DeveloperGroup* group. Then, you'll create three Amazon S3 buckets: *bucket1*, *bucket2*, and *bucket3*, and explore how the group policy governs your access to these buckets.
 
 You'll also create an IAM role, which allows access to certain buckets and their objects when the role is assumed. You will analyze different policies to better understand how they control your access level.
 
