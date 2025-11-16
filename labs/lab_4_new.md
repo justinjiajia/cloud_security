@@ -56,7 +56,8 @@ Once logged in, let's verify that your account is part of an AWS Organization.
 
    <img width="500"  src="https://github.com/user-attachments/assets/6197006d-d00c-4104-9718-77518990157b" />
 
-
+   This is an expected behavior. A *Deny* statement in the *Service Control Policy* (SCP) applied to your Organization Unit is explicitly blocking the *organizations:LeaveOrganization* action.
+   
 <br/>
 
    
