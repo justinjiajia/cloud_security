@@ -242,7 +242,7 @@ In the end, you should see 3 buckets present in the *General purpose buckets* li
 
    <img width="600" src="https://github.com/user-attachments/assets/163bb537-f888-4994-9292-446e2f0bcacb" />
 
-5. Log in using the IAM user named *devuser*. Please note that the pre-populated Account ID or alias field will show a different account ID on your end.
+5. Log in using the IAM user named *devuser*. Please note that the Account ID or alias field is pre-populated with your account ID.
 
    <img width="300" src="https://github.com/user-attachments/assets/f18e3caf-81ce-4a97-a319-460642ecdc43" />
 
