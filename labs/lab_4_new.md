@@ -497,11 +497,11 @@ Next, you'll test if you can assume the *Bucket2AccessRole* role while logged in
     
 11. Choose *devuser* under the *Switch from* section. Then choose *Switch role*.
     
-    <img width="812" height="578" alt="image" src="https://github.com/user-attachments/assets/55fb4aa8-7d6f-41ef-8cb1-cefa2b28f5c2" />
+    <img width="800" src="https://github.com/user-attachments/assets/55fb4aa8-7d6f-41ef-8cb1-cefa2b28f5c2" />
 
 Now you're logged in as the *Bucket2AccessRole* role.
 
-    <img width="500" alt="image" src="https://github.com/user-attachments/assets/4be2b921-9346-4fcc-be57-3bde04d990fd" />
+   <img width="500" src="https://github.com/user-attachments/assets/4be2b921-9346-4fcc-be57-3bde04d990fd" />
 
 You can head over to the Amazon S3 console and test whether you can upload files into the *ust-\<ITSC account string\>-bucket2* bucket.
 
