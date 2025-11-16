@@ -410,88 +410,82 @@ In this task, you'll configure a resource-based policy to allow an existing S3 b
 -
 
 
-##
+## Task 9: Assuming an IAM role to access AWS resources
 
+In this task, you will try to access *bucket2* by using a role while logged in as the devuser IAM user. 
 
 1. Keep the current tab open. Switch to the tab that holds the session for the account root user.
 2. Open the *IAM* console, and choose *Policies* in the left navigation pane
-3. Choose *Create policy*. This time, you'll use the visual policy editor to create and configure a policy 
-
-4. Select S3 from the Service dropdown menu
    
-   <img width="781" height="453" alt="image" src="https://github.com/user-attachments/assets/c194487e-39b4-4e46-b993-7950973cf8d9" />
+3. Choose *Create policy*. This time, you'll explore how to use the visual policy editor to create and configure a policy. 
 
-5. Tick the checkbox for *All S3 actions (s3:*)*
+   - Select S3 from the Service dropdown menu
    
-   <img width="762" height="180" alt="image" src="https://github.com/user-attachments/assets/c93dd0c6-2f57-44a2-a73e-6266386c87da" />
+     <img width="800" src="https://github.com/user-attachments/assets/c194487e-39b4-4e46-b993-7950973cf8d9" />
 
-
-6. Locate the *bucket* field under the *Resources* section, choose *Add ARNs* to restrict access.
-
-   <img width="761" height="75" alt="image" src="https://github.com/user-attachments/assets/58da9c79-950f-49d5-a05f-390eb0b26f56" />
-
-7. Type the name of the 2nd bucket, i.e., *ust-\<ITSC account string\>-bucket2*: in the *Resource bucket name* field on the popup window. Then choose *Add ARN*
-
-   <img width="604" height="215" alt="image" src="https://github.com/user-attachments/assets/e70750a9-b4cd-4170-8eb1-d10019393d81" />
-
-8. Locate the *object* field under the *Resources* section, choose *Add ARNs* to restrict access.
+   - Tick the checkbox for *All S3 actions (s3:*)*
    
-   <img width="759" height="77" alt="image" src="https://github.com/user-attachments/assets/8f32d257-5391-43ac-bfa3-9c263724adee" />
+     <img width="800" src="https://github.com/user-attachments/assets/c93dd0c6-2f57-44a2-a73e-6266386c87da" />
 
 
-9. Fill in the *Resource bucket name* field with the same bucket name, and tick the checkbox for *Any object name*. Then choose *Add ARN*
+   - Locate the *bucket* field under the *Resources* section, choose *Add ARNs* to restrict access.
 
-   <img width="606" height="265" alt="image" src="https://github.com/user-attachments/assets/69f45872-dabe-4962-9a89-ee3ba13309c7" />
+     <img width="800" src="https://github.com/user-attachments/assets/58da9c79-950f-49d5-a05f-390eb0b26f56" />
 
+   - Type the name of the 2nd bucket, i.e., *ust-\<ITSC account string\>-bucket2*: in the *Resource bucket name* field on the popup window. Then choose *Add ARN*
 
-10. Click Next
+     <img width="600" src="https://github.com/user-attachments/assets/e70750a9-b4cd-4170-8eb1-d10019393d81" />
 
-11. Type *Bucket2AccessPolicy* in the *Policy name* field. Then choose *Create policy* at the bottom right corner.
-
-    <img width="974" height="296" alt="image" src="https://github.com/user-attachments/assets/e5d2fede-c69a-423f-9b4b-7b63b116fd3f" />
-
-12. Search for the policy you just created. Click the plus icon to the left of the policy name to review the policy
-
-    <img width="982" height="502" alt="image" src="https://github.com/user-attachments/assets/82278249-8c2e-4b17-a6c3-04176b4d2199" />
+   - Locate the *object* field under the *Resources* section, choose *Add ARNs* to restrict access.
+   
+     <img width="800" alt="image" src="https://github.com/user-attachments/assets/8f32d257-5391-43ac-bfa3-9c263724adee" />
 
 
-To use the policy, you need to associate it with an IAM principal,  Next, you'll create an IAM role and attach this *Bucket2AccessPolicy* policy to it
+   - Fill in the *Resource bucket name* field with the same bucket name, and tick the checkbox for *Any object name*. Then choose *Add ARN*
 
-13. Choose *Roles* in the left navigation pane. Then choose *Create roles*
+     <img width="600" src="https://github.com/user-attachments/assets/69f45872-dabe-4962-9a89-ee3ba13309c7" />
+
+
+   - Click Next
+
+   - Type *Bucket2AccessPolicy* in the *Policy name* field. Then choose *Create policy* at the bottom right corner.
+
+     <img width="800" src="https://github.com/user-attachments/assets/e5d2fede-c69a-423f-9b4b-7b63b116fd3f" />
+
+4. Search for the policy you just created. Click the plus icon to the left of the policy name to review the policy
+
+   <img width="800" src="https://github.com/user-attachments/assets/82278249-8c2e-4b17-a6c3-04176b4d2199" />
+
+
+To use the policy, you need to associate it with an IAM principal. Next, you'll create an IAM role and attach this *Bucket2AccessPolicy* policy to it
+
+5. Choose *Roles* in the left navigation pane. Then choose *Create roles*, and configure the role settings:
     
-14. Select *AWS account* under the *Trusted entity type* section, and choose *This account* under the *An AWS account* section. Then choose *Next*
+   - Select *AWS account* under the *Trusted entity type* section, and choose *This account* under the *An AWS account* section. Then choose *Next*
     
-    <img width="975" height="495" alt="image" src="https://github.com/user-attachments/assets/0b2c4e82-1ada-4986-855b-5fc146ae45c1" />
+     <img width="800" src="https://github.com/user-attachments/assets/0b2c4e82-1ada-4986-855b-5fc146ae45c1" />
 
-15. Search for the policy you just created. Tick the check box for the policy. Then choose *Next*
-    <img width="972" height="312" alt="image" src="https://github.com/user-attachments/assets/709cca07-905e-4a9f-96ab-b1ca04c4d465" />
+   - Search for the policy you just created. Tick the checkbox for the policy. Then choose *Next*
 
-16. Call the role  *Bucket2AccessRole*. Then choose *Create role* at the bottom right corner
+     <img width="800" src="https://github.com/user-attachments/assets/709cca07-905e-4a9f-96ab-b1ca04c4d465" />
+
+   - Call the role *Bucket2AccessRole*. Then choose *Create role* at the bottom right corner
     
-    <img width="974" height="285" alt="image" src="https://github.com/user-attachments/assets/0495b9f1-eb0a-49a1-baa8-0c678a167ed9" />
+     <img width="800" src="https://github.com/user-attachments/assets/0495b9f1-eb0a-49a1-baa8-0c678a167ed9" />
 
-17. Choose the *Bucket2AccessRole* role from the *Roles* list
-    <img width="979" height="238" alt="image" src="https://github.com/user-attachments/assets/9b18bf1a-3902-4fdf-9967-89d3b6555f2b" />
 
-18. Choose the *Trust relationships* tab. Then choose *Edit trust policy*
+The trust policy for the role we just created does not meet our need fully. Next, you'll refine it to restrict access only to the IAM user *devuser*.
 
-    <img width="976" height="505" alt="image" src="https://github.com/user-attachments/assets/f319c720-421f-40a8-9043-38d2b14d70e4" />
+6. Choose the *Bucket2AccessRole* role from the *Roles* list
+   
+    <img width="800" src="https://github.com/user-attachments/assets/9b18bf1a-3902-4fdf-9967-89d3b6555f2b" />
 
-19. Copy and paste the JSON-formatted policy below to the *Edit trust policy* text area. Choose *Update policy*
-    ```json
-    {
-		"Version": "2012-10-17",
-		"Statement": [
-			{
-				"Effect": "Allow",
-				"Principal": {
-					"AWS": "arn:aws:iam::245221346334:user/devuser"
-				},
-				"Action": "sts:AssumeRole"
-			}
-		]
-	}
-    ```
+7. Choose the *Trust relationships* tab. Then choose *Edit trust policy*
+
+    <img width="800" src="https://github.com/user-attachments/assets/f319c720-421f-40a8-9043-38d2b14d70e4" />
+
+8. Locate the *Principal* block in the *Edit trust policy* text area to include *user/devuser* after the account ID. Then choose *Update policy*.
+    
 
 20. Copy the URL in the *Link to switch roles in console* field
     
@@ -512,7 +506,7 @@ You can navigate to the S3 console and check if you're able to upload files into
    <img width="264" height="545" alt="image" src="https://github.com/user-attachments/assets/351f7470-25f9-468e-a63e-42b427c6187e" />
 
 	
-25. Open a new browswer tab, and paste the URL copied from the *Link to switch roles in console*  into the address bar. This time, choose switch role from the root user account. You'll run into an error message as follows:
+24. Open a new browswer tab, and paste the URL copied from the *Link to switch roles in console*  into the address bar. This time, choose switch role from the root user account. You'll run into an error message as follows:
     
     <img width="812" height="121" alt="image" src="https://github.com/user-attachments/assets/5341773b-eb72-44f5-ac91-5a10afde1819" />
 
