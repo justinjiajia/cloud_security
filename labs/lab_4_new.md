@@ -242,7 +242,7 @@ In the end, you should see 3 buckets present in the *General purpose buckets* li
 
 5. Log in using the IAM user named *devuser*. Please note that the pre-populated Account ID or alias field will show a different account ID on your end.
 
-   <img width="300"  src="https://github.com/user-attachments/assets/000c0354-9772-49e7-8aa6-c0a9c77bfdbe" />
+   <img width="300" src="https://github.com/user-attachments/assets/f18e3caf-81ce-4a97-a319-460642ecdc43" />
 
    - For IAM user name, enter *devuser*
    - For Password, enter *isom5140_devuser* (the password you created before for this IAM user).
