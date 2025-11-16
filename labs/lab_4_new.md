@@ -292,7 +292,7 @@ In this task, you will look at the IAM policy details that apply to *devuser* to
  
 3. Save the policy to a file on your computer:
    
-   - To copy the JSON-formatted policy to your clipboard, choose *Copy*.
+   - To copy the JSON policy to your clipboard, choose *Copy*.
    - Open a text editor on your local computer, and paste the policy that you just copied.
    - Save the policy document as *DeveloperGroupPolicy.json* to a location on your computer that you will remember.
 
