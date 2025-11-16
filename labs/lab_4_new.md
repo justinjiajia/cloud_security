@@ -518,10 +518,7 @@ Next, you'll test if you can assume the *Bucket2AccessRole* role while logged in
 
 9. Copy the URL in the *Link to switch roles in console* field
 
-   <img width="800" src="https://github.com/user-attachments/assets/7151a16e-2a28-417d-be54-2c7e372a9f79" />
-
-    
-	<img width="800" src="https://github.com/user-attachments/assets/dbce9432-fae2-4543-b5a8-803b49ea8109" />
+   <img width="800" src="https://github.com/user-attachments/assets/7151a16e-2a28-417d-be54-2c7e372a9f79" /> 
 
 10. Open a new browser tab, and paste the URL into the address bar. Then press *Enter*.
     
