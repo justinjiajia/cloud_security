@@ -528,13 +528,13 @@ Next, you'll test if you can assume the *Bucket2AccessRole* role while logged in
 
 Now you're logged in as the *Bucket2AccessRole* role.
 
-   <img width="500" src="https://github.com/user-attachments/assets/4be2b921-9346-4fcc-be57-3bde04d990fd" />
-
 You can head over to the Amazon S3 console and test whether you can upload files into the *ust-\<ITSC account string\>-bucket2* bucket.
 
 12. Once you've finished testing, look for and click your profile at the top right of the screen. Then in the dropdown menu, choose the down-pointing triangle next to *Sign out of all sessions*. Choose *Sign out of current session* to only log out of the current IAM role session.
 
-    <img width="300" src="https://github.com/user-attachments/assets/351f7470-25f9-468e-a63e-42b427c6187e" />
+
+	<img width="250" src="https://github.com/user-attachments/assets/bdf6d49a-3126-409b-862a-80c1a0c76f72" />
+
 
 Next, you'll test if you can assume the *Bucket2AccessRole* role while signed in as the account root user.
 
