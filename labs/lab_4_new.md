@@ -150,8 +150,9 @@ Once logged in, let's verify that your account is part of an AWS Organization.
 9. Choose *Create user group* to create the goup.
 
 10. Choose the *Permissions* tab. Notice that an IAM policy named *DeveloperGroupPolicy* is attached to this IAM group. Choose the plus icon to the left of *DeveloperGroupPolicy* to display the policy details. Review the IAM policy details.
-    
-    <img width="800"  src="https://github.com/user-attachments/assets/894a23ab-bee4-4b9f-81f8-8604c1f86a98" />
+
+    <img width="800" src="https://github.com/user-attachments/assets/cd4c46e2-16d9-4acd-a776-60bf9992d289" />
+ 
 
 
 Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group.
