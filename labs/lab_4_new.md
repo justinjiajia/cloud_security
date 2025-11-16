@@ -70,7 +70,7 @@ Once logged in, let's verify that your account is part of an AWS Organization.
    
    <img width="800"  src="https://github.com/user-attachments/assets/5eb0f770-f3f5-4493-997a-c6765a910004" />
 
-2. In the left navigation pane, choose *Policies*. Then choose *Create policy*
+2. In the left navigation pane, choose *Policies*. Then choose *Create policy*.
   
    <img width="250"  src="https://github.com/user-attachments/assets/975d03ef-9fee-47eb-a3a8-56356ffb9a2e" /> <br/>
    
