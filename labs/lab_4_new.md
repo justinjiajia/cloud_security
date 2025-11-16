@@ -72,9 +72,10 @@ Once logged in, let's verify that your account is part of an AWS Organization.
 
 2. In the left navigation pane, choose *Policies*. Then choose *Create policy*.
   
-   <img width="250"  src="https://github.com/user-attachments/assets/975d03ef-9fee-47eb-a3a8-56356ffb9a2e" /> <br/>
-   
-   <img width="400"  src="https://github.com/user-attachments/assets/b02bdab5-9dc1-41f2-ba84-f6362eacb813" />
+   <img width="200"  src="https://github.com/user-attachments/assets/975d03ef-9fee-47eb-a3a8-56356ffb9a2e" />  
+
+   <br/>
+   <img width="300"  src="https://github.com/user-attachments/assets/b02bdab5-9dc1-41f2-ba84-f6362eacb813" />
 
 
 3. Choose the edit the policy using the JSON editor. Copy and paste the following JSON-formatted policy into the *Policy editor* text area:
