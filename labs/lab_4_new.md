@@ -210,21 +210,23 @@ In the end, you should see 3 buckets present in the *General purpose buckets* li
  
    <img width="800" src="https://github.com/user-attachments/assets/7b1310c6-8003-4e4b-bc03-8790491b8915" />
 
-2. Copy the value of the *Console sign-in link* field.
-   
-3. Keep open the current tab that hosts the session for the account root user. Open a new browser tab, and paste the URL you just copy into the address bar. Then hit Enter.
 
-4. Choose *Sign into new session* to proceed to the sign-in page
+2. Click on the *Security credentials* tab, and copy the link shown in the *Console sign-in link* field.
+
+3. Keep the current tab (where you're signed in as the root user) open. Open a new browser tab, paste the URL you just copied into the address bar, and press Enter.
+
+
+
+4. Choose *Sign into new session* to proceed to the login page.
 
    <img width="600" src="https://github.com/user-attachments/assets/163bb537-f888-4994-9292-446e2f0bcacb" />
 
-5. Log in as the IAM user named `devuser`. 
+5. Log in using the IAM user named *devuser*. Please note that the pre-populated Account ID or alias field will show a different account ID on your end.
 
-   <img width="400"   src="https://github.com/user-attachments/assets/000c0354-9772-49e7-8aa6-c0a9c77bfdbe" />
+   <img width="400"  src="https://github.com/user-attachments/assets/000c0354-9772-49e7-8aa6-c0a9c77bfdbe" />
 
    - For IAM user name, enter *devuser*
    - For Password, enter *isom5140_devuser* (the password you created before for this IAM user).
-   - Note that the pre-populated *Account ID or alias* field should contain a different account ID in your case.
    - Choose *Sign in*.
 
 6. The AWS Management Console displays. Make sure you're in the *us-east-1* Region.   
