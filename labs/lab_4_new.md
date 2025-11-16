@@ -163,7 +163,7 @@ Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group
 
 12. Configure the IAM user details:
 
-    - Name: *devuser*
+    - User name: *devuser*
     - Tick the checkbox for *Provide user access to the AWS Management Console - optional*.
     - Choose *Custom password*.
     - Password: *isom5140_devuser*.
