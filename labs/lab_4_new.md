@@ -496,12 +496,13 @@ Next, you'll create an IAM role and attach this *Bucket2AccessPolicy* policy to 
 The trust policy for the role we just created doesn't fully meet our requirements. Next, you'll refine it to restrict access so that only the IAM user *devuser* can assume this role.
 
 6. Choose the *Bucket2AccessRole* role from the *Roles* list.
-   
-    <img width="800" src="https://github.com/user-attachments/assets/9b18bf1a-3902-4fdf-9967-89d3b6555f2b" />
+
 
 7. Click on the *Trust relationships* tab. Then choose *Edit trust policy*.
 
-    <img width="800" src="https://github.com/user-attachments/assets/f319c720-421f-40a8-9043-38d2b14d70e4" />
+
+	<img width="800" src="https://github.com/user-attachments/assets/e4084b4d-6c0e-44fe-bd63-19574baac081" />
+
 
 
 8. In the *Edit trust policy* text area, find the *Principal* block. Replace the *root* part of the ARN with *user/devuser* (keeping the account ID). You can also remove the *Condition* block. Then click *Update policy*.
