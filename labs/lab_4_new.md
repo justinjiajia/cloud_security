@@ -481,7 +481,9 @@ Next, you'll create an IAM role and attach this *Bucket2AccessPolicy* policy to 
     
    - Select *AWS account* under the *Trusted entity type* section, and choose *This account* under the *An AWS account* section. Then choose *Next*
     
-     <img width="800" src="https://github.com/user-attachments/assets/0b2c4e82-1ada-4986-855b-5fc146ae45c1" />
+     
+	 <img width="800" src="https://github.com/user-attachments/assets/070c0773-abff-4bd9-a0c7-a0f93dc26b98" />
+
 
    - Search for the policy you just created. Tick the checkbox for the policy. Then choose *Next*
 
