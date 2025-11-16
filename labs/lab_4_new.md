@@ -252,7 +252,7 @@ In the end, you should see 3 buckets present in the *General purpose buckets* li
 
 6. The AWS Management Console displays. Make sure you're in the *us-east-1* Region.   
 
-   <img width="400" alt="image" src="https://github.com/user-attachments/assets/e3634272-d421-4d83-8046-4d5eed754757" />
+   <img width="300" alt="image" src="https://github.com/user-attachments/assets/e3634272-d421-4d83-8046-4d5eed754757" />
 
  <br/>
 
