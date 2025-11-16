@@ -41,6 +41,21 @@ By the end of this lab, you will have created the architecture shown in the foll
 
    Note that you may need to access the authenticator app on your phone and provide the MFA code if MFA has been turned on for your account root user.
 
+Once logged in, let's verify that your account is part of an AWS Organization.
+
+3. In the search bar at the top of the screen, search for and select *AWS Organization*. 
+
+   <img width="500" alt="image" src="https://github.com/user-attachments/assets/44f08afb-6c3f-4466-8973-d7f74537d08d" />
+
+   This will bring you to the AWS Organizations console, where you have limited access.
+   
+   <img width="800" src="https://github.com/user-attachments/assets/1034e3e1-1174-4437-a6df-54dfea554c54" />
+
+4. Select *Leave this organization*. You will encounter the following error message:
+   
+
+   <img width="500"  src="https://github.com/user-attachments/assets/6197006d-d00c-4104-9718-77518990157b" />
+
 
 <br/>
 
