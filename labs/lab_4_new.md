@@ -1,5 +1,5 @@
  
-# Lab 2 Using IAM to secure AWS resources
+# Guided lab: Using IAM to secure AWS resources
 
 
 ## Lab overview and objectives
