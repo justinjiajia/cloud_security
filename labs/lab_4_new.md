@@ -58,7 +58,7 @@ Once logged in, let's verify that your account is part of an AWS Organization.
 
    <img width="500"  src="https://github.com/user-attachments/assets/6197006d-d00c-4104-9718-77518990157b" />
 
-   This is an expected behavior. No *Allow* statement in the *Service Control Policy* (SCP) applied to your Organization Unit explicitly allows the *organizations:LeaveOrganization* action.
+   This is an expected behavior, because the *Service Control Policy* (SCP) applied to your Organization Unit does not explicitly grant permission for the *organizations:LeaveOrganization* action.
 
    > After this class concludes, you will be granted permission to leave the AWS Organization. This will convert your account into a standalone AWS account with full access to AWS services. Please note: If you choose to convert to a standalone account, you will be required to provide a credit card and phone number to complete the standard AWS account setup process.
    
