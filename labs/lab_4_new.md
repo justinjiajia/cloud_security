@@ -194,15 +194,21 @@ Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group
  
 ## Task 3: Creating three S3 Buckets
 
-1. In the search box at the top left of the screen, search for and choose *S3* to open the *S3* console:
+1. Make sure you are in the *us-east-1* Region:
+
+   <img width="300" src="https://github.com/user-attachments/assets/5489c849-89fa-4211-a410-921bf0593716" />
+
+
+
+2. In the search box at the top left of the screen, search for and choose *S3* to open the *S3* console:
 
    <img width="800"  src="https://github.com/user-attachments/assets/c3818b20-9b71-4c2c-a58c-98e0413a7809" />
 
-2. Choose *Create bucket*.
+3. Choose *Create bucket*.
    
    <img width="400" src="https://github.com/user-attachments/assets/95c03432-69ee-4102-ae6e-842acfb0a3dc" />
 
-3. Configure the bucket details in the *Create bucket* wizard:
+4. Configure the bucket details in the *Create bucket* wizard:
    
    - **(IMPORTANT FOR GRADING!)** Bucket name: *ust-\<ITSC accoutn string\>-bucket1*.
      
@@ -215,7 +221,7 @@ Next, you'll create a new IAM user and assign it into the *DeveloperGroup* group
    - Review the settings, and then choose *Create bucket* at the bottom of the page. 
      
 
-4. Repeat step 3 to create two more buckets. Name them *ust-\<ITSC accoutn string\>-bucket2* and *ust-\<ITSC accoutn string\>-bucket3*, respectively.
+5. Repeat step 3 to create two more buckets. Name them *ust-\<ITSC accoutn string\>-bucket2* and *ust-\<ITSC accoutn string\>-bucket3*, respectively.
 
 
 In the end, you should see 3 buckets present in the *General purpose buckets* list.
