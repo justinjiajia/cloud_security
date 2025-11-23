@@ -33,6 +33,103 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 1. Right-click the following link and download the template to your computer: [lab-network.yaml](https://labs.vocareum.com/web/289515/2382778.0/ASNLIB/public/scripts/lab-network.yaml)
    backup: https://github.com/justinjiajia/certifications/blob/main/aws/cloud_architecting/labs/sources/lab-network.yaml
 
+   ```yaml
+   AWSTemplateFormatVersion: 2010-09-09
+   Description: >-
+     Network Template: Sample template that creates a VPC with DNS and public IPs enabled.
+   
+   # This template creates:
+   #   VPC
+   #   Internet Gateway
+   #   Public Route Table
+   #   Public Subnet
+   
+   ######################
+   # Resources section
+   ######################
+   
+   Resources:
+   
+     ## VPC
+   
+     VPC:
+       Type: AWS::EC2::VPC
+       Properties:
+         EnableDnsSupport: true
+         EnableDnsHostnames: true
+         CidrBlock: 10.0.0.0/16
+         
+     ## Internet Gateway
+   
+     InternetGateway:
+       Type: AWS::EC2::InternetGateway
+     
+     VPCGatewayAttachment:
+       Type: AWS::EC2::VPCGatewayAttachment
+       Properties:
+         VpcId: !Ref VPC
+         InternetGatewayId: !Ref InternetGateway
+     
+     ## Public Route Table
+   
+     PublicRouteTable:
+       Type: AWS::EC2::RouteTable
+       Properties:
+         VpcId: !Ref VPC
+     
+     PublicRoute:
+       Type: AWS::EC2::Route
+       DependsOn: VPCGatewayAttachment
+       Properties:
+         RouteTableId: !Ref PublicRouteTable
+         DestinationCidrBlock: 0.0.0.0/0
+         GatewayId: !Ref InternetGateway
+     
+     ## Public Subnet
+     
+     PublicSubnet:
+       Type: AWS::EC2::Subnet
+       Properties:
+         VpcId: !Ref VPC
+         CidrBlock: 10.0.0.0/24
+         AvailabilityZone: !Select 
+           - 0
+           - !GetAZs 
+             Ref: AWS::Region
+     
+     PublicSubnetRouteTableAssociation:
+       Type: AWS::EC2::SubnetRouteTableAssociation
+       Properties:
+         SubnetId: !Ref PublicSubnet
+         RouteTableId: !Ref PublicRouteTable
+     
+     PublicSubnetNetworkAclAssociation:
+       Type: AWS::EC2::SubnetNetworkAclAssociation
+       Properties:
+         SubnetId: !Ref PublicSubnet
+         NetworkAclId: !GetAtt 
+           - VPC
+           - DefaultNetworkAcl
+     
+   ######################
+   # Outputs section
+   ######################
+   
+   Outputs:
+     
+     PublicSubnet:
+       Description: The subnet ID to use for public web servers
+       Value: !Ref PublicSubnet
+       Export:
+         Name: !Sub '${AWS::StackName}-SubnetID'
+   
+     VPC:
+       Description: VPC ID
+       Value: !Ref VPC
+       Export:
+         Name: !Sub '${AWS::StackName}-VPCID'
+   
+   ```
    If you want, you can open the template in a text editor to see how the AWS resources are defined.
 
    Templates can be written in JavaScript Object Notation (JSON) or YAML Ain't Markup Language (YAML). YAML is a markup language that is similar to JSON, but it is easier to read and edit.
