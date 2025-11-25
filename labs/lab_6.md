@@ -30,13 +30,7 @@ This way, templates can be reused between systems. For example, you can deploy a
 
 In this task, you will deploy an AWS CloudFormation template that creates a *networking layer* by using Amazon VPC.
 
-
-
-
-
-
-
-<img width="800" src="https://github.com/user-attachments/assets/d3b0aed9-0409-4292-88f5-2b22e6292179" />
+ 
 
 
 
