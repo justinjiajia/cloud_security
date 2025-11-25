@@ -365,12 +365,12 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
    A CloudFormation stack can use reference values from another CloudFormation stack. For example, this portion of the *lab-instance* template references the *lab-network* template:
 
    ```yaml
-      WebServerSecurityGroup:
-        Type: AWS::EC2::SecurityGroup
-        Properties:
-          GroupDescription: Enable HTTP ingress
-          VpcId:
-            Fn::ImportValue: !Sub ${NetworkStackName}-VPCID
+   WebServerSecurityGroup:
+     Type: AWS::EC2::SecurityGroup
+     Properties:
+       GroupDescription: Enable HTTP ingress
+       VpcId:
+         Fn::ImportValue: !Sub ${NetworkStackName}-VPCID
    ```
 
    The last line uses the *network stack name* that you provided (*lab-network*) when the stack was created. It imports the value of *lab-network-VPCID* from the *Outputs* of the first stack. It then inserts the value into the VPC ID field of the security group definition. The result is that the security group is created in the VPC that was created by the first stack.
@@ -378,9 +378,9 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
    Here is another example, which is in the CloudFormation template that you just used to create the application stack. This template code places the EC2 instance into the subnet that was created by the network stack:
 
    ```yaml
-      SubnetId:
-        Fn::ImportValue:
-        !Sub ${NetworkStackName}-SubnetID
+   SubnetId:
+     Fn::ImportValue:
+     !Sub ${NetworkStackName}-SubnetID
    ```
 
    It takes the *subnet ID* from the *lab-network* stack and uses it in the *lab-instance* stack to launch the instance into the public subnet, which was created by the 1st stack.
@@ -423,14 +423,14 @@ First, you will examine the current settings for the security group.
 
 9. In the **Stacks** list of the **AWS CloudFormation console**, select **lab-instance**.
 
-10. Choose **Update** and configure these settings.
+10. Choose **Update stack \> Make a direct update** and configure these settings.
 
    - Select **Replace current template**
    - **Template source:** **Upload a template file**
-   - **Upload a template file:** Click **Choose file** then select the **lab-application2.yaml** file that you downloaded.
+   - **Upload a template file:** Click **Choose file** then select the *lab-instance-2.txt* file that you downloaded.
 
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/c87959c0-9ec1-4b48-b20a-73bb92d3681c" />
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/8d3e89ea-f2db-4b44-a86d-7033d9cb9c3c" />
+   <img width="800" src="https://github.com/user-attachments/assets/ba29939e-7574-40c1-9115-d672d82a2544" />
+
 
 
 11. Choose **Next** in each of the next *three* screens to advance to the **Review lab-application** page.
