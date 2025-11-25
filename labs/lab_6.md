@@ -45,8 +45,7 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
    
    ```yaml
    AWSTemplateFormatVersion: 2010-09-09
-   Description: >-
-     Sample template that creates a VPC with DNS and public IPs enabled.
+   Description: Sample template that creates a VPC with DNS and public IPs enabled.
    
    # What follows # is a comment
    # This template creates:
@@ -157,9 +156,9 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 
    Templates can be written in JavaScript Object Notation (JSON) or YAML Ain't Markup Language (YAML). YAML is a markup language that is similar to JSON, but it is easier to read and edit.
 
-3. In the **AWS Management Console**, from the **Services** menu, choose **CloudFormation**.
+2. In the **AWS Management Console**, from the **Services** menu, choose **CloudFormation**.
 
-4. Choose **Create stack \> With new resources (standard)**  and configure these settings.
+3. Choose **Create stack \> With new resources (standard)**  and configure these settings.
 
    **Step 1: Specify template**
 
@@ -186,24 +185,24 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 
      <img width="800" src="https://github.com/user-attachments/assets/7183b9d2-93b5-4f63-b133-5f725c06cba7" />
   
-   - Keep all the other settings as defaults
-   - Choose **Next**
+   - Keep all the other settings as default.
+   - Choose **Next**.
 
    **Step 4: Review lab-network**
 
-   - Choose **Submit**
+   - Choose **Submit**.
 
    The *template* will now be used by AWS CloudFormation to generate a *stack* of resources in the AWS account.
 
    The specified *tags* are automatically propagated to the resources that are created, which makes it easier to identify resources that are used by particular applications.
 
-6. Choose the **Stack info** tab.
+4. Choose the **Stack info** tab.
 
    
    <img width="300" src="https://github.com/user-attachments/assets/53be5c3d-f22e-473a-a0a6-4b6c71238527" />
 
 
-8. Wait for the **Status** to change to *CREATE_COMPLETE*.
+5. Wait for the status to change to *CREATE_COMPLETE*.
 
    <img width="300" src="https://github.com/user-attachments/assets/39c311b9-b564-4559-a46e-a3eeea5cbea1" />
 
@@ -211,7 +210,7 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 
    You can now examine the resources that were created.
 
-9. Choose the **Resources** tab.
+6. Choose the **Resources** tab.
 
    You will see a list of the resources that were created by the template.
 
@@ -220,11 +219,11 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 
    If the list is empty, update the list by choosing **Refresh** .
 
-11. Choose the **Events** tab and scroll through the events log.
+7. Choose the **Events** tab and scroll through the events log.
 
    The events log shows (from more recent to less recent) the activities that were performed by AWS CloudFormation. Example events include starting to create a resource and then completing the resource creation. Any errors that were encountered during the creation of the stack will be listed in this tab.
 
-11. Choose the **Outputs** tab.
+8. Choose the **Outputs** tab.
 
    A CloudFormation stack can provide *output information*, such as the ID of specific resources and links to resources.
 
@@ -239,20 +238,85 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 
    Outputs can also be used to provide values to other stacks. This is shown in the **Export name** column. In this case, the VPC and subnet IDs are given export names so that other stacks can retrieve the values. These other stacks can then build resources inside the VPC and subnet that were just created. You will use these values in the next task.
 
-11. Choose the **Template** tab.
 
-    This tab shows the template that was used to create the stack—that is, the template that you uploaded while you created the stack. Feel free to examine the template and see the resources that were created. Also feel free to explore the **Outputs** section at the end (this section defined which values to export).
 
-## Task 2: Deploying an application layer
+## Task 2: Deploying a Web server
 
 Now that you deployed the *network layer*, you will deploy an *application layer* that contains an Amazon Elastic Compute Cloud (Amazon EC2) instance and a security group.
 
 The AWS CloudFormation template will *import* the VPC and subnet IDs from the *Outputs* of the existing CloudFormation stack. It will then use this information to create the security group in the VPC and the EC2 instance in the subnet.
 
-1. Right-click the following link and download the template to your computer: [lab-application.yaml](https://labs.vocareum.com/web/289515/298748.0/ASNLIB/public/scripts/lab-application.yaml)
-   Backup: https://github.com/justinjiajia/certifications/blob/main/aws/cloud_architecting/labs/sources/lab-application.yaml
+1. Copy the following YAML code and paste it into a plain text file called *lab-instance.txt*.
 
-   If you want, you can open the template in a text editor to see how resources are defined.
+   ```yaml
+   AWSTemplateFormatVersion: 2010-09-09
+   Description: Sample template that creates an EC2 and places it in the VPC created by the previous stack.
+   
+   Parameters:            # This section declares parameters for the template
+     
+     NetworkStackName:              # Parameter logic name
+       Description: >-              # YAML syntax for introducing multi-line strings
+         Name of an active CloudFormation stack that contains the networking
+         resources, such as the VPC and subnet that will be used in this stack.
+       Type: String
+       Default: lab-network         # Default value for the parameter
+   
+   Resources:
+   
+     Ec2Instance:
+       Type: AWS::EC2::Instance
+       Properties:
+         ImageId: ami-0fa3fe0fa7920f68e
+         InstanceType: t2.micro
+         KeyName: test
+   
+         NetworkInterfaces:                          # Defines network interfaces for EC2 instance
+           - GroupSet: [!Ref InstanceSecurityGroup]  # `GroupSet` is a list of security group IDs
+             AssociatePublicIpAddress: true          # Assigns a public IP address to the network interface
+             DeviceIndex: 0                          # Primary network interface (eth0)
+             DeleteOnTermination: true               # Auto-deletes the network interface when the instance terminates
+             SubnetId: 
+               Fn::ImportValue: !Sub '${NetworkStackName}-SubnetID'  
+             # The `Fn::ImportValue` function imports the value of the specified name exported by another stack
+         
+         UserData:
+           Fn::Base64: |       # `|` is the YAML syntax for introducing multi-line strings; This text preserves line breaks exactly as written.
+             #!/bin/bash
+             dnf install -y httpd
+             systemctl enable httpd
+             systemctl start httpd
+             echo '<html><img src="https://raw.githubusercontent.com/justinjiajia/cloud_security/refs/heads/main/labs/resources/AWS_logo_RGB.png" /><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.html
+         
+           # The `Fn::Base64` function returns the Base64 representation of the input string. This function is typically used to pass encoded data to Amazon EC2 instances by way of the UserData property.
+   
+     InstanceSecurityGroup:                   # Specifies a security group.
+       Type: AWS::EC2::SecurityGroup                  
+       Properties:
+         GroupDescription: Enable SSH access via port 22
+         VpcId: 
+           Fn::ImportValue: !Sub '${NetworkStackName}-VPCID'
+         SecurityGroupIngress:                # Inbound rules for the security group
+           - IpProtocol: tcp
+             FromPort: 22
+             ToPort: 22
+             CidrIp: 0.0.0.0/0
+           - IpProtocol: tcp
+             FromPort: 80
+             ToPort: 80
+             CidrIp: 0.0.0.0/0  
+           
+   Outputs:
+     EC2Instance:
+       Description: Instance ID
+       Value: !Ref Ec2Instance
+       Export:
+         Name: !Sub '${AWS::StackName}-InstanceID'
+   
+     URL:
+       Description: URL of the sample website
+       Value: !Sub 'http://${Ec2Instance.PublicDnsName}'
+   ```
+
 
 3. In the left navigation pane, choose **Stacks**.
 
@@ -261,16 +325,18 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
    **Step 1: Specify template**
 
    - **Template source:** **Upload a template file**
-   - **Upload a template file:** Click **Choose file** then select the **lab-application.yaml** file that you downloaded.
+   - **Upload a template file:** Click **Choose file** then select the *lab-instance.txt* file that you created.
+     <img width="800" src="https://github.com/user-attachments/assets/440144ce-4ea3-4d38-9b63-c86d5a1782e4" />
+
    - Choose **Next**
 
    **Step 2: Create Stack**
 
-   - **Stack name:** `lab-application`
+   - **Stack name:** `lab-instance`
    - **NetworkStackName:** `lab-network`
+     <img width="800" src="https://github.com/user-attachments/assets/0acb67e8-beb3-44f4-80dd-e5c86a88aa37" />
+
    - Choose **Next**
-  
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/2119389a-cfbf-4266-bb75-3b4cb799b9d9" />
 
 
     The *Network Stack Name* parameter tells the template the name of the first stack that you created (*lab-network*), so it can retrieve values from the *Outputs*.
@@ -279,32 +345,32 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
 
    - In the **Tags** section, enter these values.
      - **Key:** `application`
-     - **Value:** `inventory`
+     - **Value:** `test`
+
+     
    - Choose **Next**
 
-   **Step 4: Review lab-application**
+   **Step 4: Review lab-instance**
 
    - Choose **Create stack**
 
    While the stack is being created, examine the details in the **Events** tab and the **Resources** tab. You can monitor the progress of the resource-creation process and the resource status.
 
-5. In the **Stack info** tab, wait for the **Status** to change to CREATE_COMPLETE.
+5. Wait for the **Status** to change to CREATE_COMPLETE.
 
-   Your application is now ready!
 
 6. Choose the **Outputs** tab.
    
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/3f368718-af07-423c-9d6b-b11e6fc2f26c" />
+   <img width="800" src="https://github.com/user-attachments/assets/2975f4b6-74aa-4b20-bf0d-e1e78de6d841" />
+
 
 
 8. Copy the **URL** that is displayed, open a new web browser tab, paste the URL, and press ENTER.
 
    The browser tab will open the application, which is running on the web server that this new CloudFormation stack created.
 
-   <img width="1197" alt="image" src="https://github.com/user-attachments/assets/6c28a44a-a46b-492f-a7e9-a963b5088c3c" />
 
-
-   A CloudFormation stack can use reference values from another CloudFormation stack. For example, this portion of the *lab-application* template references the *lab-network* template:
+   A CloudFormation stack can use reference values from another CloudFormation stack. For example, this portion of the *lab-instance* template references the *lab-network* template:
 
    ```yaml
       WebServerSecurityGroup:
@@ -312,8 +378,7 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
         Properties:
           GroupDescription: Enable HTTP ingress
           VpcId:
-            Fn::ImportValue:
-              !Sub ${NetworkStackName}-VPCID
+            Fn::ImportValue: !Sub ${NetworkStackName}-VPCID
    ```
 
    The last line uses the *network stack name* that you provided (*lab-network*) when the stack was created. It imports the value of *lab-network-VPCID* from the *Outputs* of the first stack. It then inserts the value into the VPC ID field of the security group definition. The result is that the security group is created in the VPC that was created by the first stack.
@@ -326,7 +391,7 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
         !Sub ${NetworkStackName}-SubnetID
    ```
 
-   It takes the *subnet ID* from the *lab-network* stack and uses it in the *lab-application* stack to launch the instance into the public subnet, which was created by the first stack.
+   It takes the *subnet ID* from the *lab-network* stack and uses it in the *lab-instance* stack to launch the instance into the public subnet, which was created by the 1st stack.
 
 ## Task 3: Updating a Stack
 
