@@ -397,32 +397,31 @@ First, you will examine the current settings for the security group.
 
 2. In the left navigation pane, choose **Security Groups**.
 
-3. Select the check box for **lab-application-WebServerSecurityGroup...**.
+3. Select the check box for *lab-instance-InstanceSecurityGroup-xxx*.
+
+   <img width="800" src="https://github.com/user-attachments/assets/f3fc4d9a-d88d-4392-9221-5c030277514c" />
+
 
 4. Choose the **Inbound rules** tab.
 
    Currently, only one rule is in the security group. The rule permits *HTTP* traffic.
 
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/d237108f-e93e-4087-baf5-307d3845251e" />
-
-
    You will now return to AWS CloudFormation to update the stack.
 
 6. From the **Services** menu, choose **CloudFormation**.
 
-7. Right-click the following link and download the updated template to your computer: [lab-application2.yaml](https://labs.vocareum.com/web/289515/2382778.0/ASNLIB/public/scripts/lab-application2.yaml)
-   Backup: https://github.com/justinjiajia/certifications/blob/main/aws/cloud_architecting/labs/sources/lab-application2.yaml
+7. Right-click the following link and download the updated template to your computer:
 
    This template has an additional configuration to permit inbound Secure Shell (SSH) traffic on port 22:
 
-   ```
-      - IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
-        CidrIp: 0.0.0.0/0
+   ```yaml
+   - IpProtocol: tcp
+     FromPort: 22
+     ToPort: 22
+     CidrIp: 0.0.0.0/0
    ```
 
-9. In the **Stacks** list of the **AWS CloudFormation console**, select **lab-application**.
+9. In the **Stacks** list of the **AWS CloudFormation console**, select **lab-instance**.
 
 10. Choose **Update** and configure these settings.
 
