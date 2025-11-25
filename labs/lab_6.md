@@ -291,10 +291,6 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
            Fn::ImportValue: !Sub '${NetworkStackName}-VPCID'
          SecurityGroupIngress:                # Inbound rules for the security group
            - IpProtocol: tcp
-             FromPort: 22
-             ToPort: 22
-             CidrIp: 0.0.0.0/0
-           - IpProtocol: tcp
              FromPort: 80
              ToPort: 80
              CidrIp: 0.0.0.0/0  
