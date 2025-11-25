@@ -437,15 +437,15 @@ First, you will examine the current settings for the security group.
 
    In the **Change set preview** section at the bottom of the page, AWS CloudFormation displays the resources that will be updated:
 
-   
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/da6ef75d-3154-4eda-b8b7-63848b0fcc10" />
+   <img width="800" src="https://github.com/user-attachments/assets/00609294-cbfd-42d6-89b3-f5b7073b6d98" />
 
 
-   This change set preview indicates that AWS CloudFormation will *Modify* the *WebServerSecurityGroup* without needing to replace it (*Replacement = False*). This change set means that the security group will have a minor change applied to it, and no references to the security group will need to change.
+
+   This change set preview indicates that AWS CloudFormation will ***Modify*** the *InstanceSecurityGroup* without needing to replace it (*Replacement = False*). This change set means that the security group will have a minor change applied to it, and no references to the security group will need to change.
 
 11. Choose **Submit**
 
-12. In the **Stack info** tab, wait for the **Status** to change to UPDATE_COMPLETE.
+12. Wait for the status to change to *UPDATE_COMPLETE*.
 
      Update the status by choosing **Refresh** every 15 seconds, if necessary.
 
@@ -453,14 +453,15 @@ First, you will examine the current settings for the security group.
 
 13. Return to the **Amazon EC2 console** and from the left navigation pane, choose **Security Groups**.
 
-14. In the **Security Groups** list, select **lab-application-WebServerSecurityGroup**.
+14. In the **Security Groups** list, select *lab-instance-InstanceSecurityGroup-xxx*.
 
     The **Inbound rules** tab should display an additional rule that allows *SSH* traffic over *TCP port 22*.
 
-    <img width="800" alt="image" src="https://github.com/user-attachments/assets/654d6b52-e558-497c-9fd9-0bb9377adb80" />
+    <img width="800" src="https://github.com/user-attachments/assets/38cb0faa-ecac-4ad6-a559-315d5c3a3c74" />
 
 
-    This subtask demonstrates how changes can be deployed in a repeatable, documented process. The AWS CloudFormation templates can be stored in a source code repository (such as AWS CodeCommit). This way, you can maintain versions and a history of the templates and the infrastructure that was deployed.
+
+    This subtask demonstrates how changes can be deployed in a repeatable, documented process. 
 
 ## Task 4: Exploring templates with AWS CloudFormation Designer
 
