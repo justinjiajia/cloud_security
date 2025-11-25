@@ -30,32 +30,44 @@ This way, templates can be reused between systems. For example, you can deploy a
 
 In this task, you will deploy an AWS CloudFormation template that creates a *networking layer* by using Amazon VPC.
 
-1. Right-click the following link and download the template to your computer: [lab-network.yaml](https://labs.vocareum.com/web/289515/2382778.0/ASNLIB/public/scripts/lab-network.yaml)
-   backup: https://github.com/justinjiajia/certifications/blob/main/aws/cloud_architecting/labs/sources/lab-network.yaml
 
+
+
+
+
+
+<img width="800" src="https://github.com/user-attachments/assets/d3b0aed9-0409-4292-88f5-2b22e6292179" />
+
+
+
+
+1. Copy the following YAML code and paste it into a plain text file called *lab-network.txt*.
+   
    ```yaml
    AWSTemplateFormatVersion: 2010-09-09
    Description: >-
-     Network Template: Sample template that creates a VPC with DNS and public IPs enabled.
+     Sample template that creates a VPC with DNS and public IPs enabled.
    
+   # What follows # is a comment
    # This template creates:
    #   VPC
    #   Internet Gateway
    #   Public Route Table
    #   Public Subnet
    
+   
    ######################
    # Resources section
    ######################
    
-   Resources:
+   Resources:       # A required section; Declares the AWS resources to provision 
    
      ## VPC
    
-     VPC:
-       Type: AWS::EC2::VPC
-       Properties:
-         EnableDnsSupport: true
+     VPC:                          # Specify the logical name of a resource
+       Type: AWS::EC2::VPC         # A mandatory attribute defines the kind of AWS resource it is. The `Type` attribute has the format AWS::ServiceName::ResourceType.
+       Properties:                 # Defines configuration details for the specific resource type; Some properties are required, while others are optional
+         EnableDnsSupport: true    # E.g., set the property `EnableDnsSupport` to true 
          EnableDnsHostnames: true
          CidrBlock: 10.0.0.0/16
          
@@ -67,8 +79,11 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
      VPCGatewayAttachment:
        Type: AWS::EC2::VPCGatewayAttachment
        Properties:
-         VpcId: !Ref VPC
-         InternetGatewayId: !Ref InternetGateway
+         VpcId: !Ref VPC    
+         InternetGatewayId: !Ref InternetGateway   
+         # The `Ref` function, when used with a resource (referred to by the logical name in the same template) , returns its identifier 
+         # Short form: !Ref logicalName` 
+         # Long form: `Ref: logicalName`
      
      ## Public Route Table
    
@@ -79,7 +94,7 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
      
      PublicRoute:
        Type: AWS::EC2::Route
-       DependsOn: VPCGatewayAttachment
+       DependsOn: VPCGatewayAttachment     # The `DependsOn` attribute enforces creation order by specifying prerequisite resources
        Properties:
          RouteTableId: !Ref PublicRouteTable
          DestinationCidrBlock: 0.0.0.0/0
@@ -92,10 +107,17 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
        Properties:
          VpcId: !Ref VPC
          CidrBlock: 10.0.0.0/24
-         AvailabilityZone: !Select 
-           - 0
-           - !GetAZs 
-             Ref: AWS::Region
+         AvailabilityZone: !Select [0, Fn::GetAZs: !Ref AWS::Region]   
+         
+         # The Fn::Select function returns a specific item from a list by index
+         # Short form: `!Select [index, list]` 
+         # Long form: `Fn::Select: [index, list]`
+         # The Fn::GetAZs function returns available Availability Zones for a region
+         # Short form: `!GetAZs region`
+         # Long form: `Fn::GetAZs: region`
+         # `AWS::Region` is a built-in parameter for the current region
+         # E.g., `!Ref AWS::Region` returns "us-east-1" if the stack is created in Region us-east-1
+         # Mixed syntax is required when nesting functions; Consecutive short-form functions cannot be directly chained 
      
      PublicSubnetRouteTableAssociation:
        Type: AWS::EC2::SubnetRouteTableAssociation
@@ -106,10 +128,11 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
      PublicSubnetNetworkAclAssociation:
        Type: AWS::EC2::SubnetNetworkAclAssociation
        Properties:
-         SubnetId: !Ref PublicSubnet
-         NetworkAclId: !GetAtt 
-           - VPC
-           - DefaultNetworkAcl
+         SubnetId: !Ref PublicSubnet  
+         NetworkAclId: !GetAtt VPC.DefaultNetworkAcl  
+         
+         # The `Fn::GetAtt` function returns the value of an attribute from a resource in the template
+         # What follows the dot is the name of a predefined attribute to retrieve
      
    ######################
    # Outputs section
@@ -117,46 +140,53 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
    
    Outputs:
      
-     PublicSubnet:
+     PublicSubnet:                                 # Logical name of the current output; unique within the template.
        Description: The subnet ID to use for public web servers
-       Value: !Ref PublicSubnet
-       Export:
-         Name: !Sub '${AWS::StackName}-SubnetID'
+       Value: !Ref PublicSubnet                    # The value of the output
+       Export:                                     # Export output values into other stacks 
+         Name: !Sub '${AWS::StackName}-SubnetID'   # The name of the output when used for a cross-stack reference.
+         
+         # The `Fn::Sub` function replaces variables in strings with values; Functions similarly to Python's f-strings
    
      VPC:
        Description: VPC ID
        Value: !Ref VPC
-       Export:
+       Export:                                  
          Name: !Sub '${AWS::StackName}-VPCID'
-   
    ```
-   If you want, you can open the template in a text editor to see how the AWS resources are defined.
 
    Templates can be written in JavaScript Object Notation (JSON) or YAML Ain't Markup Language (YAML). YAML is a markup language that is similar to JSON, but it is easier to read and edit.
 
-2. In the **AWS Management Console**, from the **Services** menu, choose **CloudFormation**.
+3. In the **AWS Management Console**, from the **Services** menu, choose **CloudFormation**.
 
-3. Choose **Create stack> With new resources (standard)**  and configure these settings.
+4. Choose **Create stack \> With new resources (standard)**  and configure these settings.
 
    **Step 1: Specify template**
 
    - **Template source:** **Upload a template file**
-   - **Upload a template file:** Click **Choose file** then select the **lab-network.yaml** file that you downloaded.
+   - **Upload a template file:** Click **Choose file** then select the *lab-network.yaml* file that you created.
      
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/7616db49-cfeb-45c2-93ee-4641fa2692be" />
+     <img width="800" src="https://github.com/user-attachments/assets/f44e84f7-1fd0-463c-971f-28ce778c9984" />
 
    - Choose **Next**
 
    **Step 2: Create Stack**
 
-   - **Stack name:** `lab-network`
+   - **Stack name:** *lab-network*
+     
+     <img width="800" src="https://github.com/user-attachments/assets/cb8b38e6-951a-4ef1-84bd-7e8d29c4046f" />
+     
    - Choose **Next**
 
    **Step 3: Configure stack options**
 
    - In the **Tags** section, enter these values.
-     - **Key:** `application`
-     - **Value:** `inventory`
+     - **Key:** *application*
+     - **Value:** *test*
+
+     <img width="800" src="https://github.com/user-attachments/assets/7183b9d2-93b5-4f63-b133-5f725c06cba7" />
+  
+   - Keep all the other settings as defaults
    - Choose **Next**
 
    **Step 4: Review lab-network**
@@ -169,10 +199,13 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 
 6. Choose the **Stack info** tab.
 
-   <img width="1000" alt="image" src="https://github.com/user-attachments/assets/e9d71888-6312-49f6-b694-eed5666bf44b" />
+   
+   <img width="300" src="https://github.com/user-attachments/assets/53be5c3d-f22e-473a-a0a6-4b6c71238527" />
 
 
-8. Wait for the **Status** to change to CREATE_COMPLETE.
+8. Wait for the **Status** to change to *CREATE_COMPLETE*.
+
+   <img width="300" src="https://github.com/user-attachments/assets/39c311b9-b564-4559-a46e-a3eeea5cbea1" />
 
    Choose **Refresh** every 15 seconds to update the display, if necessary.
 
@@ -182,7 +215,7 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 
    You will see a list of the resources that were created by the template.
 
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/d080536d-269c-491c-84c9-654c93b79159" />
+   <img width="800" src="https://github.com/user-attachments/assets/9da69728-0972-424a-aa1b-10eeb7c2c5ed" />
 
 
    If the list is empty, update the list by choosing **Refresh** .
@@ -197,10 +230,11 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 
    Two outputs are listed.
 
-   - **PublicSubnet:** The ID of the public subnet that was created (for example: _subnet-08aafd57f745035f1)
+   - **PublicSubnet:** The ID of the public subnet that was created (for example: *subnet-08aafd57f745035f1*)
    - **VPC:** The ID of the VPC that was created (for example: *vpc-08e2b7d1272ee9fb4*)
 
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/c7adcaa6-3258-4ba6-972e-08cd7c6c65e0" />
+   <img width="800" src="https://github.com/user-attachments/assets/b19d11a1-a7a9-44c7-ab43-64864df0fa0c" />
+
 
 
    Outputs can also be used to provide values to other stacks. This is shown in the **Export name** column. In this case, the VPC and subnet IDs are given export names so that other stacks can retrieve the values. These other stacks can then build resources inside the VPC and subnet that were just created. You will use these values in the next task.
