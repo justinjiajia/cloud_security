@@ -334,7 +334,9 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
 
    - **Stack name:** `lab-instance`
    - **NetworkStackName:** `lab-network`
-     <img width="800" src="https://github.com/user-attachments/assets/0acb67e8-beb3-44f4-80dd-e5c86a88aa37" />
+     
+     <img width="800" src="https://github.com/user-attachments/assets/f27aac02-03a6-4149-ae21-3829f58a6876" />
+
 
    - Choose **Next**
 
