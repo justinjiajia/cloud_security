@@ -257,6 +257,11 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
        Type: String
        Default: lab-network         # Default value for the parameter
    
+     KeyName:
+       Type: AWS::EC2::KeyPair::KeyName
+       Description: Name of an existing EC2 KeyPair
+       Default: <the name of the key pair you just created>
+   
    Resources:
    
      Ec2Instance:
@@ -264,7 +269,7 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
        Properties:
          ImageId: ami-0fa3fe0fa7920f68e
          InstanceType: t2.micro
-         KeyName: test
+         KeyName: !Ref KeyName
    
          NetworkInterfaces:                          # Defines network interfaces for EC2 instance
            - GroupSet: [!Ref InstanceSecurityGroup]  # `GroupSet` is a list of security group IDs
@@ -273,17 +278,32 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
              DeleteOnTermination: true               # Auto-deletes the network interface when the instance terminates
              SubnetId: 
                Fn::ImportValue: !Sub '${NetworkStackName}-SubnetID'  
-             # The `Fn::ImportValue` function imports the value of the specified name exported by another stack
+               # The `Fn::ImportValue` function imports the value of the specified name exported by another stack
          
          UserData:
-           Fn::Base64: |       # `|` is the YAML syntax for introducing multi-line strings; This text preserves line breaks exactly as written.
+           Fn::Base64: |    # `|` is the YAML syntax for introducing multi-line strings; This text preserves line breaks exactly as written.
              #!/bin/bash
              dnf install -y httpd
              systemctl enable httpd
              systemctl start httpd
              echo '<html><img src="https://raw.githubusercontent.com/justinjiajia/cloud_security/refs/heads/main/labs/resources/AWS_logo_RGB.png" /><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.html
          
-           # The `Fn::Base64` function returns the Base64 representation of the input string. This function is typically used to pass encoded data to Amazon EC2 instances by way of the UserData property.
+           # The `Fn::Base64` function returns the Base64 representation of the input string. 
+           # This function is typically used to pass encoded data to Amazon EC2 instances by way of the UserData property.
+   
+     DiskVolume:
+       Type: AWS::EC2::Volume
+       Properties:
+         Size: 1                          # Smallest possible - 1 GiB
+         VolumeType: gp3                  # Recommended default type
+         AvailabilityZone: !GetAtt Ec2Instance.AvailabilityZone
+   
+     DiskMountPoint:
+       Type: AWS::EC2::VolumeAttachment
+       Properties:
+         InstanceId: !Ref Ec2Instance
+         VolumeId: !Ref DiskVolume
+         Device: /dev/sdh
    
      InstanceSecurityGroup:                   # Specifies a security group.
        Type: AWS::EC2::SecurityGroup                  
@@ -295,9 +315,10 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
            - IpProtocol: tcp
              FromPort: 80
              ToPort: 80
-             CidrIp: 0.0.0.0/0  
-           
+             CidrIp: 0.0.0.0/0
+   
    Outputs:
+   
      EC2Instance:
        Description: Instance ID
        Value: !Ref Ec2Instance
