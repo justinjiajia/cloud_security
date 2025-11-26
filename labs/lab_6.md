@@ -526,7 +526,7 @@ The *lab-application* stack was configured to take a snapshot of an Amazon Elast
 
 The *DeletionPolicy* in the final line directs AWS CloudFormation to create a snapshot of the disk volume before it is deleted.
 
-You will now delete the *lab-application* stack and see the results of this deletion policy.
+You will now delete the *lab-instance* stack and see the results of this deletion policy.
 
 1. Return to the main **AWS CloudFormation console** by choosing the Close link at the top of the Designer page (choose **Leave page** if prompted).
 
