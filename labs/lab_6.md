@@ -1,5 +1,7 @@
 https://awsacademy.instructure.com/courses/64690/assignments/615155
 
+<img width="800" src="https://github.com/user-attachments/assets/38cfa19c-9eca-4637-849c-495cf37575c9" />
+
 
 # Module 10 - Guided Lab: Automating Infrastructure Deployment with AWS CloudFormation
  
