@@ -743,7 +743,7 @@ Next, let's experiment with the features of the *Infrastructure Composer*. For e
 
    <img width="800" src="https://github.com/user-attachments/assets/7ae45049-2865-439d-8a35-32274e6d4a23" />
 
-7. Switch back to the *Canvas* vidw. Click on the *Role* resource, and then select *Details* in the floating bar. It displays the *Resource properties* editor on the right.
+7. Switch back to the *Canvas* view. Click on the *Role* resource, and then select *Details* in the floating bar. It displays the *Resource properties* editor on the right.
    
    <img width="200"   src="https://github.com/user-attachments/assets/47b0054d-efe5-4d49-ad2d-ce69bc715914" />
    
