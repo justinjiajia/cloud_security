@@ -590,7 +590,10 @@ Fill in all the blanks to satisfy the following requirements:
 - Create an S3 bucket whose name is referenced by the `S3BucketName` parameter;
 - Create an IAM policy called *DevelopersS3Access*, allowing listing all buckets in the account as well as all actions on the bucket created by this template; Attach this policy the *Developers* group.
 
-- Once filling in all the blanks, append an *Outputs* section to output values indicated by the screenshot below
+- Once filling in all the blanks, append an *Outputs* section to output values indicated by the screenshot below:
+
+  <img width="800" src="https://github.com/user-attachments/assets/468509ab-1fe1-4a83-b7b8-632700d52aeb" />
+
   
   
 ```yaml
