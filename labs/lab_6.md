@@ -520,7 +520,7 @@ Next, let's ssh into the launched instance, and explore the Amazon EBS disk volu
     sudo lsblk -f
     ```
 
-    <img width="800" src="https://github.com/user-attachments/assets/5b93e135-3bb0-42bb-a881-3aa0b3ba4e51" />
+    <img width="700" src="https://github.com/user-attachments/assets/5b93e135-3bb0-42bb-a881-3aa0b3ba4e51" />
 
     
 <br>
