@@ -1,0 +1,84 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Sample template that creates an EC2 and places it in the VPC created by the previous stack.
+
+Parameters:
+  
+  NetworkStackName:
+    Description: >-
+      Name of an active CloudFormation stack that contains the networking
+      resources, such as the VPC and subnet that will be used in this stack.
+    Type: String
+    Default: lab-network
+
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Name of an existing EC2 KeyPair
+    Default: ust-justinjia
+
+Resources:
+
+  Ec2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0fa3fe0fa7920f68e
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+
+      NetworkInterfaces:                          
+        - GroupSet: [!Ref InstanceSecurityGroup]
+          AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          DeleteOnTermination: true
+          SubnetId: 
+            Fn::ImportValue: !Sub '${NetworkStackName}-SubnetID'  
+      
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          dnf install -y httpd
+          systemctl enable httpd
+          systemctl start httpd
+          echo '<html><img src="https://raw.githubusercontent.com/justinjiajia/cloud_security/refs/heads/main/labs/resources/AWS_logo_RGB.png" /><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.html
+
+
+  DiskVolume:
+    Type: AWS::EC2::Volume
+    Properties:
+      Size: 1
+      VolumeType: gp3
+      AvailabilityZone: !GetAtt Ec2Instance.AvailabilityZone
+
+  DiskMountPoint:
+    Type: AWS::EC2::VolumeAttachment
+    Properties:
+      InstanceId: !Ref Ec2Instance
+      VolumeId: !Ref DiskVolume
+      Device: /dev/sdh
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup                  
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      VpcId: 
+        Fn::ImportValue: !Sub '${NetworkStackName}-VPCID'
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+Outputs:
+
+  EC2Instance:
+    Description: Instance ID
+    Value: !Ref Ec2Instance
+    Export:
+      Name: !Sub '${AWS::StackName}-InstanceID'
+
+  URL:
+    Description: URL of the sample website
+    Value: !Sub 'http://${Ec2Instance.PublicDnsName}'
