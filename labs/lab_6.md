@@ -545,9 +545,6 @@ DiskVolume:
   Properties:
     Size: 1
     AvailabilityZone: !GetAtt WebServerInstance.AvailabilityZone
-    Tags:
-      - Key: Name
-        Value: Web Data
   DeletionPolicy: Snapshot
 ```
 
@@ -740,6 +737,7 @@ Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one 
     ```shell
     aws s3 ls
     aws s3 ls s3://<the name of one of your s3 buckets>
+    aws s3 cp s3://<the name of one of your s3 buckets>/<the name of a file> downloaded_file
     ```
 
 
