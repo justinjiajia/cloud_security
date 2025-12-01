@@ -576,10 +576,10 @@ You will now verify that a snapshot of the EBS volume was created before the EBS
    <img width="800" src="https://github.com/user-attachments/assets/9d2eec20-a7ff-4d6d-afe9-9e4c6efb0147" />
 
 <br>
-
+<br>
 ---
 
-## Challange task 1:
+## Challenge task 1:
 
 Copy the provided YAML template into a plain text file and save it with a *.yaml* extension.
 To complete the template, fill in the blanks to meet the following requirements:
