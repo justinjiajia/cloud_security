@@ -10,11 +10,12 @@ In this lab, you will learn how to deploy multiple layers of infrastructure with
 After completing this lab, you should be able to:
 
 - Use AWS CloudFormation to deploy a virtual private cloud (VPC) networking layer
-- Use AWS CloudFormation to deploy an application layer that references the networking layer
+- Use AWS CloudFormation to deploy an EC2 Web server that references the networking layer
 - Explore templates with AWS CloudFormation Designer
-- Delete a stack that has a deletion policy
+- Delete a stack
 
-   **Do not change the Region unless specifically instructed to do so**.
+---
+
 
 ## Task 1: Deploying a networking layer
 
@@ -26,14 +27,9 @@ It is a best practice to deploy infrastructure in *layers*. Common layers are:
 
 This way, templates can be reused between systems. For example, you can deploy a common network topology between development, test, and production environments, or deploy a standard database for multiple applications.
 
-In this task, you will deploy an AWS CloudFormation template that creates a *networking layer* by using Amazon VPC.
+In this task, you will deploy an AWS CloudFormation template that creates a networking layer by using Amazon VPC.
 
- 
-
-
-
-
-1. Copy the following YAML code and paste it into a plain text file called *lab-network.txt*.
+1. Copy the following YAML code and paste it into a plain text file called *lab-network.yaml*.
    
    ```yaml
    AWSTemplateFormatVersion: 2010-09-09
@@ -234,11 +230,23 @@ In this task, you will deploy an AWS CloudFormation template that creates a *net
 
 ## Task 2: Deploying a Web server
 
-Now that you deployed the *network layer*, you will deploy an *application layer* that contains an Amazon Elastic Compute Cloud (Amazon EC2) instance and a security group.
+Now that you deployed the network layer, you will deploy an Amazon Elastic Compute Cloud (Amazon EC2) instance and a security group.
 
-The AWS CloudFormation template will *import* the VPC and subnet IDs from the *Outputs* of the existing CloudFormation stack. It will then use this information to create the security group in the VPC and the EC2 instance in the subnet.
+The AWS CloudFormation template will import the VPC and subnet IDs from the ***Outputs*** of the existing CloudFormation stack. It will then use this information to create the security group in the VPC and the EC2 instance in the subnet.
 
-1. Copy the following YAML code and paste it into a plain text file called *lab-instance.txt*.
+EC2 Instances require key pairs for secure access. However, cloudFormation cannot securely deliver private keys in a key pair to users. So, before we draft the CloudFormation template, we need to create the key pair to use manually, and then use it as a parameter of the template.
+
+1. Go to the EC2 console, choose *Key pairs* in the left navigation pane, and choose *Create key pairs*
+   
+2. Provide a name with the format *ust-\<your ITSC account string\>*
+
+<img width="800"  src="https://github.com/user-attachments/assets/e81f641f-795f-4a32-81c3-a779c3371cbc" />
+
+   Keep the rest of the setting as default. Choose *Create key pair*.
+
+   > If you'll only the EC2 instance connect feature to connect to your instance later, you don't need to keep the private key there are automatically downloaded.
+
+2. Copy the following YAML code, and paste it into a plain text file called *lab-instance.yaml*. **Replate all placeholders with their actual values**. 
 
    ```yaml
    AWSTemplateFormatVersion: 2010-09-09
@@ -348,7 +356,6 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
 
 
    - Choose **Next**
-
 
     The *Network Stack Name* parameter tells the template the name of the first stack that you created (*lab-network*), so it can retrieve values from the *Outputs*.
 
