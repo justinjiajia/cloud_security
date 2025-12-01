@@ -581,18 +581,19 @@ You will now verify that a snapshot of the EBS volume was created before the EBS
 
 ## Challange task 1:
 
-Copy and paste the following incomplete template into a plain text file. 
-Fill in all the blanks to satisfy the following requirements:
-
+Copy the provided YAML template into a plain text file and save it with a *.yaml* extension.
+To complete the template, fill in the blanks to meet the following requirements:
 
 - Create an IAM group named *Developers*;
-- Create an IAM user whose name is referenced by the `IAMUserName` parameter; Assign the user to the *Developers* group;
-- Create an S3 bucket whose name is referenced by the `S3BucketName` parameter;
-- Create an IAM policy called *DevelopersS3Access*, allowing listing all buckets in the account as well as all actions on the bucket created by this template; Attach this policy the *Developers* group.
+- Create an IAM user and assign it to the *Developers* group (the user name is provided via the `IAMUserName` parameter);
+- Create an S3 bucket (the bucket name is provided via the `S3BucketName` parameter).
+- Create an IAM policy named *DevelopersS3Access* that grants permission to list all account buckets and perform all actions on the bucket created by this template. Attach this policy to the *Developers* group.
 
-- Once filling in all the blanks, append an *Outputs* section to output values indicated by the screenshot below:
+After filling in the blanks, append an *Outputs* section to export the values shown in the screenshot below.
 
-  <img width="800" src="https://github.com/user-attachments/assets/468509ab-1fe1-4a83-b7b8-632700d52aeb" />
+
+<img width="800" src="https://github.com/user-attachments/assets/835804f1-a115-43be-b25c-1e626cf66269" />
+
 
   
   
@@ -669,7 +670,7 @@ Resources:
 ```
 
 
-Once you finish editing the file, upload it to create a stack that provisions all the specified resources. 
+After editing and saving your template file, proceed to deploy it in the AWS CloudFormation Console.
 
 In *Step 2: Specify stack details*, configure the settings as follows:
 
@@ -678,18 +679,27 @@ In *Step 2: Specify stack details*, configure the settings as follows:
 - **IAMUserPassword**: *isom5140_lab3*
 - **S3BucketName**: *ust-\<your ITSC account string\>-project-bucket*
 
-  <img width="800" src="https://github.com/user-attachments/assets/85f9552c-297c-401e-baf1-af692056b8f1" />
+Wait for the stack status to change to *CREATE_COMPLETE*. You can view the *BucketArn* you defined in the *Outputs* tab.
 
-Once the provision is complete, log in as the newly created IAM user, navigate to the s3 console, and browser all the buckets in the *General purpose buckets* list.
+Log in as the new IAM user (*\<your ITSC account string\>-dev*), navigate to the Amazon S3 console, and verify the S3 permissions:
+
+- You should see the *General purpose buckets* list. This confirms the `s3:ListAllMyBuckets` permission is working.
+- Find the bucket named *ust-<your-ITSC>-project-bucket*. You should be able to open it, upload, and delete objects, confirming full bucket permissions.
 
 
 Tips:
 
-- Check out this [documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html) for specifying the *PolicyDocument* section and *Groups* section for the *DevelopersS3Policy* resource;
+For detailed guidance on the CloudFormation resource syntax used in this lab, consult the official AWS documentation:
 
- - Check out this [documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html) for specifying the *Groups* section for the *DeveloperOne* resource.
+- [AWS::IAM::Policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html) for specifying the PolicyDocument and Groups properties of the *DevelopersS3Policy* resource;
+
+- [AWS::IAM::User] for specifying the *Groups* property of the *DeveloperOne* resource.
+
+Additionally, the arn of a resource can be retrieved via its `Arn` attribute. 
+
 
 <br>
+
 ---
 
 ## Task 5: Exploring and editing templates with AWS Infrastructure Composer
