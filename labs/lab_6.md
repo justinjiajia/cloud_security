@@ -575,8 +575,9 @@ You will now verify that a snapshot of the EBS volume was created before the EBS
 
    <img width="800" src="https://github.com/user-attachments/assets/9d2eec20-a7ff-4d6d-afe9-9e4c6efb0147" />
 
+ 
 <br>
-<br>
+
 ---
 
 ## Challenge task 1:
