@@ -1,0 +1,108 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Sample template that creates a VPC with DNS and public IPs enabled.
+
+# What follows # is a comment
+# This template creates:
+#   VPC
+#   Internet Gateway
+#   Public Route Table
+#   Public Subnet
+
+
+######################
+# Resources section
+######################
+
+Resources:       # A required section; Declares the AWS resources to provision 
+
+  ## VPC
+
+  VPC:                          # Specify the logical name of a resource
+    Type: AWS::EC2::VPC         # A mandatory attribute defines the kind of AWS resource it is. The `Type` attribute has the format AWS::ServiceName::ResourceType.
+    Properties:                 # Defines configuration details for the specific resource type; Some properties are required, while others are optional
+      EnableDnsSupport: true    # E.g., set the property `EnableDnsSupport` to true 
+      EnableDnsHostnames: true
+      CidrBlock: 10.0.0.0/16
+      
+  ## Internet Gateway
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+  
+  VPCGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC    
+      InternetGatewayId: !Ref InternetGateway   
+      # The `Ref` function, when used with a resource (referred to by the logical name in the same template) , returns its identifier 
+      # Short form: !Ref logicalName` 
+      # Long form: `Ref: logicalName`
+  
+  ## Public Route Table
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+  
+  PublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: VPCGatewayAttachment     # The `DependsOn` attribute enforces creation order by specifying prerequisite resources
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  
+  ## Public Subnet
+  
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: !Select [0, Fn::GetAZs: !Ref AWS::Region]   
+      
+      # The Fn::Select function returns a specific item from a list by index
+      # Short form: `!Select [index, list]` 
+      # Long form: `Fn::Select: [index, list]`
+      # The Fn::GetAZs function returns available Availability Zones for a region
+      # Short form: `!GetAZs region`
+      # Long form: `Fn::GetAZs: region`
+      # `AWS::Region` is a built-in parameter for the current region
+      # E.g., `!Ref AWS::Region` returns "us-east-1" if the stack is created in Region us-east-1
+      # Mixed syntax is required when nesting functions; Consecutive short-form functions cannot be directly chained 
+  
+  PublicSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet
+      RouteTableId: !Ref PublicRouteTable
+  
+  PublicSubnetNetworkAclAssociation:
+    Type: AWS::EC2::SubnetNetworkAclAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet  
+      NetworkAclId: !GetAtt VPC.DefaultNetworkAcl  
+      
+      # The `Fn::GetAtt` function returns the value of an attribute from a resource in the template
+      # What follows the dot is the name of a predefined attribute to retrieve
+  
+######################
+# Outputs section
+######################
+
+Outputs:           # This section declares output values for the stack
+  
+  PublicSubnet:                                 # Logical name of the current output; unique within the template.
+    Description: The subnet ID to use for public web servers
+    Value: !Ref PublicSubnet                    # The value of the output
+    Export:                                     # Export output values into other stacks 
+      Name: !Sub '${AWS::StackName}-SubnetID'   # The name of the output when used for a cross-stack reference.
+      
+      # The `Fn::Sub` function replaces variables in strings with values; Functions similarly to Python's f-strings
+
+  VPC:
+    Description: VPC ID
+    Value: !Ref VPC
+    Export:                                  
+      Name: !Sub '${AWS::StackName}-VPCID'
