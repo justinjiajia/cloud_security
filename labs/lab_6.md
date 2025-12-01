@@ -355,7 +355,7 @@ EC2 instances require key pairs for SSH access. Because CloudFormation does not 
    **Step 1: Specify template**
 
    - **Template source:** **Upload a template file**
-   - **Upload a template file:** Click *Choose file* then select the *lab-instance.yaml* file that you created.
+   - **Upload a template file:** Click *Choose file* then select the *lab-instance.yaml* file that you created. <br>
      
      <img width="800" src="https://github.com/user-attachments/assets/23b3054f-e0a0-4a48-ac7f-59d133383167" />
 
@@ -512,20 +512,20 @@ Next, let's ssh into the launched instance, and explore the Amazon EBS volume mo
 15. In the opened tab that displays the SSH terminal, type the following commands line by line:
 
     ```shell
+    # lists all available block devices and their filesystems, labels, and mount points.
     sudo lsblk -f
-    # create a file system on the EBS volume
+    # create an EXT4 filesystem on the EBS volume
     sudo mkfs -t ext4 /dev/xvdh
-    # create a mount point directory
+    # creates a directory /data to serve as the mount point
     sudo mkdir /data
-    # mount the volume to the point directory
+    # mount /dev/xvdh (now with an ext4 filesystem) to the /data directory.
     sudo mount /dev/sdh /data
+    # lists block devices again to verify changes; the mounted EBS volume is now ready for use.
     sudo lsblk -f
     ```
 
     <img width="800" src="https://github.com/user-attachments/assets/5b93e135-3bb0-42bb-a881-3aa0b3ba4e51" />
-    These commands create a file system on the 1-GB EBS volume
     
-
 
 ---
 
