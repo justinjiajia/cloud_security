@@ -238,7 +238,7 @@ EC2 Instances require key pairs for secure access. However, cloudFormation canno
 
 1. Go to the EC2 console, choose *Key pairs* in the left navigation pane, and choose *Create key pairs*
    
-2. Provide a name with the format *ust-\<your ITSC account string\>*
+2. Provide a name in the format of *ust-\<your ITSC account string\>*
 
 <img width="800"  src="https://github.com/user-attachments/assets/e81f641f-795f-4a32-81c3-a779c3371cbc" />
 
