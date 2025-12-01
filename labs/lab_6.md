@@ -155,36 +155,36 @@ In this task, you will deploy an AWS CloudFormation template that creates a netw
      
      <img width="800" src="https://github.com/user-attachments/assets/f44e84f7-1fd0-463c-971f-28ce778c9984" />
 
-   - Choose **Next**
+   - Choose *Next*
 
    **Step 2: Create Stack**
 
-   - **Stack name:** *lab-network*
+   - *Stack name:* *lab-network*
      
      <img width="800" src="https://github.com/user-attachments/assets/cb8b38e6-951a-4ef1-84bd-7e8d29c4046f" />
      
-   - Choose **Next**
+   - Choose *Next*
 
    **Step 3: Configure stack options**
 
-   - In the **Tags** section, enter these values.
-     - **Key:** *application*
-     - **Value:** *test*
+   - In the *Tags* section, enter these values.
+     - *Key:* *application*
+     - *Value:* *test*
 
      <img width="800" src="https://github.com/user-attachments/assets/7183b9d2-93b5-4f63-b133-5f725c06cba7" />
   
    - Keep all the other settings as default.
-   - Choose **Next**.
+   - Choose *Next*.
 
    **Step 4: Review lab-network**
 
-   - Choose **Submit**.
+   - Choose *Submit*.
 
    The *template* will now be used by AWS CloudFormation to generate a *stack* of resources in the AWS account.
 
    The specified *tags* are automatically propagated to the resources that are created, which makes it easier to identify resources that are used by particular applications.
 
-4. Choose the **Stack info** tab.
+4. Choose the *Stack info* tab.
 
    
    <img width="300" src="https://github.com/user-attachments/assets/53be5c3d-f22e-473a-a0a6-4b6c71238527" />
@@ -348,46 +348,49 @@ EC2 instances require key pairs for SSH access. Because CloudFormation does not 
    **Step 1: Specify template**
 
    - **Template source:** **Upload a template file**
-   - **Upload a template file:** Click **Choose file** then select the *lab-instance.txt* file that you created.
-     <img width="800" src="https://github.com/user-attachments/assets/440144ce-4ea3-4d38-9b63-c86d5a1782e4" />
+   - **Upload a template file:** Click *Choose file* then select the *lab-instance.yaml* file that you created.
+     
+     <img width="800" src="https://github.com/user-attachments/assets/23b3054f-e0a0-4a48-ac7f-59d133383167" />
 
-   - Choose **Next**
+
+   - Choose *Next*
 
    **Step 2: Create Stack**
 
-   - **Stack name:** `lab-instance`
-   - **NetworkStackName:** `lab-network`
+   - *Stack name:* `lab-instance`
+   - *KeyName:* `ust-<your ITSC account string>`
+   - *NetworkStackName:* `lab-network`
       
      <img width="800" src="https://github.com/user-attachments/assets/e2e1cab7-b991-4c3a-a11f-48ba0592c932" />
 
 
-   - Choose **Next**
-
-    The *Network Stack Name* parameter tells the template the name of the first stack that you created (*lab-network*), so it can retrieve values from the *Outputs*.
+   - Choose *Next*
+     
+     The *KeyName* parameters tells the template the key pair to use, while the *Network Stack Name* parameter tells it the first stack you created (i.e., *lab-network*) so as to retrieve values from its *Outputs*.
 
    **Step 3: Configure stack options**
 
-   - In the **Tags** section, enter these values.
-     - **Key:** `application`
-     - **Value:** `test`
+   - In the *Tags* section, enter these values.
+     - *Key:* `application`
+     - *Value:* `test`
 
      
-   - Choose **Next**
+   - Choose *Next*.
 
    **Step 4: Review lab-instance**
 
-   - Choose **Create stack**
+   - Choose *Create stack*.
 
    While the stack is being created, examine the details in the **Events** tab and the **Resources** tab. You can monitor the progress of the resource-creation process and the resource status.
 
-6. Wait for the **Status** to change to CREATE_COMPLETE.
+6. Wait for the *Status* to change to *CREATE_COMPLETE*.
 
 
-7. Choose the **Outputs** tab.
+7. Choose the *Outputs* tab.
    
    <img width="800" src="https://github.com/user-attachments/assets/2975f4b6-74aa-4b20-bf0d-e1e78de6d841" />
 
-8. Copy the **URL** that is displayed, open a new web browser tab, paste the URL, and press ENTER.
+8. Copy the *URL* that is displayed, open a new web browser tab, paste the URL, and press ENTER.
 
    The browser tab will open the webpage, which is running on the web server that this new CloudFormation stack created.
 
@@ -414,26 +417,28 @@ EC2 instances require key pairs for SSH access. Because CloudFormation does not 
 
    It takes the *subnet ID* from the *lab-network* stack and uses it in the *lab-instance* stack to launch the instance into the public subnet, which was created by the first stack.
 
+<br>
+
 ---
 
 ## Task 3: Updating a Stack
 
-AWS CloudFormation can also *update* a stack that has been deployed. When you update a stack, AWS CloudFormation will only modify or replace the resources that are being changed. Any resources that are not being changed will be left as-is.
+AWS CloudFormation can also *update* a stack that has been deployed. When you update a stack, AWS CloudFormation will only modify or replace the resources that are being changed. Any resources that are not being changed will be left as-is. 
 
-In this task, you will update the *lab-application* stack to modify a setting in the security group.
+In this task, you will update the *lab-instance* stack to modify a setting in the security group. This demonstrates how changes can be deployed in a repeatable, documented process. 
 
 First, you will examine the current settings for the security group.
 
-1. In the **AWS Management Console**, from the **Services** menu, choose **EC2**.
+1. Navigate to the *EC2* console.
 
-2. In the left navigation pane, choose **Security Groups**.
+2. In the left navigation pane, choose *Security Groups*.
 
 3. Select the check box for *lab-instance-InstanceSecurityGroup-xxx*.
 
    <img width="800" src="https://github.com/user-attachments/assets/f3fc4d9a-d88d-4392-9221-5c030277514c" />
 
 
-4. Choose the **Inbound rules** tab.
+4. Choose the *Inbound rules* tab.
 
    Currently, only one rule is in the security group. The rule permits inbound HTTP traffic.
 
@@ -454,45 +459,44 @@ First, you will examine the current settings for the security group.
 
 6. Navigate back to the *CloudFormation* console.
    
-7. In the **Stacks** list of the **AWS CloudFormation console**, select **lab-instance**.
+7. In the *Stacks* list, select *lab-instance*.
 
-8. Choose **Update stack \> Make a direct update** and configure these settings.
+8. Choose *Update stack \> Make a direct update* and configure the following settings:
 
-   - Select **Replace current template**
-   - **Template source:** **Upload a template file**
-   - **Upload a template file:** Click **Choose file** then select the *lab-instance-2.yaml* file that you downloaded.
+   - Select *Replace existing template*
+   - *Template source:* *Upload a template file*
+   - Click *Choose file* then select the *lab-instance-2.yaml* file that you downloaded.
 
    <img width="800" src="https://github.com/user-attachments/assets/ba29939e-7574-40c1-9115-d672d82a2544" />
 
 
-9. Choose **Next** in each of the next *three* screens to advance to the **Review lab-application** page.
+9. Choose *Next* in each of the next 3 screens to advance to the *Review lab-instance* page.
 
-   In the **Change set preview** section at the bottom of the page, AWS CloudFormation displays the resources that will be updated:
+   In the *Changeset preview** section at the bottom of the page, AWS CloudFormation displays the resources that will be updated:
 
    <img width="800" src="https://github.com/user-attachments/assets/00609294-cbfd-42d6-89b3-f5b7073b6d98" />
 
 
+   This changeset preview indicates that AWS CloudFormation will ***Modify*** the *InstanceSecurityGroup* without needing to replace it (*Replacement = False*). This change set means that the security group will have a minor change applied to it, and no references to the security group will need to change.
 
-   This change set preview indicates that AWS CloudFormation will ***Modify*** the *InstanceSecurityGroup* without needing to replace it (*Replacement = False*). This change set means that the security group will have a minor change applied to it, and no references to the security group will need to change.
+10. Choose *Submit*.
 
-10. Choose **Submit**
+11. Wait for the status to change to *UPDATE_COMPLETE*. Update the status by choosing **Refresh** every 15 seconds, if necessary.
 
-11. Wait for the status to change to *UPDATE_COMPLETE*.
+You can now verify the change.
 
-     Update the status by choosing **Refresh** every 15 seconds, if necessary.
+12. Return to the *EC2* console and from the left navigation pane, choose *Security Groups*.
 
-    You can now verify the change.
+13. In the *Security Groups* list, select *lab-instance-InstanceSecurityGroup-xxx*.
 
-12. Return to the **Amazon EC2 console** and from the left navigation pane, choose **Security Groups**.
-
-13. In the **Security Groups** list, select *lab-instance-InstanceSecurityGroup-xxx*.
-
-    The **Inbound rules** tab should display an additional rule that allows *SSH* traffic over *TCP port 22*.
+    The *Inbound rules* tab should display an additional rule that allows *SSH* traffic over *TCP port 22*.
 
     <img width="800" src="https://github.com/user-attachments/assets/38cb0faa-ecac-4ad6-a559-315d5c3a3c74" />
 
+Next, let's ssh into the launched instance, and explore the EBS disk mounted to it
 
-    This task demonstrates how changes can be deployed in a repeatable, documented process. 
+14. Select the *Instance* from the the launched instance, and then choose *Connect* at the top right of the instance list. It opens the *Connect* pane
+    
 
 
 ---
@@ -502,9 +506,9 @@ First, you will examine the current settings for the security group.
 
 When resources are no longer required, AWS CloudFormation can delete the resources built for the stack.
 
-A *deletion policy* can also be specified against resources. It can preserve or (in some cases) back up a resource when its stack is deleted. This feature is useful for retaining databases, disk volumes, or any resource that might be needed after the stack is deleted.
+A *deletion policy* can also specified against resources in a template. It can preserve or (in some cases) back up a resource when its stack is deleted. This feature is useful for retaining databases, disk volumes, or any resource that might be needed after the stack is deleted.
 
-The *lab-application* stack was configured to take a snapshot of an Amazon Elastic Block Store (Amazon EBS) disk volume before it is deleted. The code in the template that accomplishes that configuration is:
+The *lab-instance* stack was configured to take a snapshot of an Amazon Elastic Block Store (Amazon EBS) disk volume before it is deleted. The code in the template that accomplishes that configuration is:
 
 ```
   DiskVolume:
@@ -522,36 +526,31 @@ The *DeletionPolicy* in the final line directs AWS CloudFormation to create a sn
 
 You will now delete the *lab-instance* stack and see the results of this deletion policy.
 
-1. Return to the main **AWS CloudFormation console** by choosing the Close link at the top of the Designer page (choose **Leave page** if prompted).
+1. Return to the main **AWS CloudFormation console**.
 
-2. In the list of stacks, choose the **lab-application** link.
+2. In the list of stacks, choose the **lab-instance** link.
 
-   <img width="1000" alt="image" src="https://github.com/user-attachments/assets/3f99ea7c-c15d-4976-b2ef-893ad9acc99e" />
+3. Choose *Delete* at the top right corner of the *Stacks* list. Choose *Delete* to confirm deletion in the popup window.
 
+   You can monitor the deletion process in the *Events* tab and update the screen by choosing *Refresh* occasionally. You might also see an events log entry that indicates that the EBS snapshot is being created.
 
-4. Choose **Delete**
+4. Wait for the stack to be deleted. It will disappear from the *Stacks* list.
 
-5. Choose **Delete stack**
+   > Note: The application stack was removed, but the network stack remained untouched. This reinforces the idea that different teams (for example, the network team or the application team) could manage their own stacks.
 
-   You can monitor the deletion process in the **Events** tab and update the screen by choosing **Refresh** occasionally. You might also see an events log entry that indicates that the EBS snapshot is being created.
-
-6. Wait for the stack to be deleted. It will disappear from the stacks list.
-
-   The application stack __ removed, but the network stack remained untouched. This scenario reinforces the idea that different teams (for example, the network team or the application team) could manage their own stacks.
-
-   You will now verify that a snapshot of the EBS volume was created before the EBS volume was deleted.
+You will now verify that a snapshot of the EBS volume was created before the EBS volume was deleted.
 
    <img width="800" alt="image" src="https://github.com/user-attachments/assets/813962e7-bd49-4ae6-a025-12647e50e15d" />
 
 
-8. From the **Services** menu, choose **EC2**.
-
-9. In the left navigation pane, choose **Snapshots**.
+5. Navigate to the *EC2* console, and in the left navigation pane, choose *Snapshots*.
 
    You should see a snapshot with a **Started** time in the last few minutes.
 
    <img width="800" alt="image" src="https://github.com/user-attachments/assets/e2b1bff7-612c-46bd-bed0-ed83416b2823" />
 
+6. Now you can manually delete this snapshot if you don't need the data stored in it further
+    
 ---
 
 ## Task 5: Exploring and editing templates with AWS Infrastructure Composer
