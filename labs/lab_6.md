@@ -647,6 +647,7 @@ Next, let's experiment with the features of the *Infrastructure Composer*. For e
              Action:
                - 's3:GetObject'
                - 's3:ListBucket'
+               - 's3:ListAllMyBuckets'
              Resource: '*'
    ```
 
