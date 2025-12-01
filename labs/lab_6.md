@@ -688,7 +688,7 @@ Then, log in as the new IAM user (*\<your ITSC account string\>-dev*), navigate 
 - Find the bucket named *ust-<your-ITSC>-project-bucket*. You should be able to open it, upload, and delete objects, confirming full bucket permissions.
 
 
-Tips:
+### Tips:
 
 For detailed guidance on the CloudFormation resource syntax used in this chanllege task, consult the official AWS documentation:
 
