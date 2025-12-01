@@ -685,7 +685,7 @@ Once you choose *Submit*, wait for the stack status to change to *CREATE_COMPLET
 Then, log in as the new IAM user (*\<your ITSC account string\>-dev*), navigate to the Amazon S3 console, and verify the S3 permissions:
 
 - You should see the *General purpose buckets* list. This confirms the `s3:ListAllMyBuckets` permission is working.
-- Find the bucket named *ust-<your-ITSC>-project-bucket*. You should be able to open it, upload, and delete objects, confirming full bucket permissions.
+- Find the bucket named *ust-\<your-ITSC\>-project-bucket*. You should be able to open it, upload, and delete objects, confirming full bucket permissions.
 
 
 ### Tips:
