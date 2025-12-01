@@ -47,13 +47,14 @@ Resources:
       Size: 1
       VolumeType: gp3
       AvailabilityZone: !GetAtt Ec2Instance.AvailabilityZone
+    DeletionPolicy: Snapshot
 
   DiskMountPoint:
     Type: AWS::EC2::VolumeAttachment
     Properties:
       InstanceId: !Ref Ec2Instance
       VolumeId: !Ref DiskVolume
-      Device: /dev/sdh
+      Device: /dev/xvdh
 
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup                  
