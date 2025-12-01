@@ -472,10 +472,9 @@ First, you will examine the current settings for the security group.
 
    - Select *Replace existing template*
    - *Template source:* *Upload a template file*
-   - Click *Choose file* then select the *lab-instance-2.yaml* file that you downloaded.
+   - Click *Choose file* then select the *lab-instance-2.yaml* file that you downloaded. <br>
 
-   
-
+  
    <img width="800" src="https://github.com/user-attachments/assets/b01786aa-8f5d-4e66-8c2c-3c8e7e5e983b" />
 
 
@@ -503,7 +502,7 @@ You can now verify the change.
 
     <img width="800" src="https://github.com/user-attachments/assets/38cb0faa-ecac-4ad6-a559-315d5c3a3c74" />
 
-Next, let's ssh into the launched instance, and explore the Amazon EBS volume mounted to it.
+Next, let's ssh into the launched instance, and explore the Amazon EBS disk volume mounted to it.
 
 14. Select *Instances* in the left navigation pane, choose the launched instance from the *Instances* list, and then choose *Connect* at the top right of the list. It opens the *Connect* pane. Choose *Connect*.
 
@@ -514,18 +513,20 @@ Next, let's ssh into the launched instance, and explore the Amazon EBS volume mo
     ```shell
     # lists all available block devices and their filesystems, labels, and mount points.
     sudo lsblk -f
-    # create an EXT4 filesystem on the EBS volume
+    # create an EXT4 filesystem on the EBS disk volume
     sudo mkfs -t ext4 /dev/xvdh
     # creates a directory /data to serve as the mount point
     sudo mkdir /data
     # mount /dev/xvdh (now with an ext4 filesystem) to the /data directory.
     sudo mount /dev/sdh /data
-    # lists block devices again to verify changes; the mounted EBS volume is now ready for use.
+    # lists block devices again to verify changes; the mounted EBS disk volume is now ready for use.
     sudo lsblk -f
     ```
 
     <img width="800" src="https://github.com/user-attachments/assets/5b93e135-3bb0-42bb-a881-3aa0b3ba4e51" />
+
     
+<br>
 
 ---
 
@@ -536,27 +537,27 @@ When resources are no longer required, AWS CloudFormation can delete the resourc
 
 A *deletion policy* can also specified against resources in a template. It can preserve or (in some cases) back up a resource when its stack is deleted. This feature is useful for retaining databases, disk volumes, or any resource that might be needed after the stack is deleted.
 
-The *lab-instance* stack was configured to take a snapshot of an Amazon Elastic Block Store (Amazon EBS) disk volume before it is deleted. The code in the template that accomplishes that configuration is:
+The *lab-instance* stack was configured to take a snapshot of the Amazon Elastic Block Store (Amazon EBS) disk volume before it is deleted. The code in the template that accomplishes that configuration is:
 
-```
-  DiskVolume:
-    Type: AWS::EC2::Volume
-    Properties:
-      Size: 1
-      AvailabilityZone: !GetAtt WebServerInstance.AvailabilityZone
-      Tags:
-        - Key: Name
-          Value: Web Data
-    DeletionPolicy: Snapshot
+```yaml
+DiskVolume:
+  Type: AWS::EC2::Volume
+  Properties:
+    Size: 1
+    AvailabilityZone: !GetAtt WebServerInstance.AvailabilityZone
+    Tags:
+      - Key: Name
+        Value: Web Data
+  DeletionPolicy: Snapshot
 ```
 
 The *DeletionPolicy* in the final line directs AWS CloudFormation to create a snapshot of the disk volume before it is deleted.
 
 You will now delete the *lab-instance* stack and see the results of this deletion policy.
 
-1. Return to the main **AWS CloudFormation console**.
+1. Return to the *AWS CloudFormation* console*.
 
-2. In the list of stacks, choose the **lab-instance** link.
+2. In the list of stacks, choose the *lab-instance* link.
 
 3. Choose *Delete* at the top right corner of the *Stacks* list. Choose *Delete* to confirm deletion in the popup window.
 
@@ -564,7 +565,7 @@ You will now delete the *lab-instance* stack and see the results of this deletio
 
 4. Wait for the stack to be deleted. It will disappear from the *Stacks* list.
 
-   > Note: The application stack was removed, but the network stack remained untouched. This reinforces the idea that different teams (for example, the network team or the application team) could manage their own stacks.
+   > Note: The instance stack was removed, but the network stack remained untouched. This reinforces the idea that different teams (for example, the network team or the web application team) could manage their own stacks.
 
 You will now verify that a snapshot of the EBS volume was created before the EBS volume was deleted.
 
@@ -575,9 +576,13 @@ You will now verify that a snapshot of the EBS volume was created before the EBS
 
    You should see a snapshot with a **Started** time in the last few minutes.
 
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/e2b1bff7-612c-46bd-bed0-ed83416b2823" />
+   <img width="800" src="https://github.com/user-attachments/assets/61b6511a-0939-41b7-ae58-6da7c921e58c" />
 
-6. Now you can manually delete this snapshot if you don't need the data stored in it further
+
+6. Now you can manually delete this snapshot if you don't need the data stored in it anymore.
+
+   <img width="800" src="https://github.com/user-attachments/assets/9d2eec20-a7ff-4d6d-afe9-9e4c6efb0147" />
+
     
 ---
 
