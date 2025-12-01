@@ -494,23 +494,20 @@ First, you will examine the current settings for the security group.
 ---
 
 
-## Task 4: Exploring templates with AWS CloudFormation Designer
+## Task 4: Exploring templates with AWS Infrastructure Composer
 
-*AWS CloudFormation Designer* is a graphic tool for creating, viewing, and modifying AWS CloudFormation templates. With Designer, you can diagram your template resources by using a drag-and-drop interface, and then edit their details through the integrated JSON and YAML editor.
+*AWS Infrastructure Composer* is a graphic tool for creating, viewing, and modifying AWS CloudFormation templates. With it, you can diagram your template resources by using a drag-and-drop interface, and then edit their details through the integrated JSON and YAML editor.
 
-Whether you are a new to AWS CloudFormation or an experienced AWS CloudFormation user, Designer can help you quickly see the interrelationship between a template's resources. It also enables you to easily modify templates.
-
+Whether you are a new to AWS CloudFormation or an experienced AWS CloudFormation user, Infrastructure Composer can help you quickly see the interrelationship between a template's resources. It also enables you to easily modify templates.
 
 
 In this task, you will gain some hands-on experience with Designer.
 
-1. From the **Services** menu, choose **CloudFormation**.
+1. Navigate back to the *CloudFormation* console.
 
-2. In the left navigation pane, choose **Infrastructure Composer**.
+2. In the left navigation pane, choose *Infrastructure Composer*.
 
-   **Tip:** You might need to expand the left navigation pane by choosing the menu icon.
-
-3. Choose the **File** menu, select **Open > Template file**, and select the **lab-application2.yaml** template that you downloaded previously.
+3. Choose the **File** menu, select **Open > Template file**, and select the *lab-application-2.yaml* template that you downloaded previously.
 
    <img width="300" alt="image" src="https://github.com/user-attachments/assets/9efa076c-1308-497d-b2f7-872bcfe096c7" />
 
