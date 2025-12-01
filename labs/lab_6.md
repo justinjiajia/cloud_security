@@ -670,18 +670,18 @@ Resources:
 ```
 
 
-After editing and saving your template file, proceed to deploy it in the AWS CloudFormation Console.
+After editing and saving your template file, proceed to create a CloudFormation stack to provision all the resources.
 
-In *Step 2: Specify stack details*, configure the settings as follows:
+Note: In *Step 2: Specify stack details*, configure the settings as follows:
 
 - **Stack name**: *lab-iam-s3*
 - **IAMUserUser**: *\<your ITSC account string\>-dev*
 - **IAMUserPassword**: *isom5140_lab3*
 - **S3BucketName**: *ust-\<your ITSC account string\>-project-bucket*
 
-Wait for the stack status to change to *CREATE_COMPLETE*. You can view the *BucketArn* you defined in the *Outputs* tab.
+Once you choose *Submit*, wait for the stack status to change to *CREATE_COMPLETE*. You can view the *BucketArn* you defined in the *Outputs* tab.
 
-Log in as the new IAM user (*\<your ITSC account string\>-dev*), navigate to the Amazon S3 console, and verify the S3 permissions:
+Then, log in as the new IAM user (*\<your ITSC account string\>-dev*), navigate to the Amazon S3 console, and verify the S3 permissions:
 
 - You should see the *General purpose buckets* list. This confirms the `s3:ListAllMyBuckets` permission is working.
 - Find the bucket named *ust-<your-ITSC>-project-bucket*. You should be able to open it, upload, and delete objects, confirming full bucket permissions.
@@ -689,13 +689,13 @@ Log in as the new IAM user (*\<your ITSC account string\>-dev*), navigate to the
 
 Tips:
 
-For detailed guidance on the CloudFormation resource syntax used in this lab, consult the official AWS documentation:
+For detailed guidance on the CloudFormation resource syntax used in this chanllege task, consult the official AWS documentation:
 
 - [AWS::IAM::Policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html) for specifying the PolicyDocument and Groups properties of the *DevelopersS3Policy* resource;
 
 - [AWS::IAM::User] for specifying the *Groups* property of the *DeveloperOne* resource.
 
-Additionally, the arn of a resource can be retrieved via its `Arn` attribute. 
+Additionally, note that the arn of a resource can be retrieved via its `Arn` attribute. 
 
 
 <br>
