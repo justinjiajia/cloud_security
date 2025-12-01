@@ -707,31 +707,39 @@ Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one 
 
 19. If everything goes smoothly without errors, click on *Create template*.
 
-    
-    <img width="450" src="https://github.com/user-attachments/assets/6a4ab449-691e-45cf-9539-bd33f31f2ec3" />
+    You'll be prompted to save this new template in an S3 bucket.
 
-    You'll be prompted to save this new template in an S3 bucket. Choose *Use a different bucket* and type *ust-cftemplate-\<your ITSC account string\>-usa-east-1* in the *Transfer bucket name* filed.
+20. Choose *Use a different bucket* and type *ust-cftemplate-\<your ITSC account string\>-usa-east-1* in the *Transfer bucket name* filed.
+
+    <img width="450" src="https://github.com/user-attachments/assets/6a4ab449-691e-45cf-9539-bd33f31f2ec3" />
 
     Choose *Confirm and continue to CloudFormation*. This leads you to the first step of the *Create stack* wizard.
 
+21. Click *Next* in *Step 1:Create stack*.
+    
     <img width="800" src="https://github.com/user-attachments/assets/55296da5-99ed-4b8a-a769-dd7f22a44fa5" />
     
-    Click *Next*.
 
-20. Type *lab-instance* and choose *Next* in the *Step 2: Specify stack details*.
 
-    <img width="800" src="https://github.com/user-attachments/assets/c36a428e-2147-46fa-a915-35190c758094" />
+22. Type *lab-instance* and choose *Next* in the *Step 2: Specify stack details*.
+
+    <img width="800" alt="image" src="https://github.com/user-attachments/assets/4ab11d72-802a-4a42-ab19-41dece4a2895" />
+
      
 
  
-21. In *Step 3: Configure stack options*, scroll down to the bottom and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
+23. In *Step 3: Configure stack options*, scroll down to the bottom and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
 
    <img width="800" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
 
+24. Click *Submit* to provision the EC2 instance and all the related resources specified in the template.
 
+25. SSH into the EC2 instance when it's ready for use. Then issue the following command to interact with S3 from within the instance:
 
-
-<img width="836" height="419" alt="image" src="https://github.com/user-attachments/assets/4ab11d72-802a-4a42-ab19-41dece4a2895" />
+    ```shell
+    aws s3 ls
+    aws s3 ls s3://<the name of one of your s3 buckets>
+    ```
 
 
 https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
