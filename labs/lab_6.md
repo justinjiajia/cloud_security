@@ -236,17 +236,19 @@ The AWS CloudFormation template will import the VPC and subnet IDs from the ***O
 
 EC2 Instances require key pairs for secure access. However, cloudFormation cannot securely deliver private keys in a key pair to users. So, before we draft the CloudFormation template, we need to create the key pair to use manually, and then use it as a parameter of the template.
 
+EC2 instances require key pairs for SSH access. Because CloudFormation does not deliver the private key in a pair, you are recommended to manually create the key pair first, and then reference it as a parameter in your template.
+
 1. Go to the EC2 console, choose *Key pairs* in the left navigation pane, and choose *Create key pairs*
    
-2. Provide a name in the format of *ust-\<your ITSC account string\>*
+2. Provide a name in the format: *ust-\<your ITSC account string\>* (replace with your actual ITSC account)
 
-<img width="800"  src="https://github.com/user-attachments/assets/e81f641f-795f-4a32-81c3-a779c3371cbc" />
+   <img width="800"  src="https://github.com/user-attachments/assets/e81f641f-795f-4a32-81c3-a779c3371cbc" />
 
-   Keep the rest of the setting as default. Choose *Create key pair*.
+   Keep the remaining settings at their defaults. Select *Create key pair*
 
-   > If you'll only the EC2 instance connect feature to connect to your instance later, you don't need to keep the private key there are automatically downloaded.
+   > Note: The private key file will be automatically downloaded. If you plan to use only the EC2 Instance Connect feature for accessing your instance later, you don't need to retain this private key file.
 
-2. Copy the following YAML code, and paste it into a plain text file called *lab-instance.yaml*. **Replate all placeholders with their actual values**. 
+3. Copy the following YAML code, and paste it into a plain text file called *lab-instance.yaml*. **Replate all placeholders with their actual values**. 
 
    ```yaml
    AWSTemplateFormatVersion: 2010-09-09
@@ -309,13 +311,13 @@ EC2 Instances require key pairs for secure access. However, cloudFormation canno
          VolumeId: !Ref DiskVolume
          Device: /dev/sdh
    
-     InstanceSecurityGroup:                   # Specifies a security group.
+     InstanceSecurityGroup:                 # Specifies a security group.
        Type: AWS::EC2::SecurityGroup                  
        Properties:
          GroupDescription: Enable HTTP request
          VpcId: 
            Fn::ImportValue: !Sub '${NetworkStackName}-VPCID'
-         SecurityGroupIngress:                # Inbound rules for the security group
+         SecurityGroupIngress:              # Inbound rules for the security group
            - IpProtocol: tcp
              FromPort: 80
              ToPort: 80
@@ -335,9 +337,9 @@ EC2 Instances require key pairs for secure access. However, cloudFormation canno
    ```
 
 
-3. In the left navigation pane, choose **Stacks**.
+4. In the left navigation pane, choose **Stacks**.
 
-4. Select **Create stack > With new resources (standard)**, and then configure these settings.
+5. Select **Create stack > With new resources (standard)**, and then configure these settings.
 
    **Step 1: Specify template**
 
@@ -374,18 +376,16 @@ EC2 Instances require key pairs for secure access. However, cloudFormation canno
 
    While the stack is being created, examine the details in the **Events** tab and the **Resources** tab. You can monitor the progress of the resource-creation process and the resource status.
 
-5. Wait for the **Status** to change to CREATE_COMPLETE.
+6. Wait for the **Status** to change to CREATE_COMPLETE.
 
 
-6. Choose the **Outputs** tab.
+7. Choose the **Outputs** tab.
    
    <img width="800" src="https://github.com/user-attachments/assets/2975f4b6-74aa-4b20-bf0d-e1e78de6d841" />
 
-
-
 8. Copy the **URL** that is displayed, open a new web browser tab, paste the URL, and press ENTER.
 
-   The browser tab will open the application, which is running on the web server that this new CloudFormation stack created.
+   The browser tab will open the webpage, which is running on the web server that this new CloudFormation stack created.
 
 
    A CloudFormation stack can use reference values from another CloudFormation stack. For example, this portion of the *lab-instance* template references the *lab-network* template:
@@ -409,7 +409,6 @@ EC2 Instances require key pairs for secure access. However, cloudFormation canno
    ```
 
    It takes the *subnet ID* from the *lab-network* stack and uses it in the *lab-instance* stack to launch the instance into the public subnet, which was created by the first stack.
-
 
 ---
 
@@ -436,9 +435,9 @@ First, you will examine the current settings for the security group.
 
    You will now return to AWS CloudFormation to update the stack.
 
-6. From the **Services** menu, choose **CloudFormation**.
 
-7. Right-click the following link and download the updated template to your computer:
+
+5. Right-click the [link](https://raw.githubusercontent.com/justinjiajia/cloud_security/refs/heads/main/labs/resources/lab-instance-2.yaml) and download the updated template to your computer:
 
    This template has an additional configuration to permit inbound Secure Shell (SSH) traffic on port 22:
 
@@ -449,19 +448,20 @@ First, you will examine the current settings for the security group.
      CidrIp: 0.0.0.0/0
    ```
 
-9. In the **Stacks** list of the **AWS CloudFormation console**, select **lab-instance**.
+6. Navigate back to the *CloudFormation* console.
+   
+7. In the **Stacks** list of the **AWS CloudFormation console**, select **lab-instance**.
 
-10. Choose **Update stack \> Make a direct update** and configure these settings.
+8. Choose **Update stack \> Make a direct update** and configure these settings.
 
    - Select **Replace current template**
    - **Template source:** **Upload a template file**
-   - **Upload a template file:** Click **Choose file** then select the *lab-instance-2.txt* file that you downloaded.
+   - **Upload a template file:** Click **Choose file** then select the *lab-instance-2.yaml* file that you downloaded.
 
    <img width="800" src="https://github.com/user-attachments/assets/ba29939e-7574-40c1-9115-d672d82a2544" />
 
 
-
-11. Choose **Next** in each of the next *three* screens to advance to the **Review lab-application** page.
+9. Choose **Next** in each of the next *three* screens to advance to the **Review lab-application** page.
 
    In the **Change set preview** section at the bottom of the page, AWS CloudFormation displays the resources that will be updated:
 
@@ -471,17 +471,17 @@ First, you will examine the current settings for the security group.
 
    This change set preview indicates that AWS CloudFormation will ***Modify*** the *InstanceSecurityGroup* without needing to replace it (*Replacement = False*). This change set means that the security group will have a minor change applied to it, and no references to the security group will need to change.
 
-11. Choose **Submit**
+10. Choose **Submit**
 
-12. Wait for the status to change to *UPDATE_COMPLETE*.
+11. Wait for the status to change to *UPDATE_COMPLETE*.
 
      Update the status by choosing **Refresh** every 15 seconds, if necessary.
 
     You can now verify the change.
 
-13. Return to the **Amazon EC2 console** and from the left navigation pane, choose **Security Groups**.
+12. Return to the **Amazon EC2 console** and from the left navigation pane, choose **Security Groups**.
 
-14. In the **Security Groups** list, select *lab-instance-InstanceSecurityGroup-xxx*.
+13. In the **Security Groups** list, select *lab-instance-InstanceSecurityGroup-xxx*.
 
     The **Inbound rules** tab should display an additional rule that allows *SSH* traffic over *TCP port 22*.
 
