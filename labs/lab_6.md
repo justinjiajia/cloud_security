@@ -621,13 +621,13 @@ Resources:
     Type: AWS::IAM::Group
     Properties:
       GroupName: _____________
-      Policies: [_____________]
 
   # 2. Customer-Managed Policy for S3 Privileges
   DevelopersS3Policy:
     Type: AWS::IAM::Policy
     Properties:
       PolicyName: _____________
+      Groups: [_____________]
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -679,8 +679,12 @@ In *Step 2: Specify stack details*, configure the settings as follows:
 
 Once the provision is complete, log in as the newly created IAM user, navigate to the s3 console, and browser all the buckets in the *General purpose buckets* list.
 
-https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html
- 
+
+Tips:
+
+- Check out this [documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html) for specifying the *PolicyDocument* section and *Groups* section for the *DevelopersS3Policy* resource;
+
+ - Check out this [documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html) for specifying the *Groups* section for the *DeveloperOne* resource.
 
 <br>
 ---
