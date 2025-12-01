@@ -569,8 +569,6 @@ You will now delete the *lab-instance* stack and see the results of this deletio
 
 You will now verify that a snapshot of the EBS volume was created before the EBS volume was deleted.
 
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/813962e7-bd49-4ae6-a025-12647e50e15d" />
-
 
 5. Navigate to the *EC2* console, and in the left navigation pane, choose *Snapshots*.
 
@@ -595,7 +593,7 @@ Whether you are a new to AWS CloudFormation or an experienced AWS CloudFormation
 
 In this task, you will gain some hands-on experience with Designer.
 
-1. Navigate back to the *CloudFormation* console.
+1. Navigate back to the *AWS CloudFormation* console.
 
 2. In the left navigation pane, choose *Infrastructure Composer*.
 
@@ -616,11 +614,11 @@ Next, let's experiment with the features of the *Infrastructure Composer*. For e
 
 4. Choose the *Resources* tab in the left pane, and type *iam::role* in the search bar. Drag the resource *AWS::IAM:Role* into the *Canvas* area.
 
-   <img width="250"  src="https://github.com/user-attachments/assets/09c7f8c2-3360-429e-8ca1-8d845be71358" />
+   <img width="200"  src="https://github.com/user-attachments/assets/09c7f8c2-3360-429e-8ca1-8d845be71358" />
    
 5. Repeat the previous step to add *AWS::IAM:InstanceProfile* into the *Canvas* area.
 
-   <img width="250" src="https://github.com/user-attachments/assets/fab79f76-17ac-4eb4-9693-c25faee656af" />
+   <img width="200" src="https://github.com/user-attachments/assets/fab79f76-17ac-4eb4-9693-c25faee656af" />
    
 6. Switch to the *Template* view. You'll see the definitions of the resources have been automatically inserted into the template.
 
@@ -652,7 +650,7 @@ Next, let's experiment with the features of the *Infrastructure Composer*. For e
              Resource: '*'
    ```
 
-   <img width="350"   src="https://github.com/user-attachments/assets/f0164326-5474-4570-93c1-acc92c0c89e5" />
+   <img width="300"   src="https://github.com/user-attachments/assets/f0164326-5474-4570-93c1-acc92c0c89e5" />
 
 9. Click *Save* to save the change.
     
@@ -667,7 +665,7 @@ Next, let's experiment with the features of the *Infrastructure Composer*. For e
     Roles: [!Ref EC2InstanceRole]
     ```
 
-    <img width="350" src="https://github.com/user-attachments/assets/3c13890c-f132-484c-905e-1d3b1289b62e" />
+    <img width="300" src="https://github.com/user-attachments/assets/3c13890c-f132-484c-905e-1d3b1289b62e" />
 
 12. Click *Save* to save the change.
 
@@ -686,9 +684,10 @@ Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one 
     IamInstanceProfile: !Ref EC2InstanceProfile
     ```
 
-15. Click *Save* to save the change. Visually, the *EC2InstanceProfile* will now be connected to the *EC2Instance* in the diagram, reflecting the attachment.
+15. Click *Save* to save the change. Visually, the *EC2InstanceProfile* will now be encapsulated in the *EC2Instance* in the diagram, reflecting the attachment.
 
 16. Switch to the *Template* view to inspect the YAML code. You'll see all the changes have been applied in the corresponding sections.
+    
 17. Scroll down to the bottom, and append the following code to the *Outputs* section to define two more pieces of output information.
 
     ```yaml
@@ -698,11 +697,15 @@ Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one 
       
       InstanceProfileName:
         Description: 'The name of the Instance Profile attached to the EC2 instance'
-        Value: !Ref EC2InstanceProfile    
+        Value: !Ref EC2InstanceProfile
     ```  
  
 
-18. After finishing editing the template, Click on *Validate* to validate the new version of the template. If everything goes smoothly without errors, click on *Create template*.
+18. After finishing editing the template, click on *Validate* to validate the new version of the template.
+
+    <img width="800" src="https://github.com/user-attachments/assets/1f3fd69c-a5d8-4354-a609-e049d8ccaeb0" />
+
+19. If everything goes smoothly without errors, click on *Create template*.
 
     
     <img width="450" src="https://github.com/user-attachments/assets/6a4ab449-691e-45cf-9539-bd33f31f2ec3" />
@@ -715,17 +718,15 @@ Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one 
     
     Click *Next*.
 
-19. Type *lab-instance* in the second step.
+20. Type *lab-instance* and choose *Next* in the *Step 2: Specify stack details*.
 
     <img width="800" src="https://github.com/user-attachments/assets/c36a428e-2147-46fa-a915-35190c758094" />
      
-https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
 
-<img width="376" height="157" alt="image" src="https://github.com/user-attachments/assets/56cc8dd1-a161-49a0-8c03-4630a47e5d9b" />
+ 
+21. In *Step 3: Configure stack options*, scroll down to the bottom and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
 
-
-
-
+   <img width="800" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
 
 
 
@@ -733,9 +734,10 @@ https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resou
 <img width="836" height="419" alt="image" src="https://github.com/user-attachments/assets/4ab11d72-802a-4a42-ab19-41dece4a2895" />
 
 
-Scroll down to the bottom, and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
+https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
 
-<img width="837" height="209" alt="image" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
+
+
 
 
 
