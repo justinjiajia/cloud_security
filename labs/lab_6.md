@@ -14,6 +14,9 @@ After completing this lab, you should be able to:
 - Explore templates with AWS CloudFormation Designer
 - Delete a stack
 
+
+<br>
+
 ---
 
 
@@ -194,7 +197,7 @@ In this task, you will deploy an AWS CloudFormation template that creates a netw
 
    <img width="300" src="https://github.com/user-attachments/assets/39c311b9-b564-4559-a46e-a3eeea5cbea1" />
 
-   Choose **Refresh** every 15 seconds to update the display, if necessary.
+   Choose *Refresh* every 15 seconds to update the display, if necessary.
 
    You can now examine the resources that were created.
 
@@ -227,6 +230,10 @@ In this task, you will deploy an AWS CloudFormation template that creates a netw
    Outputs can also be used to provide values to other stacks. This is shown in the **Export name** column. In this case, the VPC and subnet IDs are given export names so that other stacks can retrieve the values. These other stacks can then build resources inside the VPC and subnet that were just created. You will use these values in the next task.
 
 
+
+<br>
+
+---
 
 ## Task 2: Deploying a Web server
 
@@ -467,7 +474,10 @@ First, you will examine the current settings for the security group.
    - *Template source:* *Upload a template file*
    - Click *Choose file* then select the *lab-instance-2.yaml* file that you downloaded.
 
-   <img width="800" src="https://github.com/user-attachments/assets/ba29939e-7574-40c1-9115-d672d82a2544" />
+   
+
+   <img width="800" src="https://github.com/user-attachments/assets/b01786aa-8f5d-4e66-8c2c-3c8e7e5e983b" />
+
 
 
 9. Choose *Next* in each of the next 3 screens to advance to the *Review lab-instance* page.
