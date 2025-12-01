@@ -692,7 +692,7 @@ Then, log in as the new IAM user (*\<your ITSC account string\>-dev*), navigate 
 
 For detailed guidance on the CloudFormation resource syntax used in this chanllege task, consult the official AWS documentation:
 
-- [AWS::IAM::Policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html) for specifying the PolicyDocument and Groups properties of the *DevelopersS3Policy* resource;
+- [AWS::IAM::Policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html) for specifying the *PolicyDocument* and *Groups* properties of the *DevelopersS3Policy* resource;
 
 - [AWS::IAM::User](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html) for specifying the *Groups* property of the *DeveloperOne* resource.
 
