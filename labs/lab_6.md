@@ -431,7 +431,7 @@ First, you will examine the current settings for the security group.
 
 4. Choose the **Inbound rules** tab.
 
-   Currently, only one rule is in the security group. The rule permits *HTTP* traffic.
+   Currently, only one rule is in the security group. The rule permits inbound HTTP traffic.
 
    You will now return to AWS CloudFormation to update the stack.
 
