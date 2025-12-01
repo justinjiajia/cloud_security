@@ -694,9 +694,9 @@ For detailed guidance on the CloudFormation resource syntax used in this chanlle
 
 - [AWS::IAM::Policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html) for specifying the PolicyDocument and Groups properties of the *DevelopersS3Policy* resource;
 
-- [AWS::IAM::User] for specifying the *Groups* property of the *DeveloperOne* resource.
+- [AWS::IAM::User](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html) for specifying the *Groups* property of the *DeveloperOne* resource.
 
-Additionally, note that the arn of a resource can be retrieved via its `Arn` attribute. 
+Additionally, note that the arn of a resource can be retrieved via its `Arn` attribute (`GetAtt`). 
 
 
 <br>
