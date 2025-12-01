@@ -494,153 +494,7 @@ First, you will examine the current settings for the security group.
 ---
 
 
-## Task 4: Exploring templates with AWS Infrastructure Composer
-
-*AWS Infrastructure Composer* is a graphic tool for creating, viewing, and modifying AWS CloudFormation templates. With it, you can diagram your template resources by using a drag-and-drop interface, and then edit their details through the integrated JSON and YAML editor.
-
-Whether you are a new to AWS CloudFormation or an experienced AWS CloudFormation user, Infrastructure Composer can help you quickly see the interrelationship between a template's resources. It also enables you to easily modify templates.
-
-
-In this task, you will gain some hands-on experience with Designer.
-
-1. Navigate back to the *CloudFormation* console.
-
-2. In the left navigation pane, choose *Infrastructure Composer*.
-
-3. Choose  *Menu > Open > Template file*, and select the *lab-application-2.yaml* template that you downloaded previously.
-
-   <img width="300" alt="image" src="https://github.com/user-attachments/assets/9efa076c-1308-497d-b2f7-872bcfe096c7" />
-
-
-   *Infrastructure Composer* will display a graphical representation of the template:
-
-   
-   <img width="800" src="https://github.com/user-attachments/assets/2d612c47-56b2-49d8-844e-93c332eddd91" />
-
-
-   *Infrastructure Composer* is a visual editor for AWS CloudFormation templates. It draws the resources that are defined in a template and their relationship to each other.
-
-Next, let's experiment with the features of the *Infrastructure Composer*. For example, click the displayed resources and choose *Details* to display the portion of the template that defines the resources. You'll also try dragging a new resource from the **Resource types** pane on the left into the *Canvas* area.
-
-4. Choose the *Resources* tab in the left pane, and type *iam::role* in the search bar. Drag the resource *AWS::IAM:Role* into the *Canvas* area.
-
-   <img width="250"  src="https://github.com/user-attachments/assets/09c7f8c2-3360-429e-8ca1-8d845be71358" />
-   
-5. Repeat the previous step to add *AWS::IAM:InstanceProfile* into the *Canvas* area.
-
-   <img width="250" src="https://github.com/user-attachments/assets/fab79f76-17ac-4eb4-9693-c25faee656af" />
-   
-6. Switch to the *Template* view. You'll see the definitions of the resources have been automatically inserted into the template.
-
-   <img width="800" src="https://github.com/user-attachments/assets/7ae45049-2865-439d-8a35-32274e6d4a23" />
-
-7. Switch back to the *Canvas* vidw. Click on the *Role* resource, and then select *Details* in the floating bar. It displays *Resource properties* panel on the right for this resource.
-   
-   <img width="200"   src="https://github.com/user-attachments/assets/47b0054d-efe5-4d49-ad2d-ce69bc715914" />
-   
-8. Change the value in the *Logical ID* field from *Role* to *EC2InstanceRole*. Then copy and past the following code into the *Resource configuration* field.
-
-   ```yaml
-   AssumeRolePolicyDocument:
-     Version: '2012-10-17'
-     Statement:
-       - Effect: Allow
-         Principal:
-           Service: ec2.amazonaws.com
-         Action: 'sts:AssumeRole'
-   Policies:
-     - PolicyName: S3ReadAccessPolicy
-       PolicyDocument:
-         Version: '2012-10-17'
-         Statement:
-           - Effect: Allow
-             Action:
-               - 's3:GetObject'
-               - 's3:ListBucket'
-             Resource: '*'
-   ```
-
-   <img width="350"   src="https://github.com/user-attachments/assets/f0164326-5474-4570-93c1-acc92c0c89e5" />
-
-9. Click *Save* to save the change.
-    
-10. Click on the *InstanceProfile* resource, and then select *Details* in the floating bar. It displays *Resource properties* panel for this resource on the right.
-
-    <img width="200"  src="https://github.com/user-attachments/assets/084f2f96-a05f-4822-8cc7-af2ce5f458b5" />
-
-11. Change the value in the *Logical ID* field from *InstanceProfile* to *EC2InstanceProfile*. Then copy and past the following code into the *Resource configuration* field.
-
-    ```yaml
-    InstanceProfileName: !Sub '${AWS::StackName}-InstanceProfile'
-    Roles: [!Ref EC2InstanceRole]
-    ```
-
-    <img width="350" src="https://github.com/user-attachments/assets/3c13890c-f132-484c-905e-1d3b1289b62e" />
-
-12. Click *Save* to save the change.
-
-You'll see *EC2InstanceRole* merged into *EC2InstanceProfile*, because by design, an InstanceProfile is a container for a role in the context of attaching roles to EC2 instances.
-
-<img width="200" src="https://github.com/user-attachments/assets/c1ad93eb-f763-45ef-bd2c-ac04f2d449b4" />
-
-Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one of its properties.
-
-13. Click on the *EC2Instance* resource, and then select *Details* in the floating bar. It displays *Resource properties* panel on the right for this resource.
-
-14. Insert the following line between the *InstanceType* line and the *KeyName* line:
-    
-    ```yaml
-    IamInstanceProfile: !Ref EC2InstanceProfile
-    ```
-
-15. Click *Save* to save the change.
-
-In the *Canvas* view, you'll see the *EC2InstanceProfile* merged into the *EC2Instance* as one of its attributes.
-
-16. Switch to the *Template* view to inspect the YAML template code. You'll see all the changes have been applied in the corresponding sections.
-17. Scroll down to the bottom, and append the following code to the *Outputs* section to define two more pieces of output information.
-
-    ```yaml
-      RoleArn:
-        Description: 'The ARN of the created IAM Role'
-        Value: !GetAtt EC2InstanceRole.Arn
-      
-      InstanceProfileName:
-        Description: 'The name of the Instance Profile attached to the EC2 instance'
-        Value: !Ref EC2InstanceProfile    
-    ```  
- 
-
-
-
-https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
-
-<img width="376" height="157" alt="image" src="https://github.com/user-attachments/assets/56cc8dd1-a161-49a0-8c03-4630a47e5d9b" />
-
-
-
-<img width="810" height="56" alt="image" src="https://github.com/user-attachments/assets/c36a428e-2147-46fa-a915-35190c758094" />
-
-After finishing editing the template, you can click on "Validate" to validate the new version of the template, and 
-
-Click on *Create template*
-
-<img width="440" height="296" alt="image" src="https://github.com/user-attachments/assets/6a4ab449-691e-45cf-9539-bd33f31f2ec3" />
-
-
-Choosing:
-
-<img width="842" height="478" alt="image" src="https://github.com/user-attachments/assets/55296da5-99ed-4b8a-a769-dd7f22a44fa5" />
-
-<img width="836" height="419" alt="image" src="https://github.com/user-attachments/assets/4ab11d72-802a-4a42-ab19-41dece4a2895" />
-
-
-Scroll down to the bottom, and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
-
-<img width="837" height="209" alt="image" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
-
-
-## Task 5: Deleting the stack
+## Task 4: Deleting the stack
 
 When resources are no longer required, AWS CloudFormation can delete the resources built for the stack.
 
@@ -652,7 +506,7 @@ The *lab-application* stack was configured to take a snapshot of an Amazon Elast
   DiskVolume:
     Type: AWS::EC2::Volume
     Properties:
-      Size: 100
+      Size: 1
       AvailabilityZone: !GetAtt WebServerInstance.AvailabilityZone
       Tags:
         - Key: Name
@@ -693,6 +547,160 @@ You will now delete the *lab-instance* stack and see the results of this deletio
    You should see a snapshot with a **Started** time in the last few minutes.
 
    <img width="800" alt="image" src="https://github.com/user-attachments/assets/e2b1bff7-612c-46bd-bed0-ed83416b2823" />
+
+---
+
+## Task 5: Exploring and editing templates with AWS Infrastructure Composer
+
+*AWS Infrastructure Composer* is a graphic tool for creating, viewing, and modifying AWS CloudFormation templates. With it, you can diagram your template resources by using a drag-and-drop interface, and then edit their details through the integrated JSON and YAML editor.
+
+Whether you are a new to AWS CloudFormation or an experienced AWS CloudFormation user, Infrastructure Composer can help you quickly see the interrelationship between a template's resources. It also enables you to easily modify templates.
+
+
+In this task, you will gain some hands-on experience with Designer.
+
+1. Navigate back to the *CloudFormation* console.
+
+2. In the left navigation pane, choose *Infrastructure Composer*.
+
+3. Choose  *Menu > Open > Template file*, and select the *lab-application-2.yaml* template that you downloaded previously.
+
+   <img width="300" alt="image" src="https://github.com/user-attachments/assets/9efa076c-1308-497d-b2f7-872bcfe096c7" />
+
+
+   *Infrastructure Composer* will display a graphical representation of the template:
+
+   
+   <img width="800" src="https://github.com/user-attachments/assets/2d612c47-56b2-49d8-844e-93c332eddd91" />
+
+
+   *Infrastructure Composer* is a visual editor for AWS CloudFormation templates. It draws the resources that are defined in a template and their relationship to each other.
+
+Next, let's experiment with the features of the *Infrastructure Composer*. For example, click the displayed resources and choose *Details* to display the portion of the template that defines the resources. You'll also try dragging a new resource from the **Resource types** pane on the left into the *Canvas* area.
+
+4. Choose the *Resources* tab in the left pane, and type *iam::role* in the search bar. Drag the resource *AWS::IAM:Role* into the *Canvas* area.
+
+   <img width="250"  src="https://github.com/user-attachments/assets/09c7f8c2-3360-429e-8ca1-8d845be71358" />
+   
+5. Repeat the previous step to add *AWS::IAM:InstanceProfile* into the *Canvas* area.
+
+   <img width="250" src="https://github.com/user-attachments/assets/fab79f76-17ac-4eb4-9693-c25faee656af" />
+   
+6. Switch to the *Template* view. You'll see the definitions of the resources have been automatically inserted into the template.
+
+   <img width="800" src="https://github.com/user-attachments/assets/7ae45049-2865-439d-8a35-32274e6d4a23" />
+
+7. Switch back to the *Canvas* vidw. Click on the *Role* resource, and then select *Details* in the floating bar. It displays the *Resource properties* editor on the right.
+   
+   <img width="200"   src="https://github.com/user-attachments/assets/47b0054d-efe5-4d49-ad2d-ce69bc715914" />
+   
+8. Change the value in the *Logical ID* field from *Role* to *EC2InstanceRole*. Then copy and past the following code into the *Resource configuration* field.
+
+   ```yaml
+   AssumeRolePolicyDocument:
+     Version: '2012-10-17'
+     Statement:
+       - Effect: Allow
+         Principal:
+           Service: ec2.amazonaws.com
+         Action: 'sts:AssumeRole'
+   Policies:
+     - PolicyName: S3ReadAccessPolicy
+       PolicyDocument:
+         Version: '2012-10-17'
+         Statement:
+           - Effect: Allow
+             Action:
+               - 's3:GetObject'
+               - 's3:ListBucket'
+             Resource: '*'
+   ```
+
+   <img width="350"   src="https://github.com/user-attachments/assets/f0164326-5474-4570-93c1-acc92c0c89e5" />
+
+9. Click *Save* to save the change.
+    
+10. Click on the *InstanceProfile* resource, and then select *Details* in the floating bar. It displays the *Resource properties* editor for this resource on the right.
+
+    <img width="200"  src="https://github.com/user-attachments/assets/084f2f96-a05f-4822-8cc7-af2ce5f458b5" />
+
+11. Change the value in the *Logical ID* field from *InstanceProfile* to *EC2InstanceProfile*. Then copy and past the following code into the *Resource configuration* field.
+
+    ```yaml
+    InstanceProfileName: !Sub '${AWS::StackName}-InstanceProfile'
+    Roles: [!Ref EC2InstanceRole]
+    ```
+
+    <img width="350" src="https://github.com/user-attachments/assets/3c13890c-f132-484c-905e-1d3b1289b62e" />
+
+12. Click *Save* to save the change.
+
+    You will see the *EC2InstanceRole* now nested within the *EC2InstanceProfile*. In AWS, an Instance Profile acts as a container specifically for an IAM role, allowing it to be attached to an EC2 instance.
+
+
+    <img width="200" src="https://github.com/user-attachments/assets/c1ad93eb-f763-45ef-bd2c-ac04f2d449b4" />
+
+Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one of its properties.
+
+13. Click on the *EC2Instance* resource, and then select *Details* in the floating bar. It displays *Resource properties* panel on the right for this resource.
+
+14. Insert the following line between the *InstanceType* line and the *KeyName* line:
+    
+    ```yaml
+    IamInstanceProfile: !Ref EC2InstanceProfile
+    ```
+
+15. Click *Save* to save the change. Visually, the *EC2InstanceProfile* will now be connected to the *EC2Instance* in the diagram, reflecting the attachment.
+
+16. Switch to the *Template* view to inspect the YAML code. You'll see all the changes have been applied in the corresponding sections.
+17. Scroll down to the bottom, and append the following code to the *Outputs* section to define two more pieces of output information.
+
+    ```yaml
+      RoleArn:
+        Description: 'The ARN of the created IAM Role'
+        Value: !GetAtt EC2InstanceRole.Arn
+      
+      InstanceProfileName:
+        Description: 'The name of the Instance Profile attached to the EC2 instance'
+        Value: !Ref EC2InstanceProfile    
+    ```  
+ 
+
+18. After finishing editing the template, Click on *Validate* to validate the new version of the template. If everything goes smoothly without errors, click on *Create template*.
+
+    
+    <img width="450" src="https://github.com/user-attachments/assets/6a4ab449-691e-45cf-9539-bd33f31f2ec3" />
+
+    You'll be prompted to save this new template in an S3 bucket. Choose *Use a different bucket* and type *ust-cftemplate-\<your ITSC account string\>-usa-east-1* in the *Transfer bucket name* filed.
+
+    Choose *Confirm and continue to CloudFormation*. This leads you to the first step of the *Create stack* wizard.
+
+    <img width="800" src="https://github.com/user-attachments/assets/55296da5-99ed-4b8a-a769-dd7f22a44fa5" />
+    
+    Click *Next*.
+
+19. Type *lab-instance* in the second step.
+
+    <img width="800" src="https://github.com/user-attachments/assets/c36a428e-2147-46fa-a915-35190c758094" />
+     
+https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
+
+<img width="376" height="157" alt="image" src="https://github.com/user-attachments/assets/56cc8dd1-a161-49a0-8c03-4630a47e5d9b" />
+
+
+
+
+
+
+
+
+<img width="836" height="419" alt="image" src="https://github.com/user-attachments/assets/4ab11d72-802a-4a42-ab19-41dece4a2895" />
+
+
+Scroll down to the bottom, and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
+
+<img width="837" height="209" alt="image" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
+
 
 
     
