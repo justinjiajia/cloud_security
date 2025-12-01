@@ -303,13 +303,17 @@ EC2 instances require key pairs for SSH access. Because CloudFormation does not 
          Size: 1                          # Smallest possible - 1 GiB
          VolumeType: gp3                  # Recommended default type
          AvailabilityZone: !GetAtt Ec2Instance.AvailabilityZone
+         Tags:
+           - Key: Name
+             Value: Web Data
+       DeletionPolicy: Snapshot
    
      DiskMountPoint:
        Type: AWS::EC2::VolumeAttachment
        Properties:
          InstanceId: !Ref Ec2Instance
          VolumeId: !Ref DiskVolume
-         Device: /dev/sdh
+         Device: /dev/xvdh
    
      InstanceSecurityGroup:                 # Specifies a security group.
        Type: AWS::EC2::SecurityGroup                  
