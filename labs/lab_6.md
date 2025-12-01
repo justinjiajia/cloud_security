@@ -304,7 +304,7 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
      InstanceSecurityGroup:                   # Specifies a security group.
        Type: AWS::EC2::SecurityGroup                  
        Properties:
-         GroupDescription: Enable SSH access via port 22
+         GroupDescription: Enable HTTP request
          VpcId: 
            Fn::ImportValue: !Sub '${NetworkStackName}-VPCID'
          SecurityGroupIngress:                # Inbound rules for the security group
@@ -384,25 +384,27 @@ The AWS CloudFormation template will *import* the VPC and subnet IDs from the *O
    A CloudFormation stack can use reference values from another CloudFormation stack. For example, this portion of the *lab-instance* template references the *lab-network* template:
 
    ```yaml
-   WebServerSecurityGroup:
-     Type: AWS::EC2::SecurityGroup
+   InstanceSecurityGroup:
+     Type: AWS::EC2::SecurityGroup                  
      Properties:
-       GroupDescription: Enable HTTP ingress
-       VpcId:
-         Fn::ImportValue: !Sub ${NetworkStackName}-VPCID
+       GroupDescription: Enable HTTP request
+       VpcId: 
+         Fn::ImportValue: !Sub '${NetworkStackName}-VPCID'
    ```
 
    The last line uses the *network stack name* that you provided (*lab-network*) when the stack was created. It imports the value of *lab-network-VPCID* from the *Outputs* of the first stack. It then inserts the value into the VPC ID field of the security group definition. The result is that the security group is created in the VPC that was created by the first stack.
 
-   Here is another example, which is in the CloudFormation template that you just used to create the application stack. This template code places the EC2 instance into the subnet that was created by the network stack:
+   Here is another example. This template code places the EC2 instance into the subnet that was created by the network stack:
 
    ```yaml
    SubnetId:
-     Fn::ImportValue:
-     !Sub ${NetworkStackName}-SubnetID
+     Fn::ImportValue: !Sub ${NetworkStackName}-SubnetID
    ```
 
-   It takes the *subnet ID* from the *lab-network* stack and uses it in the *lab-instance* stack to launch the instance into the public subnet, which was created by the 1st stack.
+   It takes the *subnet ID* from the *lab-network* stack and uses it in the *lab-instance* stack to launch the instance into the public subnet, which was created by the first stack.
+
+
+---
 
 ## Task 3: Updating a Stack
 
@@ -479,8 +481,11 @@ First, you will examine the current settings for the security group.
     <img width="800" src="https://github.com/user-attachments/assets/38cb0faa-ecac-4ad6-a559-315d5c3a3c74" />
 
 
+    This task demonstrates how changes can be deployed in a repeatable, documented process. 
 
-    This subtask demonstrates how changes can be deployed in a repeatable, documented process. 
+
+---
+
 
 ## Task 4: Exploring templates with AWS CloudFormation Designer
 
@@ -505,10 +510,9 @@ In this task, you will gain some hands-on experience with Designer.
 
    **Infrastructure Composer** will display a graphical representation of the template:
 
-   <img width="1000" alt="image" src="https://github.com/user-attachments/assets/8cb429ca-5479-4e86-b96c-aa61a2228eae" />
+   
+   <img width="800" src="https://github.com/user-attachments/assets/2d612c47-56b2-49d8-844e-93c332eddd91" />
 
-
-   ![CloudFormation Designer](img/designer.png)
 
    Instead of drawing a typical architecture diagram, Designer is a visual editor for AWS CloudFormation templates. It draws the resources that are defined in a template and their relationship to each other.
 
@@ -517,11 +521,40 @@ In this task, you will gain some hands-on experience with Designer.
    - Click the displayed resources and choose Details. The right pane will then display the portion of the template that defines the resources.
 
 
-     <img width="1000" alt="image" src="https://github.com/user-attachments/assets/0aed4ffa-2912-4d22-8b44-bdc76703d24b" />
-
-   - Try dragging a new resource—from the **Resource types** pane on the left—into the design area. The definition of the resource will be automatically inserted into the template.
+   - Try dragging a new resource—from the **Resource types** pane on the left into the design area. The definition of the resource will be automatically inserted into the template.
    - Try dragging the resource connector circles to create relationships between resources.
    - Open the **lab-network.yaml** template that you downloaded earlier in the lab and also explore its resources in Designer.
+  
+ <img width="225" height="387" alt="image" src="https://github.com/user-attachments/assets/09c7f8c2-3360-429e-8ca1-8d845be71358" />
+
+<img width="229" height="341" alt="image" src="https://github.com/user-attachments/assets/fab79f76-17ac-4eb4-9693-c25faee656af" />
+
+https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html
+
+<img width="376" height="157" alt="image" src="https://github.com/user-attachments/assets/56cc8dd1-a161-49a0-8c03-4630a47e5d9b" />
+
+<img width="800" src="https://github.com/user-attachments/assets/7ae45049-2865-439d-8a35-32274e6d4a23" />
+
+<img width="810" height="56" alt="image" src="https://github.com/user-attachments/assets/c36a428e-2147-46fa-a915-35190c758094" />
+
+After finishing editing the template, you can click on "Validate" to validate the new version of the template, and 
+
+Click on *Create template*
+
+<img width="440" height="296" alt="image" src="https://github.com/user-attachments/assets/6a4ab449-691e-45cf-9539-bd33f31f2ec3" />
+
+
+Choosing:
+
+<img width="842" height="478" alt="image" src="https://github.com/user-attachments/assets/55296da5-99ed-4b8a-a769-dd7f22a44fa5" />
+
+<img width="836" height="419" alt="image" src="https://github.com/user-attachments/assets/4ab11d72-802a-4a42-ab19-41dece4a2895" />
+
+
+Scroll down to the bottom, and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
+
+<img width="837" height="209" alt="image" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
+
 
 ## Task 5: Deleting the stack
 
