@@ -482,7 +482,7 @@ First, you will examine the current settings for the security group.
 
 9. Choose *Next* in each of the next 3 screens to advance to the *Review lab-instance* page.
 
-   In the *Changeset preview** section at the bottom of the page, AWS CloudFormation displays the resources that will be updated:
+   In the *Changeset preview* section at the bottom of the page, AWS CloudFormation displays the resources that will be updated:
 
    <img width="800" src="https://github.com/user-attachments/assets/00609294-cbfd-42d6-89b3-f5b7073b6d98" />
 
@@ -491,7 +491,7 @@ First, you will examine the current settings for the security group.
 
 10. Choose *Submit*.
 
-11. Wait for the status to change to *UPDATE_COMPLETE*. Update the status by choosing **Refresh** every 15 seconds, if necessary.
+11. Wait for the status to change to *UPDATE_COMPLETE*. Update the status by choosing *Refresh* every 15 seconds, if necessary.
 
 You can now verify the change.
 
@@ -503,9 +503,27 @@ You can now verify the change.
 
     <img width="800" src="https://github.com/user-attachments/assets/38cb0faa-ecac-4ad6-a559-315d5c3a3c74" />
 
-Next, let's ssh into the launched instance, and explore the EBS disk mounted to it
+Next, let's ssh into the launched instance, and explore the Amazon EBS volume mounted to it.
 
-14. Select the *Instance* from the the launched instance, and then choose *Connect* at the top right of the instance list. It opens the *Connect* pane
+14. Select *Instances* in the left navigation pane, choose the launched instance from the *Instances* list, and then choose *Connect* at the top right of the list. It opens the *Connect* pane. Choose *Connect*.
+
+    <img width="800" src="https://github.com/user-attachments/assets/108df803-7a0e-4d42-b4ae-61f3c4f96de3" />
+
+15. In the opened tab that displays the SSH terminal, type the following commands line by line:
+
+    ```shell
+    sudo lsblk -f
+    # create a file system on the EBS volume
+    sudo mkfs -t ext4 /dev/xvdh
+    # create a mount point directory
+    sudo mkdir /data
+    # mount the volume to the point directory
+    sudo mount /dev/sdh /data
+    sudo lsblk -f
+    ```
+
+    <img width="800" src="https://github.com/user-attachments/assets/5b93e135-3bb0-42bb-a881-3aa0b3ba4e51" />
+    These commands create a file system on the 1-GB EBS volume
     
 
 
