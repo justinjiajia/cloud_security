@@ -203,7 +203,7 @@ In this task, you will learn how to access event details in the CloudTrail event
   <img width="800" src="https://github.com/user-attachments/assets/bf91e8e3-c2ed-45a6-b9a2-7f526a1d6919" />
 
 
-By enabling CloudWatch logging for this CloudTrail trail, we create a pipeline that streams API audit logs consolidated by this trail to CloudWatch. This allows us to use CloudWatch's alarm system to build real-time monitoring and alerting on specific API activities.
+By enabling CloudWatch Logs for this CloudTrail trail, we create a pipeline that streams API audit logs consolidated by this trail to CloudWatch. This allows us to use CloudWatch's alarm system to build real-time monitoring and alerting on specific API activities.
  
 
 <br>
@@ -249,19 +249,22 @@ The core workflow is to:
 
    - Filter pattern: Copy and paste the following code:
 
-     ```
+     ```regex
      { ($.eventName = ConsoleLogin) && ($.errorMessage = "Failed authentication") }
      ```
 
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/227a6a55-8b3b-4626-b5f9-d4c8800d224b" />
+     <img width="800" src="https://github.com/user-attachments/assets/39a9032d-7982-40a6-bf5c-5a61356ddeea" />
 
-Choose Next.
+     
+     > Written in the CloudWatch Logs [filter pattern syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html), the filter pattern identifies specific log events in CloudWatch Logs. It matches events where the `eventName` field equals `ConsoleLogin` and the `errorMessage` filed displays `"Failed authentication"`.
+     
+   - Choose *Next*.
 
-Filter name: Enter ***ConsoleLoginErrors***
+6. Configure the following:
 
-Metric namespace: Enter ***CloudTrailMetrics***
-
-Metric name: Enter ***ConsoleLoginFailureCount***
+   - Filter name: Enter *ConsoleLoginErrors*
+   - Metric namespace: Enter ***CloudTrailMetrics*
+   - Metric name: Enter ***ConsoleLoginFailureCount***
 
 Metric value: Enter `1`
 
