@@ -27,11 +27,15 @@ The lab starts with an Amazon Elastic Compute Cloud (EC2) instance that is assoc
 By the end of task x, you will have created the architecture shown in the following diagram:
 
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab6/end-task-5.png"   />
- 
-
-## Task 1: Preparing the lab environment with CloudFormation
 
 
+ <br>
+
+---
+
+## Task 1: Preparing your lab environment with CloudFormation
+
+In this task, you will use a CloudFormation template to create an SNS topic and subscribe your email address to the topic. The topic will be used in later tasks to deliver email alerts to you about important activity that occurs in the AWS account.
 
 1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu in the top right of the screen.
 
@@ -92,9 +96,25 @@ By the end of task x, you will have created the architecture shown in the follow
 
    Choose *Refresh* every 15 seconds to update the display, if necessary.
 
+7. In the email address you provided earlier, you should receive an email notification titled *AWS Notification - Subscription Confirmation* from *Login Failure Notifications* .
+
+   <img width="500" src="https://github.com/user-attachments/assets/0220c818-9af1-474c-8c9d-447ae6841ad0" />
+  
+9. Click the *Confirm subscription* link to confirm the subscription of your email address to an SNS Topic created by the stack.
+
+    <img width="500" src="https://github.com/user-attachments/assets/5d875a99-d6e4-4dbb-a2c9-d0f29f157a52" />
+
+    Then, close the tab that displays *Subscription confirmed!* 
+
+   > Amazon SNS is a fully managed messaging service that provides the ability to send messages to users at scale through SMS, mobile push, and email. 
+
+
+
    Now, you've created all the resources needed for this lab. The meaning of the previous steps will become clear after we learn CloudFormation for automation.
 
+<br>
 
+---
 
 ## Task 2: Creating a CloudTrail trail with CloudWatch Logs enabled
 
@@ -129,100 +149,37 @@ In this task, you will analyze the type of event information that is available i
   
 - Choose the most recent *CreateStack* event.
   
-  <img width="800" alt="image" src="https://github.com/user-attachments/assets/1acfafbf-5507-4387-9ba2-8d7caa7d72e4" />
+  <img width="800" src="https://github.com/user-attachments/assets/bec7dad5-7c9b-40fa-a7bb-afcfa575ebfe" />
 
-- The event record from the chosen event displays.
+
+- The *Event record* from the chosen event displays.
   
   > Note: The Event record, sometimes called the event payload, is the full JSON text of an event. The record contains fields that help you determine the requested action as well as when and where the request was made. 
 
-  <details><summary>The event record of the CreateStack event</summary>
-  <pre lang="json"><code>
-  {
-      "eventVersion": "1.11",
-      "userIdentity": {
-          "type": "AssumedRole",
-          "principalId": "AROA3JTBYLCO4TQ3NAQGC:sys6253671",
-          "arn": "arn:aws:sts::776520358045:assumed-role/vocareum/sys6253671",
-          "accountId": "776520358045",
-          "accessKeyId": "ASIA3JTBYLCOTN2HTEUP",
-          "sessionContext": {
-              "sessionIssuer": {
-                  "type": "Role",
-                  "principalId": "AROA3JTBYLCO4TQ3NAQGC",
-                  "arn": "arn:aws:iam::776520358045:role/vocareum",
-                  "accountId": "776520358045",
-                  "userName": "vocareum"
-              },
-              "attributes": {
-                  "creationDate": "2025-06-15T09:51:54Z",
-                  "mfaAuthenticated": "false"
-              }
-          }
-      },
-      "eventTime": "2025-06-15T09:52:03Z",
-      "eventSource": "cloudformation.amazonaws.com",
-      "eventName": "CreateStack",
-      "awsRegion": "us-east-1",
-      "sourceIPAddress": "34.209.206.113",
-      "userAgent": "aws-sdk-php/3.325.3 ua/2.0 OS/Linux#6.1.134-152.225.amzn2023.x86_64 lang/php#8.2.28 GuzzleHttp/7",
-      "requestParameters": {
-          "capabilities": [
-              "CAPABILITY_IAM",
-              "CAPABILITY_NAMED_IAM"
-          ],
-          "enableTerminationProtection": false,
-          "parameters": [
-              {
-                  "parameterKey": "KeyName"
-              }
-          ],
-          "tags": [
-              {
-                  "value": "c103198a2383322l10619409t1w776520358045",
-                  "key": "cloudlab"
-              }
-          ],
-          "disableRollback": true,
-          "stackName": "c103198a2383322l10619409t1w776520358045"
-      },
-      "responseElements": {
-          "stackId": "arn:aws:cloudformation:us-east-1:776520358045:stack/c103198a2383322l10619409t1w776520358045/637332b0-49ce-11f0-8a20-0affe38651ad"
-      },
-      "requestID": "2bd3e09f-a66a-4740-a28d-bd016b205b58",
-      "eventID": "82587be5-012e-4076-9442-4701a2e16f89",
-      "readOnly": false,
-      "eventType": "AwsApiCall",
-      "managementEvent": true,
-      "recipientAccountId": "776520358045",
-      "eventCategory": "Management",
-      "tlsDetails": {
-          "tlsVersion": "TLSv1.3",
-          "cipherSuite": "TLS_AES_128_GCM_SHA256",
-          "clientProvidedHostHeader": "cloudformation.us-east-1.amazonaws.com"
-      }
-  } 
-  </code></pre></details>
  
-  > Analysis: The CreateStack event occurred when you started this lab. The stack created resources in the account. Notice that the record includes details such as the `userIdentity `for the person who made the API call, `eventTime`, and `awsRegion`. Other essential audit record details are also provided.
+  > Analysis: The CreateStack event occurred when we performed task 1 to create resources in the account. Notice that the record includes details such as the `userIdentity `for the person who made the API call, `eventTime`, and `awsRegion`. Other essential audit record details are also provided.
 
   > Note: The event history exists by default in each Region. The history shows events from the last 90 days for the Region that you are viewing. This view is limited to management events with create, modify, and delete API calls and account activity. To maintain a record of account activity that extends past 90 days, including all management events with the option to include data events and read-only activity, you need to configure a CloudTrail trail. You will do this in the next step.
 
  
 
- 
+2. Create a *CloudTrail* trail with *CloudWatch Logs* enabled.
 
-4. Create a CloudTrail trail with CloudWatch Logs enabled.
+- In the navigation pane, choose *Trails*.
 
-- In the navigation pane, choose Trails.
-- Choose Create trail.
+  <img width="800" src="https://github.com/user-attachments/assets/9263adff-5e05-4ae9-be91-45f2f57f3044" />
+
+- Choose *Create trail*.
+  
 - On the Choose trail attributes page, configure the following:
-  - Trail name: Enter MyLabCloudTrail
-  - Storage location: Choose Create a new S3 bucket, and accept the default bucket name, which includes aws-cloudtrail-logs.
-  - Log file SSE-KMS encryption: Clear the check box (to disable this option).
+  - *Trail name*: Enter *LabCloudTrail*.
+  - *Storage location*: Choose *Create a new S3 bucket*, and accept the default bucket name, which includes *aws-cloudtrail-logs*.
+  - *Log file SSE-KMS encryption*: Clear the check box (to disable this option).
 
-    <img width="800" alt="image" src="https://github.com/user-attachments/assets/7a270439-2d8e-4086-952d-f61147137f81" />
+    <img width="891" height="552" alt="image" src="https://github.com/user-attachments/assets/f45e3277-364c-47b9-8fdb-1ef5026068f1" />
 
-  - CloudWatch Logs: Select Enabled.
+
+  - *CloudWatch Logs*: Select Enabled.
   - Log group: Choose New, and accept the default log group name.
   - IAM Role: Choose Existing.
   - Role name: Choose `LabCloudTrailRole`.
