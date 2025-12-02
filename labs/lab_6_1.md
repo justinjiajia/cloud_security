@@ -27,7 +27,7 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 ## Task 1: Preparing your lab environment with CloudFormation
 
-In this task, you will use a CloudFormation template to create an SNS topic and subscribe your email address to the topic. The topic will be used in later tasks to deliver email alerts to you about important activity that occurs in the AWS account.
+In this task, you will use a CloudFormation template to create an SNS topic and subscribe your email address to the topic. This resource will be used in later tasks to deliver email alerts to you about important activity that occurs in the AWS account.
 
 1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu in the top right of the screen.
 
