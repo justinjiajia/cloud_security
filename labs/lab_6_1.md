@@ -228,7 +228,7 @@ The core workflow is to:
 
 1. In the search box at the top left corner of your screen, search for and choose *CloudWatch* to open the CloudWatch console.
 
-   <img width="800" src="https://github.com/user-attachments/assets/ad5ee00e-f5b7-4426-8696-d8fd99059f4c" />
+   <img width="500" src="https://github.com/user-attachments/assets/ad5ee00e-f5b7-4426-8696-d8fd99059f4c" />
 
 
 2. In the navigation pane, expand Logs, and then choose *Log groups*.
