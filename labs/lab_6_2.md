@@ -866,8 +866,20 @@ Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one 
     aws s3 cp s3://<the name of one of your s3 buckets>/<the name of a file> downloaded_file
     ```
 
+<br>
+---
 
+## After-class task: Clean up all lab resources
 
+To avoid incurring charges for unused resources, please follow the steps below to delete all components created during this lab.
+
+### Step 1: Delete CloudFormation Stacks
+
+In the AWS Management Console, navigate to the CloudFormation service. On the *Stacks* page, select and delete all listed stacks in the reverse order of their creation.
+
+### Step 2: Delete EBS Snapshots
+
+Go to the EC2 console, select *Snapshots* from the left navigation pane, and manually delete all snapshots created for this lab.
 
 
 
