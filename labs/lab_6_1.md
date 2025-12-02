@@ -344,7 +344,7 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 
    Note: Each time that you attempt to log in, you will see a message indicating that your authentication information is incorrect. This is expected!
 
-   A notification will be sent to your subscribed email address in roughly 5 minutes.
+   A notification message will be sent to your subscribed email address in roughly 3 minutes, with the content similar to the following:
 
    <img width="500" src="https://github.com/user-attachments/assets/317d956d-fbec-4901-983a-8a10b431e84e" />
 
@@ -352,16 +352,14 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 
 ### Task 3.4 Graph the metric
 
-1. Navigate to the CloudWatch console.
+1. Navigate to the CloudWatch console. In the navigation pane, expand *Metrics*, and then choose *All metrics*.
 
-2. In the navigation pane, expand *Metrics*, and then choose *All metrics*.
-
-3. In the *Metrics* section, under *Custom namespaces*, choose *CloudTrailMetrics*.
+2. In the *Metrics* section, under *Custom namespaces*, choose *CloudTrailMetrics*.
 
 
-4. Choose *Metrics with no dimensions*.
+3. Choose *Metrics with no dimensions*.
 
-5. Choose *ConsoleLoginFailureCounts*.
+4. Choose *ConsoleLoginFailureCounts*.
 
    <img width="800" src="https://github.com/user-attachments/assets/404cd6b9-eb20-4121-86bf-09cf306211f3" />
 
@@ -374,58 +372,15 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 1. In the navigation pane, expand *Alarms*, and then choose *All alarms*.
 
 2. The *State* for the *FailedLogins* alarm should be *In alarm*.
-
-
-<img width="921" height="462" alt="image" src="https://github.com/user-attachments/assets/ddd42430-df13-4724-bd5a-4a51816ac1e5" />
-
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/9416ce0d-9f32-4bcb-9e52-b06dd3b592a0" />
-
-> Note: If the alarm doesn't show this state, wait a minute or two. To refresh the page, choose the  refresh icon.
-
- Tip: To find out if the alarm was invoked recently, choose the link for the FailedLogins alarm name, and then choose the History tab.
-
- <img width="800" alt="image" src="https://github.com/user-attachments/assets/526da2b6-241d-4161-88fd-00a4b345d5a8" />
-
-
-Check the inbox of the email address that you subscribed to the SNS topic.
-
-You should have received a message about multiple failed login attempts, with content that is similar to the following:
+   
+   > Note: If the alarm doesn't show this state, wait a minute or two. To refresh the page, choose the  refresh icon.
  
 
-```
-You are receiving this email because your Amazon CloudWatch Alarm "FailedLogins" in the US East (N. Virginia) region has entered the ALARM state, because "Threshold Crossed: 1 out of the last 1 datapoints [3.0 (15/06/25 12:02:00)] was greater than or equal to the threshold (3.0) (minimum 1 datapoint for OK -> ALARM transition)." at "Sunday 15 June, 2025 12:07:17 UTC".
+3. To find out if the alarm was invoked recently, choose the link for the *FailedLogins* alarm name, and then choose the *History* tab.
 
-View this alarm in the AWS Management Console:
-https://us-east-1.console.aws.amazon.com/cloudwatch/deeplink.js?region=us-east-1#alarmsV2:alarm/FailedLogins
-
-Alarm Details:
-- Name:                       FailedLogins
-- Description:               
-- State Change:               INSUFFICIENT_DATA -> ALARM
-- Reason for State Change:    Threshold Crossed: 1 out of the last 1 datapoints [3.0 (15/06/25 12:02:00)] was greater than or equal to the threshold (3.0) (minimum 1 datapoint for OK -> ALARM transition).
-- Timestamp:                  Sunday 15 June, 2025 12:07:17 UTC
-- AWS Account:                776520358045
-- Alarm Arn:                  arn:aws:cloudwatch:us-east-1:776520358045:alarm:FailedLogins
-
-Threshold:
-- The alarm is in the ALARM state when the metric is GreaterThanOrEqualToThreshold 3.0 for at least 1 of the last 1 period(s) of 300 seconds.
-
-Monitored Metric:
-- MetricNamespace:                     CloudTrailMetrics
-- MetricName:                          ConsoleLoginFailureCount
-- Dimensions:                         
-- Period:                              300 seconds
-- Statistic:                           Sum
-- Unit:                                not specified
-- TreatMissingData:                    missing
+   <img width="800" src="https://github.com/user-attachments/assets/91cda314-549d-4b45-90cf-60c524f44dfe" />
 
 
-State Change Actions:
-- OK:
-- ALARM: [arn:aws:sns:us-east-1:776520358045:MySNSTopic]
-- INSUFFICIENT_DATA:
-```
- 
 
  
 
