@@ -148,14 +148,16 @@ In this task, you will deploy an AWS CloudFormation template that creates an Ama
 
    Templates can be written in JavaScript Object Notation (JSON) or YAML Ain't Markup Language (YAML). YAML is a markup language that is similar to JSON, but it is easier to read and edit.
 
-2. In the **AWS Management Console**, from the **Services** menu, choose **CloudFormation**.
-
-3. Choose **Create stack \> With new resources (standard)**  and configure these settings.
+2. In the *AWS Management Console*, from the search bar at the top of the screen, search for and select *CloudFormation*.
+   
+   <img width="500"  src="https://github.com/user-attachments/assets/da3a6769-ce22-4e62-8293-a549afa4fcc4" />
+   
+3. Choose *Create stack \> With new resources (standard)*  and configure these settings.
 
    **Step 1: Specify template**
 
-   - **Template source:** **Upload a template file**
-   - **Upload a template file:** Click **Choose file** then select the *lab-network.yaml* file that you created.
+   - **Template source:** *Upload a template file*
+   - **Upload a template file:** Click *Choose file* then select the *lab-network.yaml* file that you created.
      
      <img width="800" src="https://github.com/user-attachments/assets/f44e84f7-1fd0-463c-971f-28ce778c9984" />
 
@@ -209,13 +211,13 @@ In this task, you will deploy an AWS CloudFormation template that creates an Ama
    <img width="800" src="https://github.com/user-attachments/assets/9da69728-0972-424a-aa1b-10eeb7c2c5ed" />
 
 
-   If the list is empty, update the list by choosing **Refresh** .
+   If the list is empty, update the list by choosing *Refresh* .
 
-7. Choose the **Events** tab and scroll through the events log.
+7. Choose the *Events* tab and scroll through the events log.
 
    The events log shows (from more recent to less recent) the activities that were performed by AWS CloudFormation. Example events include starting to create a resource and then completing the resource creation. Any errors that were encountered during the creation of the stack will be listed in this tab.
 
-8. Choose the **Outputs** tab.
+8. Choose the *Outputs* tab.
 
    A CloudFormation stack can provide *output information*, such as the ID of specific resources and links to resources.
 
