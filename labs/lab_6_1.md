@@ -383,7 +383,7 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 
 ---
 
-## Task 4 Clean up all lab resources (after class)
+## After-class task: Clean up all lab resources
 
 To conclude this lab and ensure you are not charged for resources you no longer need, perform the following steps to systematically remove all created components.
 
