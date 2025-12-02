@@ -203,7 +203,7 @@ In this task, you will learn how to access event details in the CloudTrail event
   <img width="800" src="https://github.com/user-attachments/assets/bf91e8e3-c2ed-45a6-b9a2-7f526a1d6919" />
 
 
-This CloudTrail trail, with CloudWatch logging enabled, is an essential component of the monitoring and alerting solutions that you will build in the rest of this lab.
+By enabling CloudWatch logging for this CloudTrail trail, we create a pipeline that streams API audit logs consolidated by this trail to CloudWatch. This allows us to use CloudWatch's alarm system to build real-time monitoring and alerting on specific API activities.
  
 
 <br>
@@ -213,30 +213,45 @@ This CloudTrail trail, with CloudWatch logging enabled, is an essential componen
 
 ## Task 3: Creating a CloudWatch alarm based on a metrics filter
 
-So far in this lab, you have used **CloudTrail** and **EventBridge** to alert you whenever someone modifies the inbound rules for a security group in one of the Regions in your account. In this task, you will use a different service, CloudWatch, to notify you when a user fails to log in to the AWS Management Console a specific number of times.
+
+In this task, you will use CloudWatch to notify you when a user fails to log in to the AWS Management Console a specific number of times.
+
+The core workflow is to: 
+
+- Create metric filters on a CloudWatch Logs log group to detect specific API patterns. 
+- Create CloudWatch Alarms based on those metrics to send alerts (e.g., via SNS).
 
  
 
-Create a CloudWatch metric filter.
-
-In the search box to the right of  Services, search for and choose CloudWatch to open the CloudWatch console.
-
-In the navigation pane, expand  Logs, and then choose Log groups.
-
-Select the check box for CloudTrailLogGroup.
-
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/43cbc8bd-3b0c-46d9-a444-695369cab230" />
+### Task 3.1 Create a CloudWatch metric filter.
 
 
-> Note: Recall that when you created the CloudTrail trail, you configured it to create this log group.
+1. In the search box at the top left corner of your screen, search for and choose *CloudWatch* to open the CloudWatch console.
 
-Choose Actions > Create metric filter, and then configure the following:
+   <img width="800" src="https://github.com/user-attachments/assets/ad5ee00e-f5b7-4426-8696-d8fd99059f4c" />
 
-Filter pattern: Copy and paste the following code:
 
-```
-{ ($.eventName = ConsoleLogin) && ($.errorMessage = "Failed authentication") }
-```
+2. In the navigation pane, expand Logs, and then choose *Log groups*.
+
+   <img width="800" src="https://github.com/user-attachments/assets/f0b4f9a3-93fa-4ebb-b2f7-57d5b95160cd" />
+
+
+3. Select the check box for *CloudTrailLogGroup*.
+
+   > Note: Recall that when you created the CloudTrail trail, you configured it to create this log group.
+
+4. Choose *Actions > Create metric filter*.
+
+   <img width="800" src="https://github.com/user-attachments/assets/0cddd773-270c-44a4-b432-2258c23372df" />
+
+5. In the *Create metric filter* wizard, configure the following:
+     
+
+   - Filter pattern: Copy and paste the following code:
+
+     ```
+     { ($.eventName = ConsoleLogin) && ($.errorMessage = "Failed authentication") }
+     ```
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/227a6a55-8b3b-4626-b5f9-d4c8800d224b" />
 
