@@ -274,7 +274,7 @@ Now, you've created a metric resulting from filtering `ConsoleLogin` events.  Ne
 
 ### Task 3.2 Create a CloudWatch alarm based on the metric filter
 
-1. On the Metric filters tab, select the check box to the right of the ConsoleLoginErrors metric filter that you just created.
+1. On the *Metric filters* tab, select the check box to the right of the *ConsoleLoginErrors* metric filter that you just created.
       
   <img width="800" src="https://github.com/user-attachments/assets/4ae13519-a27b-4d10-af49-3d1bac8abe2f" />
 
@@ -376,5 +376,63 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
    <img width="800" src="https://github.com/user-attachments/assets/91cda314-549d-4b45-90cf-60c524f44dfe" />
 
 
+<br>
 
+---
+
+## Task 4 Clean up resources to prevent unnecessary charges (after class)
+
+To conclude this lab and ensure you are not charged for resources you no longer need, perform the following steps to systematically remove all created components.
+
+### Step 1: Delete the metric filter
+
+1. In the CloudWatch console, select *Log groups* from the navigation pane.
+
+2. Choose the *CloudTrailLogGroup* log group from the list to open its details.
+
+3. Navigate to the *Metric filters* tab. Select the checkbox next to *ConsoleLoginErrors* metric filter.
+
+4. Choose *Delete*, then confirm the deletion in the popup window.
  
+   <img width="800" src="https://github.com/user-attachments/assets/13a96527-eb97-486e-8c00-2766882884cf" />
+
+
+### Step 2: Delete the CloudWatch alarm
+
+1. From the CloudWatch navigation pane, select *All alarms*.
+
+2. Locate and select the *FailedLogins* alarm from the list.
+
+3. Choose *Action \> Delete*, and confirm the deletion when prompted.
+ 
+   <img width="800" src="https://github.com/user-attachments/assets/a979eb19-eacb-4ca8-a78b-12e39a85a708" />
+
+### Step 3: Delete the CloudWatch Logs log group
+
+1. Return to *Log groups* in the CloudWatch navigation pane.
+
+2. Select the checkbox for *CloudTrailLogGroup*.
+
+3. Choose *Action \> Delete log group(s)*, and confirm the deletion in the popup window.
+ 
+
+   <img width="800" src="https://github.com/user-attachments/assets/be30e405-458e-4912-8532-0f2edcbda6df" />
+
+
+### Step 4: Delete the CloudTrail Trail
+
+1. Navigate to the CloudTrail console.
+
+2. Select *Trails* from the left navigation pane.
+
+3. In the list of trails, select *LabCloudTrail*, then choose *Delete*. Confirm the deletion in the popup window.
+
+   <img width="800" src="https://github.com/user-attachments/assets/b23de50d-d7c5-45fc-9141-8ca06371a7ec" />
+ 
+### Step 5: Delete the CloudFormation stack
+
+1. Open the CloudFormation console.
+2. From the left navigation pane, choose *Stacks*.
+3. Select the *lab-environment* stack, then choose *Delete*. Confirm the deletion in the popup window to remove all remaining resources.
+ 
+   <img width="800" src="https://github.com/user-attachments/assets/06939716-f5a1-4aa8-8c97-954568acfe9a" />
