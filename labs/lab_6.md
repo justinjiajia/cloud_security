@@ -1,5 +1,5 @@
  
-# Guided Lab 3: Automating Infrastructure Deployment with AWS CloudFormation
+# Guided Lab 3.2: Automating Infrastructure Deployment with AWS CloudFormation
  
 ## Lab overview and objectives
 
