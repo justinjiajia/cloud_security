@@ -157,7 +157,7 @@ In this task, you will deploy an AWS CloudFormation template that creates an Ama
    **Step 1: Specify template**
 
    - *Template source:* *Upload a template file*
-   - *Upload a template file:* Click *Choose file* then select the *lab-network.yaml* file that you created.
+   - *Upload a template file:* Click *Choose file*, then select the *lab-network.yaml* file that you created.
      
      <img width="800" src="https://github.com/user-attachments/assets/050904f4-dc04-4e11-b038-f964d771fde8" />
 
