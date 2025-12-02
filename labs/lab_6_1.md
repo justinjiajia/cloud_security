@@ -27,7 +27,8 @@ By the end of this lab, you will have created the architecture shown in the foll
 
 ## Task 1: Preparing your lab environment with CloudFormation
 
-In this task, you will use a CloudFormation template to create an SNS topic and subscribe your email address to the topic. This resource will be used in later tasks to deliver email alerts to you about important activity that occurs in the AWS account.
+
+In this task, you will provision an SNS (short for Simple Notification Service) topic and subscribe your email address using a CloudFormation template. This topic will be used in subsequent tasks to deliver email alerts to you about important activity that occurs in the AWS account.
 
 1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu in the top right of the screen.
 
@@ -98,10 +99,10 @@ In this task, you will use a CloudFormation template to create an SNS topic and 
 
     Then, close the tab that displays *Subscription confirmed!* 
 
-    > Amazon SNS (short for Simple Notification Service) is a fully managed messaging service that provides the ability to send messages to users at scale through SMS, mobile push, and email. 
+    > Amazon SNS is a fully managed messaging service that provides the ability to send messages to users at scale through SMS, mobile push, and email. 
 
 
-Now, you've created all the resources needed for this lab. The meaning of the previous steps will become clear after we learn CloudFormation for automation.
+You have now used your first AWS CloudFormation template to provision the lab environment, including an SNS topic and an IAM role. The purpose of the IAM role will become clear in task 2. We will take a deep dive into automating infrastructure deployment with CloudFormation in the later part of today's class.
 
 <br>
 
