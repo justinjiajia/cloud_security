@@ -3,7 +3,7 @@
  
 ## Lab overview and objectives
 
-Deploying infrastructure in a consistent, reliable manner is difficult. It requires people to follow documented procedures without taking any undocumented shortcuts. It can also be difficult to deploy infrastructure out-of-hours when fewer staff are available. AWS CloudFormation changes this situation by defining infrastructure in a template that can be automatically deployed—even on an automated schedule.
+Deploying infrastructure in a consistent, reliable manner is difficult. It requires people to follow documented procedures without taking any undocumented shortcuts. It can also be difficult to deploy infrastructure out-of-hours when fewer staff are available. AWS CloudFormation changes this situation by defining infrastructure in a template that can be automatically deployed, even on an automated schedule.
 
 In this lab, you will learn how to deploy multiple layers of infrastructure with AWS CloudFormation, update a CloudFormation stack, and delete a stack (while retaining some resources).
 
@@ -11,8 +11,9 @@ After completing this lab, you should be able to:
 
 - Use AWS CloudFormation to deploy a virtual private cloud (VPC) networking layer
 - Use AWS CloudFormation to deploy an EC2 Web server that references the networking layer
+- Delete a stack while retaining some resources
 - Explore templates with AWS Infrastructure Composer
-- Delete a stack
+
 
 
 <br>
@@ -25,12 +26,12 @@ After completing this lab, you should be able to:
 It is a best practice to deploy infrastructure in *layers*. Common layers are:
 
 - Network (Amazon VPC)
+- Application (e.g., Web server)
 - Database
-- Application
 
 This way, templates can be reused between systems. For example, you can deploy a common network topology between development, test, and production environments, or deploy a standard database for multiple applications.
 
-In this task, you will deploy an AWS CloudFormation template that creates a networking layer by using Amazon VPC.
+In this task, you will deploy an AWS CloudFormation template that creates an Amazon VPC with related resources for a networking layer.
 
 1. Copy the following YAML code and paste it into a plain text file called *lab-network.yaml*.
    
