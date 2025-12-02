@@ -343,6 +343,7 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 
    <img width="500" src="https://github.com/user-attachments/assets/317d956d-fbec-4901-983a-8a10b431e84e" />
 
+<br>
  
 
 ### Task 3.4 Graph the metric
@@ -360,6 +361,7 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 
    In the graph area in the upper portion of the page, a small blue dot should appear. The dot indicates that a login failure was detected.
 
+<br>
 
 
 ### Task 3.5 Check the alarm status and details in the CloudWatch console.
@@ -380,7 +382,7 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 
 ---
 
-## Task 4 Clean up resources to prevent unnecessary charges (after class)
+## Task 4 Clean up all lab resources (after class)
 
 To conclude this lab and ensure you are not charged for resources you no longer need, perform the following steps to systematically remove all created components.
 
