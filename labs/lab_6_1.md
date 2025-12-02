@@ -1,27 +1,22 @@
   
 
- # Lab 6 Monitoring and Alerting with CloudTrail and CloudWatch
+ # Guided Lab 6.1: Monitoring and Alerting with CloudTrail and CloudWatch
 
 
  
 ## Lab overview and objectives
 
-In this lab, you will configure logging and monitoring in an AWS account. You will understand how to create an AWS CloudTrail trail, which will be an audit log of API calls made in the account. You will then create an Amazon Simple Notification Service (Amazon SNS) topic. By subscribing your email to the topic, you will be alerted when particular events occur. Next, you will define an Amazon EventBridge rule. The rule will notice any time that someone modifies a security group and will send you an email alert about the incident. Finally, you will create an Amazon CloudWatch alarm to notice whenever multiple failed login attempts occur for the AWS Management Console.
+In this lab, you will configure logging and monitoring in an AWS account. You will understand how to create an AWS CloudTrail trail, which will be an audit log of API calls made in the account. You will then create an Amazon CloudWatch alarm to notice whenever multiple failed login attempts occur for the AWS Management Console.
 
 After completing this lab, you should be able to do the following:
 
 - Analyze event details in the CloudTrail event history.
 - Create a CloudTrail trail with CloudWatch logging enabled.
-- Create an SNS topic and an email subscription to it.
-- Configure an EventBridge rule to monitor changes to resources in an AWS account.
 - Create CloudWatch metric filters and CloudWatch alarms.
-- Query CloudTrail logs by using CloudWatch Logs Insights.
- 
-
- 
 
 
-By the end of task x, you will have created the architecture shown in the following diagram:
+
+By the end of this lab, you will have created the architecture shown in the following diagram:
 
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab6/end-task-5.png"   />
 
