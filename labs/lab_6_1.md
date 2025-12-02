@@ -256,7 +256,7 @@ The core workflow is to:
      <img width="800" src="https://github.com/user-attachments/assets/39a9032d-7982-40a6-bf5c-5a61356ddeea" />
 
      
-     > Written in the CloudWatch Logs [filter pattern syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html), the filter pattern identifies specific log events in CloudWatch Logs. It matches events where the `eventName` field equals `ConsoleLogin` and the `errorMessage` filed displays `"Failed authentication"`.
+     > Written in the CloudWatch Logs [filter pattern syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html), the filter pattern identifies and counts `ConsoleLogin` events where the `errorMessage` displays `"Failed authentication"`.
      
    - Choose *Next*.
 
@@ -273,7 +273,7 @@ The core workflow is to:
 
 7. In *Step 3: Review and create*, Choose *Create metric filter*.
 
-Now, you've created a metric filter.  Next, you will set a CloudWatch alarm on the new metric to trigger an SNS notification when a threshold (e.g., 3 failures in 5 minutes) is breached.
+Now, you've created a metric filter.  Next, you will set a CloudWatch alarm on the new metric to trigger an SNS notification when a threshold (e.g., 3 failed logins in 5 minutes) is breached.
 
 ### Task 3.2 Create a CloudWatch alarm based on the metric filter
 
