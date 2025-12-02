@@ -43,7 +43,7 @@ In this task, you will use a CloudFormation template to create an SNS topic and 
    <img width="500"  src="https://github.com/user-attachments/assets/da3a6769-ce22-4e62-8293-a549afa4fcc4" />
 
 
-4. Right-click the link and download a CloudFormation template to your computer
+4. Right-click the [link](https://canvas.ust.hk/files/11453703/download?download_frd=1&verifier=jzVegIZJlGirL0D8Q7YsBfHUatj8xbEimEZQf3Uz) and download a CloudFormation template to your computer
 
 5. Choose *Create stack \> With new resources (standard)* and configure these settings.
 
