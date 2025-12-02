@@ -103,7 +103,7 @@ In this task, you will use a CloudFormation template to create an SNS topic and 
 
     Then, close the tab that displays *Subscription confirmed!* 
 
-    > Amazon SNS is a fully managed messaging service that provides the ability to send messages to users at scale through SMS, mobile push, and email. 
+    > Amazon SNS (short for Simple Notification Service) is a fully managed messaging service that provides the ability to send messages to users at scale through SMS, mobile push, and email. 
 
 
 Now, you've created all the resources needed for this lab. The meaning of the previous steps will become clear after we learn CloudFormation for automation.
@@ -345,28 +345,29 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
    Note: Each time that you attempt to log in, you will see a message indicating that your authentication information is incorrect. This is expected!
 
    A notification will be sent to your subscribed email address in roughly 5 minutes.
+
+   <img width="500" src="https://github.com/user-attachments/assets/317d956d-fbec-4901-983a-8a10b431e84e" />
+
  
 
+### Task 3.4 Graph the metric
 
-Graph the metric that you created.
+1. Navigate to the CloudWatch console.
 
-Navigate to the CloudWatch console.
+2. In the navigation pane, expand *Metrics*, and then choose *All metrics*.
 
-In the navigation pane, expand  Metrics, and then choose All metrics.
+3. In the *Metrics* section, under *Custom namespaces*, choose *CloudTrailMetrics*.
 
-In the Metrics section, under Custom namespaces, choose CloudTrailMetrics.
+   <img width="800" src="https://github.com/user-attachments/assets/404cd6b9-eb20-4121-86bf-09cf306211f3" />
 
-<img width="1171" alt="image" src="https://github.com/user-attachments/assets/24f47217-9924-48dd-a4ed-2b00a33e25e2" />
+4. Choose *Metrics with no dimensions*.
 
-> Note: If CloudTrailMetrics does not yet appear, wait until the SNS notification is received.
-
-Choose Metrics with no dimensions.
-
-Choose ConsoleLoginFailureCount.
+5. Choose *ConsoleLoginFailureCounts*.
 
 In the graph area at the top of the page, a small blue dot should appear. The dot indicates that a login failure was detected.
 
- 
+
+
 
 Check the alarm status and details in the CloudWatch console.
 
@@ -374,6 +375,8 @@ In the navigation pane, expand  Alarms, and then choose All alarms.
 
 The State for the FailedLogins alarm should be In alarm.
 
+
+<img width="921" height="462" alt="image" src="https://github.com/user-attachments/assets/ddd42430-df13-4724-bd5a-4a51816ac1e5" />
 
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/9416ce0d-9f32-4bcb-9e52-b06dd3b592a0" />
 
