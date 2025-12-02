@@ -273,86 +273,80 @@ The core workflow is to:
 
 7. In *Step 3: Review and create*, Choose *Create metric filter*.
 
-Now, you've created a metric filter.  Next, you will set a CloudWatch alarm on the new metric to trigger an SNS notification when a threshold (e.g., 3 failed logins in 5 minutes) is breached.
+Now, you've created a metric resulting from filtering `ConsoleLogin` events.  Next, you will set a CloudWatch alarm on the new metric to trigger an SNS email notification when a threshold (e.g., 3 failed logins in 5 minutes) is breached.
+
+<br>
 
 ### Task 3.2 Create a CloudWatch alarm based on the metric filter
 
-14. .
-
-    - On the Metric filters tab, select the check box to the right of the ConsoleLoginErrors metric filter that you just created.
+1. On the Metric filters tab, select the check box to the right of the ConsoleLoginErrors metric filter that you just created.
       
-      <img width="800" alt="image" src="https://github.com/user-attachments/assets/ca25d350-9994-4412-a391-a86974a8e732" />
+  <img width="800" src="https://github.com/user-attachments/assets/4ae13519-a27b-4d10-af49-3d1bac8abe2f" />
 
  
 
-    - Choose Create alarm. A new browser tab opens.
-    - On the Specify metric and conditions page, in the Conditions section, configuring the following alarm details:
-       - Whenever ConsoleLoginFailureCount is: Choose Greater/Equal.
-       - than...: Enter 3
-         <img width="800" alt="image" src="https://github.com/user-attachments/assets/90c812ba-7525-4988-91c8-4458ecd5d989" />
+2. Choose *Create alarm*. A new browser tab opens.
 
-         <img width="800" alt="image" src="https://github.com/user-attachments/assets/74ef35cc-7c3f-4bd5-a178-793a8e88640d" />
+3. On the *Specify metric and conditions* page, in the *Conditions* section, configuring the following alarm details:
 
-         Observe the settings. This alarm will be invoked whenever the sum of the ConsoleLoginFailureCount metric that you defined is greater than or equal to 3 within any 5-minute period.
+   - *Whenever ConsoleLoginFailureCounts is...*: Choose *Greater/Equal*.
+   - *than...*: Enter `3`
 
-       - Choose Next.
+     <img width="800" src="https://github.com/user-attachments/assets/895fabbf-0552-4dda-af34-4395df2fd06e" />
 
-    - On the Configure actions page, configure the following:
+         
 
-Select an SNS topic: Choose Select an existing topic.
-
-Send a notification to...: Choose **MySNSTopic**.
-
-<img width="872" alt="image" src="https://github.com/user-attachments/assets/ecf22ef6-a2e5-402c-851a-85a1bb532382" />
+   - Keep the other settings as default.
+  
+     <img width="800" src="https://github.com/user-attachments/assets/9bbd6fd9-ac57-45b3-9775-88787e9cd0f8" />
 
 
-Choose Next.
+     This means the alarm will be invoked whenever the sum of the *ConsoleLoginFailureCounts* metric that you defined is greater than or equal to 3 within any 5-minute period.
 
-On the Add name and description page, configure the following:
+   - Choose Next.
 
-Alarm name: Enter FailedLogins
+4. On the *Configure actions* page, configure the following:
 
-Choose Next.
+   - *Select an SNS topic*: Choose *Select an existing topic*.
+   - *Send a notification to...*: Choose *LoginFailureSNSTopic*.
 
-Scroll to the bottom of the page, and choose Create alarm.
+     <img width="800" src="https://github.com/user-attachments/assets/6563f1ff-54eb-4381-9a76-dc9603317738" />
 
-Test the CloudWatch alarm by attempting to log in to the console with incorrect credentials at least three times.
+   - Choose *Next*.
 
-In the search box to the right of  Services, search for and choose IAM to open the IAM console.
+5. On the *Add name and description* page, configure the following:
+   - *Alarm name*: Enter *FailedLogins*
+   - Choose *Next*.
 
-In the navigation pane, choose Users.
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/547b221e-cb42-40db-a593-13d6ff594bb4" />
+6. On the *Preview and create* page, scroll to the bottom of the page, and choose *Create alarm*.
+
+You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by attempting to log in to the console with incorrect credentials at least 3 times.
+
+<br>
+
+### Task 3.3 Test the CloudWatch alarm with 3 failed logins
+
+1. Navigate to the IAM console, and in the navigation pane, choose *Users*.
+
+2. Choose the link for the *admin* user you created during the last lab.
+
+3. Choose the *Security credentials* tab, and then copy the *Console sign-in link*.
+
+   <img width="800" src="https://github.com/user-attachments/assets/5cd8f074-9caa-4c86-8be0-5e9d8d53051c" />
 
 
-Choose the link for the test user name.
+4. Paste the copied link into a new browser tab to load the console sign-in page. You need to choose *Sign into new session* if multi-session support has been enabled.
 
-Choose the Security credentials tab, and then copy the Console sign-in link.
+   <img width="800" src="https://github.com/user-attachments/assets/e7cc219c-6cc8-444a-96d6-484401d103b1" />
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/3f749882-d95a-4d24-8aea-63a0ffa76a0a" />
 
-Paste the copied link into a new browser tab to load the console sign-in page.
+5. Enter the IAM username *admin* and an **incorrect** password, and attempt to sign in. Repeat this at least 3 times:
 
-Enter credentials, including an incorrect password, and attempt to sign in. Repeat this at least three times:
+   Note: Each time that you attempt to log in, you will see a message indicating that your authentication information is incorrect. This is expected!
 
-IAM user name: Enter test
-
-Password: test
-
-Choose Sign in.
-
- Note: Each time that you attempt to log in, you will see a message indicating that your authentication information is incorrect. This is expected!
-
+   A notification will be sent to your subscribed email address in roughly 5 minutes.
  
 
-Re-establish your access to the AWS account.
-
-Close all browser tabs where you have the AWS Management Console open.
-
-On the lab instructions page, choose the AWS  link above these instructions to log in again as the voclabs user.
-
- Important: Your attempts to log in to the console as the test user cleared the previous authentication information from your browser's cache. Therefore, you need to re-authenticate to gain access to the console.
-
- 
 
 Graph the metric that you created.
 
