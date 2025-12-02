@@ -1,3 +1,7 @@
+```
+rm ~/.aws/config
+aws configure
+```
 
 ```shell
 aws organizations create-account --email "mars.earth.venus@gmail.com" --account-name "ISOM5140_identity_2"
