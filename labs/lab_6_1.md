@@ -59,7 +59,7 @@ In this task, you will use a CloudFormation template to create an SNS topic and 
    **Step 2: Create Stack**
 
    - *Stack name:* *lab-environment*
-   - *SubscriptionEmail*: *\<An email account to receive notifications\>* (e.g., your UST email account)
+   - *SubscriptionEmail*: *\<An email address to receive notifications\>* (e.g., your UST email)
      
      <img width="800" src="https://github.com/user-attachments/assets/0db16807-5181-411c-b7d1-8d3ff525035c" />
 
