@@ -452,7 +452,7 @@ First, you will examine the current settings for the security group.
 
 
 
-5. Right-click the [link](https://raw.githubusercontent.com/justinjiajia/cloud_security/refs/heads/main/labs/resources/lab-instance-2.yaml) and download the updated template to your computer:
+5. Right-click the [link](https://canvas.ust.hk/files/11453879/download?download_frd=1&verifier=IYOl0rMgpP1RVds21WLSr3n8vO4cnbpxRMIaNknM) and download the updated template to your computer:
 
    This template has an additional configuration to permit inbound Secure Shell (SSH) traffic on port 22:
 
@@ -582,7 +582,7 @@ You will now verify that a snapshot of the EBS volume was created before the EBS
 
 ---
 
-## Challenge task 1:
+## Challenge Task
 
 Copy the provided YAML template into a plain text file and save it with a *.yaml* extension.
 To complete the template, fill in the blanks to meet the following requirements:
