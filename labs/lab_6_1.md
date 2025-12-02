@@ -29,28 +29,105 @@ By the end of task x, you will have created the architecture shown in the follow
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab6/end-task-5.png"   />
  
 
-## Task: 
+## Task 1: Preparing the lab environment with CloudFormation
 
-Create
+
+
+1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu in the top right of the screen.
+
+   <img width="500"  src="https://github.com/user-attachments/assets/c0fa4abd-534e-4635-a38f-6c58060e5cfc" />
+
+2. Choose *Sign-in using root user email*. Then follow the instructions to log into your root account.
+
+   <img width="300"  src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
  
- 
-## Task 1: Creating a CloudTrail trail with CloudWatch Logs enabled
+
+3. Once logged in, in the search bar at the top of the screen, search for and select *CloudFormation*.
+   
+   <img width="500"  src="https://github.com/user-attachments/assets/da3a6769-ce22-4e62-8293-a549afa4fcc4" />
+
+
+4. Right-click the link and download a CloudFormation template to your computer
+
+5. Choose *Create stack \> With new resources (standard)* and configure these settings.
+
+   **Step 1: Specify template**
+
+   - *Template source:* *Upload a template file*
+   - *Upload a template file:* Click *Choose file*, then select the downloaded *lab-environment.yaml* file.
+     
+     <img width="800" src="https://github.com/user-attachments/assets/716e7374-d955-4cbb-9bf7-63399c0fea5d" />
+
+   - Choose *Next*
+
+   **Step 2: Create Stack**
+
+   - *Stack name:* *lab-environment*
+   - *SubscriptionEmail*: *\<An email account to receive notifications\>* (e.g., your UST email account)
+     
+     <img width="800" src="https://github.com/user-attachments/assets/0db16807-5181-411c-b7d1-8d3ff525035c" />
+
+     
+   - Choose *Next*
+
+   **Step 3: Configure stack options**
+   
+   - Scroll down to the bottom and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
+
+   <img width="800" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
+   
+   - Keep all the other settings as default.
+   - Choose *Next*. 
+
+   **Step 4: Review lab-network**
+
+   - Choose *Submit*.
+
+   The *template* will now be used by AWS CloudFormation to generate a *stack* of resources in the AWS account.
+
+6. Wait for the status to change to *CREATE_COMPLETE*.
+
+   <img width="300" src="https://github.com/user-attachments/assets/1714a343-8496-4e22-9f0b-836b00afdf7e" />
+
+
+   Choose *Refresh* every 15 seconds to update the display, if necessary.
+
+   Now, you've created all the resources needed for this lab. The meaning of the previous steps will become clear after we learn CloudFormation for automation.
+
+
+
+## Task 2: Creating a CloudTrail trail with CloudWatch Logs enabled
 
 In this task, you will analyze the type of event information that is available in the CloudTrail event history. You will also create a CloudTrail trail with CloudWatch logging enabled.
 
  
 
-3. Analyze the information available in the CloudTrail event history.
+1. Analyze the information available in the CloudTrail event history.
 
-- In the console, in the search box to the right of  Services, search for and choose CloudTrail to open the CloudTrail console.
-- In the navigation pane, choose ***Event history***.
-- From the Read-only dropdown menu under the Event history section heading, choose ***Event source***.
-- In the search box to the right of Event source, start typing `cloudformation.amazonaws.com` and choose it when it appears.
+- In the search bar at the top left of the screen, search for and choose *CloudTrail* to open the CloudTrail console.
+
+  <img width="500" src="https://github.com/user-attachments/assets/c1a3601b-a58a-45fa-ae6a-a1a4e2eca8fb" />
+
+- In the navigation pane, choose *Event history*.
+
+  <img width="800" src="https://github.com/user-attachments/assets/46efde6c-01fe-42db-a413-2726be9b2c73" />
+
+
+- From the *Read-only* dropdown menu under the Event history section heading, choose *Event source*.
+
   
-  <img width="800" alt="image" src="https://github.com/user-attachments/assets/0efa763c-0868-4bc2-b3ad-841e319e6db2" />
+  
+- In the search box to the right of *Event source*, type *cloudformation.amazonaws.com* and choose it when it appears.
+
+  <img width="800" src="https://github.com/user-attachments/assets/ebbaea05-2a9a-4182-b146-ca4fea6aeb8d" />
+
   
 - The events in the event history are filtered so that only audit trail events where the source of the event was AWS CloudFormation are displayed.
-- Choose the most recent ***CreateStack*** event.
+
+  <img width="800" src="https://github.com/user-attachments/assets/84bff424-54f3-4f89-b192-a5b69012fa70" />
+
+  
+- Choose the most recent *CreateStack* event.
   
   <img width="800" alt="image" src="https://github.com/user-attachments/assets/1acfafbf-5507-4387-9ba2-8d7caa7d72e4" />
 
