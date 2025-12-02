@@ -11,7 +11,7 @@ After completing this lab, you should be able to:
 
 - Use AWS CloudFormation to deploy a virtual private cloud (VPC) networking layer
 - Use AWS CloudFormation to deploy an EC2 Web server that references the networking layer
-- Explore templates with AWS CloudFormation Designer
+- Explore templates with AWS Infrastructure Composer
 - Delete a stack
 
 
@@ -854,7 +854,7 @@ Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one 
 
 24. Click *Submit* to provision the EC2 instance and all the related resources specified in the template.
 
-25. SSH into the EC2 instance when it's ready for use. Then issue the following command to interact with S3 from within the instance:
+25. SSH into the EC2 instance when it's ready for use. Then issue the following commands to interact with S3 from within the instance:
 
     ```shell
     aws s3 ls
