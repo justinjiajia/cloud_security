@@ -1,5 +1,5 @@
  
-# Guided Lab 3.2: Automating Infrastructure Deployment with AWS CloudFormation
+# Guided Lab 6.2: Automating Infrastructure Deployment with AWS CloudFormation
  
 ## Lab overview and objectives
 
@@ -12,8 +12,6 @@ After completing this lab, you should be able to:
 - Use AWS CloudFormation to deploy a virtual private cloud (VPC) networking layer
 - Use AWS CloudFormation to deploy an EC2 Web server that references the networking layer
 - Delete a stack while retaining some resources
-- Explore templates with AWS Infrastructure Composer
-
 
 
 <br>
