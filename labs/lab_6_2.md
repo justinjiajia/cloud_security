@@ -31,7 +31,7 @@ This way, templates can be reused between systems. For example, you can deploy a
 
 In this task, you will deploy an AWS CloudFormation template that creates an Amazon VPC with related resources for a networking layer.
 
-1. Copy the following YAML code and paste it into a plain text file called *lab-network.yaml*.
+1. Right click the [link](https://canvas.ust.hk/files/11454418/download?download_frd=1&verifier=yusE1GLODhGpbS5ZGd3dMAlkSh7ILSkWzoonQ1eM) and download a template file called *lab-network.yaml* onto your laptop. This file contains the following YAML code:
    
    ```yaml
    AWSTemplateFormatVersion: 2010-09-09
@@ -144,7 +144,7 @@ In this task, you will deploy an AWS CloudFormation template that creates an Ama
          Name: !Sub '${AWS::StackName}-VPCID'
    ```
 
-   Templates can be written in JavaScript Object Notation (JSON) or YAML Ain't Markup Language (YAML). YAML is a markup language that is similar to JSON, but it is easier to read and edit.
+   > Note: Templates can be written in JavaScript Object Notation (JSON) or YAML Ain't Markup Language (YAML). YAML is a markup language that is similar to JSON, but it is easier to read and edit.
 
 2. In the *AWS Management Console*, from the search bar at the top of the screen, search for and select *CloudFormation*.
    
@@ -257,7 +257,7 @@ EC2 instances require key pairs for SSH access. Because CloudFormation does not 
 
    > Note: The private key file will be automatically downloaded. If you plan to use only the EC2 Instance Connect feature for accessing your instance later, you don't need to retain this private key file.
 
-3. Copy the following YAML code, and paste it into a plain text file called *lab-instance.yaml*. **Replate all placeholders with their actual values**. 
+3. Copy the following YAML code, and paste it into a plain text file. Replace the placeholder *\<the name of the key pair you just created\>* with what is expected. Save the template as *lab-instance.yaml*.
 
    ```yaml
    AWSTemplateFormatVersion: 2010-09-09
