@@ -358,22 +358,22 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 
 3. In the *Metrics* section, under *Custom namespaces*, choose *CloudTrailMetrics*.
 
-   <img width="800" src="https://github.com/user-attachments/assets/404cd6b9-eb20-4121-86bf-09cf306211f3" />
 
 4. Choose *Metrics with no dimensions*.
 
 5. Choose *ConsoleLoginFailureCounts*.
 
-In the graph area at the top of the page, a small blue dot should appear. The dot indicates that a login failure was detected.
+   <img width="800" src="https://github.com/user-attachments/assets/404cd6b9-eb20-4121-86bf-09cf306211f3" />
+
+   In the graph area in the upper portion of the page, a small blue dot should appear. The dot indicates that a login failure was detected.
 
 
 
+### Task 3.5 Check the alarm status and details in the CloudWatch console.
 
-Check the alarm status and details in the CloudWatch console.
+1. In the navigation pane, expand *Alarms*, and then choose *All alarms*.
 
-In the navigation pane, expand  Alarms, and then choose All alarms.
-
-The State for the FailedLogins alarm should be In alarm.
+2. The *State* for the *FailedLogins* alarm should be *In alarm*.
 
 
 <img width="921" height="462" alt="image" src="https://github.com/user-attachments/assets/ddd42430-df13-4724-bd5a-4a51816ac1e5" />
