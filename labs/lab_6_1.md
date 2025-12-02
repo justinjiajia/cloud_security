@@ -383,37 +383,3 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 
 
  
-
-## Task 5: Querying CloudTrail logs by using CloudWatch Logs Insights
-
-In this final task in the lab, you will use CloudWatch Logs Insights to query CloudTrail logs.
-
-CloudWatch Logs Insights enables you to interactively search and analyze your log data in Amazon CloudWatch Logs. You can perform queries to help you more efficiently and effectively respond to operational issues.
-
- 
-
-Run a CloudWatch Logs Insights query.
-
-In the CloudWatch console, in the navigation pane, choose Logs Insights.
-
-From the Selection criteria dropdown menu under the Logs Insights section heading, select CloudTrailLogGroup.
-
-Delete the existing content from the query field, and then copy and paste the following code into the query field:
-```
-filter eventSource="signin.amazonaws.com" and eventName="ConsoleLogin" and responseElements.ConsoleLogin="Failure"
-| stats count(*) as Total_Count by sourceIPAddress as Source_IP, errorMessage as Reason, awsRegion as AWS_Region, userIdentity.arn as IAM_Arn
-
-```
-
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/d157fef6-f7c3-49f6-947d-da10ca52ae53" />
-
-Choose Run query.
-
-The output should look similar to the following graph:
-
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/2e1821aa-d2a2-4f54-bc8a-6db2299b683b" />
-
-
-  
-  
-
