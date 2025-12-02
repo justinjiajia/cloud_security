@@ -152,14 +152,15 @@ In this task, you will deploy an AWS CloudFormation template that creates an Ama
    
    <img width="500"  src="https://github.com/user-attachments/assets/da3a6769-ce22-4e62-8293-a549afa4fcc4" />
    
-3. Choose *Create stack \> With new resources (standard)*  and configure these settings.
+3. Choose *Create stack \> With new resources (standard)* and configure these settings:
 
    **Step 1: Specify template**
 
-   - **Template source:** *Upload a template file*
-   - **Upload a template file:** Click *Choose file* then select the *lab-network.yaml* file that you created.
+   - *Template source:* *Upload a template file*
+   - *Upload a template file:* Click *Choose file* then select the *lab-network.yaml* file that you created.
      
-     <img width="800" src="https://github.com/user-attachments/assets/f44e84f7-1fd0-463c-971f-28ce778c9984" />
+     <img width="800" src="https://github.com/user-attachments/assets/050904f4-dc04-4e11-b038-f964d771fde8" />
+
 
    - Choose *Next*
 
