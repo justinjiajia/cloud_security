@@ -867,6 +867,7 @@ Next, you'll need to attach the *EC2InstanceProfile* to the EC2 instance as one 
     ```
 
 <br>
+
 ---
 
 ## After-class task: Clean up all lab resources
