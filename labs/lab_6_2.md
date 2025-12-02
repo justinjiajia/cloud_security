@@ -501,7 +501,7 @@ You can now verify the change.
 
     <img width="800" src="https://github.com/user-attachments/assets/38cb0faa-ecac-4ad6-a559-315d5c3a3c74" />
 
-Next, let's ssh into the launched instance, and explore the Amazon EBS disk volume mounted to it.
+(Optional) Next, let's ssh into the launched instance, and explore the Amazon EBS disk volume mounted to it.
 
 14. Select *Instances* in the left navigation pane, choose the launched instance from the *Instances* list, and then choose *Connect* at the top right of the list. It opens the *Connect* pane. Choose *Connect*.
 
@@ -697,6 +697,7 @@ For detailed guidance on the CloudFormation resource syntax used in this chanlle
 - [AWS::IAM::Policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html) for specifying the *PolicyDocument* and *Groups* properties of the *DevelopersS3Policy* resource;
 
 - [AWS::IAM::User](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html) for specifying the *Groups* property of the *DeveloperOne* resource.
+- [CloudFormation built-in functions](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference.html)
 
 Additionally, note that the arn of a resource can be retrieved via its `Arn` attribute (`GetAtt`). 
 
