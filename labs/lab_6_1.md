@@ -223,7 +223,7 @@ The core workflow is to:
 
  
 
-### Task 3.1 Create a CloudWatch metric filter.
+### Task 3.1 Create a CloudWatch metric filter
 
 
 1. In the search box at the top left corner of your screen, search for and choose *CloudWatch* to open the CloudWatch console.
@@ -260,23 +260,24 @@ The core workflow is to:
      
    - Choose *Next*.
 
-6. Configure the following:
+6. In *Step 2: Assign metric*, configure the following:
 
-   - Filter name: Enter *ConsoleLoginErrors*
-   - Metric namespace: Enter ***CloudTrailMetrics*
-   - Metric name: Enter ***ConsoleLoginFailureCount***
+   - *Filter name*: Enter *ConsoleLoginErrors*
+   - *Metric namespace*: Enter *CloudTrailMetrics*
+   - *Metric name*: Enter *ConsoleLoginFailureCounts*
+   - *Metric value*: Enter `1`
+  
+   <img width="682" height="548" alt="image" src="https://github.com/user-attachments/assets/b3289a6f-1469-4e25-b3c9-ae82de0463da" />
 
-Metric value: Enter `1`
+   At the bottom of the page, choose *Next*.
 
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/95fc1e5b-7749-415a-b965-b48b3bf47502" />
+7. In *Step 3: Review and create*, Choose *Create metric filter*.
 
-At the bottom of the page, choose Next.
+Now, you've created a metric filter.  Next, you will set a CloudWatch alarm on the new metric to trigger an SNS notification when a threshold (e.g., 3 failures in 5 minutes) is breached.
 
-Choose Create metric filter.
+### Task 3.2 Create a CloudWatch alarm based on the metric filter
 
- 
-
-14. Create a CloudWatch alarm based on the metric filter.
+14. .
 
     - On the Metric filters tab, select the check box to the right of the ConsoleLoginErrors metric filter that you just created.
       
