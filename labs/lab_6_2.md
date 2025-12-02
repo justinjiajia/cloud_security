@@ -12,6 +12,7 @@ After completing this lab, you should be able to:
 - Use AWS CloudFormation to deploy a virtual private cloud (VPC) networking layer
 - Use AWS CloudFormation to deploy an EC2 Web server that references the networking layer
 - Delete a stack while retaining some resources
+- Explore templates with AWS Infrastructure Composer (optional)
 
 
 <br>
@@ -706,7 +707,7 @@ Additionally, note that the arn of a resource can be retrieved via its `Arn` att
 
 ---
 
-## Task 5: Exploring and editing templates with AWS Infrastructure Composer
+## Task 5: Exploring and editing templates with AWS Infrastructure Composer (Optional)
 
 *AWS Infrastructure Composer* is a graphic tool for creating, viewing, and modifying AWS CloudFormation templates. With it, you can diagram your template resources by using a drag-and-drop interface, and then edit their details through the integrated JSON and YAML editor.
 
