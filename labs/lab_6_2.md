@@ -453,7 +453,7 @@ First, you will examine the current settings for the security group.
 
 
 
-5. Right-click the [link](https://canvas.ust.hk/files/11453879/download?download_frd=1&verifier=IYOl0rMgpP1RVds21WLSr3n8vO4cnbpxRMIaNknM) and download the updated template to your computer:
+5. Right-click the [link](https://canvas.ust.hk/files/11457839/download?download_frd=1&verifier=rAHEESKLyWrSuRnlzkII52zw7PfihWeKOzKA5mCc) and download the updated template to your computer:
 
    This template has an additional configuration to permit inbound Secure Shell (SSH) traffic on port 22:
 
