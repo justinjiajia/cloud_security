@@ -172,7 +172,7 @@ In this task, you will learn how to access event details in the CloudTrail event
 
   - *CloudWatch Logs*: Select *Enabled*.
   - *Log group*: Choose *New*.
-  - *Log group name*: **
+  - *Log group name*: *CloudTrailLogGroup*
   - IAM Role: Choose *Existing*.
   - Role name: Choose *CloudTrailRole*.
     
