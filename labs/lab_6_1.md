@@ -186,8 +186,9 @@ In this task, you will learn how to access event details in the CloudTrail event
 - On the *Choose log events* page, configure the following:
   - *Event type*: Select *Management events* only.
   - *API activity*: Keep *Read* and *Write* selected.
-
-    <img width="800" alt="image" src="https://github.com/user-attachments/assets/fc54d315-1350-48e7-ba27-21f4e9c546b9" />
+ 
+    <img width="800" src="https://github.com/user-attachments/assets/5ee364ac-d31d-4792-8f6f-90376565bf96" />
+ 
    
 
   - Choose *Next*.
