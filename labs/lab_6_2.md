@@ -477,18 +477,18 @@ First, you will examine the current settings for the security group.
   
    <img width="800" src="https://github.com/user-attachments/assets/b01786aa-8f5d-4e66-8c2c-3c8e7e5e983b" />
 
+   - Choose *Next*.
 
+9. In *Step 2: Specify stack details*, make sure you change the *KeyName* field to the name of your key pair. Choose *Next*
 
-9. Choose *Next* in each of the next 3 screens to advance to the *Review lab-instance* page.
-
-   In the *Changeset preview* section at the bottom of the page, AWS CloudFormation displays the resources that will be updated:
+10. Advance to the *Review lab-instance* page. In the *Changeset preview* section at the bottom of the page, AWS CloudFormation displays the resources that will be updated:
 
    <img width="800" src="https://github.com/user-attachments/assets/00609294-cbfd-42d6-89b3-f5b7073b6d98" />
 
 
    This changeset preview indicates that AWS CloudFormation will ***Modify*** the *InstanceSecurityGroup* without needing to replace it (*Replacement = False*). This change set means that the security group will have a minor change applied to it, and no references to the security group will need to change.
-
-10. Choose *Submit*.
+   
+   Choose *Submit*.
 
 11. Wait for the status to change to *UPDATE_COMPLETE*. Update the status by choosing *Refresh* every 15 seconds, if necessary.
 
