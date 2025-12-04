@@ -343,7 +343,7 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
 
    Note: Each time that you attempt to log in, you will see a message indicating that your authentication information is incorrect. This is expected!
 
-   A notification message will be sent to your subscribed email address in roughly 3 minutes, with the content similar to the following:
+   A notification message will be sent to your subscribed email address in a couple of minutes, with the content similar to the following:
 
    <img width="500" src="https://github.com/user-attachments/assets/317d956d-fbec-4901-983a-8a10b431e84e" />
 
