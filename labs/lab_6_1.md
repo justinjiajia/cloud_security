@@ -348,7 +348,7 @@ You have created a CloudWatch alarm. Next, you will test the CloudWatch alarm by
    <img width="500" src="https://github.com/user-attachments/assets/317d956d-fbec-4901-983a-8a10b431e84e" />
 
 
-Under the hood, the login failutres flow through CloudTrail -> CloudWatch Logs -> your metric filter -> the `ConsoleLoginFailureCounts` metric to trigger the alarm and send the notification.
+Under the hood, the login failutres flow through your custom CloudTrail -> your CloudWatch Logs log group -> your metric filter -> the `ConsoleLoginFailureCounts` metric to trigger the alarm and send the notification.
 
 <br>
  
