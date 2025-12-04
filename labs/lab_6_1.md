@@ -353,7 +353,7 @@ Under the hood, the login failutres flow through your custom CloudTrail -> your 
 <br>
  
 
-### Task 3.4 Graph the metric
+### Task 3.4 Graph the metric (Optional)
 
 1. Navigate to the CloudWatch console. In the navigation pane, expand *Metrics*, and then choose *All metrics*.
 
@@ -371,7 +371,7 @@ Under the hood, the login failutres flow through your custom CloudTrail -> your 
 <br>
 
 
-### Task 3.5 Check the alarm status and details in the CloudWatch console.
+### Task 3.5 Check the alarm status and details in the CloudWatch console (Optional)
 
 1. In the navigation pane, expand *Alarms*, and then choose *All alarms*.
 
