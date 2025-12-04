@@ -176,9 +176,11 @@ In this task, you will learn how to access event details in the CloudTrail event
   - IAM Role: Choose *Existing*.
   - Role name: Choose *CloudTrailRole*.
     
-    > This IAM role grants CloudTrail the permissions to deliver the trail's log events to an Amazon CloudWatch Logs log group. It was also created by the stack you submitted in task 1.
+    > This IAM role grants CloudTrail the permissions to deliver the trail's log events to an Amazon CloudWatch Logs log group. This role was also created by the stack you submitted in task 1.
 
     <img width="800" src="https://github.com/user-attachments/assets/49d75efc-5784-4319-81dd-33fad7d072f3" />
+
+    > This step configures this new trail to send events to *CloudWatch Logs*, in addition to archiving them in S3. The main reason to do so is to unlock real-time operational monitoring and security alerting. Later, you'll see how CloudWatch Logs allows you to set up alarms and get notified via SNS when specific events occur.
 
 
   - Keep the other default trail attributes, and choose *Next*.
