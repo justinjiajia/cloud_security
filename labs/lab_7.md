@@ -151,7 +151,7 @@ You have now used your first AWS CloudFormation template to provision the lab en
 ## Task 2: Examining IAM roles
 
 
-In this task, you will analyze two IAM roles that were pre-provisioned for you in the lab environment. You will also update the permissions of one of the roles. AWS Config and Lambda will use these roles later in the lab.
+In this task, you will analyze two IAM roles that were pre-provisioned for you in the lab environment. AWS Config and Lambda will use these roles later in the lab.
 
 1. In the IAM console, observe the permissions granted to the *AwsConfigLambdaSGRole* role.
 
@@ -172,96 +172,36 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you i
    > <img width="700" alt="image" src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/lambda_role.png" />
 
 
+2. A second custom IAM role named *AwsConfigRole* was also created for you in the account. Let's also observe the permissions granted to the *AwsConfigRole* role.
+   
+- In the navigation pane, choose Roles.
 
-A second custom IAM role was also created for you in the account. You will look at that role and modify it in the next set of steps.
-
- 
-
-4. Update the permissions that are granted to the AwsConfigRole IAM role.
-
- - In the navigation pane, choose Roles.
-
- - Choose the AwsConfigRole link.
+- Choose the *AwsConfigRole* link.
 
    <img width="700" alt="image" src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/AwsConfigRole.png" />
 
-- On the Permissions tab, expand the ***S3Access*** policy, which is already attached to this role.
-  <details>
-    <summary>Permission policy document</summary>
-    <pre lang="json"><code>
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Condition": {
-                    "StringLike": {
-                        "s3:x-amz-acl": "bucket-owner-full-control"
-                    }
-                },
-                "Action": [
-                    "s3:PutObject*"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::*/AWSLogs/*/*"
-                ],
-                "Effect": "Allow"
-            },
-            {
-                "Action": [
-                    "s3:GetBucketAcl"
-                ],
-                "Resource": "arn:aws:s3:::*",
-                "Effect": "Allow"
-            }
-        ]
-    }</code></pre></details>
-
-    <br>
+- On the Permissions tab, an inline policy named  *S3Access* and an AWS managed policy named *AWS_ConfigRole* are already attached to this role.
 
     
-  <details>
-    <summary>IAM role trust policy</summary>
-    <pre lang="json"><code>    
-    {
-        "Version": "2008-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Principal": {
-                    "Service": "config.amazonaws.com"
-                },
-                "Action": "sts:AssumeRole"
-            }
-        ]
-    }</code></pre></details>
-    
-  Currently, this role grants permissions to get the bucket access control lists (ACLs) of Amazon Simple Storage Service (Amazon S3) buckets and upload objects to an S3 bucket if certain conditions are met. These permissions will allow AWS Config to write CloudWatch log files to Amazon S3.
+  > **Analysis**:  The *S3Access* policy grants permissions to get the bucket access control lists (ACLs) of Amazon Simple Storage Service (Amazon S3) buckets and upload objects to an S3 bucket if certain conditions are met. These permissions will allow AWS Config to write CloudWatch log files to Amazon S3.
 
-- Near the top of the tab, choose **Add permissions** > **Attach policies**.
-- To search for policies related to AWS Config, in the  Search box, search for Config and press Enter.
-- Select the ***AWS_ConfigRole*** policy.
-- Choose Add permissions, which is located in the lower-right corner.
-    <img width="800" alt="image" src="https://github.com/user-attachments/assets/fe1c4166-f48c-4f75-adae-a8fd35b82921" />
+  > The *AWS_ConfigRole* policy grants read-level access (mostly Get, List, and Describe actions) to many AWS services.
+  
+In the next task, you will grant **AWS Config** the ability to use this role when you configure AWS Config. The role defines the permissions that **AWS Config** will have when monitoring one of the Regions in the AWS account.
 
-  The policy grants read-level access (mostly Get, List, and Describe actions) to many AWS services.
-
-  > **Analysis**: You will grant **AWS Config** the ability to use this role when you configure AWS Config in the next task. The role defines the permissions that **AWS Config** will have when monitoring one of the Regions in the AWS account.
-
+  
  
 
-In this task, you analyzed the permissions that are granted to an IAM role that a Lambda function will use later in the lab. You also updated and analyzed the permissions granted to an IAM role that AWS Config will use in the next task.
-
- 
-
-## Task 2: Setting up AWS Config to monitor resources
+## Task 3: Setting up AWS Config to monitor resources
 
 In this task, you will configure AWS Config to monitor specific resources in a Region in the AWS account.
 
- 
-
-5. Set up AWS Config.
+1. Set up AWS Config.
 - In the search box to the right of  Services, search for and choose **AWS Config**.
-- Choose Get started, and configure the following settings:
+- Choose *Get started*, and configure the following settings:
+
+  <img width="800" src="https://github.com/user-attachments/assets/6cecef49-aa12-42d1-877d-54ab721f1167" />
+
   - Under Recording strategy. Choose Specific resource types.
   - Resource type: Choose ***AWS EC2 SecurityGroup***. For Frequency choose ***Continuous***.
 
