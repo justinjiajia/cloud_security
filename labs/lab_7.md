@@ -160,7 +160,8 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you i
 
  - On the *Permissions* tab, expand `awsconfig_lambda_ec2_sg_role_policy`, and read the policy displayed.
 
-   <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/awsconfig_lambda_ec2_sg_role_policy.png"  width=800 />
+   <img width="800" src="https://github.com/user-attachments/assets/929dc383-68d1-43f3-8fdf-b61ba4e602ef" />
+
    
 
    > **Analysis**: This is a custom role that was created for you. Later in this lab, you will attach this role to a Lambda function that you will create. This role defines the permissions that the Lambda function will have when it runs. The policy will allow the Lambda function to add or remove inbound rules on Amazon EC2 security groups. The policy will also allow the Lambda function to create and write events to CloudWatch Logs.
@@ -175,26 +176,35 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you i
 
 - Choose the *AwsConfigRole* link.
 
-  <img width="800" src="https://github.com/user-attachments/assets/40d0665d-cb4f-4d77-90f0-29ee81f659aa" />
+  <img width="1007" height="253" alt="image" src="https://github.com/user-attachments/assets/83684a96-dd5e-483f-a192-d9ab49c25e97" />
 
 
-- On the Permissions tab, an inline policy named  *S3Access* and an AWS managed policy named *AWS_ConfigRole* are already attached to this role.
+
+- On the Permissions tab, an inline policy named  *S3Access*, an inline policy named *SNSPublish*, and an AWS managed policy named *AWS_ConfigRole* are already attached to this role.
 
     
-  > **Analysis**:  The *S3Access* policy grants permissions to get the bucket access control lists (ACLs) of Amazon Simple Storage Service (Amazon S3) buckets and upload objects to an S3 bucket if certain conditions are met. These permissions will allow AWS Config to write CloudWatch log files to Amazon S3.
+  > **Analysis**: The *S3Access* policy grants permissions to get the bucket access control lists (ACLs) of Amazon Simple Storage Service (Amazon S3) buckets and upload objects to an S3 bucket if certain conditions are met. These permissions will allow AWS Config to write CloudWatch log files to Amazon S3.
 
+  > The *SNSPublish* policy grants permissions to publish to a topic.
   > The *AWS_ConfigRole* policy grants read-level access (mostly Get, List, and Describe actions) to many AWS services.
   
 In the next task, you will grant **AWS Config** the ability to use this role when you configure AWS Config. The role defines the permissions that **AWS Config** will have when monitoring one of the Regions in the AWS account.
 
-  
+
+
+<br>
+
+---
+
+
  
 
 ## Task 3: Setting up AWS Config to monitor resources
 
 In this task, you will configure AWS Config to monitor specific resources in a Region in the AWS account.
 
-1. Set up AWS Config.
+1. Set up AWS Config
+   
 - In the search box to the right of  Services, search for and choose **AWS Config**.
 - Choose *Get started*, and configure the following settings:
 
@@ -213,20 +223,22 @@ In this task, you will configure AWS Config to monitor specific resources in a R
   > Note: Recall that AwsConfigRole was the second role that you analyzed in the previous task.
   
 - In the Delivery channel section, notice that AWS Config will store findings in an S3 bucket by default.
-- EC2SG-config-topic
+- Tick the checkbox for *Stream configuration changes and notifications to an Amazon SNS topic*, and choose *Create a topic*
+- *SNS topic name*: *ust-\<your ITSC account string\>-config-topic*
 - Keep the default settings, and choose *Next*.
     
-  <img width="800"   src="https://github.com/user-attachments/assets/3da7869c-3d7a-4b74-9de6-c66d9717fbc0" />
+  <img width="800" src="https://github.com/user-attachments/assets/eda27415-acbf-4479-8c61-e8147c93042c" />
+
   
-  - On the AWS Managed Rules page, choose Next at the bottom of the page.
-  - Review the AWS Config setup details, and then choose Confirm.
+- On the *Step 2: Rules* page, choose *Next* at the bottom of the page.
+- Review the AWS Config setup details, and then choose Confirm.
 
     <img width="800" alt="image" src="https://github.com/user-attachments/assets/d176f4fd-8518-45b1-8a1b-83440b2e81a7" />
 
 
 A banner appears briefly, and then the AWS Config Dashboard displays.
 
-6. To observe the resource inventory that AWS Config created, in the navigation pane, choose Resources.
+2. To observe the resource inventory that AWS Config created, in the navigation pane, choose Resources.
 
    The Resource Inventory page displays and lists the Amazon EC2 resources in your account.
    
@@ -244,6 +256,7 @@ In this task, you set up the AWS Config service in one Region in the AWS account
 ---
 
 ## Task 4: Modifying a security group that AWS Config monitors
+
 
 In this task, you will configure new inbound rule settings in one of the security groups that is listed in the AWS Config resource inventory. The purpose is to effectively emulate a security incident. Some of the inbound rule settings that you will define during this task won't match the desired settings, which you will define in a later task.
 
@@ -266,7 +279,7 @@ In this task, you will configure new inbound rule settings in one of the securit
 
  
 
-2. Add inbound rules to the security group to allow HTTP, HTTPS, SMTPS, and IMAPS network traffic.
+2. Add inbound rules to the security group to allow **HTTP**, **HTTPS**, **SMTPS**, and **IMAPS** network traffic.
 
 - Choose the Inbound rules tab, and then choose Edit inbound rules.
 - Notice that one inbound rule for HTTP connections is already defined.
@@ -302,7 +315,7 @@ In this task, you located a security group in the Lab VPC and defined three new 
 
  
 
-## Task 4: Creating an AWS Config rule that calls a Lambda function
+## Task 5: Creating an AWS Config rule that calls a Lambda function
 In this task you configure an AWS Config rule to invoke a pre-created Lambda function. The rule and the function will work together to ensure that monitored Amazon EC2 security groups have only the desired inbound rules.
 
  
