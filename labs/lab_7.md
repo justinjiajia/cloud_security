@@ -163,7 +163,7 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you i
 
  - On the *Permissions* tab, expand `awsconfig_lambda_ec2_sg_role_policy`, and read the policy displayed.
 
-   <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/awsconfig_lambda_ec2_sg_role_policy.png"  width=700 />
+   <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/awsconfig_lambda_ec2_sg_role_policy.png"  width=800 />
    
 
    > **Analysis**: This is a custom role that was created for you. Later in this lab, you will attach this role to a Lambda function that you will create. This role defines the permissions that the Lambda function will have when it runs. The policy will allow the Lambda function to add or remove inbound rules on Amazon EC2 security groups. The policy will also allow the Lambda function to create and write events to CloudWatch Logs.
@@ -178,7 +178,8 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you i
 
 - Choose the *AwsConfigRole* link.
 
-   <img width="700" alt="image" src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/AwsConfigRole.png" />
+  <img width="800" src="https://github.com/user-attachments/assets/40d0665d-cb4f-4d77-90f0-29ee81f659aa" />
+
 
 - On the Permissions tab, an inline policy named  *S3Access* and an AWS managed policy named *AWS_ConfigRole* are already attached to this role.
 
