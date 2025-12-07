@@ -148,67 +148,25 @@ You have now used your first AWS CloudFormation template to provision the lab en
 
 ---
  
-## Task 1: Examining and updating IAM roles
+## Task 2: Examining IAM roles
 
 
 In this task, you will analyze two IAM roles that were pre-provisioned for you in the lab environment. You will also update the permissions of one of the roles. AWS Config and Lambda will use these roles later in the lab.
 
- 3. In the IAM console, observe the permissions granted to the AwsConfigLambdaSGRole role.
+1. In the IAM console, observe the permissions granted to the *AwsConfigLambdaSGRole* role.
 
  - In the search box to the right of  Services, search for and choose IAM.
 
  - In the navigation pane, choose Roles.
 
- - Choose the ***AwsConfigLambdaSGRole*** link.
+ - Choose the *AwsConfigLambdaSGRole* link.
 
- - On the Permissions tab, expand `awsconfig_lambda_ec2_sg_role_policy`.
+ - On the *Permissions* tab, expand `awsconfig_lambda_ec2_sg_role_policy`, and read the policy displayed.
 
    <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/awsconfig_lambda_ec2_sg_role_policy.png"  width=700 />
+   
 
-   The following IAM policy document (formatted in JSON) displays:
-   <details><summary>Permission policy document</summary>
-   <pre lang="json"><code>
-    {
-       "Version":"2012-10-17",
-       "Statement":[
-           {
-              "Action":[
-                  "logs:CreateLogGroup",
-                  "logs:CreateLogStream",
-                  "logs:PutLogEvents"
-              ],
-              "Resource":"arn:aws:logs:*:*:*",
-              "Effect":"Allow"
-           },
-           {
-              "Action":[
-                  "config:PutEvaluations",
-                  "ec2:DescribeSecurityGroups",
-                  "ec2:AuthorizeSecurityGroupIngress",
-                  "ec2:RevokeSecurityGroupIngress"
-              ],
-              "Resource":"*",
-              "Effect":"Allow"
-           }
-       ]
-   }</code></pre></details>
-   <details><summary>IAM role trust policy</summary>
-   <pre lang="json"><code>
-   {
-       "Version": "2012-10-17",
-       "Statement": [
-           {
-               "Effect": "Allow",
-               "Principal": {
-                   "Service": "lambda.amazonaws.com"
-               },
-               "Action": "sts:AssumeRole"
-           }
-       ]
-   }</code></pre>
-   </details>
-
-   > **Analysis**: This is a custom role that was created for you. Later in this lab, you will attach this role to a Lambda function that you will create. This role defines the permissions that the Lambda function will have when it runs. The policy will allow the Lambda function to add or remove inbound rules on Amazon EC2 security groups. The policy will also allow the Lambda function to create and write events to CloudWatch logs.
+   > **Analysis**: This is a custom role that was created for you. Later in this lab, you will attach this role to a Lambda function that you will create. This role defines the permissions that the Lambda function will have when it runs. The policy will allow the Lambda function to add or remove inbound rules on Amazon EC2 security groups. The policy will also allow the Lambda function to create and write events to CloudWatch Logs.
    
    > The subsequent configuration step for this:
    > <img width="700" alt="image" src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/lambda_role.png" />
