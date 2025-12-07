@@ -91,7 +91,7 @@ In this task, you will provision an SNS (short for Simple Notification Service) 
    **Step 1: Specify template**
 
    - *Template source:* *Upload a template file*
-   - *Upload a template file:* Click *Choose file*, then select the downloaded *lab-environment.yaml* file.
+   - *Upload a template file:* Click *Choose file*, then select the downloaded *lab_7_environment.yaml* file.
      
      <img width="800" src="https://github.com/user-attachments/assets/716e7374-d955-4cbb-9bf7-63399c0fea5d" />
 
