@@ -1,8 +1,6 @@
 
 
-
-
-<img width="1562" height="486" alt="image" src="https://github.com/user-attachments/assets/6fefb18a-0349-484e-b6eb-dc655f8afcc5" />
+ 
 
 
 <img width="998" height="369" alt="image" src="https://github.com/user-attachments/assets/ceb8d67f-b7c6-4eb3-add5-ed19f7916f9f" />
@@ -126,18 +124,13 @@ In this task, you will provision an SNS (short for Simple Notification Service) 
 
    Choose *Refresh* every 15 seconds to update the display, if necessary.
 
-7. In the email address you provided earlier, you should receive an email notification titled *AWS Notification - Subscription Confirmation* from *Login Failure Notifications* .
+7. In the email address you provided earlier, you should receive an email notification titled *AWS Notification - Subscription Confirmation* from *EC2 SecurityGroup Change Notifications* .
 
-   <img width="500" src="https://github.com/user-attachments/assets/0220c818-9af1-474c-8c9d-447ae6841ad0" />
+   <img width="500" src="https://github.com/user-attachments/assets/b591f89f-8241-4032-84d0-e5644368e3c2" />
   
-9. Click the *Confirm subscription* link to confirm the subscription of your email address to an SNS Topic created by the stack.
+9. Click the *Confirm subscription* link in the opened tab to confirm the subscription of your email address to the SNS Topic created by the stack.
 
-    <img width="500" src="https://github.com/user-attachments/assets/5d875a99-d6e4-4dbb-a2c9-d0f29f157a52" />
-
-    Then, close the tab that displays *Subscription confirmed!* 
-
-    > Amazon SNS is a fully managed messaging service that provides the ability to send messages to users at scale through SMS, mobile push, and email. 
-
+   Then, close the tab that displays *Subscription confirmed!* 
 
 You have now used your first AWS CloudFormation template to provision the lab environment, including an SNS topic and an IAM role. The purpose of the IAM role will become clear in task 2. We will take a deep dive into automating infrastructure deployment with CloudFormation in the later part of today's class.
 
