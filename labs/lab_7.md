@@ -2,9 +2,6 @@
 
 
 
-<img width="2014" height="1114" alt="image" src="https://github.com/user-attachments/assets/05f9cfb8-743e-4cee-a249-17a8f6665702" />
-
-
 <img width="1562" height="486" alt="image" src="https://github.com/user-attachments/assets/6fefb18a-0349-484e-b6eb-dc655f8afcc5" />
 
 
@@ -203,21 +200,23 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
   <img width="800" src="https://github.com/user-attachments/assets/6cecef49-aa12-42d1-877d-54ab721f1167" />
 
-  - Under Recording strategy. Choose Specific resource types.
-  - Resource type: Choose ***AWS EC2 SecurityGroup***. For Frequency choose ***Continuous***.
+- Under *Recording strategy*. Choose *Specific resource types*.
+- *Resource type*: Choose ***AWS EC2 SecurityGroup***. For Frequency choose ***Continuous***.
 
-    <img width="800" alt="image" src="https://github.com/user-attachments/assets/97d12181-fc2d-4d9b-9a02-543287397824" />
+  <img width="800" src="https://github.com/user-attachments/assets/05f9cfb8-743e-4cee-a249-17a8f6665702" />
   
-  - IAM role for AWS Config Choose ***Choose a role from your account***.
-  - Existing roles: Choose AwsConfigRole.
+- *IAM role for AWS Config*: Choose ***Choose a role from your account***.
+- *Existing roles*: Choose ***AwsConfigRole***.
 
-    <img width="800" alt="image" src="https://github.com/user-attachments/assets/4903df0f-216e-467f-9e57-fb459c52c6d3" />
+  <img width="800" src="https://github.com/user-attachments/assets/4903df0f-216e-467f-9e57-fb459c52c6d3" />
 
-    > Note: Recall that AwsConfigRole was the second role that you analyzed in the previous task.
+  > Note: Recall that AwsConfigRole was the second role that you analyzed in the previous task.
   
-  - In the Delivery channel section, notice that AWS Config will store findings in an S3 bucket by default. Keep the default settings, and choose Next.
+- In the Delivery channel section, notice that AWS Config will store findings in an S3 bucket by default.
+- EC2SG-config-topic
+- Keep the default settings, and choose *Next*.
     
-    <img width="800" alt="image" src="https://github.com/user-attachments/assets/3da7869c-3d7a-4b74-9de6-c66d9717fbc0" />
+  <img width="800"   src="https://github.com/user-attachments/assets/3da7869c-3d7a-4b74-9de6-c66d9717fbc0" />
   
   - On the AWS Managed Rules page, choose Next at the bottom of the page.
   - Review the AWS Config setup details, and then choose Confirm.
@@ -239,62 +238,63 @@ A banner appears briefly, and then the AWS Config Dashboard displays.
 
 In this task, you set up the AWS Config service in one Region in the AWS account to monitor specific resources of interest. You then observed how AWS Config created an inventory of resources.
 
- 
 
-## Task 3: Modifying a security group that AWS Config monitors
+<br>
+
+---
+
+## Task 4: Modifying a security group that AWS Config monitors
 
 In this task, you will configure new inbound rule settings in one of the security groups that is listed in the AWS Config resource inventory. The purpose is to effectively emulate a security incident. Some of the inbound rule settings that you will define during this task won't match the desired settings, which you will define in a later task.
 
  
 
-Locate the security group in the Lab VPC.
+1. Locate the security group in the Lab VPC.
 
-In the search box to the right of  Services, search for and choose VPC.
+- In the search box, search for and choose VPC.
 
-In the navigation pane, choose the Filter by VPC box, and choose Lab VPC.
+- In the left navigation pane, choose the Filter by VPC box, and choose Lab VPC.
 
-In the navigation pane, choose Security groups.
+  <img width="800" src="https://github.com/user-attachments/assets/5db602ac-2d88-48ae-bab3-99bd2ccd67aa" />
 
-At least two security groups are defined in this VPC.
 
-Select the LabSG1 security group.
+- In the left navigation pane, choose Security groups.
+
+  At least two security groups are defined in this VPC.
+
+- Select the *LabSG1* security group.
 
  
 
-Add inbound rules to the security group to allow HTTP, HTTPS, SMTPS, and IMAPS network traffic.
+2. Add inbound rules to the security group to allow HTTP, HTTPS, SMTPS, and IMAPS network traffic.
 
-Choose the Inbound rules tab, and then choose Edit inbound rules.
+- Choose the Inbound rules tab, and then choose Edit inbound rules.
+- Notice that one inbound rule for HTTP connections is already defined.
 
-Notice that one inbound rule for HTTP connections is already defined.
+- Choose Add rule and configure the following:
 
-For the existing rule, change Source to Anywhere-IPv4.
+  - Type: Choose HTTPS.
+  - Source: Choose Anywhere-IPv4.
 
-Choose Add rule and configure the following:
+- Choose Add rule again and configure the following:
 
-Type: Choose HTTPS.
+  - Type: Choose SMTPS.
+  - Source: Choose Anywhere-IPv4.
 
-Source: Choose Anywhere-IPv4.
+- Choose Add rule again and configure the following:
 
-Choose Add rule again and configure the following:
+  - Type: Choose IMAPS.
+  - Source: Choose Anywhere-IPv4.
 
-Type: Choose SMTPS.
-
-Source: Choose Anywhere-IPv4.
-
-Choose Add rule again and configure the following:
-
-Type: Choose IMAPS.
-
-Source: Choose Anywhere-IPv4.
-
-Choose Save rules.
+- Choose Save rules.
 
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/bee3d7fc-29db-4a00-8fd9-da14d1e76d6d" />
+  
 
-The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
+  The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
 
-previously configured inbound rules
+  <img width="800" src="https://github.com/user-attachments/assets/b254daa5-dfe0-4b84-82da-563c2d8cd811" />
+
 
  
 
