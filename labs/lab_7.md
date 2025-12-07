@@ -570,30 +570,23 @@ After a couple of minutes, the grades panel appears and shows you how many point
 To find detailed feedback about your work, choose Submission Report.
 
 
-## Delete AWS Config Recorder:
+## After-class task: Clean up all lab resources
 
 log in as an admin user
+
+1. Stop AWS Config Recorder
+
+- Go to the AWS Config Console.
+
+- In the left navigation pane, choose *Settings*.
+
+- On the *Customer managed recorder* tab, choose *Stop Recording* in the *Recorder* section.
+
+  <img width="800" src="https://github.com/user-attachments/assets/fbb7336f-6c9e-4c03-a181-445de3b70866" />
+
+2. Delete the *lab-environment* stack
+
+- Navigate to the *CloudFormation* console.
+- On the *Stacks* page, select and delete all listed stacks in the reverse order of their creation.
+   
  
-
-Go to the AWS Config Console and select the correct Region.
-
-In the left navigation pane, choose Settings.
-
-On the "General" tab, find the Recording section.
-
-Toggle the recording switch to Off and save the changes.
-
-
-```shell
-aws configservice delete-configuration-recorder --configuration-recorder-name default
-```
-
-More relevant shell commands:
-
-```shell
-# Getting all recorders quickly, especially for automation.
-aws configservice list-configuration-recorders
-# Inspecting specific settings of the main (customer-managed) recorder.
-aws configservice describe-configuration-recorders
- 
-```
