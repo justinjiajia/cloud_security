@@ -191,9 +191,10 @@ In the next task, you will grant **AWS Config** the ability to use this role whe
 
 In this task, you will configure AWS Config to monitor specific resources in a Region in the AWS account.
 
-1. Set up AWS Config
+1. Set up a customer managed recording in AWS Config
    
 - In the search box at the top left corner, search for and choose **AWS Config**.
+  
 - Choose *Get started*, and configure the following settings:
 
   <img width="800" src="https://github.com/user-attachments/assets/6cecef49-aa12-42d1-877d-54ab721f1167" />
@@ -221,20 +222,28 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
   
 - On the *Step 2: Rules* page, choose *Next* at the bottom of the page.
-- Review the AWS Config setup details, and then choose Confirm.
+- Review the AWS Config setup details, and then choose *Confirm*.
 
-    <img width="800" alt="image" src="https://github.com/user-attachments/assets/d176f4fd-8518-45b1-8a1b-83440b2e81a7" />
+  <img width="800" src="https://github.com/user-attachments/assets/60526c9c-7805-4109-a34d-ac16c36ce513" />
+
 
 
 A banner appears briefly, and then the AWS Config Dashboard displays.
 
-2. To observe the resource inventory that AWS Config created, in the navigation pane, choose Resources.
+You should receive multiple email notations with the titles starting *AWS::Config::ConfigurationRecorder*, indicating the AWS Config recorder has taken effect and be at work to monitor the 
 
-   The Resource Inventory page displays and lists the Amazon EC2 resources in your account.
-   
-   > Note: If the resources list displays a message saying that your resources are being discovered, wait a few minutes. It might take a few minutes for AWS Config to identify all of your resources.
-   
-   > **Analysis**: Recall that you configured AWS Config to inventory EC2 Security Group type resources. The Amazon EC2 security groups that were pre-provisioned in the Region where you set up AWS Config are included in the inventory. However, notice that many other resource types also appear in the inventory. AWS Config tracks resources related to the resources that you are primarily interested in, because related resources can affect the behavior of the primary resources. The lab environment that you are working in includes many of these related resources (such as internet gateways and network ACLs).
+2. To observe the resource inventory that AWS Config created
+
+   - In the left navigation pane, choose *Resources*.
+   - Use the *Resource type* filter, type ***EC2 SecurityGroup*** and choose it from the popup menu. Then choose *Apply*.
+
+     <img width="800" src="https://github.com/user-attachments/assets/e20e2dd2-5216-4a37-95ca-2e4723563e08" />
+
+   - The *Resource inventory* page displays the two security groups that AWS Config is currently recording
+     > Recall that you configured AWS Config to inventory EC2 Security Group type resources.
+     > Note: One security group is the default group that comes with the VPC defined in the YAML template and created by the CloudFormation  stack (as any VPC created in AWS comes with a default security group). The second security group is called *LabSG1*. It is also defined in the CloudFormation temapalte, and dedicated to manipulation and testing in subsequent tasks.
+
+   - 
 
  
 
