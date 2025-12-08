@@ -576,7 +576,7 @@ To find detailed feedback about your work, choose Submission Report.
 
 ## After-class task: Clean up all lab resources
 
-log in as an admin user
+ 
 
 1. Stop AWS Config Recorder
 
@@ -587,6 +587,8 @@ log in as an admin user
 - On the *Customer managed recorder* tab, choose *Stop Recording* in the *Recorder* section.
 
   <img width="800" src="https://github.com/user-attachments/assets/fbb7336f-6c9e-4c03-a181-445de3b70866" />
+
+  > Note: Neither stopping nor deleting the recorder will delete the configuration history files already delivered to your Amazon S3 bucket. You must manage and delete those files separately if needed.
 
 2. Delete the *lab-environment* stack
 
