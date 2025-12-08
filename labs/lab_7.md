@@ -241,13 +241,16 @@ You should receive multiple email notations with the titles starting *AWS::Confi
 
      <img width="800" src="https://github.com/user-attachments/assets/e20e2dd2-5216-4a37-95ca-2e4723563e08" />
 
-     The *Resource inventory* page displays the security groups AWS Config is currently recording.
+     The *Resource inventory* page displays the security groups AWS Config is currently recording. They should look like the groups in the following screenshot (although your security group IDs are different).
      
      > Recall that in step 1 of this task, you configured AWS Config to monitor *EC2 SecurityGroup* type resources.
      
      > Note: One security group is the default one that comes with the VPC defined in the YAML template and created by the CloudFormation  stack (as any VPC created in AWS comes with a default security group). The second security group is called *LabSG1*. It was also defined in the YAML temapalte, and is dedicated to manipulation and testing in subsequent tasks.
 
-   - You can select one security group, and then choose *Resource timeline* to view  all the configuration items captured so far for the selected resource.
+   - You can select one security group, preferrably the *LabSG1* one, and then choose *Resource timeline* to view  all the configuration items captured so far for the selected resource.
+  
+     <img width="800" src="https://github.com/user-attachments/assets/960e989c-7f0e-4634-ac4d-c0e519cc3860" />
+
 
  
 
@@ -258,25 +261,22 @@ In this task, you set up the AWS Config service in the AWS account to monitor sp
 
 ---
 
-## Task 4: Modifying a security group that AWS Config monitors
+## Task 4: Emulating a security incident
 
 
-In this task, you will configure new inbound rule settings in one of the security groups that is listed in the AWS Config resource inventory. The purpose is to effectively emulate a security incident. Some of the inbound rule settings that you will define during this task won't match the desired settings, which you will define in a later task.
+In this task, you will configure new inbound rule settings in the security group *LabSG1* (one listed in the AWS Config resource inventory). The purpose is to effectively emulate a security incident. Some of the inbound rule settings that you will define during this task won't match the desired settings, which you will define in a later task.
 
  
+1. Locate the security group in the *Lab VPC*.
 
-1. Locate the security group in the Lab VPC.
-
-- In the search box, search for and choose VPC.
-
-- In the left navigation pane, choose the Filter by VPC box, and choose Lab VPC.
+- Go to the VPC console. In the left navigation pane, choose the *Filter by VPC* box, and choose *Lab VPC*.
 
   <img width="800" src="https://github.com/user-attachments/assets/5db602ac-2d88-48ae-bab3-99bd2ccd67aa" />
 
 
-- In the left navigation pane, choose Security groups.
+- In the navigation pane, choose *Security groups*.
 
-  At least two security groups are defined in this VPC.
+  You will see two security groups defined in this VPC.
 
 - Select the *LabSG1* security group.
 
@@ -305,13 +305,14 @@ In this task, you will configure new inbound rule settings in one of the securit
 - Choose Save rules.
 
 
-  
-
   The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
 
   <img width="800" src="https://github.com/user-attachments/assets/b254daa5-dfe0-4b84-82da-563c2d8cd811" />
 
 
+3. View the change in
+
+4. <img width="867" height="570" alt="image" src="https://github.com/user-attachments/assets/862802f7-5dce-460e-b78b-7d3ddccc24d9" />
  
 
 In this task, you located a security group in the Lab VPC and defined three new inbound rules in the security group. Later in this lab, you will observe these modifications are identified as a security incident and remediated.
