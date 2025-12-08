@@ -380,6 +380,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 
 - Choose *Next*, and then choose *Save*.
 
+As soon as you create the new rule, AWS Config automatically  evaluates the  last configuration state of your monitored resources against it.
  
 4. Observe the AWS Config *EC2SecurityGroup* rule details.
 
@@ -399,9 +400,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 5. Return to the browser tab that shows the *Resource timeline* for *LabSG1*, and refresh the page to show the latest configuration changes.
 
    <img width="700" src="https://github.com/user-attachments/assets/f69caf31-187d-434c-ba0b-87a67463f90b" />
-
-
-You should also receive several email notifications about the configuration updates to the monitored resources.
+ 
  
 You should also see several new email notifications that report these configuration updates for the monitored resources, delivered through the configured SNS topic.​
 
@@ -492,7 +491,6 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 
 In this task, you observed the logic for the Lambda function to detect and remove the additional permissions for SMTPS (TCP port 465) and IMAPS (TCP port 993) in the security group, and add required permissions.
 
-> Note that the security incident (when you modified the inbound rules in task 4) occurred *before* you created the AWS Config rule and Lambda function to remediate such incidents (in task 5). During initial rule validation, AWS Config verifies all recorded configuration changes, detected the security incident, and trigger the remediation.
 
 > If you were to modify the security group again, an AWS Config compliance evaluation would be initiated. The evaluation would invoke the Lambda function, and your changes would be reverted so that the inbound rules again match the desired settings. The default security groups are being similarly monitored and would have their settings remediated if changed.
 
