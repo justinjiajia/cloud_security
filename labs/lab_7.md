@@ -234,30 +234,34 @@ A banner appears briefly, and then the AWS Config Dashboard displays.
 
 You should receive multiple email notifications with the titles starting with *AWS::Config::ConfigurationRecorder* or *AWS::EC2::SecurityGroup*, indicating the AWS Config recorder is effective to monitor the configured AWS recourses (*EC2 SecurityGroup*).
 
-2. To observe the resource inventory that AWS Config is currently recording.
+2. Complete the following steps to review the resource inventory that AWS Config is currently recording:
 
    - In the left navigation pane, choose *Resources*.
-   - Use the *Resource type* filter, type ***EC2 SecurityGroup*** and choose it from the popup menu. Then choose *Apply*.
+   - In the *Resource type* filter, start typing ***EC2 SecurityGroup***, then choose ***AWS EC2 SecurityGroup*** from the dropdown list.
+   - Choose *Apply*.
 
      <img width="800" src="https://github.com/user-attachments/assets/e20e2dd2-5216-4a37-95ca-2e4723563e08" />
 
-     The *Resource inventory* page displays the security groups AWS Config is currently recording. They should look like the groups in the screenshot above (although your security group IDs are different).
+     The *Resource inventory*  page now lists the security groups that AWS Config is recording. Your security group IDs will differ, but they should resemble the ones shown in the reference screenshot.
      
-     > Recall that in step 1 of this task, you configured AWS Config to monitor *EC2 SecurityGroup* type resources.
-     
-     > Note: One security group is the default one that comes with the VPC defined in the YAML template and created by the CloudFormation  stack (as any VPC created in AWS comes with a default security group). The second security group is called *LabSG1*. It was also defined in the YAML temapalte, and is dedicated to manipulation and testing in subsequent tasks.
+     > In Step 1, you configured AWS Config to record resources of type *EC2 SecurityGroup*, which is why these security groups now appear in the inventory.
+   
+     > You should see two security groups:
+     > One is the default security group that is automatically created with the VPC defined in the CloudFormation YAML template. Every new VPC in AWS includes a default security group.
+     > The second security group is named *LabSG1*. It is also defined in the YAML template and is intended for experimentation and testing in the later steps of this lab. 
 
-   - You can select one security group, preferrably the *LabSG1* one, and then choose *Resource timeline* to view  all the configuration items  (CIs)  captured so far for the selected resource.
+ 
+   - Select one of the security groups — preferably *LabSG1*  — and then choose *Resource timeline* to display all configuration items (CIs) that AWS Config has captured for this resource so far.
   
      <img width="800" src="https://github.com/user-attachments/assets/960e989c-7f0e-4634-ac4d-c0e519cc3860" />
   
-     Keep the tab open, as you will get back to view upcoming configuration changes.
+     Keep this browser tab open; you will return to this *Resource timeline* view to observe configuration changes as you proceed through the lab.  
      
-     > AWS Config uses the configuration recorder to continuously record configuration changes for supported resources.
-     > In addition to configuration items, this *Resource timeline* view also shows the links to correlated CloudTrail events by querying CloudTrail's Event history so as to give the complete story about each configuration change. Note that finding these correlated CloudTrail events is best‑effort rather than guaranteed for every change.
+     > AWS Config uses the configuration recorder to continuously capture configuration changes for supported resource types.
+     > In the  *Resource timeline* view, AWS Config not only shows the configuration items, but also provides links to related AWS CloudTrail events (from CloudTrail Event history) to help you see the full context of each configuration change.  These CloudTrail correlations are performed on a best-effort basis and might not be available for every change.
+ 
 
-
-In this task, you set up the AWS Config service in the AWS account to monitor specific resources of interest.  
+In this task, you configured AWS Config to monitor EC2 security groups in your AWS account and inspected their recorded configuration history.
 
 <br>
 
@@ -340,7 +344,7 @@ In this task, you configure an AWS Config Rule to invoke a pre-created Lambda Fu
    <img width="800" src="https://github.com/user-attachments/assets/0565218c-baed-4711-8acd-cb38c0bca284" />
 
 
-   Keep the tab open.
+   Keep the browser tab open.
    
 
 
@@ -364,6 +368,7 @@ In this task, you configure an AWS Config Rule to invoke a pre-created Lambda Fu
    
   - *Name*: Enter ***EC2SecurityGroup***
   - *Description*: Enter ***Restrict inbound ports to HTTP and HTTPS***
+    
     <img width="800" src="https://github.com/user-attachments/assets/c6deae88-b7ac-44e6-84e3-adc44e74a0f7" />
     
   - Copy the *Function ARN* field from the tab that displays the Lambda console. Then paste the copied ARN into the *AWS Lambda function ARN* field on the *Configure rule* page.
@@ -373,33 +378,43 @@ In this task, you configure an AWS Config Rule to invoke a pre-created Lambda Fu
   - Trigger type: Select ***When configuration changes***.
   - Scope of changes: Choose ***Resources***.
   - *Resource type*: Choose ***AWS EC2 SecurityGroup***.
-    AWS EC2 SecurityGroup appears in the resources area.
-    <img width="780" alt="image" src="https://github.com/user-attachments/assets/28d60cfb-90ac-43ad-8f46-ed7355b7d92b" />
-
+    
     <img width="800" src="https://github.com/user-attachments/assets/8cd00982-5642-42ea-97ab-6686f1052fb8" />
 
   - In the Parameters section, add a parameter with the following settings:
     
-    - Key: debug
-    - Value: true
-    <img width="778" alt="image" src="https://github.com/user-attachments/assets/a786bec3-b96c-41ae-b199-e75a703ea2d2" />
+    - Key: ***debug***
+    - Value: ***true***
+      
+      <img width="800" src="https://github.com/user-attachments/assets/a786bec3-b96c-41ae-b199-e75a703ea2d2" />
     
-    > Note: Any parameters that you define here will be passed by this AWS Config rule to the EC2SecurityGroup Lambda function. 
+    > Note: Any parameters that you define here will be passed by this AWS Config rule to the Lambda function. 
 
-- Choose Next, and then choose Save.
+- Choose *Next*, and then choose *Save*.
 
  
-11. Observe the AWS Config EC2SecurityGroup rule details.
+4. Observe the AWS Config *EC2SecurityGroup* rule details.
 
-- Choose the ***EC2SecurityGroup*** link.
-- In the Resources in scope section, choose the Noncompliant dropdown menu, and choose All.
-  In the Rule details section, notice the Last successful evaluation field. Initially, this field displays Not available; however, after a few minutes, a timestamp will display.
-  <img width="800" alt="image" src="https://github.com/user-attachments/assets/8bc0a028-40bc-4a68-8e22-dea6714b8d0e" />
-  > Note: The initial evaluation might take a few minutes to complete. This same evaluation will also occur when any security group that is within scope is modified in the future.
-  > Notice the Amazon EC2 security group resources that are listed as in scope.
-  > While the initial evaluation occurs, the Compliance value will be No results available. After several minutes, the value for each security group resource changes to Compliant. Wait until you see that it is compliant.
+- Choose the *EC2SecurityGroup* link.
+  
+- In the *Resources in scope* section, choose the *Noncompliant* dropdown menu, and choose ***All***.
 
-Notice that the Annotation column displays Permissions were modified.
+  <img width="800" src="https://github.com/user-attachments/assets/6fd654e5-a19b-45cf-8ec6-696f7b5adb99" />
+
+  
+  In the Rule details section, notice the *Last successful evaluation* field. Initially, this field displays *Not available*; however, after a few minutes (refresh the browser tab if needed), a timestamp will display with a green tick icon prepended.
+
+  <img width="800" src="https://github.com/user-attachments/assets/8de376f1-bce8-4a7a-a0f0-c6d4057a582e" />
+
+  
+  > Note: The initial evaluation might take a few moment to complete. This same evaluation will also occur when any security group that is within scope is modified in the future.
+
+  > While the initial evaluation occurs, the *Compliance* column will show *No results available*. After several minutes, the value for each security group resource changes to *Compliant*. Wait until you see that it is compliant.
+
+  Notice that the *Annotation* column displays *Permissions were modified. 2 new revocation(s). 2 new authorization(s).*.
+
+  <img width="800" src="https://github.com/user-attachments/assets/67fb3cc1-2231-48b9-9c77-1d029e018b1f" />
+
 
  
 
