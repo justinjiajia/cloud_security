@@ -431,7 +431,7 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 
 1. Analyze the inbound rules defined on the *LabSG1* security group.
 
-- Switch to the browser tab where the details of the *LabSG1* security group displays, and refresh the page.
+- Switch to the browser tab that shows the *LabSG1* security group details, and refresh the page to load the latest configuration.
 
 - On the Inbound rules tab, notice that only HTTP and HTTPS traffic is permitted.
 
@@ -440,7 +440,7 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
   <img width="800" src="https://github.com/user-attachments/assets/0dfcb234-4be5-4c19-943d-b68d8d83cf54" />
 
 
-  > Recall that in task 4, you added two additional inbound rules for SMTPS and IMAPS on this security group. However, the rules for SMTPS and IMAPS no longer exist. Also, an additional HTTP rule was added. This shows your manual modifications have been evaluated and remediated by the Lambda function.
+  > Recall that in task 4, you added two extra inbound rules to this security group to allow SMTPS and IMAPS traffic. However, those SMTPS and IMAPS rules no longer exist, and an additional HTTP rule has been added. This indicates that your manual changes were evaluated and automatically remediated by the Lambda function attached to the AWS Config rule.
  
  
 
@@ -493,6 +493,8 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
           - Revoke unwanted rules: If `revoke_permissions` list is not empty, it calls `revoke_security_group_ingress` to remove the unwanted rules.
           - Authorize required rules: If `authorize_permissions` list is not empty, it calls `authorize_security_group_ingress` to add the missing, required rules.
 
+  - In this Lambda code, any line that calls `print()`  writes logs to CloudWatch Logs, because Lambda automatically sends everything written to stdout/stderr to a CloudWatch Logs log stream.       
+
  
 
 In this task, you observed the logic for the Lambda function to detect and remove the additional permissions for SMTPS (TCP port 465) and IMAPS (TCP port 993) in the security group, and add required permissions.
@@ -501,59 +503,44 @@ In this task, you observed the logic for the Lambda function to detect and remov
 
 > If you were to modify the security group again, an AWS Config compliance evaluation would be initiated. The evaluation would invoke the Lambda function, and your changes would be reverted so that the inbound rules again match the desired settings. The default security groups are being similarly monitored and would have their settings remediated if changed.
 
- 
+
+<br>
+
+---
 
 ## Task 7: Using CloudWatch logs for verification
 
 In this task, you will analyze **CloudWatch** logs and filter the log entries to find evidence of the remediation.
 
  
+1. Locate the logs that show evidence of the changes that the AWS Config rule and its associated Lambda function made to the security group.
 
-Locate the logs that show evidence of the changes that the AWS Config rule and its associated Lambda function made to the security group.
+- Go to the CloudWatch console.
 
-In the search box to the right of  Services, search for and choose CloudWatch.
+- In the navigation pane, expand  *Logs* and then choose *Log Management*.
 
-In the navigation pane, expand  Logs and then choose Log groups.
+- Choose the *awsconfig_lambda_security_group* log group link.
 
-Choose the awsconfig_lambda_security_group log group link.
-
-One or more log stream entries are visible in the log streams list.
+  One or more log stream entries are visible in the *Log streams* list.
 
 
-<img width="928" alt="image" src="https://github.com/user-attachments/assets/3e115875-559f-4f64-a423-ac00e20cc787" />
+  <img width="800" src="https://github.com/user-attachments/assets/dac9bde7-df55-4890-9648-ac2396a99c7a" />
 
-Choose Search all.
 
-In the Filter events search field, enter revoking for and then press Enter.
+- Choose *Search all log streams*.
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/fecc9fc5-68ad-42fb-8aa2-3e36f29e16b8" />
+- In the *Filter events* search field, enter ***revoking for*** and then press Enter.
 
-Expand  each log event and review the contents.
+  <img width="800" alt="image" src="https://github.com/user-attachments/assets/65df695e-aaa8-4130-a6dd-371c15592c39" />
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/a840831a-fca2-4fd0-a54e-c0b5e338154a" />
+- Expand  each log event and review the contents.
 
-Each event provides details about the action that the Lambda function took. In one of the events, you should find details showing that the inbound rules that you manually added for SMTPS (TCP port 465) and IMAPS (TCP port 993) were removed.
-
-The other filtered events logged the changes to the other two security groups that exist in your account. These security groups are also in the resources inventory that your AWS Config rule is monitoring.
+  > Each event provides details about the action that the Lambda function took. In one of the events, you should find details showing that the inbound rules that you manually added for SMTPS (TCP port 465) and IMAPS (TCP port 993) were removed.
+ 
 
 In this task, you observed evidence in the CloudWatch logs that AWS Config invoked the Lambda function to automatically revoke the modifications that were made to the security group.
 
  
-
-Submitting your work
-To record your progress, choose Submit at the top of these instructions.
-
- 
-
-When prompted, choose Yes.
-
-After a couple of minutes, the grades panel appears and shows you how many points you earned for each task. If the results don't display after a couple of minutes, choose Grades at the top of these instructions.
-
- Tip: You can submit your work multiple times. After you change your work, choose Submit again. Your last submission is recorded for this lab.
-
- 
-
-To find detailed feedback about your work, choose Submission Report.
 
 
 ## After-class task: Clean up all lab resources
