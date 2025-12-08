@@ -397,21 +397,15 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 - Choose the *EC2SecurityGroup* link.
   
 - In the *Resources in scope* section, choose the *Noncompliant* dropdown menu, and choose ***All***.
-
-  <img width="800" src="https://github.com/user-attachments/assets/6fd654e5-a19b-45cf-8ec6-696f7b5adb99" />
-
   
   In the *Rule details* section, notice the *Last successful evaluation* field. Initially, this field displays *Not available*; However, after just a moment (refresh the browser tab if needed), a timestamp will display with a green tick icon prepended.
 
   <img width="800" src="https://github.com/user-attachments/assets/b1983d0c-de97-470f-8ad3-18a7d5ad77a8" />
 
 
-  
   While the initial evaluation occurs, the *Compliance* column will show *No results available*. After just a moment, the value for each security group resource changes to *Compliant*. Wait until you see that it is compliant.
 
   Notice that the *Annotation* column displays *Permissions were modified. 2 new revocation(s). 2 new authorization(s).*.
-
-  <img width="800" src="https://github.com/user-attachments/assets/67fb3cc1-2231-48b9-9c77-1d029e018b1f" />
 
 
 
