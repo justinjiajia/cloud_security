@@ -230,20 +230,22 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
 A banner appears briefly, and then the AWS Config Dashboard displays.
 
-You should receive multiple email notations with the titles starting *AWS::Config::ConfigurationRecorder*, indicating the AWS Config recorder has taken effect and be at work to monitor the 
+You should receive multiple email notations with the titles starting *AWS::Config::ConfigurationRecorder* or *AWS::EC2::SecurityGroup*, indicating the AWS Config recorder has in effect and at work to monitor the configured AWS recourses (*EC2 SecurityGroup*)
 
-2. To observe the resource inventory that AWS Config created
+2. To observe the resource inventory that AWS Config is currently recording.
 
    - In the left navigation pane, choose *Resources*.
    - Use the *Resource type* filter, type ***EC2 SecurityGroup*** and choose it from the popup menu. Then choose *Apply*.
 
      <img width="800" src="https://github.com/user-attachments/assets/e20e2dd2-5216-4a37-95ca-2e4723563e08" />
 
-   - The *Resource inventory* page displays the two security groups that AWS Config is currently recording
-     > Recall that you configured AWS Config to inventory EC2 Security Group type resources.
-     > Note: One security group is the default group that comes with the VPC defined in the YAML template and created by the CloudFormation  stack (as any VPC created in AWS comes with a default security group). The second security group is called *LabSG1*. It is also defined in the CloudFormation temapalte, and dedicated to manipulation and testing in subsequent tasks.
+     The *Resource inventory* page displays the security groups AWS Config is currently recording.
+     
+     > Recall that in step 1 of this task, you configured AWS Config to monitor *EC2 SecurityGroup* type resources.
+     
+     > Note: One security group is the default one that comes with the VPC defined in the YAML template and created by the CloudFormation  stack (as any VPC created in AWS comes with a default security group). The second security group is called *LabSG1*. It was also defined in the YAML temapalte, and is dedicated to manipulation and testing in subsequent tasks.
 
-   - 
+   - You can select one security group, and then choose *Resource timeline* to view  all the configuration items captured so far for the selected resource.
 
  
 
