@@ -103,7 +103,7 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
      
    - Choose *Next*
 
-   > Note: The entries displayed in the *Parameters* section and requiring your inputs were specified in the *Parameters* section of the YAML template file. 
+   > Note: The entries displayed in the *Parameters* section and requiring your inputs were defined in the *Parameters* section of the YAML template file. 
 
    **Step 3: Configure stack options**
    
