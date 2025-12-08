@@ -151,7 +151,7 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you. 
 
  - Choose the *AwsConfigLambdaSGRole* link.
 
- - On the *Permissions* tab, expand `awsconfig_lambda_ec2_sg_role_policy`, and read the policy displayed.
+ - On the *Permissions* tab, expand `awsconfig_lambda_ec2_sg_role_policy`, and analyze the policy displayed.
 
    <img width="800" src="https://github.com/user-attachments/assets/929dc383-68d1-43f3-8fdf-b61ba4e602ef" />
 
