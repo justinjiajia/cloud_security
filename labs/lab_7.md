@@ -109,7 +109,7 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
    
    - Scroll down to the bottom and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
 
-   <img width="800" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
+     <img width="800" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
    
    - Choose *Next*. 
 
@@ -121,8 +121,7 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
 
 6. Wait for the status to change to *CREATE_COMPLETE*.
 
-   <img width="300" src="https://github.com/user-attachments/assets/1714a343-8496-4e22-9f0b-836b00afdf7e" />
-
+   <img width="300" src="https://github.com/user-attachments/assets/4d151a38-9428-49da-8616-f3b77ca4ec54" />
 
    Choose *Refresh* every 15 seconds to update the display, if necessary.
 
@@ -130,11 +129,11 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
 
    <img width="500" src="https://github.com/user-attachments/assets/b591f89f-8241-4032-84d0-e5644368e3c2" />
   
-9. Click the *Confirm subscription* link in the opened tab to subscribe your email address to the SNS Topic.
+8. Click the *Confirm subscription* link in the opened tab to subscribe your email address to the SNS Topic.
 
    Then, close the tab that displays *Subscription confirmed!* 
 
-You have now used the AWS CloudFormation template to provision the lab environment, including two IAM Roles, a Lambda Function, and a SNS Topic. The purpose of these resources will become clear in subsequent tasks. 
+You have now used the AWS CloudFormation template to provision your lab environment, including two IAM Roles, a Lambda Function,  a SNS Topic, and several VPC related resources. The purpose of these resources will become clear in subsequent tasks. 
 
 The following diagram shows the architecture that was created for you in AWS at the beginning of the lab.
 
@@ -164,9 +163,6 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you. 
    
 
    > **Analysis**: This is a custom role that was created for you. Later in this lab, you will attach this role to a Lambda function that you will create. This role defines the permissions that the Lambda function will have when it runs. The policy will allow the Lambda function to add or remove inbound rules on Amazon EC2 security groups. The policy will also allow the Lambda function to create and write events to CloudWatch Logs.
-   
-   > The subsequent configuration step for this:
-   > <img width="700" alt="image" src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/lambda_role.png" />
 
 
 2. A second custom IAM role named *AwsConfigRole* was also created in the account. Let's also observe the permissions granted to it.
