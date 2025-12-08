@@ -1,10 +1,5 @@
 
 
- 
-
-
-<img width="998" height="369" alt="image" src="https://github.com/user-attachments/assets/ceb8d67f-b7c6-4eb3-add5-ed19f7916f9f" />
-
 
 
 # Lab 7 Remediating an Incident by Using AWS Config and Lambda
