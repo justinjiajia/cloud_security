@@ -231,7 +231,7 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
 A banner appears briefly, and then the AWS Config Dashboard displays.
  
-You should also receive several email notifications with the titles starting with *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. They corresponds to configuration changes captured by the AWS Config recorder about the monitored resources, and were sent through the SNS topic.
+You should also receive multiple email notifications with the titles starting with *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. They corresponds to configuration changes captured by the AWS Config recorder about the monitored resources, and were sent through the SNS topic.
 
 2. In the left navigation pane, choose *Resources* to review the resource inventory that AWS Config is currently recording.
 
