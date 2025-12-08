@@ -232,7 +232,7 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
 A banner appears briefly, and then the AWS Config Dashboard displays.
 
-You should receive multiple email notifications with the titles starting with *AWS::Config::ConfigurationRecorder* or *AWS::EC2::SecurityGroup*, indicating the AWS Config recorder has in effect and at work to monitor the configured AWS recourses (*EC2 SecurityGroup*)
+You should receive multiple email notifications with the titles starting with *AWS::Config::ConfigurationRecorder* or *AWS::EC2::SecurityGroup*, indicating the AWS Config recorder is effective to monitor the configured AWS recourses (*EC2 SecurityGroup*).
 
 2. To observe the resource inventory that AWS Config is currently recording.
 
