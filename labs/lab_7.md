@@ -241,7 +241,7 @@ You should receive multiple email notations with the titles starting *AWS::Confi
 
      <img width="800" src="https://github.com/user-attachments/assets/e20e2dd2-5216-4a37-95ca-2e4723563e08" />
 
-     The *Resource inventory* page displays the security groups AWS Config is currently recording. They should look like the groups in the following screenshot (although your security group IDs are different).
+     The *Resource inventory* page displays the security groups AWS Config is currently recording. They should look like the groups in the screenshot above (although your security group IDs are different).
      
      > Recall that in step 1 of this task, you configured AWS Config to monitor *EC2 SecurityGroup* type resources.
      
