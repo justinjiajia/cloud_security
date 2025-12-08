@@ -76,9 +76,9 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
 
    **Step 2: Create Stack**
 
-   - *Stack name:* *lab-environment*
-   - *ITSCAccountString*: *\<your ITSC account string\>* (The string before the `@` sign of your UST email address)
-   - *SubscriptionEmail*: *\<An email address to receive notifications\>* (e.g., your UST email)
+   - *Stack name:* ***lab-environment***
+   - *ITSCAccountString*: ***\<your ITSC account string\>*** (The string before the `@` sign of your UST email address)
+   - *SubscriptionEmail*: ***\<An email address to receive notifications\>*** (e.g., your UST email)
      
      <img width="700" src="https://github.com/user-attachments/assets/03f4938c-9b04-4378-b8e6-397cf3984e2e" />
 
@@ -149,7 +149,7 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you. 
 
 2. A second custom IAM role named *AwsConfigRole* was also created in the account. Let's also observe the permissions granted to it.
    
-- In the navigation pane, choose Roles.
+- In the navigation pane, choose *Roles*.
 
 - Choose the *AwsConfigRole* link.
 
@@ -172,8 +172,6 @@ In the next task, you will grant AWS Config the ability to use this role when yo
 
 ---
 
-
-
 ## Task 3: Setting up AWS Config to monitor resources
 
 In this task, you will configure AWS Config to monitor specific resources in a Region in the AWS account.
@@ -186,7 +184,7 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
   <img width="700" src="https://github.com/user-attachments/assets/6cecef49-aa12-42d1-877d-54ab721f1167" />
 
-- Under *Recording strategy*. Choose *Specific resource types*.
+- Under *Recording strategy*. Choose ***Specific resource types***.
 - *Resource type*: Choose ***AWS EC2 SecurityGroup***. For Frequency choose ***Continuous***.
 
   <img width="700" src="https://github.com/user-attachments/assets/05f9cfb8-743e-4cee-a249-17a8f6665702" />
