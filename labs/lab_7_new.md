@@ -485,7 +485,9 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 
   - On line 119, the function checks whether the `debug` parameter is included in the AWS Config rule. Recall that this was a parameter you configured when you defined the AWS Config rule in an earlier task. If `debug` is set to `true`, then the Lambda function code will print additional debugging information when it runs. You can see examples of this throughout the Lambda code. 
 
-  - Any line that calls `print()`  writes logs to CloudWatch Logs, because Lambda automatically sends everything written to stdout/stderr to a CloudWatch Logs log stream.       
+  - Any line that calls `print()`  writes logs to CloudWatch Logs, because Lambda automatically sends everything written to stdout/stderr to a CloudWatch Logs log stream.
+ 
+  - On line 129,  `config.put_evaluations()` tells AWS Config that the resource is *COMPLIANT* and causes it to generate a *ComplianceChangeNotification* message.
 
  
 
