@@ -122,11 +122,10 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
 
 7. In the email address you provided earlier, you should receive an email notification titled *AWS Notification - Subscription Confirmation* from *EC2 SecurityGroup Change Notifications* .
 
-   <img width="500" src="https://github.com/user-attachments/assets/b591f89f-8241-4032-84d0-e5644368e3c2" />
-  
-8. Click the *Confirm subscription* link in the opened tab to subscribe your email address to the SNS Topic.
+   <img width="600" src="https://github.com/user-attachments/assets/89e830e5-5a1a-4737-b38e-f4319ed27e88" />
 
-   Then, close the tab that displays *Subscription confirmed!* 
+  
+8. Click the link in the *"SubscribeURL"* field to subscribe your email address to the SNS Topic. Then close the tab that displays a snippet of XML source code.
 
 You have now used the AWS CloudFormation template to provision your lab environment, including two IAM Roles, a Lambda Function,  a SNS Topic, and several VPC related resources. The purpose of these resources will become clear in subsequent tasks. 
 
@@ -316,7 +315,8 @@ In this task, you will configure new inbound rule settings in the security group
 
 3. Switch back to the tab that shows the *Resource timeline* view of the affected resource. Refresh the tab to reflect the change you just made. 
 
-   <img width="795" height="586" alt="image" src="https://github.com/user-attachments/assets/b71606f6-08d7-4137-ba2b-9f2110ffd15a" />
+   <img width="800" src="https://github.com/user-attachments/assets/ebafd14e-ee41-4667-9dda-a06188e5a688" />
+
 
 
    You will see the corresponding configuration change successfully recorded, along with its causes queried from CloudTrail.  
