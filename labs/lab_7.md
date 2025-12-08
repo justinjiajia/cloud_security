@@ -63,7 +63,7 @@ After you build the solution, a security incident will be remediated through the
 ## Task 1: Preparing your lab environment with CloudFormation
 
 
-In this task, you will provision an SNS (short for Simple Notification Service) topic and subscribe your email address using a CloudFormation template. This topic will be used in subsequent tasks to deliver email alerts to you about important activity that occurs in the AWS account.
+In this task, you will provision two IAM Roles with proper permissions, a Lambda Function, and an SNS Topic with your email address subscribed using a CloudFormation template. These resources will be used in subsequent tasks to ...
 
 1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu in the top right of the screen.
 
@@ -88,19 +88,24 @@ In this task, you will provision an SNS (short for Simple Notification Service) 
    - *Template source:* *Upload a template file*
    - *Upload a template file:* Click *Choose file*, then select the downloaded *lab_7_environment.yaml* file.
      
-     <img width="800" src="https://github.com/user-attachments/assets/716e7374-d955-4cbb-9bf7-63399c0fea5d" />
+     <img width="800" src="https://github.com/user-attachments/assets/7dbbe59f-8407-4591-8bca-a33e079cb9c4" />
+
 
    - Choose *Next*
 
    **Step 2: Create Stack**
 
    - *Stack name:* *lab-environment*
+   - *ITSCAccountString*: *\<your ITSC account string\>* (The string before the `@` sign of your UST email address)
    - *SubscriptionEmail*: *\<An email address to receive notifications\>* (e.g., your UST email)
      
-     <img width="800" src="https://github.com/user-attachments/assets/0db16807-5181-411c-b7d1-8d3ff525035c" />
+     <img width="800" src="https://github.com/user-attachments/assets/03f4938c-9b04-4378-b8e6-397cf3984e2e" />
+
 
      
    - Choose *Next*
+
+   > Note: The entries displayed in the *Parameters* section and requiring your inputs were specified in the *Parameters* section of the YAML template file. 
 
    **Step 3: Configure stack options**
    
@@ -108,7 +113,6 @@ In this task, you will provision an SNS (short for Simple Notification Service) 
 
    <img width="800" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
    
-   - Keep all the other settings as default.
    - Choose *Next*. 
 
    **Step 4: Review lab-network**
@@ -128,11 +132,11 @@ In this task, you will provision an SNS (short for Simple Notification Service) 
 
    <img width="500" src="https://github.com/user-attachments/assets/b591f89f-8241-4032-84d0-e5644368e3c2" />
   
-9. Click the *Confirm subscription* link in the opened tab to confirm the subscription of your email address to the SNS Topic created by the stack.
+9. Click the *Confirm subscription* link in the opened tab to subscribe your email address to the SNS Topic.
 
    Then, close the tab that displays *Subscription confirmed!* 
 
-You have now used your first AWS CloudFormation template to provision the lab environment, including an SNS topic and an IAM role. The purpose of the IAM role will become clear in task 2. We will take a deep dive into automating infrastructure deployment with CloudFormation in the later part of today's class.
+You have now used the AWS CloudFormation template to provision the lab environment, including two IAM Roles, a Lambda Function, and a SNS Topic. The purpose of these resources will become clear in subsequent tasks. 
 
 <br>
 
@@ -141,13 +145,13 @@ You have now used your first AWS CloudFormation template to provision the lab en
 ## Task 2: Examining IAM roles
 
 
-In this task, you will analyze two IAM roles that were pre-provisioned for you in the lab environment. AWS Config and Lambda will use these roles later in the lab.
+In this task, you will analyze two IAM roles that were pre-provisioned for you. AWS Config and Lambda will use these roles later in the lab.
 
 1. In the IAM console, observe the permissions granted to the *AwsConfigLambdaSGRole* role.
 
  - In the search box to the right of  Services, search for and choose IAM.
 
- - In the navigation pane, choose Roles.
+ - In the navigation pane, choose *Roles*.
 
  - Choose the *AwsConfigLambdaSGRole* link.
 
@@ -163,25 +167,24 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you i
    > <img width="700" alt="image" src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/lambda_role.png" />
 
 
-2. A second custom IAM role named *AwsConfigRole* was also created for you in the account. Let's also observe the permissions granted to the *AwsConfigRole* role.
+2. A second custom IAM role named *AwsConfigRole* was also created in the account. Let's also observe the permissions granted to it.
    
 - In the navigation pane, choose Roles.
 
 - Choose the *AwsConfigRole* link.
 
-  <img width="1007" height="253" alt="image" src="https://github.com/user-attachments/assets/83684a96-dd5e-483f-a192-d9ab49c25e97" />
+  <img width="800" src="https://github.com/user-attachments/assets/83684a96-dd5e-483f-a192-d9ab49c25e97" />
 
-
-
-- On the Permissions tab, an inline policy named  *S3Access*, an inline policy named *SNSPublish*, and an AWS managed policy named *AWS_ConfigRole* are already attached to this role.
+- On the Permissions tab, two inline policies named  *S3Access* and *SNSPublish* respectively, and an AWS managed policy named *AWS_ConfigRole* are already attached to this role.
 
     
   > **Analysis**: The *S3Access* policy grants permissions to get the bucket access control lists (ACLs) of Amazon Simple Storage Service (Amazon S3) buckets and upload objects to an S3 bucket if certain conditions are met. These permissions will allow AWS Config to write CloudWatch log files to Amazon S3.
 
-  > The *SNSPublish* policy grants permissions to publish to a topic.
+  > The *SNSPublish* policy grants permissions to the role to publish updates to the SNS Topic created by the CloudFormation stack in task 1.
+  
   > The *AWS_ConfigRole* policy grants read-level access (mostly Get, List, and Describe actions) to many AWS services.
   
-In the next task, you will grant **AWS Config** the ability to use this role when you configure AWS Config. The role defines the permissions that **AWS Config** will have when monitoring one of the Regions in the AWS account.
+In the next task, you will grant **AWS Config** the ability to use this role when you configure AWS Config. The role defines the permissions that **AWS Config** will have when monitoring AWS resources in the AWS account.
 
 
 
@@ -190,7 +193,6 @@ In the next task, you will grant **AWS Config** the ability to use this role whe
 ---
 
 
- 
 
 ## Task 3: Setting up AWS Config to monitor resources
 
@@ -198,7 +200,7 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
 1. Set up AWS Config
    
-- In the search box to the right of  Services, search for and choose **AWS Config**.
+- In the search box at the top left corner, search for and choose **AWS Config**.
 - Choose *Get started*, and configure the following settings:
 
   <img width="800" src="https://github.com/user-attachments/assets/6cecef49-aa12-42d1-877d-54ab721f1167" />
@@ -215,7 +217,7 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
   > Note: Recall that AwsConfigRole was the second role that you analyzed in the previous task.
   
-- In the Delivery channel section, notice that AWS Config will store findings in an S3 bucket by default.
+- In the *Delivery channel* section, notice that AWS Config will store findings in an S3 bucket by default.
 - Tick the checkbox for *Stream configuration changes and notifications to an Amazon SNS topic*, and choose *Create a topic*
 - *SNS topic name*: *ust-\<your ITSC account string\>-config-topic*
 - Keep the default settings, and choose *Next*.
@@ -241,7 +243,7 @@ A banner appears briefly, and then the AWS Config Dashboard displays.
 
  
 
-In this task, you set up the AWS Config service in one Region in the AWS account to monitor specific resources of interest. You then observed how AWS Config created an inventory of resources.
+In this task, you set up the AWS Config service in the AWS account to monitor specific resources of interest. You then observed how AWS Config created an inventory of resources.
 
 
 <br>
