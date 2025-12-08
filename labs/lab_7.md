@@ -217,10 +217,12 @@ In this task, you will configure AWS Config to monitor specific resources in a R
   
 - In the *Delivery channel* section, notice that AWS Config will store findings in an S3 bucket by default.
 - Tick the checkbox for *Stream configuration changes and notifications to an Amazon SNS topic*, and choose *Create a topic*
-- *SNS topic name*: *ust-\<your ITSC account string\>-config-topic*
+- Select ***Choose a topic from your account***
+- *SNS topic name*: Select the SNS Topic created in task 1 from the dropdown menu, i.e., *ust-\<your ITSC account string\>-config-topic*
 - Keep the default settings, and choose *Next*.
     
-  <img width="800" src="https://github.com/user-attachments/assets/eda27415-acbf-4479-8c61-e8147c93042c" />
+  <img width="800" src="https://github.com/user-attachments/assets/81bd8b30-a7c1-42e1-b1ae-f8e2b71153d9" />
+
 
   
 - On the *Step 2: Rules* page, choose *Next* at the bottom of the page.
