@@ -311,7 +311,8 @@ In this task, you will configure new inbound rule settings in the security group
 
   <img width="800" src="https://github.com/user-attachments/assets/b254daa5-dfe0-4b84-82da-563c2d8cd811" />
 
-
+  **Important: Keep this bowswer tab open**. You will come back to investigate the effect of remediation in task 5.
+  
 3. After making the change, return to the browser tab that shows the *Resource timeline* for the affected security group, and refresh the page so that the latest configuration data is displayed.
 
    <img width="800" alt="image" src="https://github.com/user-attachments/assets/32eb3b35-b150-4c42-b965-5babaa54e486" />
@@ -356,6 +357,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
  
 - Choose *Add rule*.
 - For *Select rule type*, choose ***Create custom Lambda rule***.
+  
   <img width="800" src="https://github.com/user-attachments/assets/1127bb26-d551-433e-a75e-62f8cd66ebab" />
 
   This allows us to define a Lambda function with  custom code to evaluate whether monitored AWS resources comply with the rule.
@@ -407,166 +409,112 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 
   Notice that the *Annotation* column displays *Permissions were modified. 2 new revocation(s). 2 new authorization(s).*.
 
+5. Return to the browser tab that shows the *Resource timeline* for *LabSG1*, and refresh the page to show the latest configuration changes.
+
+   <img width="800" src="https://github.com/user-attachments/assets/f69caf31-187d-434c-ba0b-87a67463f90b" />
 
 
-<img width="791" height="656" alt="image" src="https://github.com/user-attachments/assets/a858d8fc-4052-4a44-b394-11a3e1a7830e" />
+You should also receive several email notifications about the configuration updates to the monitored resources.
+ 
 
+In this task, you configured an AWS Config rule to invoke the pre-created Lambda function. The rule and the function will work together to monitor and remediate any undesired updates to inbound rules for monitored Amazon EC2 security groups. 
+
+
+<br>
+
+---
 
  
 
-In this task, you configured an AWS Config rule to invoke the pre-created lambda function. The rule and the function will work together to monitor and remediate any undesired updates to inbound rules for monitored Amazon EC2 security groups. 
+## Task 6: Revisiting the security group configuration
+
+Now that the initial AWS Config compliance evaluation has occurred, you will re-examine the *LabSG1* security group. You will observe whether the security incident changes (the modifications that you made to the inbound rules) were noticed and then remediated.
 
  
 
-## Task 5: Revisiting the security group configuration
-Now that the initial AWS Config compliance evaluation has occurred, you will reexamine the LabSG1 security group. You will observe whether the security incident changes (the modifications that you made to the inbound rules) were noticed and then remediated.
+1. Analyze the inbound rules defined on the *LabSG1* security group.
 
+- Switch to the browser tab where the details of the *LabSG1* security group displays, and refresh the page.
+
+- On the Inbound rules tab, notice that only HTTP and HTTPS traffic is permitted.
+
+  The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
+
+  <img width="800" src="https://github.com/user-attachments/assets/428c1100-e89c-4736-adb9-56f5f96bfc50" />
+
+  > Recall that in task 4, you defined inbound rules for SMTPS and IMAPS, as well as HTTP and HTTPS, on this security group. However, the rules for SMTPS and IMAPS no longer exist. Also, recall that you set the IP version for all rules to only IPv4, but now the HTTP and HTTPS rules are defined for IPv4 and IPv6. Therefore, your manual modifications have been evaluated and remediated by the Lambda function.
+ 
  
 
-Analyze the inbound rules defined on the LabSG1 security group.
-
-Navigate to the VPC console.
-
-In the navigation pane, choose the Filter by VPC box, and choose Lab VPC.
-
-In the navigation pane, choose Security groups.
-
-Select the LabSG1 security group.
-
-On the Inbound rules tab, notice that only HTTP and HTTPS traffic is permitted.
-
-The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
-
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/0deb2742-741b-4d97-bb92-93a32cd10c56" />
-
-
-> **Analysis**: Recall that you defined inbound rules for SMTPS and IMAPS, as well as HTTP and HTTPS, on this security group. However, the rules for SMTPS and IMAPS no longer exist. Also, recall that you set the IP version for all rules to only IPv4, but now the HTTP and HTTPS rules are defined for IPv4 and IPv6.
-
-In summary, you modified the inbound rules in this security group to look like the ones in the following screenshot. However, they have been significantly modified to look like the previous screenshot.
-
-previously configured inbound rules
-
- 
-
-16. Analyze the Lambda function code.
+2. Analyze the Lambda function code.
 
  - Navigate to the Lambda console.
- - In the navigation pane, choose Functions.
- - Choose the awsconfig_lambda_security_group function link.
-   <details><summary>The function's template generated from the function's configuration (see task 1 for how Policies in it might be specified (through AwsConfigLambdaSGRole))</summary>
-    <pre><code>
-    # This AWS SAM template has been generated from your function's configuration. If
-    # your function has one or more triggers, note that the AWS resources associated
-    # with these triggers aren't fully specified in this template and include
-    # placeholder values. Open this template in AWS Infrastructure Composer or your
-    # favorite IDE and modify it to specify a serverless application with other AWS
-    # resources.
-    AWSTemplateFormatVersion: '2010-09-09'
-    Transform: AWS::Serverless-2016-10-31
-    Description: An AWS Serverless Application Model template describing your function.
-    Resources:
-      awsconfiglambdasecuritygroup:
-        Type: AWS::Serverless::Function
-        Properties:
-          CodeUri: .
-          Description: ''
-          MemorySize: 128
-          Timeout: 300
-          Handler: index.lambda_handler
-          Runtime: python3.12
-          Architectures:
-            - x86_64
-          EphemeralStorage:
-            Size: 512
-          EventInvokeConfig:
-            MaximumEventAgeInSeconds: 21600
-            MaximumRetryAttempts: 2
-          PackageType: Zip
-          Policies:
-            - Statement:
-                - Action:
-                    - logs:CreateLogGroup
-                    - logs:CreateLogStream
-                    - logs:PutLogEvents
-                  Resource: arn:aws:logs:*:*:*
-                  Effect: Allow
-                - Action:
-                    - config:PutEvaluations
-                    - ec2:DescribeSecurityGroups
-                    - ec2:AuthorizeSecurityGroupIngress
-                    - ec2:RevokeSecurityGroupIngress
-                  Resource: '*'
-                  Effect: Allow
-          RecursiveLoop: Terminate
-          SnapStart:
-            ApplyOn: None
-          Tags:
-            cloudlab: c103198a2383324l10620395t1w818542204083
-          RuntimeManagementConfig:
-            UpdateRuntimeOn: Auto
-    </code></pre>
-   </details>
-   
+ - In the navigation pane, choose *Functions*.
+ - Choose the *awsconfig_lambda_security_group* function link.
 
-- In the Code source section, open the awsconfig_lambda_security_group.py file that you imported.
-  <img width="800" alt="image" src="https://github.com/user-attachments/assets/d6330c74-3de9-44ac-b380-e6a7a4fe96ab" />
+- In the *Code source* section, open the *index.py* file.
   
-  <a href="https://github.com/justinjiajia/certifications/blob/main/aws/cloud_security/labs/source/lab7_lambda_code.py">Python code</a>
+  <img width="800" alt="image" src="https://github.com/user-attachments/assets/d6330c74-3de9-44ac-b380-e6a7a4fe96ab" />
  
-Observe the following details:
+  Observe the following details:
 
-On line 2, the function `imports boto3`, which is the AWS SDK for Python.
+  - On line 2, the function `imports boto3`, which is the AWS SDK for Python.
 
-On line 9, REQUIRED_PERMISSIONS are defined. This array includes the desired ingress (inbound) IP permissions for Amazon EC2 security group resources that are in scope of the AWS Config rule that you defined.
+  - On line 9, `REQUIRED_PERMISSIONS` are defined. This array includes the desired ingress (inbound) IP permissions for Amazon EC2 security group resources that are in scope of the AWS Config rule that you defined.
 
-```python
-REQUIRED_PERMISSIONS = [
-{
-    "IpProtocol" : "tcp",
-    "FromPort" : 80,
-    "ToPort" : 80,
-    "UserIdGroupPairs" : [],
-    "IpRanges" : [{"CidrIp" : "0.0.0.0/0"}],
-    "PrefixListIds" : [],
-    "Ipv6Ranges": [
-        {
-            "CidrIpv6": "::/0"
-        }
-    ]
-},
-{
-    "IpProtocol" : "tcp",
-    "FromPort" : 443,
-    "ToPort" : 443,
-    "UserIdGroupPairs" : [],
-    "IpRanges" : [{"CidrIp" : "0.0.0.0/0"}],
-    "PrefixListIds" : [],
-    "Ipv6Ranges": [
-        {
-            "CidrIpv6": "::/0"
-        }
-    ]
-}]
-```
+    ```python
+    REQUIRED_PERMISSIONS = [
+    {
+        "IpProtocol" : "tcp",
+        "FromPort" : 80,
+        "ToPort" : 80,
+        "UserIdGroupPairs" : [],
+        "IpRanges" : [{"CidrIp" : "0.0.0.0/0"}],
+        "PrefixListIds" : [],
+        "Ipv6Ranges": [
+            {
+                "CidrIpv6": "::/0"
+            }
+        ]
+    },
+    {
+        "IpProtocol" : "tcp",
+        "FromPort" : 443,
+        "ToPort" : 443,
+        "UserIdGroupPairs" : [],
+        "IpRanges" : [{"CidrIp" : "0.0.0.0/0"}],
+        "PrefixListIds" : [],
+        "Ipv6Ranges": [
+            {
+                "CidrIpv6": "::/0"
+            }
+        ]
+    }]
+    ``` 
 
-The required permissions are defined in the format that the `describe_security_groups()` API call requires. This call is invoked on line 117.
+    - The `evaluate_compliance` function on line 52 is the workhorse of this Python script. This function handles both checking compliance and automatically fixing non-compliant security groups.  
+      - Evaluation:
+        The function checks if the actual security group permissions match the `REQUIRED_PERMISSIONS`, and stores the comparison results in two list:
+           - `authorize_permissions`: Rules that should be present (`REQUIRED_PERMISSIONS`) but are missing from the current setup.
+           - `revoke_permissions`: Rules that are currently present but should not be there (i.e., any rule not in `REQUIRED_PERMISSIONS`).
+      
+      - Remediation:
+
+        If any differences are found, the remediation occurs in two distinct phases:
+          - Revoke unwanted rules: If `revoke_permissions` list is not empty, it calls `revoke_security_group_ingress` to remove the unwanted rules.
+          - Authorize required rules: If `authorize_permissions` list is not empty, it calls `authorize_security_group_ingress` to add the missing, required rules.
+
  
 
-For more information about this API call, see the [AWS SDK for Python documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_group_rules).
+In this task, you observed the logic for the Lambda function to detect and remove the additional permissions for SMTPS (TCP port 465) and IMAPS (TCP port 993) in the security group, and add required permissions.
 
-On line 129, the function checks whether the `debug` parameter is included in the AWS Config rule. Recall that this was a parameter you configured when you defined the AWS Config rule in task 4. If debug is set to true then the Lambda function code will print additional debugging information when it runs. You can see examples of this throughout the Lambda code.
-
- 
-
-In this task, you observed the logic for the Lambda function to detect and remove the additional permissions for SMTPS (TCP port 465) and IMAPS (TCP port 993) in the security group.
-
-> **Analysis**: The security incident (when you modified the inbound rules) occurred *before* you created the AWS Config rule and Lambda function to remediate such incidents. During initial rule validation, AWS Config detected the security incident.
+> Note that the security incident (when you modified the inbound rules in task 4) occurred *before* you created the AWS Config rule and Lambda function to remediate such incidents (in task 5). During initial rule validation, AWS Config detected the security incident, and triggered the .
 
 > If you were to modify the security group again, an AWS Config compliance evaluation would be initiated. The evaluation would invoke the Lambda function, and your changes would be reverted so that the inbound rules again match the desired settings. The default security groups are being similarly monitored and would have their settings remediated if changed.
 
  
 
-## Task 6: Using CloudWatch logs for verification
+## Task 7: Using CloudWatch logs for verification
 
 In this task, you will analyze **CloudWatch** logs and filter the log entries to find evidence of the remediation.
 
