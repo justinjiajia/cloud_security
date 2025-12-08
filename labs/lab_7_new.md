@@ -57,9 +57,7 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
    <img width="300"  src="https://github.com/user-attachments/assets/af7f9159-26f0-4b60-b84d-5a2ce6db9276" />
  
 
-3. Once logged in, in the search bar at the top of the screen, search for and select *CloudFormation*.
-   
-   <img width="500"  src="https://github.com/user-attachments/assets/da3a6769-ce22-4e62-8293-a549afa4fcc4" />
+3. Once logged in, go to the CloudFormation console.
 
 
 4. Right-click the [link](https://canvas.ust.hk/files/11484889/download?download_frd=1&verifier=E4faeL4Eg8nHBZows2kt6H4LBjDezPtReAxUrYLJ) and download a CloudFormation template to your computer
