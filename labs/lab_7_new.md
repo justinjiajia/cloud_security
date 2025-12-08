@@ -470,8 +470,7 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
         "ToPort" : 80,
         "UserIdGroupPairs" : [],
         "IpRanges" : [{"CidrIp" : "0.0.0.0/0"}],
-        "PrefixListIds" : [],
-        "Ipv6Ranges": [{"CidrIpv6": "::/0"}]
+        "PrefixListIds" : []
     },
     {
         "IpProtocol" : "tcp",
@@ -479,13 +478,13 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
         "ToPort" : 443,
         "UserIdGroupPairs" : [],
         "IpRanges" : [{"CidrIp" : "0.0.0.0/0"}],
-        "PrefixListIds" : [],
-        "Ipv6Ranges": [{"CidrIpv6": "::/0"}]
+        "PrefixListIds" : []
     }]
     ```
 
-  - The `evaluate_compliance` function on line 44 is the workhorse of this Python script. This function handles both checking compliance and automatically fixing non-compliant security groups.  
+  - The `evaluate_compliance` function on line 42 is the workhorse of this Python script. This function handles both checking compliance and automatically fixing non-compliant security groups.  
       - Evaluation:
+        
         The function checks if the actual security group permissions match the `REQUIRED_PERMISSIONS`, and stores the comparison results in two list:
            - `authorize_permissions`: Rules that should be present (`REQUIRED_PERMISSIONS`) but are missing from the current setup.
            - `revoke_permissions`: Rules that are currently present but should not be there (i.e., any rule not in `REQUIRED_PERMISSIONS`).
