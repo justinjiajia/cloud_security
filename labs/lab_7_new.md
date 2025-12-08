@@ -15,29 +15,19 @@ In this lab, you will learn how to use the AWS Config service to monitor changes
 
 After completing this lab, you should be able to do the following:
 
+- Provision  necessary AWS resources using Amazon CloudFormation
 - Explain how to use AWS Identity and Access Management (IAM) roles to grant AWS services access to other AWS services.
 - Enable AWS Config to monitor resources in an AWS account.
 - Create and enable a custom AWS Config rule that uses a pre-created Lambda function.
-- Test the behavior of an AWS Config rule to ensure it's working as intended.
 - Analyze Amazon CloudWatch logs to audit when AWS Config rules are invoked.
 
    
 
 ## Scenario
 
-During this lab, your responsibility is to monitor Amazon EC2 security group settings in an AWS account. You will define which inbound ports should and shouldn't be open in a security group. Your will configure a solution to automatically remediate an incident where someone modifies a security group's inbound rules and they no longer conform with the desired configuration.
+During this lab, your responsibility is to monitor Amazon EC2 security group settings in an AWS account. You will define which inbound ports should and shouldn't be open in a security group. Your will configure a solution to automatically remediate an incident where someone modifies a security group's inbound rules and they no longer conform with the desired configuration. 
 
-When you start the lab, your AWS account will contain two IAM roles and a Lambda function. It will also contain a default VPC with a default security group in it and a custom VPC named Lab VPC, which has a security group named LabSG1 in it.
-
-
-
-
-During the lab, you will configure the AWS Config service to create an inventory of specific resources in one Region of your AWS account. You will then create an AWS Config rule.
-
-By the end of this lab, you will have created the architecture shown in the following diagram.
-
-<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/end-arch.png" alt="Ending architecture" width=600 />
-
+ 
 
 After you build the solution, a security incident will be remediated through the steps described in the following table.
 
@@ -45,7 +35,7 @@ After you build the solution, a security incident will be remediated through the
 |------|--------------------------------|
 | 1    | The AWS Config rule will monitor for any changes to security groups that are tracked in the AWS Config resources inventory.  |
 | 2    | When the rule notices that changes were made to a security group, the rule will invoke the Lambda function.    |
-| 3    | The function will remediate the situation by updating the desired inbound rule configuration for the security group. |
+| 3    | The Lambda function will remediate the situation by updating the desired inbound rule configuration for the security group. |
 
 
 
