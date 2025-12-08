@@ -211,7 +211,7 @@ In this task, you will configure AWS Config to monitor specific resources in a R
   > Note: Recall that AwsConfigRole was the second role that you analyzed in the previous task.
   
 - In the *Delivery channel* section, notice that AWS Config will store findings in an S3 bucket by default.
-- Tick the checkbox for *Stream configuration changes and notifications to an Amazon SNS topic*, and choose *Create a topic*
+- Tick the checkbox for *Stream configuration changes and notifications to an Amazon SNS topic*
 - Select ***Choose a topic from your account***
 - *SNS topic name*: Select the SNS Topic created in task 1 from the dropdown menu, i.e., *ust-\<your ITSC account string\>-config-topic*
 - Keep the default settings, and choose *Next*.
