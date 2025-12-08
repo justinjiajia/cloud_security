@@ -215,11 +215,13 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 - Tick the checkbox for *Stream configuration changes and notifications to an Amazon SNS topic*
 - Select ***Choose a topic from your account***
 - *SNS topic name*: Select the SNS Topic created in task 1 from the dropdown menu, i.e., *ust-\<your ITSC account string\>-config-topic*
+  > This setting allows you to receive email alerts reactive to any configuration changes made to the monitored resources.
+  
 - Keep the default settings, and choose *Next*.
     
   <img width="800" src="https://github.com/user-attachments/assets/81bd8b30-a7c1-42e1-b1ae-f8e2b71153d9" />
 
-
+  
   
 - On the *Step 2: Rules* page, choose *Next* at the bottom of the page.
 - Review the AWS Config setup details, and then choose *Confirm*.
