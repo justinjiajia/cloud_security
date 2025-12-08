@@ -248,11 +248,11 @@ You should also receive several email notifications with subject lines that begi
    > The second security group is named *LabSG1*. It is also defined in the YAML template and is intended for experimentation and testing in the later steps of this lab. 
 
  
-- Select one of the security groups — preferably *LabSG1* (should be the 1st security group entry in the list) — and then choose *Resource timeline* to display all configuration items (CIs) that AWS Config has captured for this resource so far.
+- Select one of the security groups — preferably *LabSG1*  — and then choose *Resource timeline* to display all configuration items that AWS Config has captured for this resource so far.
   
   <img width="800" src="https://github.com/user-attachments/assets/93414497-1d9c-443e-a641-4769ecb76177" />
 
-  Keep this browser tab open; You will return to the *Resource timeline* view to observe configuration changes as you proceed through the lab.  
+  **Important: Keep this browser tab open**. You will return to the *Resource timeline* view to observe configuration changes as you proceed through the lab.  
      
   > AWS Config uses the configuration recorder to continuously capture configuration changes for supported resource types.
   > In the  *Resource timeline* view, AWS Config not only shows the configuration items, but also provides links to related AWS CloudTrail events (from CloudTrail Event history) to help you see the full context of each configuration change.  These CloudTrail correlations are performed on a best-effort basis and might not be available for every change.
@@ -290,10 +290,6 @@ In this task, you will configure new inbound rule settings in the security group
 - Choose the Inbound rules tab, and then choose Edit inbound rules.
 - Notice that one inbound rule for HTTP connections is already defined.
 
-- Choose Add rule and configure the following:
-
-  - Type: Choose *HTTPS*.
-  - Source: Choose *Anywhere-IPv4*.
 
 - Choose Add rule again and configure the following:
 
@@ -309,7 +305,8 @@ In this task, you will configure new inbound rule settings in the security group
 
   The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
 
-  <img width="800" src="https://github.com/user-attachments/assets/b254daa5-dfe0-4b84-82da-563c2d8cd811" />
+  <img width="1095" height="236" alt="image" src="https://github.com/user-attachments/assets/10e2eb02-d014-4161-b4cb-d35caf3f9bde" />
+
 
   **Important: Keep this bowswer tab open**. You will come back to investigate the effect of remediation in task 5.
   
@@ -320,7 +317,7 @@ In this task, you will configure new inbound rule settings in the security group
 
    You should now see a new configuration item that reflects the security group update, along with the correlated CloudTrail event.
 
-As before, AWS Config has also streamed this configuration change to the configured Amazon SNS topic, which then forwarded an email notification to your subscribed address for alerting. 
+As before, AWS Config has streamed this configuration change to the configured Amazon SNS topic, which then forwarded an email notification to your subscribed address for alerting. 
 
 In this task, you located a security group in the lab VPC and added three new inbound rules to it. Later in the lab, these changes will be treated as a security incident and automatically remediated by the configured AWS Config rule and its remediation workflow. 
  
@@ -344,7 +341,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
    <img width="800" src="https://github.com/user-attachments/assets/0565218c-baed-4711-8acd-cb38c0bca284" />
 
 
-   Keep the browser tab open.
+   **Important: Keep the browser tab open**. 
    
 
 
@@ -573,6 +570,11 @@ To find detailed feedback about your work, choose Submission Report.
   <img width="800" src="https://github.com/user-attachments/assets/fbb7336f-6c9e-4c03-a181-445de3b70866" />
 
   > Note: Neither stopping nor deleting the recorder will delete the configuration history files already delivered to your Amazon S3 bucket. You must manage and delete those files separately if needed.
+
+
+
+<img width="999" height="297" alt="image" src="https://github.com/user-attachments/assets/1adf27e7-6f05-47f4-be80-eb6233c6aee2" />
+Type confirm when you are prompted to confirm the deletion.
 
 2. Delete the *lab-environment* stack
 
