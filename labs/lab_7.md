@@ -34,9 +34,7 @@ During this lab, your responsibility is to monitor Amazon EC2 security group set
 
 When you start the lab, your AWS account will contain two IAM roles and a Lambda function. It will also contain a default VPC with a default security group in it and a custom VPC named Lab VPC, which has a security group named LabSG1 in it.
 
-The following diagram shows the architecture that was created for you in AWS at the beginning of the lab.
 
-<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/start-arch.png" alt="Starting architecture" width=600 />
 
 
 During the lab, you will configure the AWS Config service to create an inventory of specific resources in one Region of your AWS account. You will then create an AWS Config rule.
@@ -137,6 +135,10 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
    Then, close the tab that displays *Subscription confirmed!* 
 
 You have now used the AWS CloudFormation template to provision the lab environment, including two IAM Roles, a Lambda Function, and a SNS Topic. The purpose of these resources will become clear in subsequent tasks. 
+
+The following diagram shows the architecture that was created for you in AWS at the beginning of the lab.
+
+<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/start-arch.png" alt="Starting architecture" width=600 />
 
 <br>
 
