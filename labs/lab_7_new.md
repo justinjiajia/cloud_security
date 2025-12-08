@@ -231,17 +231,16 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
 
 A banner appears briefly, and then the AWS Config Dashboard displays.
-
-You should receive multiple email notifications with the titles starting with *AWS::Config::ConfigurationRecorder* or *AWS::EC2::SecurityGroup*, indicating the AWS Config recorder is effective to monitor the configured AWS recourses (*EC2 SecurityGroup*).
+ 
 
 2. In the left navigation pane, choose *Resources* to review the resource inventory that AWS Config is currently recording:
 
    <img width="800" src="https://github.com/user-attachments/assets/b33de8e4-ca9c-4f3f-858a-e7388a7b6fa9" />
  
 
-   The *Resource inventory*  page now lists two security groups that AWS Config is recording, along with the default configuration recorder. Your security group IDs will differ, but they should resemble the ones shown in the reference screenshot.
+   The *Resource inventory*  page lists two security groups that AWS Config is recording, along with the default configuration recorder you set up in step 1. Your security group IDs will differ, but they should resemble the ones shown in the reference screenshot.
      
-   Recall that in Step 1, you configured AWS Config to record resources of type *EC2 SecurityGroup*, which is why these security groups now appear in the inventory.
+   Recall that in step 1, you configured AWS Config to record resources of type *EC2 SecurityGroup*, which is why these security groups now appear in the inventory.
    
    > Between the two security groups, one is the default security group that is automatically created with the VPC defined in the CloudFormation YAML template. Every new VPC in AWS includes a default security group.
    > The second security group is named *LabSG1*. It is also defined in the YAML template and is intended for experimentation and testing in the later steps of this lab. 
@@ -249,7 +248,10 @@ You should receive multiple email notifications with the titles starting with *A
  
    - Select one of the security groups — preferably *LabSG1*  — and then choose *Resource timeline* to display all configuration items (CIs) that AWS Config has captured for this resource so far.
   
-     <img width="800" src="https://github.com/user-attachments/assets/960e989c-7f0e-4634-ac4d-c0e519cc3860" />
+     <img width="800" src="https://github.com/user-attachments/assets/bf2445a9-a1cd-464f-8b0f-a2a249fec587" />
+
+
+
   
      Keep this browser tab open; you will return to this *Resource timeline* view to observe configuration changes as you proceed through the lab.  
      
@@ -311,9 +313,10 @@ In this task, you will configure new inbound rule settings in the security group
   <img width="800" src="https://github.com/user-attachments/assets/b254daa5-dfe0-4b84-82da-563c2d8cd811" />
 
 
-3. Switch back to the tab that shows the *Resource timeline* view of the affected resource. 
+3. Switch back to the tab that shows the *Resource timeline* view of the affected resource. Refresh the tab to reflect the change you just made. 
 
-   <img width="800" src="https://github.com/user-attachments/assets/862802f7-5dce-460e-b78b-7d3ddccc24d9" />
+   <img width="795" height="586" alt="image" src="https://github.com/user-attachments/assets/b71606f6-08d7-4137-ba2b-9f2110ffd15a" />
+
 
    You will see the corresponding configuration change successfully recorded, along with its causes queried from CloudTrail.  
  
