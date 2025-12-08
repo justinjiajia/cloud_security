@@ -341,7 +341,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
    <img width="800" src="https://github.com/user-attachments/assets/0565218c-baed-4711-8acd-cb38c0bca284" />
 
 
-   **Important: Keep the browser tab open**. 
+   **Important: Keep the browser tab open**. You'll return to this page for copying the Lambda function ARN and exploring its code.
    
 
 
@@ -437,9 +437,10 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 
   The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
 
-  <img width="800" src="https://github.com/user-attachments/assets/428c1100-e89c-4736-adb9-56f5f96bfc50" />
+  <img width="800" src="https://github.com/user-attachments/assets/0dfcb234-4be5-4c19-943d-b68d8d83cf54" />
 
-  > Recall that in task 4, you defined inbound rules for SMTPS and IMAPS, as well as HTTP and HTTPS, on this security group. However, the rules for SMTPS and IMAPS no longer exist. Also, recall that you set the IP version for all rules to only IPv4, but now the HTTP and HTTPS rules are defined for IPv4 and IPv6. Therefore, your manual modifications have been evaluated and remediated by the Lambda function.
+
+  > Recall that in task 4, you added two additional inbound rules for SMTPS and IMAPS on this security group. However, the rules for SMTPS and IMAPS no longer exist. Also, an additional HTTP rule was added. This shows your manual modifications have been evaluated and remediated by the Lambda function.
  
  
 
