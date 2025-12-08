@@ -312,19 +312,17 @@ In this task, you will configure new inbound rule settings in the security group
   <img width="800" src="https://github.com/user-attachments/assets/b254daa5-dfe0-4b84-82da-563c2d8cd811" />
 
 
-3. Switch back to the tab that shows the *Resource timeline* view of the affected resource. Refresh the tab to reflect the change you just made. 
+3. After making the change, return to the browser tab that shows the *Resource timeline* for the affected security group, and refresh the page so that the latest configuration data is displayed.
 
    <img width="800" alt="image" src="https://github.com/user-attachments/assets/32eb3b35-b150-4c42-b965-5babaa54e486" />
 
 
+   You should now see a new configuration item that reflects the security group update, along with the correlated CloudTrail event.
 
+As before, AWS Config has also streamed this configuration change to the configured Amazon SNS topic, which then forwarded an email notification to your subscribed address for alerting. 
 
-   You will see the corresponding configuration change successfully recorded, along with its causes queried from CloudTrail.
-
-As before, the recorded change will be published to the SNS topic, which then delivered them to your email subscription for alerting. 
+In this task, you located a security group in the lab VPC and added three new inbound rules to it. Later in the lab, these changes will be treated as a security incident and automatically remediated by the configured AWS Config rule and its remediation workflow. 
  
-
-In this task, you located a security group in the Lab VPC and defined three new inbound rules in the security group. Later in this lab, you will observe these modifications are identified as a security incident and remediated.
 
  
 <br>
@@ -333,10 +331,9 @@ In this task, you located a security group in the Lab VPC and defined three new 
 
 ## Task 5: Creating an AWS Config rule that calls a Lambda function
 
-In this task, you configure an AWS Config Rule to invoke a pre-created Lambda Function. The rule and the function will work together to ensure that monitored Amazon EC2 security groups have only the desired inbound rules.
+In this task, you configure an AWS Config rule to invoke a pre-created Lambda Function. The rule and the function will work together to ensure that monitored Amazon EC2 security groups have only the desired inbound rules.
 
  
-
 1. In the search box at the top left of the screen, search for *Lambda* and choose to open the console in a new browser tab.
 
    <img width="500" src="https://github.com/user-attachments/assets/8839b3cc-7132-414a-91f7-dc7a5577d052" />
@@ -353,7 +350,7 @@ In this task, you configure an AWS Config Rule to invoke a pre-created Lambda Fu
 3. Create a new AWS Config rule that will invoke the Lambda Function whenever monitored Amazon EC2 security groups are modified.
 
 - Switch over to the AWS Config console.
-- In the navigation pane, choose *Rules* (Note: not *Rules* under *Aggregator*).
+- In the navigation pane, choose *Rules* (not *Rules* under *Aggregator*).
   
   Currently, AWS Config doesn't have any rules defined.
  
@@ -406,7 +403,8 @@ In this task, you configure an AWS Config Rule to invoke a pre-created Lambda Fu
   
   In the *Rule details* section, notice the *Last successful evaluation* field. Initially, this field displays *Not available*; However, after just a moment (refresh the browser tab if needed), a timestamp will display with a green tick icon prepended.
 
-  <img width="800" src="https://github.com/user-attachments/assets/8de376f1-bce8-4a7a-a0f0-c6d4057a582e" />
+  <img width="800" src="https://github.com/user-attachments/assets/b1983d0c-de97-470f-8ad3-18a7d5ad77a8" />
+
 
   
   While the initial evaluation occurs, the *Compliance* column will show *No results available*. After just a moment, the value for each security group resource changes to *Compliant*. Wait until you see that it is compliant.
