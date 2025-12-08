@@ -403,8 +403,9 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 
 You should also receive several email notifications about the configuration updates to the monitored resources.
  
+You should also see several new email notifications that report these configuration updates for the monitored resources, delivered through the configured SNS topic.​
 
-In this task, you configured an AWS Config rule to invoke the pre-created Lambda function. The rule and the function will work together to monitor and remediate any undesired updates to inbound rules for monitored Amazon EC2 security groups. 
+In this task, you configured an AWS Config rule that invokes a pre‑created Lambda function whenever a security group's inbound rules drift from the desired state. The rule and function now work together to continuously monitor EC2 security groups and automatically remediate any unwanted updates to inbound rules.
 
 
 <br>
@@ -491,7 +492,7 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 
 In this task, you observed the logic for the Lambda function to detect and remove the additional permissions for SMTPS (TCP port 465) and IMAPS (TCP port 993) in the security group, and add required permissions.
 
-> Note that the security incident (when you modified the inbound rules in task 4) occurred *before* you created the AWS Config rule and Lambda function to remediate such incidents (in task 5). During initial rule validation, AWS Config detected the security incident, and triggered the .
+> Note that the security incident (when you modified the inbound rules in task 4) occurred *before* you created the AWS Config rule and Lambda function to remediate such incidents (in task 5). During initial rule validation, AWS Config verifies all recorded configuration changes, detected the security incident, and trigger the remediation.
 
 > If you were to modify the security group again, an AWS Config compliance evaluation would be initiated. The evaluation would invoke the Lambda function, and your changes would be reverted so that the inbound rules again match the desired settings. The default security groups are being similarly monitored and would have their settings remediated if changed.
 
