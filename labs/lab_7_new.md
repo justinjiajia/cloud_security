@@ -81,7 +81,7 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
    - *Template source:* *Upload a template file*
    - *Upload a template file:* Click *Choose file*, then select the downloaded *lab_7_environment.yaml* file.
      
-     <img width="800" src="https://github.com/user-attachments/assets/7dbbe59f-8407-4591-8bca-a33e079cb9c4" />
+     <img width="700" src="https://github.com/user-attachments/assets/7dbbe59f-8407-4591-8bca-a33e079cb9c4" />
 
 
    - Choose *Next*
@@ -92,7 +92,7 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
    - *ITSCAccountString*: *\<your ITSC account string\>* (The string before the `@` sign of your UST email address)
    - *SubscriptionEmail*: *\<An email address to receive notifications\>* (e.g., your UST email)
      
-     <img width="800" src="https://github.com/user-attachments/assets/03f4938c-9b04-4378-b8e6-397cf3984e2e" />
+     <img width="700" src="https://github.com/user-attachments/assets/03f4938c-9b04-4378-b8e6-397cf3984e2e" />
 
 
      
@@ -104,7 +104,7 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
    
    - Scroll down to the bottom and tick the checkbox for *"I acknowledge that AWS CloudFormation might create IAM resources with customised names."*
 
-     <img width="800" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
+     <img width="700" src="https://github.com/user-attachments/assets/5e4f3bd7-27a9-4c53-95e6-b4cf1370fed9" />
    
    - Choose *Next*. 
 
@@ -152,7 +152,7 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you. 
 
  - On the *Permissions* tab, expand `awsconfig_lambda_ec2_sg_role_policy`, and analyze the policy displayed.
 
-   <img width="800" src="https://github.com/user-attachments/assets/929dc383-68d1-43f3-8fdf-b61ba4e602ef" />
+   <img width="700" src="https://github.com/user-attachments/assets/929dc383-68d1-43f3-8fdf-b61ba4e602ef" />
 
    
 
@@ -165,7 +165,7 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you. 
 
 - Choose the *AwsConfigRole* link.
 
-  <img width="800" src="https://github.com/user-attachments/assets/83684a96-dd5e-483f-a192-d9ab49c25e97" />
+  <img width="700" src="https://github.com/user-attachments/assets/83684a96-dd5e-483f-a192-d9ab49c25e97" />
 
 - On the Permissions tab, two inline policies named  *S3Access* and *SNSPublish* respectively, and an AWS managed policy named *AWS_ConfigRole* are already attached to this role.
 
@@ -196,17 +196,17 @@ In this task, you will configure AWS Config to monitor specific resources in a R
   
 - Choose *Get started*, and configure the following settings:
 
-  <img width="800" src="https://github.com/user-attachments/assets/6cecef49-aa12-42d1-877d-54ab721f1167" />
+  <img width="700" src="https://github.com/user-attachments/assets/6cecef49-aa12-42d1-877d-54ab721f1167" />
 
 - Under *Recording strategy*. Choose *Specific resource types*.
 - *Resource type*: Choose ***AWS EC2 SecurityGroup***. For Frequency choose ***Continuous***.
 
-  <img width="800" src="https://github.com/user-attachments/assets/05f9cfb8-743e-4cee-a249-17a8f6665702" />
+  <img width="700" src="https://github.com/user-attachments/assets/05f9cfb8-743e-4cee-a249-17a8f6665702" />
   
 - *IAM role for AWS Config*: Choose ***Choose a role from your account***.
 - *Existing roles*: Choose ***AwsConfigRole***.
 
-  <img width="800" src="https://github.com/user-attachments/assets/4903df0f-216e-467f-9e57-fb459c52c6d3" />
+  <img width="700" src="https://github.com/user-attachments/assets/4903df0f-216e-467f-9e57-fb459c52c6d3" />
 
   > Note: Recall that AwsConfigRole was the second role that you analyzed in the previous task.
   
@@ -218,14 +218,14 @@ In this task, you will configure AWS Config to monitor specific resources in a R
   
 - Keep the default settings, and choose *Next*.
     
-  <img width="800" src="https://github.com/user-attachments/assets/81bd8b30-a7c1-42e1-b1ae-f8e2b71153d9" />
+  <img width="700" src="https://github.com/user-attachments/assets/81bd8b30-a7c1-42e1-b1ae-f8e2b71153d9" />
 
   
   
 - On the *Step 2: Rules* page, choose *Next* at the bottom of the page.
 - Review the AWS Config setup details, and then choose *Confirm*.
 
-  <img width="800" src="https://github.com/user-attachments/assets/60526c9c-7805-4109-a34d-ac16c36ce513" />
+  <img width="700" src="https://github.com/user-attachments/assets/60526c9c-7805-4109-a34d-ac16c36ce513" />
 
 
 
@@ -235,7 +235,7 @@ You should also receive several email notifications with subject lines that begi
 
 2. In the left navigation pane, choose *Resources* to review the resource inventory that AWS Config is currently recording.
 
-   <img width="800" src="https://github.com/user-attachments/assets/fcf06a9b-6278-42d8-b6ff-313d239205de" />
+   <img width="700" src="https://github.com/user-attachments/assets/fcf06a9b-6278-42d8-b6ff-313d239205de" />
 
 
  
@@ -250,7 +250,7 @@ You should also receive several email notifications with subject lines that begi
  
 - Select one of the security groups — preferably *LabSG1*  — and then choose *Resource timeline* to display all configuration items that AWS Config has captured for this resource so far.
   
-  <img width="800" src="https://github.com/user-attachments/assets/93414497-1d9c-443e-a641-4769ecb76177" />
+  <img width="700" src="https://github.com/user-attachments/assets/93414497-1d9c-443e-a641-4769ecb76177" />
 
   **Important: Keep this browser tab open**. You will return to the *Resource timeline* view to observe configuration changes as you proceed through the lab.  
      
@@ -274,7 +274,7 @@ In this task, you will configure new inbound rule settings in the security group
 
 - Go to the VPC console. In the left navigation pane, choose the *Filter by VPC* box, and choose *Lab VPC*.
 
-  <img width="800" src="https://github.com/user-attachments/assets/5db602ac-2d88-48ae-bab3-99bd2ccd67aa" />
+  <img width="700" src="https://github.com/user-attachments/assets/5db602ac-2d88-48ae-bab3-99bd2ccd67aa" />
 
 
 - In the navigation pane, choose *Security groups*.
@@ -312,7 +312,7 @@ In this task, you will configure new inbound rule settings in the security group
   
 3. After making the change, return to the browser tab that shows the *Resource timeline* for the affected security group, and refresh the page so that the latest configuration data is displayed.
 
-   <img width="800" alt="image" src="https://github.com/user-attachments/assets/32eb3b35-b150-4c42-b965-5babaa54e486" />
+   <img width="700" alt="image" src="https://github.com/user-attachments/assets/32eb3b35-b150-4c42-b965-5babaa54e486" />
 
 
    You should now see a new configuration item that reflects the security group update, along with the correlated CloudTrail event.
@@ -338,7 +338,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 
 2. Choose the *awsconfig_lambda_security_group* link in the *Functions* list. This is the Lambda Function created by the CloudFormation stack in task 1.
 
-   <img width="800" src="https://github.com/user-attachments/assets/0565218c-baed-4711-8acd-cb38c0bca284" />
+   <img width="700" src="https://github.com/user-attachments/assets/0565218c-baed-4711-8acd-cb38c0bca284" />
 
 
    **Important: Keep the browser tab open**. You'll return to this page for copying the Lambda function ARN and exploring its code.
@@ -355,7 +355,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 - Choose *Add rule*.
 - For *Select rule type*, choose ***Create custom Lambda rule***.
   
-  <img width="800" src="https://github.com/user-attachments/assets/1127bb26-d551-433e-a75e-62f8cd66ebab" />
+  <img width="700" src="https://github.com/user-attachments/assets/1127bb26-d551-433e-a75e-62f8cd66ebab" />
 
   This allows us to define a Lambda function with  custom code to evaluate whether monitored AWS resources comply with the rule.
   
@@ -367,7 +367,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
   - *Name*: Enter ***EC2SecurityGroup***
   - *Description*: Enter ***Restrict inbound ports to HTTP and HTTPS***
     
-    <img width="800" src="https://github.com/user-attachments/assets/c6deae88-b7ac-44e6-84e3-adc44e74a0f7" />
+    <img width="700" src="https://github.com/user-attachments/assets/c6deae88-b7ac-44e6-84e3-adc44e74a0f7" />
     
   - Copy the *Function ARN* field from the tab that displays the Lambda console. Then paste the copied ARN into the *AWS Lambda function ARN* field on the *Configure rule* page.
     
@@ -377,14 +377,14 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
   - Scope of changes: Choose ***Resources***.
   - *Resource type*: Choose ***AWS EC2 SecurityGroup***.
     
-    <img width="800" src="https://github.com/user-attachments/assets/8cd00982-5642-42ea-97ab-6686f1052fb8" />
+    <img width="700" src="https://github.com/user-attachments/assets/8cd00982-5642-42ea-97ab-6686f1052fb8" />
 
   - In the Parameters section, add a parameter with the following settings:
     
     - Key: ***debug***
     - Value: ***true***
       
-      <img width="800" src="https://github.com/user-attachments/assets/a786bec3-b96c-41ae-b199-e75a703ea2d2" />
+      <img width="700" src="https://github.com/user-attachments/assets/a786bec3-b96c-41ae-b199-e75a703ea2d2" />
     
     > Note: Any parameters that you define here will be passed by this AWS Config rule to the Lambda function. 
 
@@ -399,7 +399,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
   
   In the *Rule details* section, notice the *Last successful evaluation* field. Initially, this field displays *Not available*; However, after just a moment (refresh the browser tab if needed), a timestamp will display with a green tick icon prepended.
 
-  <img width="800" src="https://github.com/user-attachments/assets/b1983d0c-de97-470f-8ad3-18a7d5ad77a8" />
+  <img width="700" src="https://github.com/user-attachments/assets/b1983d0c-de97-470f-8ad3-18a7d5ad77a8" />
 
 
   While the initial evaluation occurs, the *Compliance* column will show *No results available*. After just a moment, the value for each security group resource changes to *Compliant*. Wait until you see that it is compliant.
@@ -408,7 +408,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 
 5. Return to the browser tab that shows the *Resource timeline* for *LabSG1*, and refresh the page to show the latest configuration changes.
 
-   <img width="800" src="https://github.com/user-attachments/assets/f69caf31-187d-434c-ba0b-87a67463f90b" />
+   <img width="700" src="https://github.com/user-attachments/assets/f69caf31-187d-434c-ba0b-87a67463f90b" />
 
 
 You should also receive several email notifications about the configuration updates to the monitored resources.
@@ -437,7 +437,7 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 
   The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
 
-  <img width="800" src="https://github.com/user-attachments/assets/0dfcb234-4be5-4c19-943d-b68d8d83cf54" />
+  <img width="700" src="https://github.com/user-attachments/assets/0dfcb234-4be5-4c19-943d-b68d8d83cf54" />
 
 
   > Recall that in task 4, you added two extra inbound rules to this security group to allow SMTPS and IMAPS traffic. However, those SMTPS and IMAPS rules no longer exist, and an additional HTTP rule has been added. This indicates that your manual changes were evaluated and automatically remediated by the Lambda function attached to the AWS Config rule.
@@ -452,7 +452,7 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 
 - In the *Code source* section, open the *index.py* file.
   
-  <img width="800" alt="image" src="https://github.com/user-attachments/assets/d6330c74-3de9-44ac-b380-e6a7a4fe96ab" />
+  <img width="700" alt="image" src="https://github.com/user-attachments/assets/d6330c74-3de9-44ac-b380-e6a7a4fe96ab" />
  
   Observe the following details:
 
@@ -523,14 +523,14 @@ In this task, you will analyze **CloudWatch** logs and filter the log entries to
   One or more log stream entries are visible in the *Log streams* list.
 
 
-  <img width="800" src="https://github.com/user-attachments/assets/dac9bde7-df55-4890-9648-ac2396a99c7a" />
+  <img width="700" src="https://github.com/user-attachments/assets/dac9bde7-df55-4890-9648-ac2396a99c7a" />
 
 
 - Choose *Search all log streams*.
 
 - In the *Filter events* search field, enter ***revoking for*** and then press Enter.
 
-  <img width="800" alt="image" src="https://github.com/user-attachments/assets/65df695e-aaa8-4130-a6dd-371c15592c39" />
+  <img width="700" alt="image" src="https://github.com/user-attachments/assets/65df695e-aaa8-4130-a6dd-371c15592c39" />
 
 - Expand  each log event and review the contents.
 
@@ -554,7 +554,7 @@ In this task, you observed evidence in the CloudWatch logs that AWS Config invok
 
 - On the *Customer managed recorder* tab, choose *Stop Recording* in the *Recorder* section.
 
-  <img width="800" src="https://github.com/user-attachments/assets/fbb7336f-6c9e-4c03-a181-445de3b70866" />
+  <img width="700" src="https://github.com/user-attachments/assets/fbb7336f-6c9e-4c03-a181-445de3b70866" />
 
   > Note: Neither stopping nor deleting the recorder will delete the configuration history files already delivered to your Amazon S3 bucket. You must manage and delete those files separately if needed.
 
