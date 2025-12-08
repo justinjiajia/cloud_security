@@ -137,7 +137,7 @@ The following diagram shows the architecture that was created for you in AWS at 
 
 ---
  
-## Task 2: Examining IAM roles
+## Task 2: Examining IAM roles (Optional)
 
 
 In this task, you will analyze two IAM roles that were pre-provisioned for you. AWS Config and Lambda will use these roles later in the lab.
