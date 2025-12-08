@@ -191,7 +191,7 @@ In the next task, you will grant **AWS Config** the ability to use this role whe
 
 In this task, you will configure AWS Config to monitor specific resources in a Region in the AWS account.
 
-1. Set up a customer managed recording in AWS Config
+1. Set up a customer managed configuration recorder in AWS Config
    
 - In the search box at the top left corner, search for and choose **AWS Config**.
   
@@ -247,15 +247,17 @@ You should receive multiple email notifications with the titles starting with *A
      
      > Note: One security group is the default one that comes with the VPC defined in the YAML template and created by the CloudFormation  stack (as any VPC created in AWS comes with a default security group). The second security group is called *LabSG1*. It was also defined in the YAML temapalte, and is dedicated to manipulation and testing in subsequent tasks.
 
-   - You can select one security group, preferrably the *LabSG1* one, and then choose *Resource timeline* to view  all the configuration items captured so far for the selected resource.
+   - You can select one security group, preferrably the *LabSG1* one, and then choose *Resource timeline* to view  all the configuration items  (CIs)  captured so far for the selected resource.
   
      <img width="800" src="https://github.com/user-attachments/assets/960e989c-7f0e-4634-ac4d-c0e519cc3860" />
+  
+     Keep the tab open, as you will get back to view upcoming configuration changes.
+     
+     > AWS Config uses the configuration recorder to continuously record configuration changes for supported resources.
+     > In addition to configuration items, this *Resource timeline* view also shows the links to correlated CloudTrail events by querying CloudTrail's Event history so as to give the complete story about each configuration change. Note that finding these correlated CloudTrail events is best‑effort rather than guaranteed for every change.
 
 
- 
-
-In this task, you set up the AWS Config service in the AWS account to monitor specific resources of interest. You then observed how AWS Config created an inventory of resources.
-
+In this task, you set up the AWS Config service in the AWS account to monitor specific resources of interest.  
 
 <br>
 
@@ -289,68 +291,93 @@ In this task, you will configure new inbound rule settings in the security group
 
 - Choose Add rule and configure the following:
 
-  - Type: Choose HTTPS.
-  - Source: Choose Anywhere-IPv4.
+  - Type: Choose *HTTPS*.
+  - Source: Choose *Anywhere-IPv4*.
 
 - Choose Add rule again and configure the following:
 
-  - Type: Choose SMTPS.
-  - Source: Choose Anywhere-IPv4.
+  - Type: Choose *SMTPS*.
+  - Source: Choose *Anywhere-IPv4*.
 
 - Choose Add rule again and configure the following:
 
-  - Type: Choose IMAPS.
-  - Source: Choose Anywhere-IPv4.
+  - Type: Choose *IMAPS*.
+  - Source: Choose *Anywhere-IPv4*.
 
-- Choose Save rules.
-
+- Choose *Save rules*.
 
   The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
 
   <img width="800" src="https://github.com/user-attachments/assets/b254daa5-dfe0-4b84-82da-563c2d8cd811" />
 
 
-3. View the change in
+3. Switch back to the tab that shows the *Resource timeline* view of the affected resource. 
 
-4. <img width="867" height="570" alt="image" src="https://github.com/user-attachments/assets/862802f7-5dce-460e-b78b-7d3ddccc24d9" />
+   <img width="800" src="https://github.com/user-attachments/assets/862802f7-5dce-460e-b78b-7d3ddccc24d9" />
+
+   You will see the corresponding configuration change successfully recorded, along with its causes queried from CloudTrail.  
  
 
 In this task, you located a security group in the Lab VPC and defined three new inbound rules in the security group. Later in this lab, you will observe these modifications are identified as a security incident and remediated.
 
  
+<br>
+
+---
 
 ## Task 5: Creating an AWS Config rule that calls a Lambda function
-In this task you configure an AWS Config rule to invoke a pre-created Lambda function. The rule and the function will work together to ensure that monitored Amazon EC2 security groups have only the desired inbound rules.
+
+In this task, you configure an AWS Config Rule to invoke a pre-created Lambda Function. The rule and the function will work together to ensure that monitored Amazon EC2 security groups have only the desired inbound rules.
 
  
 
-9. Go to the i AWS Details section and copy the value for LambdaFunctionARN to your clipboard.
-    <details><summary>LambdaFunctionARN</summary>
-     <pre><cod>arn:aws:lambda:us-east-1:818542204083:function:awsconfig_lambda_security_group</cod></pre>
-    </details>
-    > Note: You will use the ARN in the next set of steps.
+1. In the search box at the top left of the screen, search for *Lambda* and choose to open the console in a new browser tab.
 
- 
+  <img width="500" src="https://github.com/user-attachments/assets/8839b3cc-7132-414a-91f7-dc7a5577d052" />
 
-10. Create a new AWS Config rule that will invoke the Lambda function whenever monitored Amazon EC2 security groups are modified.
+2. Choose the *awsconfig_lambda_security_group* link in the *Functions* list. This is the Lambda Function created by the CloudFormation stack in task 1.
 
-- Navigate to the AWS Config console.
-- In the navigation pane, choose Rules.
+   <img width="800" src="https://github.com/user-attachments/assets/0565218c-baed-4711-8acd-cb38c0bca284" />
+
+
+   Keep the tab open.
+   
+
+
+3. Create a new AWS Config rule that will invoke the Lambda Function whenever monitored Amazon EC2 security groups are modified.
+
+- Switch over to the AWS Config console.
+- In the navigation pane, choose *Rules* (Note: not *Rules* under *Aggregator*).
+  
   Currently, AWS Config doesn't have any rules defined.
-- Choose Add rule.
-- For Select rule type, choose Create custom Lambda rule.
-  <img width="821" alt="image" src="https://github.com/user-attachments/assets/1127bb26-d551-433e-a75e-62f8cd66ebab" />
-- Choose Next.
-- On the Configure rule page, configure the following:
-  - AWS Lambda function ARN: Paste in the Lambda function ARN that you copied.
-  - Name: Enter EC2SecurityGroup
-  - Description: Enter Restrict inbound ports to HTTP and HTTPS
-    <img width="779" alt="image" src="https://github.com/user-attachments/assets/c6deae88-b7ac-44e6-84e3-adc44e74a0f7" />
-  - Trigger type: Select When configuration changes.
-  - Scope of changes: Choose Resources.
-  - Resource type: Choose AWS EC2 SecurityGroup.
+ 
+- Choose *Add rule*.
+- For *Select rule type*, choose ***Create custom Lambda rule***.
+  <img width="800" src="https://github.com/user-attachments/assets/1127bb26-d551-433e-a75e-62f8cd66ebab" />
+
+  This allows us to define a Lambda function with  custom code to evaluate whether monitored AWS resources comply with the rule.
+  
+- Choose *Next*.
+  
+- On the *Configure rule* page, configure the following:
+
+   
+  - *Name*: Enter ***EC2SecurityGroup***
+  - *Description*: Enter ***Restrict inbound ports to HTTP and HTTPS***
+    <img width="800" src="https://github.com/user-attachments/assets/c6deae88-b7ac-44e6-84e3-adc44e74a0f7" />
+    
+  - Copy the *Function ARN* field from the tab that displays the Lambda console. Then paste the copied ARN into the *AWS Lambda function ARN* field on the *Configure rule* page.
+    
+    <img width="400" src="https://github.com/user-attachments/assets/dc4d808d-515a-45ad-a06f-47accece16f1" />
+    
+  - Trigger type: Select ***When configuration changes***.
+  - Scope of changes: Choose ***Resources***.
+  - *Resource type*: Choose ***AWS EC2 SecurityGroup***.
     AWS EC2 SecurityGroup appears in the resources area.
     <img width="780" alt="image" src="https://github.com/user-attachments/assets/28d60cfb-90ac-43ad-8f46-ed7355b7d92b" />
+
+    <img width="800" src="https://github.com/user-attachments/assets/8cd00982-5642-42ea-97ab-6686f1052fb8" />
+
   - In the Parameters section, add a parameter with the following settings:
     
     - Key: debug
