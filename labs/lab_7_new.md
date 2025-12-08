@@ -448,9 +448,9 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 
 2. Analyze the Lambda function code.
 
- - Navigate to the Lambda console.
- - In the navigation pane, choose *Functions*.
- - Choose the *awsconfig_lambda_security_group* function link.
+- Navigate to the Lambda console.
+- In the navigation pane, choose *Functions*.
+- Choose the *awsconfig_lambda_security_group* function link.
 
 - In the *Code source* section, open the *index.py* file.
   
@@ -492,7 +492,7 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
     }]
     ``` 
 
-    - The `evaluate_compliance` function on line 52 is the workhorse of this Python script. This function handles both checking compliance and automatically fixing non-compliant security groups.  
+  - The `evaluate_compliance` function on line 52 is the workhorse of this Python script. This function handles both checking compliance and automatically fixing non-compliant security groups.  
       - Evaluation:
         The function checks if the actual security group permissions match the `REQUIRED_PERMISSIONS`, and stores the comparison results in two list:
            - `authorize_permissions`: Rules that should be present (`REQUIRED_PERMISSIONS`) but are missing from the current setup.
