@@ -337,7 +337,7 @@ In this task, you configure an AWS Config Rule to invoke a pre-created Lambda Fu
 
 1. In the search box at the top left of the screen, search for *Lambda* and choose to open the console in a new browser tab.
 
-  <img width="500" src="https://github.com/user-attachments/assets/8839b3cc-7132-414a-91f7-dc7a5577d052" />
+   <img width="500" src="https://github.com/user-attachments/assets/8839b3cc-7132-414a-91f7-dc7a5577d052" />
 
 2. Choose the *awsconfig_lambda_security_group* link in the *Functions* list. This is the Lambda Function created by the CloudFormation stack in task 1.
 
@@ -402,18 +402,20 @@ In this task, you configure an AWS Config Rule to invoke a pre-created Lambda Fu
   <img width="800" src="https://github.com/user-attachments/assets/6fd654e5-a19b-45cf-8ec6-696f7b5adb99" />
 
   
-  In the Rule details section, notice the *Last successful evaluation* field. Initially, this field displays *Not available*; however, after a few minutes (refresh the browser tab if needed), a timestamp will display with a green tick icon prepended.
+  In the *Rule details* section, notice the *Last successful evaluation* field. Initially, this field displays *Not available*; However, after just a moment (refresh the browser tab if needed), a timestamp will display with a green tick icon prepended.
 
   <img width="800" src="https://github.com/user-attachments/assets/8de376f1-bce8-4a7a-a0f0-c6d4057a582e" />
 
   
-  > Note: The initial evaluation might take a few moment to complete. This same evaluation will also occur when any security group that is within scope is modified in the future.
-
-  > While the initial evaluation occurs, the *Compliance* column will show *No results available*. After several minutes, the value for each security group resource changes to *Compliant*. Wait until you see that it is compliant.
+  While the initial evaluation occurs, the *Compliance* column will show *No results available*. After just a moment, the value for each security group resource changes to *Compliant*. Wait until you see that it is compliant.
 
   Notice that the *Annotation* column displays *Permissions were modified. 2 new revocation(s). 2 new authorization(s).*.
 
   <img width="800" src="https://github.com/user-attachments/assets/67fb3cc1-2231-48b9-9c77-1d029e018b1f" />
+
+
+
+<img width="791" height="656" alt="image" src="https://github.com/user-attachments/assets/a858d8fc-4052-4a44-b394-11a3e1a7830e" />
 
 
  
