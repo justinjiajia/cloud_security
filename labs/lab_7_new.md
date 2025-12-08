@@ -388,7 +388,7 @@ As soon as you create the new rule, AWS Config automatically  evaluates the  las
   
 - In the *Resources in scope* section, choose the *Noncompliant* dropdown menu, and choose ***All***.
   
-  In the *Rule details* section, notice the *Last successful evaluation* field. Initially, this field displays *Not available*; However, after just a moment (refresh the browser tab if needed), a timestamp will display with a green tick icon prepended.
+  In the *Rule details* section, notice the *Last successful detective evaluation* field. Initially, this field displays *Not available*; However, after just a moment (refresh the browser tab if needed), a timestamp will display with a green tick icon prepended.
 
   <img width="700" src="https://github.com/user-attachments/assets/b1983d0c-de97-470f-8ad3-18a7d5ad77a8" />
 
