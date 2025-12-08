@@ -176,7 +176,7 @@ In this task, you will analyze two IAM roles that were pre-provisioned for you. 
   
   > The *AWS_ConfigRole* policy grants read-level access (mostly Get, List, and Describe actions) to many AWS services.
   
-In the next task, you will grant **AWS Config** the ability to use this role when you configure AWS Config. The role defines the permissions that **AWS Config** will have when monitoring AWS resources in the AWS account.
+In the next task, you will grant AWS Config the ability to use this role when you configure AWS Config. The role defines the permissions that AWS Config will have when monitoring AWS resources in the AWS account.
 
 
 
@@ -192,7 +192,7 @@ In this task, you will configure AWS Config to monitor specific resources in a R
 
 1. Set up a customer managed configuration recorder in AWS Config
    
-- In the search box at the top left corner, search for and choose **AWS Config**.
+- In the search box at the top left corner, search for and choose ***AWS Config***.
   
 - Choose *Get started*, and configure the following settings:
 
@@ -332,7 +332,7 @@ In this task, you located a security group in the lab VPC and added three new in
 In this task, you configure an AWS Config rule to invoke a pre-created Lambda Function. The rule and the function will work together to ensure that monitored Amazon EC2 security groups have only the desired inbound rules.
 
  
-1. In the search box at the top left of the screen, search for *Lambda* and choose to open the console in a new browser tab.
+1. In the search box at the top left of the screen, search for ***Lambda*** and choose to open the console in a new browser tab.
 
    <img width="500" src="https://github.com/user-attachments/assets/8839b3cc-7132-414a-91f7-dc7a5577d052" />
 
