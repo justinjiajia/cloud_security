@@ -380,22 +380,22 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 
 - Choose *Next*, and then choose *Save*.
 
-As soon as you create the new rule, AWS Config automatically  evaluates the  last configuration state of your monitored resources against it.
+As soon as you create the new rule, AWS Config automatically  evaluates the  last recorded configuration state of your monitored resources against it.
  
 4. Observe the AWS Config *EC2SecurityGroup* rule details.
 
 - Choose the *EC2SecurityGroup* link.
   
-- In the *Resources in scope* section, choose the *Noncompliant* dropdown menu, and choose ***All***.
+- In the *Resources in scope* section, locate the *Noncompliant* dropdown menu, and change it to ***All*** so that you can see all evaluated resources.  
   
-  In the *Rule details* section, notice the *Last successful detective evaluation* field. Initially, this field displays *Not available*; However, after just a moment (refresh the browser tab if needed), a timestamp will display with a green tick icon prepended.
+- In the *Rule details* section, look at the *Last successful detective evaluation* field. Initially, this field displays *Not available*. However, after just a moment (refresh your browser tab if necessary), it will update to show a timestamp prepended with a green tick icon, indicating the evaluation has completed.
 
   <img width="700" src="https://github.com/user-attachments/assets/b1983d0c-de97-470f-8ad3-18a7d5ad77a8" />
 
 
-  While the initial evaluation occurs, the *Compliance* column will show *No results available*. After just a moment, the value for each security group resource changes to *Compliant*. Wait until you see that it is compliant.
+- While the initial evaluation is in progress, the *Compliance* column will show *No results available*. After a brief wait, the status for each security group resource will update to *Compliant*.  
 
-  Notice that the *Annotation* column displays *Permissions were modified. 2 new revocation(s). 2 new authorization(s).*.
+- Notice that the *Annotation* column displays *Permissions were modified. 2 new revocation(s). 2 new authorization(s).*.
 
 5. Return to the browser tab that shows the *Resource timeline* for *LabSG1*, and refresh the page to show the latest configuration changes.
 
