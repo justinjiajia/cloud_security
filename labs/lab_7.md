@@ -61,7 +61,7 @@ After you build the solution, a security incident will be remediated through the
 ## Task 1: Preparing your lab environment with CloudFormation
 
 
-In this task, you will provision two IAM Roles with proper permissions, a Lambda Function, and an SNS Topic with your email address subscribed using a CloudFormation template. These resources will be used in subsequent tasks to ...
+In this task, you will provision two IAM Roles with proper permissions, a Lambda Function, an SNS Topic with your email address subscribed, and several VPC related resources, using a CloudFormation template.
 
 1. Visit <a href="console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a>. Then choose *Multi-session enabled* from the dropdown menu in the top right of the screen.
 
