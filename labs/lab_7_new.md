@@ -235,7 +235,8 @@ A banner appears briefly, and then the AWS Config Dashboard displays.
 
 2. In the left navigation pane, choose *Resources* to review the resource inventory that AWS Config is currently recording:
 
-   <img width="800" src="https://github.com/user-attachments/assets/b33de8e4-ca9c-4f3f-858a-e7388a7b6fa9" />
+   <img width="800" src="https://github.com/user-attachments/assets/beb5446c-cf2f-4474-b0e1-ffa3f536d974" />
+
  
 
    The *Resource inventory*  page lists two security groups that AWS Config is recording, along with the default configuration recorder you set up in step 1. Your security group IDs will differ, but they should resemble the ones shown in the reference screenshot.
@@ -246,17 +247,17 @@ A banner appears briefly, and then the AWS Config Dashboard displays.
    > The second security group is named *LabSG1*. It is also defined in the YAML template and is intended for experimentation and testing in the later steps of this lab. 
 
  
-   - Select one of the security groups — preferably *LabSG1*  — and then choose *Resource timeline* to display all configuration items (CIs) that AWS Config has captured for this resource so far.
+- Select one of the security groups — preferably *LabSG1*  — and then choose *Resource timeline* to display all configuration items (CIs) that AWS Config has captured for this resource so far.
   
-     <img width="800" src="https://github.com/user-attachments/assets/bf2445a9-a1cd-464f-8b0f-a2a249fec587" />
+  <img width="800" src="https://github.com/user-attachments/assets/bf2445a9-a1cd-464f-8b0f-a2a249fec587" />
 
 
 
   
-     Keep this browser tab open; you will return to this *Resource timeline* view to observe configuration changes as you proceed through the lab.  
+  Keep this browser tab open; you will return to this *Resource timeline* view to observe configuration changes as you proceed through the lab.  
      
-     > AWS Config uses the configuration recorder to continuously capture configuration changes for supported resource types.
-     > In the  *Resource timeline* view, AWS Config not only shows the configuration items, but also provides links to related AWS CloudTrail events (from CloudTrail Event history) to help you see the full context of each configuration change.  These CloudTrail correlations are performed on a best-effort basis and might not be available for every change.
+  > AWS Config uses the configuration recorder to continuously capture configuration changes for supported resource types.
+  > In the  *Resource timeline* view, AWS Config not only shows the configuration items, but also provides links to related AWS CloudTrail events (from CloudTrail Event history) to help you see the full context of each configuration change.  These CloudTrail correlations are performed on a best-effort basis and might not be available for every change.
  
 
 In this task, you configured AWS Config to monitor EC2 security groups in your AWS account and inspected their recorded configuration history.
