@@ -353,7 +353,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
     
   - Copy the *Function ARN* field from the tab that displays the Lambda console. Then paste the copied ARN into the *AWS Lambda function ARN* field on the *Configure rule* page.
   - 
-    <img width="400" src="https://github.com/user-attachments/assets/987de861-f1a0-4558-a7db-a6babf6a8f35" />
+    <img width="300" src="https://github.com/user-attachments/assets/987de861-f1a0-4558-a7db-a6babf6a8f35" />
  
     
   - For *Trigger type*, select ***When configuration changes***.
@@ -437,11 +437,11 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 
 - Navigate to the Lambda console.
 - In the navigation pane, choose *Functions*.
-- Choose the *awsconfig_lambda_security_group* function link.
+- Choose the *evaluate_remediate_security_group* function link.
 
 - In the *Code source* section, open the *index.py* file.
-  
-  <img width="700" alt="image" src="https://github.com/user-attachments/assets/d6330c74-3de9-44ac-b380-e6a7a4fe96ab" />
+
+  <img width="700" src="https://github.com/user-attachments/assets/3055a792-0d91-4389-b492-7f668d916ed4" /> 
  
   Observe the following details:
 
@@ -493,7 +493,9 @@ Now that the initial AWS Config compliance evaluation has occurred, you will re-
 In this task, you observed the logic for the Lambda function to detect and remove the additional permissions for SMTPS (TCP port 465) and IMAPS (TCP port 993) in the security group, and add required permissions.
 
 
-> If you were to modify the security group again, an AWS Config compliance evaluation would be initiated. The evaluation would invoke the Lambda function, and your changes would be reverted so that the inbound rules again match the desired settings. The default security groups are being similarly monitored and would have their settings remediated if changed.
+> If you were to modify the security group again, an AWS Config compliance evaluation would be initiated. The evaluation would invoke the Lambda function, and your changes would be reverted so that the inbound rules again match the desired settings.
+
+> The default security groups are being similarly monitored and would have their settings remediated if changed.
 
 
 <br>
