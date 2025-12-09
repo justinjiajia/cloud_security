@@ -60,7 +60,7 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
 3. Once logged in, go to the CloudFormation console.
 
 
-4. Right-click the [link](https://canvas.ust.hk/files/11486707/download?download_frd=1&verifier=C5jDWwc9G9NPlshi5Mah3eUFH5dGpvIbycT8P39Q) and download a CloudFormation template to your computer
+4. Right-click the [link](https://canvas.ust.hk/files/11487388/download?download_frd=1&verifier=x81naojh4ebIDEIrNXGivoq0zwQA4sRcsJXuALAp) and download a CloudFormation template to your computer
 
 5. Choose *Create stack \> With new resources (standard)* and configure these settings.
 
