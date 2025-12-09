@@ -390,17 +390,20 @@ As soon as you create the new rule, AWS Config automatically evaluates the  last
 
 - Notice that the *Annotation* column displays *Permissions were modified. 2 new revocation(s). 2 new authorization(s).*.
 
+- You should also receive multiple email notifications with subject lines that begin with *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. 
+
+  > The first set of notifications indicates that AWS Config has detected non-compliant EC2 security group resources in your account, followed by additional notifications showing that these security groups have become compliant as a result of automatic remediation.
+  > You receive these messages because compliance state change events are published to the configured Amazon SNS topic, which then forwards the notifications to your subscribed email address for alerting.
+
 5. Return to the browser tab that shows the *Resource timeline* for *LabSG1*, and refresh the page to show the latest configuration changes.
 
    <img width="700" src="https://github.com/user-attachments/assets/f69caf31-187d-434c-ba0b-87a67463f90b" />
  
 
 
-6. You should also receive multiple email notifications with subject lines that begin with *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. 
-
-The first set of notifications indicates that AWS Config has detected noncompliant EC2 security group resources in your account, followed by additional notifications showing that these security groups have become compliant after remediation. You receive these messages because compliance state change events are published to the configured Amazon SNS topic, which then forwards the notifications to your subscribed email address for alerting.
 
 In this task, you configured an AWS Config rule that invokes a pre‑created Lambda function whenever a security group's inbound rules drift from the desired state. The rule and function now work together to continuously monitor EC2 security groups and automatically remediate any unwanted updates to inbound rules.
+
 
 
 <br>
