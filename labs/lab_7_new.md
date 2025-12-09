@@ -113,7 +113,7 @@ In this task, you will provision two IAM Roles with proper permissions, a Lambda
    <img width="600" src="https://github.com/user-attachments/assets/89e830e5-5a1a-4737-b38e-f4319ed27e88" />
 
   
-8. Click the link in the *"SubscribeURL"* field to subscribe your email address to the SNS Topic. Then close the tab that displays a snippet of XML source code.
+8. Click the link in the ***"SubscribeURL"*** field to subscribe your email address to the SNS Topic. Then close the tab that displays a snippet of XML source code.
 
 You have now used the AWS CloudFormation template to provision your lab environment, including two IAM Roles, a Lambda function, an SNS Topic, and several VPC related resources. The purpose of these resources will become clear in subsequent tasks. 
 
