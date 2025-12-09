@@ -298,13 +298,6 @@ In this task, you will configure new inbound rule settings in the security group
 
    You should now see a new configuration item that reflects the security group update, along with the correlated CloudTrail event.
 
-As before, AWS Config has streamed this configuration change to the configured Amazon SNS topic, which then forwarded an email notification to your subscribed address for alerting. 
-
-
-
-You should also receive several email notifications with subject lines that begin with something like *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. These notifications indicate that the AWS Config recorder has discovered EC2 security group resources in your account and has published the corresponding events to the configured SNS topic, which then delivered them to your email subscription. 
-
-
 
 In this task, you located a security group in the lab VPC and added three new inbound rules to it. Later in the lab, these changes will be treated as a security incident and automatically remediated by the configured AWS Config rule and its remediation workflow. 
  
@@ -400,6 +393,13 @@ As soon as you create the new rule, AWS Config automatically  evaluates the  las
  
  
 You should also see several new email notifications that report these configuration updates for the monitored resources, delivered through the configured SNS topic.​
+
+As before, AWS Config has streamed this configuration change to the configured Amazon SNS topic, which then forwarded an email notification to your subscribed address for alerting. 
+
+
+
+You should also receive several email notifications with subject lines that begin with something like *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. These notifications indicate that the AWS Config recorder has discovered EC2 security group resources in your account and has published the corresponding events to the configured SNS topic, which then delivered them to your email subscription. 
+
 
 In this task, you configured an AWS Config rule that invokes a pre‑created Lambda function whenever a security group's inbound rules drift from the desired state. The rule and function now work together to continuously monitor EC2 security groups and automatically remediate any unwanted updates to inbound rules.
 
