@@ -185,7 +185,8 @@ In this task, you will configure AWS Config to monitor security group resources 
   <img width="700" src="https://github.com/user-attachments/assets/6cecef49-aa12-42d1-877d-54ab721f1167" />
 
 - Under *Recording strategy*. Choose ***Specific resource types***.
-- *Resource type*: Choose ***AWS EC2 SecurityGroup***. For Frequency choose ***Continuous***.
+- In the *Resource type* filter: Start typing ***EC2 SecurityGroup***, then choose ***AWS EC2 SecurityGroup*** from the dropdown list.
+- *Frequency*: Choose ***Continuous***.
 
   <img width="700" src="https://github.com/user-attachments/assets/05f9cfb8-743e-4cee-a249-17a8f6665702" />
   
@@ -194,44 +195,36 @@ In this task, you will configure AWS Config to monitor security group resources 
 
   <img width="700" src="https://github.com/user-attachments/assets/4903df0f-216e-467f-9e57-fb459c52c6d3" />
 
-  > Note: Recall that AwsConfigRole was the second role that you analyzed in the previous task.
+  > Recall that AwsConfigRole was the second role that you analyzed in the previous task.
   
-- In the *Delivery channel* section, notice that AWS Config will store findings in an S3 bucket by default.
-- Tick the checkbox for *Stream configuration changes and notifications to an Amazon SNS topic*
-- Select ***Choose a topic from your account***
-- *SNS topic name*: Select the SNS Topic created in task 1 from the dropdown menu, i.e., *ust-\<your ITSC account string\>-config-topic*
+- Keep the default setting in the *Delivery channel* section. This will create an Amazon S3 bucket, which AWS Config uses by default to store findings.
+- Tick the checkbox for *Stream configuration changes and notifications to an Amazon SNS topic*.
+- Select ***Choose a topic from your account***.
+- For *SNS topic name*, choose the topic named *ust-\<your ITSC account string\>-config-topic*, which you created and subscribed to in Task 1. 
   
   > This setting allows you to receive reactive email alerts for any configuration changes made to the monitored resources.
   
-- Keep the default settings, and choose *Next*.
+- Choose *Next*.
     
   <img width="700" src="https://github.com/user-attachments/assets/81bd8b30-a7c1-42e1-b1ae-f8e2b71153d9" />
 
-  
-  
-- On the *Step 2: Rules* page, choose *Next* at the bottom of the page.
+- On the *Step 2: Rules* page, scroll down to the bottom of the page and choose *Next*.
 - Review the AWS Config setup details, and then choose *Confirm*.
 
   <img width="700" src="https://github.com/user-attachments/assets/60526c9c-7805-4109-a34d-ac16c36ce513" />
 
 
-
 A banner appears briefly, and then the AWS Config Dashboard displays.
 
-You should also receive several email notifications with subject lines that begin with something like *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. These notifications indicate that the AWS Config recorder has discovered EC2 security group resources in your account and has published the corresponding events to the configured SNS topic, which then delivered them to your email subscription. 
 
 2. In the left navigation pane, choose *Resources* to review the resource inventory that AWS Config is currently recording.
 
    <img width="700" src="https://github.com/user-attachments/assets/fcf06a9b-6278-42d8-b6ff-313d239205de" />
 
-
- 
-
-   The *Resource inventory*  page lists two security groups that AWS Config is recording, along with the default configuration recorder you set up in step 1. Your security group IDs will differ, but they should resemble the ones shown in the reference screenshot.
+   The *Resource inventory*  page lists three security groups that AWS Config is recording, along with the default configuration recorder you set up in Step 1 (your security group IDs will differ, but they should resemble the ones shown in the reference screenshot). Recall that in Step 1, you configured AWS Config to record resources of type *EC2 SecurityGroup*, which is why these security groups now appear in the inventory. 
      
-   Recall that in step 1, you configured AWS Config to record resources of type *EC2 SecurityGroup*, which is why these security groups now appear in the inventory.
-   
    > Between the two security groups, one is the default security group that is automatically created with the VPC defined in the CloudFormation YAML template. Every new VPC in AWS includes a default security group.
+   
    > The second security group is named *LabSG1*. It is also defined in the YAML template and is intended for experimentation and testing in the later steps of this lab. 
 
  
@@ -248,6 +241,7 @@ You should also receive several email notifications with subject lines that begi
 In this task, you configured AWS Config to monitor EC2 security groups in your AWS account and inspected their recorded configuration history.
 
 <br>
+
 
 ---
 
@@ -272,7 +266,7 @@ In this task, you will configure new inbound rule settings in the security group
 
  
 
-2. Add inbound rules to the security group to allow **HTTP**, **HTTPS**, **SMTPS**, and **IMAPS** network traffic.
+2. Add inbound rules to the security group to allow **HTTP**, **SMTPS**, and **IMAPS** network traffic.
 
 - Choose the Inbound rules tab, and then choose Edit inbound rules.
 - Notice that one inbound rule for HTTP connections is already defined.
@@ -292,10 +286,10 @@ In this task, you will configure new inbound rule settings in the security group
 
   The inbound rules should now look like the rules in the following screenshot (although your security group rule IDs are different).
 
-  <img width="1095" height="236" alt="image" src="https://github.com/user-attachments/assets/10e2eb02-d014-4161-b4cb-d35caf3f9bde" />
+  <img width="700" src="https://github.com/user-attachments/assets/10e2eb02-d014-4161-b4cb-d35caf3f9bde" />
 
 
-  **Important: Keep this bowswer tab open**. You will come back to investigate the effect of remediation in task 5.
+  **Important: Keep this bowswer tab open**. You will come back to investigate the effect of remediation in Task 5.
   
 3. After making the change, return to the browser tab that shows the *Resource timeline* for the affected security group, and refresh the page so that the latest configuration data is displayed.
 
@@ -305,6 +299,12 @@ In this task, you will configure new inbound rule settings in the security group
    You should now see a new configuration item that reflects the security group update, along with the correlated CloudTrail event.
 
 As before, AWS Config has streamed this configuration change to the configured Amazon SNS topic, which then forwarded an email notification to your subscribed address for alerting. 
+
+
+
+You should also receive several email notifications with subject lines that begin with something like *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. These notifications indicate that the AWS Config recorder has discovered EC2 security group resources in your account and has published the corresponding events to the configured SNS topic, which then delivered them to your email subscription. 
+
+
 
 In this task, you located a security group in the lab VPC and added three new inbound rules to it. Later in the lab, these changes will be treated as a security incident and automatically remediated by the configured AWS Config rule and its remediation workflow. 
  
