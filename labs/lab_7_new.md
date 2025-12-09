@@ -174,9 +174,9 @@ In the next task, you will grant AWS Config the ability to use this role when yo
 
 ## Task 3: Setting up AWS Config to monitor resources
 
-In this task, you will configure AWS Config to monitor specific resources in a Region in the AWS account.
+In this task, you will configure AWS Config to monitor security group resources in your AWS account.
 
-1. Set up a customer managed configuration recorder in AWS Config
+1. Set up a customer managed configuration recorder in AWS Config.
    
 - In the search box at the top left corner, search for and choose ***AWS Config***.
   
