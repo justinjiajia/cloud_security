@@ -185,7 +185,7 @@ In this task, you will configure AWS Config to monitor security group resources 
   <img width="700" src="https://github.com/user-attachments/assets/6cecef49-aa12-42d1-877d-54ab721f1167" />
 
 - Under *Recording strategy*. Choose ***Specific resource types***.
-- In the *Resource type* filter: Start typing ***EC2 SecurityGroup***, then choose ***AWS EC2 SecurityGroup*** from the dropdown list.
+- In the *Resource type* filter, start typing ***EC2 SecurityGroup***, then choose ***AWS EC2 SecurityGroup*** from the dropdown list.
 - *Frequency*: Choose ***Continuous***.
 
   <img width="700" src="https://github.com/user-attachments/assets/05f9cfb8-743e-4cee-a249-17a8f6665702" />
@@ -299,7 +299,7 @@ In this task, you will configure new inbound rule settings in the security group
    You should now see a new configuration item that reflects the security group update, along with the correlated CloudTrail event.
 
 
-In this task, you located a security group in the lab VPC and added three new inbound rules to it. Later in the lab, these changes will be treated as a security incident and automatically remediated by the configured AWS Config rule and its remediation workflow. 
+In this task, you located a security group in the lab VPC and added two new inbound rules to it. Later in the lab, these changes will be treated as a security incident and automatically remediated by the configured AWS Config rule and its remediation workflow. 
  
 
  
@@ -309,16 +309,17 @@ In this task, you located a security group in the lab VPC and added three new in
 
 ## Task 5: Creating an AWS Config rule that calls a Lambda function
 
-In this task, you configure an AWS Config rule to invoke a pre-created Lambda Function. The rule and the function will work together to ensure that monitored Amazon EC2 security groups have only the desired inbound rules.
-
+In this task, you configure an AWS Config rule to invoke a pre-created Lambda Function that implements the evaluation and remediation logic. The rule and the function will work together to ensure that monitored Amazon EC2 security groups have only the approved inbound rules.
+ 
  
 1. In the search box at the top left of the screen, search for ***Lambda*** and choose to open the console in a new browser tab.
 
    <img width="500" src="https://github.com/user-attachments/assets/8839b3cc-7132-414a-91f7-dc7a5577d052" />
 
-2. Choose the *evaluate_remediate_security_group* link in the *Functions* list. This is the Lambda Function created by the CloudFormation stack in task 1.
+2. Choose the *evaluate_remediate_security_group* link in the *Functions* list. This is a Lambda Function created by the CloudFormation stack in Task 1.
 
-   <img width="700" src="https://github.com/user-attachments/assets/0565218c-baed-4711-8acd-cb38c0bca284" />
+   <img width="700" src="https://github.com/user-attachments/assets/df5ce82e-cee3-429f-9d51-f43a0736428f" />
+
 
 
    **Important: Keep the browser tab open**. You will return to this page later to copy the Lambda function ARN and review its code.
@@ -347,15 +348,17 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
   - *Name*: Enter ***EC2SecurityGroup***
   - *Description*: Enter ***Restrict inbound ports to HTTP and HTTPS***
     
-    <img width="700" src="https://github.com/user-attachments/assets/c6deae88-b7ac-44e6-84e3-adc44e74a0f7" />
+    <img width="700" src="https://github.com/user-attachments/assets/4b0113a0-f7b6-4642-b116-d1b759bea657" />
+
     
   - Copy the *Function ARN* field from the tab that displays the Lambda console. Then paste the copied ARN into the *AWS Lambda function ARN* field on the *Configure rule* page.
+  - 
+    <img width="400" src="https://github.com/user-attachments/assets/987de861-f1a0-4558-a7db-a6babf6a8f35" />
+ 
     
-    <img width="400" src="https://github.com/user-attachments/assets/dc4d808d-515a-45ad-a06f-47accece16f1" />
-    
-  - Trigger type: Select ***When configuration changes***.
-  - Scope of changes: Choose ***Resources***.
-  - *Resource type*: Choose ***AWS EC2 SecurityGroup***.
+  - For *Trigger type*, select ***When configuration changes***.
+  - For *Scope of changes*, choose ***Resources***.
+  - In the *Resource type* filter, start typing ***EC2 SecurityGroup***, and select ***AWS EC2 SecurityGroup***.
     
     <img width="700" src="https://github.com/user-attachments/assets/8cd00982-5642-42ea-97ab-6686f1052fb8" />
 
@@ -370,7 +373,7 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 
 - Choose *Next*, and then choose *Save*.
 
-As soon as you create the new rule, AWS Config automatically  evaluates the  last recorded configuration state of your monitored resources against it.
+As soon as you create the new rule, AWS Config automatically evaluates the  last recorded configuration state of your monitored resources against the rule.
  
 4. Observe the AWS Config *EC2SecurityGroup* rule details.
 
@@ -391,15 +394,11 @@ As soon as you create the new rule, AWS Config automatically  evaluates the  las
 
    <img width="700" src="https://github.com/user-attachments/assets/f69caf31-187d-434c-ba0b-87a67463f90b" />
  
- 
-You should also see several new email notifications that report these configuration updates for the monitored resources, delivered through the configured SNS topic.​
-
-As before, AWS Config has streamed this configuration change to the configured Amazon SNS topic, which then forwarded an email notification to your subscribed address for alerting. 
 
 
+6. You should also receive multiple email notifications with subject lines that begin with *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. 
 
-You should also receive several email notifications with subject lines that begin with something like *[AWS Config:us-east-1] AWS::EC2::SecurityGroup*. These notifications indicate that the AWS Config recorder has discovered EC2 security group resources in your account and has published the corresponding events to the configured SNS topic, which then delivered them to your email subscription. 
-
+The first set of notifications indicates that AWS Config has detected noncompliant EC2 security group resources in your account, followed by additional notifications showing that these security groups have become compliant after remediation. You receive these messages because compliance state change events are published to the configured Amazon SNS topic, which then forwards the notifications to your subscribed email address for alerting.
 
 In this task, you configured an AWS Config rule that invokes a pre‑created Lambda function whenever a security group's inbound rules drift from the desired state. The rule and function now work together to continuously monitor EC2 security groups and automatically remediate any unwanted updates to inbound rules.
 
