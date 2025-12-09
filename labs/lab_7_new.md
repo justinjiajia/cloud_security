@@ -323,16 +323,16 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 
    <img width="500" src="https://github.com/user-attachments/assets/8839b3cc-7132-414a-91f7-dc7a5577d052" />
 
-2. Choose the *awsconfig_lambda_security_group* link in the *Functions* list. This is the Lambda Function created by the CloudFormation stack in task 1.
+2. Choose the *evaluate_remediate_security_group* link in the *Functions* list. This is the Lambda Function created by the CloudFormation stack in task 1.
 
    <img width="700" src="https://github.com/user-attachments/assets/0565218c-baed-4711-8acd-cb38c0bca284" />
 
 
-   **Important: Keep the browser tab open**. You'll return to this page for copying the Lambda function ARN and exploring its code.
+   **Important: Keep the browser tab open**. You will return to this page later to copy the Lambda function ARN and review its code.
    
 
 
-3. Create a new AWS Config rule that will invoke the Lambda Function whenever monitored Amazon EC2 security groups are modified.
+3. Create a new AWS Config rule that will invoke the Lambda function whenever monitored Amazon EC2 security groups are modified.
 
 - Switch over to the AWS Config console.
 - In the navigation pane, choose *Rules* (not *Rules* under *Aggregator*).
