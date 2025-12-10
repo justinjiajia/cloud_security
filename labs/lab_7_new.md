@@ -119,7 +119,8 @@ You have now used the AWS CloudFormation template to provision your lab environm
 
 The following diagram shows the architecture that was created for you in AWS at the beginning of the lab.
 
-<img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_security/lab7/start-arch.png" alt="Starting architecture" width=600 />
+<img width="650" src="https://github.com/user-attachments/assets/9d430093-e152-4780-ab81-f2ffa32fb9c8" />
+
 
 <br>
 
