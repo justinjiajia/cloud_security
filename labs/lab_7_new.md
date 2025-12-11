@@ -194,7 +194,10 @@ In this task, you will configure AWS Config to monitor security group resources 
 - *IAM role for AWS Config*: Choose ***Choose a role from your account***.
 - *Existing roles*: Choose ***AwsConfigRole***.
 
-  <img width="700" src="https://github.com/user-attachments/assets/4903df0f-216e-467f-9e57-fb459c52c6d3" />
+ 
+  <img width="700" src="https://github.com/user-attachments/assets/d005cfe5-09ea-46a6-968d-fac03f2d9db8" />
+
+  
 
   > Recall that AwsConfigRole was the second role that you analyzed in the previous task.
   
@@ -337,9 +340,11 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
 - Choose *Add rule*.
 - For *Select rule type*, choose ***Create custom Lambda rule***.
   
-  <img width="700" src="https://github.com/user-attachments/assets/1127bb26-d551-433e-a75e-62f8cd66ebab" />
+ 
+  <img width="700" alt="image" src="https://github.com/user-attachments/assets/a81bfbc6-d006-4864-88a7-abc48ae4c0bc" />
 
-  This allows us to define a Lambda function with  custom code to evaluate whether monitored AWS resources comply with the rule.
+
+  This allows you to use a Lambda function with  custom code to evaluate whether monitored AWS resources comply with the rule.
   
 - Choose *Next*.
   
