@@ -367,8 +367,9 @@ In this task, you configure an AWS Config rule to invoke a pre-created Lambda Fu
     
     - Key: ***debug***
     - Value: ***true***
-      
-      <img width="700" src="https://github.com/user-attachments/assets/a786bec3-b96c-41ae-b199-e75a703ea2d2" />
+   
+      <img width="700" src="https://github.com/user-attachments/assets/74122831-6800-43f7-a0ab-411aa70fb8aa" />
+
     
     > Note: Any parameters that you define here will be passed by this AWS Config rule to the Lambda function. 
 
