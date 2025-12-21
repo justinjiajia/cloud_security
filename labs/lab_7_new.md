@@ -579,4 +579,57 @@ In this task, you observed evidence in the CloudWatch logs that AWS Config invok
 - Navigate to the *CloudFormation* console.
 - On the *Stacks* page, select and delete all listed stacks in the reverse order of their creation.
    
-  
+
+## Reference:
+
+
+<img width="1000"  src="https://github.com/user-attachments/assets/183665ff-e54c-4ec2-8cfd-5f6e74ff76fb" />
+
+
+```
+2025-12-21T16:52:45.911Z
+START RequestId: b00ab9d2-bab9-41ab-98cc-04861fe681df Version: $LATEST
+2025-12-21T16:52:45.912Z
+Received event: {
+2025-12-21T16:52:45.912Z
+"version": "1.0",
+2025-12-21T16:52:45.912Z
+"invokingEvent": "{\"configurationItemDiff\":null,\"configurationItem\":{\"relatedEvents\":[],\"relationships\":[{\"resourceId\":\"vpc-0f8096c79661cae64\",\"resourceName\":null,\"resourceType\":\"AWS::EC2::VPC\",\"name\":\"Is contained in Vpc\"}],\"configuration\":{\"description\":\"LabSG1\",\"groupName\":\"lab-environ-LabSG1-9qYiRSyJC4nN\",\"ipPermissions\":[{\"fromPort\":80,\"ipProtocol\":\"tcp\",\"ipv6Ranges\":[],\"prefixListIds\":[],\"toPort\":80,\"userIdGroupPairs\":[],\"ipv4Ranges\":[{\"cidrIp\":\"0.0.0.0/0\"}],\"ipRanges\":[\"0.0.0.0/0\"]},{\"fromPort\":443,\"ipProtocol\":\"tcp\",\"ipv6Ranges\":[],\"prefixListIds\":[],\"toPort\":443,\"userIdGroupPairs\":[],\"ipv4Ranges\":[{\"cidrIp\":\"0.0.0.0/0\"}],\"ipRanges\":[\"0.0.0.0/0\"]}],\"ownerId\":\"245221346334\",\"groupId\":\"sg-0f8cc6b91623f1ac6\",\"ipPermissionsEgress\":[{\"ipProtocol\":\"-1\",\"ipv6Ranges\":[],\"prefixListIds\":[],\"userIdGroupPairs\":[],\"ipv4Ranges\":[{\"cidrIp\":\"0.0.0.0/0\"}],\"ipRanges\":[\"0.0.0.0/0\"]}],\"tags\":[{\"key\":\"aws:cloudformation:stack-name\",\"value\":\"lab-environ\"},{\"key\":\"aws:cloudformation:stack-id\",\"value\":\"arn:aws:cloudformation:us-east-1:245221346334:stack/lab-environ/cff4e2e0-de83-11f0-9e19-12888ae6b969\"},{\"key\":\"Name\",\"value\":\"LabSG1\"},{\"key\":\"aws:cloudformation:logical-id\",\"value\":\"LabSG1\"}],\"vpcId\":\"vpc-0f8096c79661cae64\"},\"supplementaryConfiguration\":{},\"tags\":{\"aws:cloudformation:stack-name\":\"lab-environ\",\"aws:cloudformation:stack-id\":\"arn:aws:cloudformation:us-east-1:245221346334:stack/lab-environ/cff4e2e0-de83-11f0-9e19-12888ae6b969\",\"aws:cloudformation:logical-id\":\"LabSG1\",\"Name\":\"LabSG1\"},\"configurationItemVersion\":\"1.3\",\"configurationItemCaptureTime\":\"2025-12-21T16:49:40.718Z\",\"configurationStateId\":1766335780718,\"awsAccountId\":\"245221346334\",\"configurationItemStatus\":\"OK\",\"resourceType\":\"AWS::EC2::SecurityGroup\",\"resourceId\":\"sg-0f8cc6b91623f1ac6\",\"resourceName\":\"lab-environ-LabSG1-9qYiRSyJC4nN\",\"ARN\":\"arn:aws:ec2:us-east-1:245221346334:security-group/sg-0f8cc6b91623f1ac6\",\"awsRegion\":\"us-east-1\",\"availabilityZone\":\"Not Applicable\",\"configurationStateMd5Hash\":\"\",\"resourceCreationTime\":null,\"configurationItemDeliveryTime\":null,\"recordingFrequency\":null},\"notificationCreationTime\":\"2025-12-21T16:52:19.333Z\",\"messageType\":\"ConfigurationItemChangeNotification\",\"recordVersion\":\"1.3\"}",
+2025-12-21T16:52:45.912Z
+"ruleParameters": "{\"debug\":\"true\"}",
+2025-12-21T16:52:45.912Z
+"resultToken": "eyJlbmNyeXB0ZWREYXRhIjpbOTAsNzksNTMsOTQsMjYsLTcxLC0zNSwxNyw4NiwxNCwxMTUsODUsLTEwMCw4MiwxMDksMiwtMTIsLTI1LC01NCwtODcsMTEsLTEyNywtMTIwLC0xMTksMTA1LC00MSw1OCwtODksLTc0LC02NywxMTIsNjgsOCw2NSwtMTA2LC0xMjAsLTU5LDM1LC04Miw4NSw5NywtMTEwLDI1LDgyLDcyLDI2LDMxLC01NSw4NiwxMywtMTExLC0yMiwyMywtNDIsMTIzLDY5LDQsOTUsLTE2LDE0LDk2LC0xMTUsLTEzLC04OSwxNywtMTI3LC0zOCwxMTUsLTM5LC0yNywtODQsLTEwNCwtNDIsLTI3LDE2LC01NiwtMTgsMTIyLDEwOCwxMDgsNTUsLTQsNDUsLTEwNCwxMyw3NCwtMjYsLTEyMSwtMTE5LC02MCwtMjQsLTQ1LC02NSwyOSw1MCwtNzAsOTIsMTA2LC04LDc1LDc3LC01NiwtMiwtNzIsLTIsLTExOSwtNTIsLTMyLDk1LDgwLDk5LC0xMDcsMiw5Miw2NiwtODcsLTM2LC05MiwtMTA2LDkxLC0xMCwxMjUsLTYwLDY4LDk1LC0xNiwtNjIsMTI2LC0zMSwtMTAyLC0zNCw2NCw1OSwtMTA3LC0xMTcsMzYsNzcsOTgsLTE3LDY1LC0xNiwtMzgsLTExMyw2NiwxMCw1NCwxMjAsLTExMiwtMTI4LC04MywtMzYsLTg5LC0yMywtNjYsLTg0LC0xMTIsNywyOSwtMzksOTQsLTE5LDczLDgsMTEwLC04NywxMTMsNCwzOCwtMjIsLTQzLDQzLC05LDE2LDg5LDExNiwtNjQsLTExMyw1NiwtMjIsNzYsNTMsNiwxMjYsMjksLTkzLDEyMywtNjksNDUsLTUzLDEsLTIzLDk3LC0xMyw4OSwtMTA4LDksLTEyMyw3LC05Niw4LC04MiwyNCwxNiwtOTUsODQsLTk5LDEwMiwtNzcsNjUsNTksMTE1LC00LC01Nyw5MiwyNCw1MywtMTA4LC0xMDUsLTkwLDUxLC0yMywtMTIsNzcsODAsNTQsLTg4LC02MiwtMTA0LC00OSwtNjgsLTEwOCwtNSwtMjEsLTM0LC0xMDIsOTIsLTI1LDQ3LDMwLC0xMjQsLTEyNCw3NiwxMDMsMzEsNDYsLTExOCwtNDAsMTE0LC04OSwtNTAsLTY1LDEyMSw3MSwtNDEsMTI3LDM0LC0zMSwtODIsLTk0LC0zNywtNjIsLTYwLC03MiwtOTUsLTEyMSw5NywxMjMsMTEzLC01MiwtNyw4MiwyNSwxMSwtMTIwLDUwLDIyLC0xMCw5LDcxLC0zOSw1NCwtMTI0LDY2LDEwLC03NiwtMTE4LC05MSwtNjIsLTk1LDYxLDQsMTEyLDEwOCw5NSwtMjAsMTA4LDAsLTExOSwtMTIwLC04NiwtOTQsLTEyNCwtODksLTQwLDQ3LC03NSwtMTA0LDExMywtMTA2LC05OSwtNjUsMTI1LC0xMjAsLTI5LC0xMDUsLTg5LDI5LC0xMDMsLTIxLDExLDg2LC0xMDMsNzUsLTE2LC00NSwtMjYsLTE3LDkyLC00OCw0NCwtMTA2LC04LC03MiwzMCw1MywxNiwxMDUsLTUzLC05NiwtNDIsMTE0LDEwMSwtMTEwLC02MCw4OCwyMCwxMDgsLTQsOTksMTE4LDExOCwtOTUsLTcxLDE3LDE2LC0yMiwtNjgsLTY1LC0xMDAsLTMwLDQxLDM1LC05NiwtMzQsLTEwLDY4LDc0LC00OSw1OSw3MSwtOTUsMTI0LDg1LC0zLDc0LC0xMTAsLTc0LDEsNjIsLTg4LDE5LC0xMSwtOTcsMTEwLC00MywtMjUsLTg3LDEwMyw0MSwtMTI2LC0xMDAsMTEsMTgsMTEzLC03LDU3LC0xMTgsLTg4LDUxLC0xMTUsNDYsMjgsLTEwNSw4OCwtNDMsMzUsMjcsLTY2LDEyMSwxMSwzMywxMDgsLTY4LC0xMDcsLTI2LC00MiwtMjEsMzQsLTEwMiwtOTgsMjAsOSw5NiwtMTA2LDYsLTU0LC0xMTYsMjcsOTgsLTc3LDcwLDYyLC00LC0zOCwtODUsLTQyLC0xOSw1MywtNDAsODksLTEwNSwtMjIsOTMsNDIsNDQsLTIzLC0xMjMsNjksMTEsMjAsLTE3LC01MiwtNzksLTEyNiwtMTgsMzUsMTE2LDEyNCwtMjUsMzcsMjEsLTYzLC0zMCw1MiwyOSw4MiwtMzYsNTYsODgsODUsLTc0LC0yMCw2MCwtNjUsLTExNSw3OCwxMjYsMTI1LDI3LDg0LC0xMTgsMTEyLC04LDEyLDc0LC01NSwyMCwxMDUsLTMzLDEyLC0zNCwtMTEwLC0xMjcsNDUsOTUsLTY5LC0xMTQsLTExNCw5MCw0OSwtMTIsLTYyLDY2LC01MCw0LDMxLC0zNCwtNjQsMTA1LC0zOSwtMTIyLDQ3LDcwLDEyMSw3NiwtNjAsMjYsLTM3LDEyNiwtMTAxLC0xMjYsNTIsMjMsNzgsLTEwNCwtMjIsNjAsLTQ2LDgyLC04NSwtNDIsNDgsMTA5LC02Niw0Niw3LC05OCwxMSwtMTMsLTc5LDEwNywxMDMsLTEzLC0zOSwtMTA3LDc1LC0xMywxMDYsLTc3LC0zNSwtNTYsLTEwNCwxLDEwNSwxMDcsMTgsLTU3LC0xMjAsMTgsLTU5LDM4LC01NCwxMDUsNzYsNzYsMTIwLC00MywxMjcsNDcsLTcsNTUsMzcsMzksNjksMzcsLTExMSwtNzUsLTI2LC0yNyw3LC0zNSwtMTA2LDkxLDEyMiw3Myw1MCwtMTI1LC0xMDMsMTcsMTIxLDMyLDEyLDc2LDI3LC05MSwtODUsLTk0LDMyLC01NCw4NSwxMjYsMjIsLTg5LDYxLDY1LDI3LDUsLTMzLC0zNCwtNDQsMTE5LC0xMTEsNywtMzQsLTY3LC04OCw4NywtNzYsLTQ0LC0yMiw2Niw2NywtNzAsLTY4LDE1LDQ5LC02OCwtNzAsOTAsLTYzLC02MCwzMCw2LC05Nyw2NSw0NCwxNSwzMiw5MiwtNzEsOCwyNiwxMDYsLTYxLC02OSwtNDEsLTIyLDEwOCwzMyw3MywtMjAsNDEsLTc3LC0xMyw2NSwtNTMsLTg3LC0zOCw4OSwxLDU3LDEyMiwzNSwtMTI3LC01MCwtMTIzLC00Miw5MiwyLC04OCwxOSw4MiwtNTgsMTAyLC0yNCwxMTEsMTEyLDczLDE0LC01NiwtMTIyLC04MCw0NywxMTAsLTgyLC02MCwtNTQsNzMsMjMsLTMzLDExOCw1OSwtOTEsMjcsMTA4LDI2LC05NiwtNDQsMTEyLC04OCwtMTE4LDEyNSw3MCwtMTEyLDYyLC0xOSwxMjQsMTI0LC0zMCwtMTYsMTA2LC0xMjYsLTU1LDEwMCw0MCw2NiwtMTAyLDEwMywzNiw2Miw4MCw5LDE0LC01OCw5MCwtNzksNTQsLTQ0LDIzLC0zNywtMTI4LC0xMTIsMTExLDEwMiwtODAsMzEsOTJdLCJtYXRlcmlhbFNldFNlcmlhbE51bWJlciI6MSwiaXZQYXJhbWV0ZXJTcGVjIjp7Iml2IjpbNzYsMTA4LC0yOCwtNDMsLTEsMjAsOCwtNjAsLTExOCwtMTEyLC01NywzOCwxMTksMTI0LDY4LC0xMTBdfX0=",
+2025-12-21T16:52:45.912Z
+"eventLeftScope": false,
+2025-12-21T16:52:45.912Z
+"executionRoleArn": "arn:aws:iam::245221346334:role/AwsConfigRole",
+2025-12-21T16:52:45.912Z
+"configRuleArn": "arn:aws:config:us-east-1:245221346334:config-rule/config-rule-dzr4xs",
+2025-12-21T16:52:45.912Z
+"configRuleName": "EC2SecurityGroup",
+2025-12-21T16:52:45.912Z
+"configRuleId": "config-rule-dzr4xs",
+2025-12-21T16:52:45.912Z
+"accountId": "245221346334",
+2025-12-21T16:52:45.912Z
+"evaluationMode": "DETECTIVE"
+2025-12-21T16:52:45.919Z
+}
+2025-12-21T16:52:46.372Z
+('security group definition: ', '{\n "SecurityGroups": [\n {\n "GroupId": "sg-0f8cc6b91623f1ac6",\n "IpPermissionsEgress": [\n {\n "IpProtocol": "-1",\n "UserIdGroupPairs": [],\n "IpRanges": [\n {\n "CidrIp": "0.0.0.0/0"\n }\n ],\n "Ipv6Ranges": [],\n "PrefixListIds": []\n }\n ],\n "Tags": [\n {\n "Key": "aws:cloudformation:stack-name",\n "Value": "lab-environ"\n },\n {\n "Key": "aws:cloudformation:stack-id",\n "Value": "arn:aws:cloudformation:us-east-1:245221346334:stack/lab-environ/cff4e2e0-de83-11f0-9e19-12888ae6b969"\n },\n {\n "Key": "Name",\n "Value": "LabSG1"\n },\n {\n "Key": "aws:cloudformation:logical-id",\n "Value": "LabSG1"\n }\n ],\n "VpcId": "vpc-0f8096c79661cae64",\n "SecurityGroupArn": "arn:aws:ec2:us-east-1:245221346334:security-group/sg-0f8cc6b91623f1ac6",\n "OwnerId": "245221346334",\n "GroupName": "lab-environ-LabSG1-9qYiRSyJC4nN",\n "Description": "LabSG1",\n "IpPermissions": [\n {\n "IpProtocol": "tcp",\n "FromPort": 80,\n "ToPort": 80,\n "UserIdGroupPairs": [],\n "IpRanges": [\n {\n "CidrIp": "0.0.0.0/0"\n }\n ],\n "Ipv6Ranges": [],\n "PrefixListIds": []\n },\n {\n "IpProtocol": "tcp",\n "FromPort": 22,\n "ToPort": 22,\n "UserIdGroupPairs": [],\n "IpRanges": [\n {\n "CidrIp": "0.0.0.0/0"\n }\n ],\n "Ipv6Ranges": [],\n "PrefixListIds": []\n },\n {\n "IpProtocol": "tcp",\n "FromPort": 443,\n "ToPort": 443,\n "UserIdGroupPairs": [],\n "IpRanges": [\n {\n "CidrIp": "0.0.0.0/0"\n }\n ],\n "Ipv6Ranges": [],\n "PrefixListIds": []\n }\n ]\n }\n ],\n "ResponseMetadata": {\n "RequestId": "19a7e161-d060-4c15-93fe-ce8b8b4e4466",\n "HTTPStatusCode": 200,\n "HTTPHeaders": {\n "x-amzn-requestid": "19a7e161-d060-4c15-93fe-ce8b8b4e4466",\n "cache-control": "no-cache, no-store",\n "strict-transport-security": "max-age=31536000; includeSubDomains",\n "content-type": "text/xml;charset=UTF-8",\n "content-length": "1716",\n "date": "Sun, 21 Dec 2025 16:52:46 GMT",\n "server": "AmazonEC2"\n },\n "RetryAttempts": 0\n }\n}')
+2025-12-21T16:52:46.372Z
+('revoking for ', 'sg-0f8cc6b91623f1ac6', ', ip_permissions ', '[\n {\n "IpProtocol": "tcp",\n "FromPort": 80,\n "ToPort": 80,\n "UserIdGroupPairs": [],\n "IpRanges": [\n {\n "CidrIp": "0.0.0.0/0"\n }\n ],\n "Ipv6Ranges": [],\n "PrefixListIds": []\n },\n {\n "IpProtocol": "tcp",\n "FromPort": 22,\n "ToPort": 22,\n "UserIdGroupPairs": [],\n "IpRanges": [\n {\n "CidrIp": "0.0.0.0/0"\n }\n ],\n "Ipv6Ranges": [],\n "PrefixListIds": []\n },\n {\n "IpProtocol": "tcp",\n "FromPort": 443,\n "ToPort": 443,\n "UserIdGroupPairs": [],\n "IpRanges": [\n {\n "CidrIp": "0.0.0.0/0"\n }\n ],\n "Ipv6Ranges": [],\n "PrefixListIds": []\n }\n]')
+2025-12-21T16:52:46.649Z
+('authorizing for ', 'sg-0f8cc6b91623f1ac6', ', ip_permissions ', '[\n {\n "IpProtocol": "tcp",\n "FromPort": 80,\n "ToPort": 80,\n "UserIdGroupPairs": [],\n "IpRanges": [\n {\n "CidrIp": "0.0.0.0/0"\n }\n ],\n "PrefixListIds": []\n },\n {\n "IpProtocol": "tcp",\n "FromPort": 443,\n "ToPort": 443,\n "UserIdGroupPairs": [],\n "IpRanges": [\n {\n "CidrIp": "0.0.0.0/0"\n }\n ],\n "PrefixListIds": []\n }\n]')
+2025-12-21T16:52:47.179Z
+END RequestId: b00ab9d2-bab9-41ab-98cc-04861fe681df
+2025-12-21T16:52:47.179Z
+REPORT RequestId: b00ab9d2-bab9-41ab-98cc-04861fe681df Duration: 1267.87 ms Billed Duration: 1268 ms Memory Size: 128 MB Max Memory Used: 97 MB
+```
+
+
+Use the delete-configuration-recorder command:
+
+```
+$ aws configservice delete-configuration-recorder --configuration-recorder-name default
+```  
