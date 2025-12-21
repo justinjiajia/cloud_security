@@ -540,7 +540,6 @@ In this task, you observed evidence in the CloudWatch logs that AWS Config invok
 
  
 
-
 ## After-class task: Clean up all lab resources
 
  
@@ -558,13 +557,26 @@ In this task, you observed evidence in the CloudWatch logs that AWS Config invok
   > Note: Neither stopping nor deleting the recorder will delete the configuration history files already delivered to your Amazon S3 bucket. You must manage and delete those files separately if needed.
 
 
+2. Delete EC2SecurityGroup rule
 
-<img width="999" height="297" alt="image" src="https://github.com/user-attachments/assets/1adf27e7-6f05-47f4-be80-eb6233c6aee2" />
-Type confirm when you are prompted to confirm the deletion.
+- Go to the AWS Config Console.
 
-2. Delete the *lab-environment* stack
+- In the left navigation pane, choose *Resources*.
+
+- Search for the EC2 Security Group *LabSG1*.
+
+- Scroll down to find the *Rules* section.
+
+- Select *EC2SecurityGroup* and choose *Delete rule*.
+
+  <img width="700" alt="image" src="https://github.com/user-attachments/assets/1adf27e7-6f05-47f4-be80-eb6233c6aee2" />
+
+ - Type confirm when you are prompted to confirm the deletion.
+
+
+3. Delete the *lab-environment* stack
 
 - Navigate to the *CloudFormation* console.
 - On the *Stacks* page, select and delete all listed stacks in the reverse order of their creation.
    
- 
+  
