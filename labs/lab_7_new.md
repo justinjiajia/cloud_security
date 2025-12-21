@@ -633,3 +633,4 @@ Use the delete-configuration-recorder command:
 ```
 $ aws configservice delete-configuration-recorder --configuration-recorder-name default
 ```  
+https://canvas.ust.hk/courses/65501/assignments/410319
