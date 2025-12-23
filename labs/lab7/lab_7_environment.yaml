@@ -1,0 +1,374 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'AWS CloudFormation Template to create a VPC, Subnet, Security Group, IAM Roles, and a Lambda function for AWS Config to manage Security Group rules.'
+
+Parameters:
+  SubscriptionEmail:
+    Description: 'Email address to receive SNS notifications'
+    Type: String
+    AllowedPattern: '^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    ConstraintDescription: 'Must be a valid email address'
+
+  ITSCAccountString:
+    Description: 'The substring before @ in your UST email address'
+    Type: String
+
+
+Resources:
+
+  AwsConfigLambdaSGRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: AwsConfigLambdaSGRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: awsconfig_lambda_ec2_sg_role_policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - config:PutEvaluations
+                  - ec2:DescribeSecurityGroups
+                  - ec2:AuthorizeSecurityGroupIngress
+                  - ec2:RevokeSecurityGroupIngress
+                Resource: '*'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+
+  AwsConfigRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: AwsConfigRole
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - config.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: S3Access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject*
+                Resource:
+                  - arn:aws:s3:::*/AWSLogs/*/*
+                Condition:
+                  StringLike:
+                    s3:x-amz-acl: bucket-owner-full-control
+              - Effect: Allow
+                Action:
+                  - s3:GetBucketAcl
+                Resource: arn:aws:s3:::*
+        - PolicyName: SNSPublish
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sns:Publish
+                Resource:
+                  - !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:*-config-topic'                
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AWS_ConfigRole'
+
+
+  LabSG1:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: LabSG1
+      VpcId:
+        Ref: LabVPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Name
+        Value: LabSG1
+
+  LabVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      CidrBlock: 10.0.0.0/16
+      Tags:
+        - Key: Name
+          Value: Lab VPC
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref LabVPC
+      InternetGatewayId: !Ref InternetGateway
+
+  LabPublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LabVPC
+      MapPublicIpOnLaunch: true
+      CidrBlock: 10.0.1.0/24
+      Tags:
+        - Key: Name
+          Value: LabPublicSubnet
+
+  LabRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref LabVPC
+
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref LabRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  Subnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref LabPublicSubnet
+      RouteTableId: !Ref LabRouteTable
+
+  MyLambdaFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: 'evaluate_remediate_security_group'
+      Runtime: 'python3.12'
+      Handler: 'index.lambda_handler'
+      Role: !GetAtt AwsConfigLambdaSGRole.Arn
+      Code:
+        ZipFile: |
+
+          import boto3
+          import botocore
+          import json
+
+
+          APPLICABLE_RESOURCES = ["AWS::EC2::SecurityGroup"]
+
+          REQUIRED_PERMISSIONS = [
+          {
+              "IpProtocol" : "tcp",
+              "FromPort" : 80,
+              "ToPort" : 80,
+              "UserIdGroupPairs" : [],
+              "IpRanges" : [{"CidrIp" : "0.0.0.0/0"}],
+              "PrefixListIds" : []
+          },
+          {
+              "IpProtocol" : "tcp",
+              "FromPort" : 443,
+              "ToPort" : 443,
+              "UserIdGroupPairs" : [],
+              "IpRanges" : [{"CidrIp" : "0.0.0.0/0"}],
+              "PrefixListIds" : []
+          }]
+
+          def normalize_parameters(rule_parameters):
+              for key, value in rule_parameters.items():
+                  normalized_parameters = {}
+                  normalized_key=key.lower()
+                  normalized_value=value
+
+                  if normalized_value == "true":
+                      normalized_parameters[normalized_key] = True
+                  elif normalized_value == "false":
+                      normalized_parameters[normalized_key] = False
+                  else:
+                      normalized_parameters[normalized_key] = True
+
+              return normalized_parameters
+
+          def evaluate_compliance(configuration_item, debug_enabled):
+              if configuration_item["resourceType"] not in APPLICABLE_RESOURCES:
+                  return {
+                      "compliance_type" : "NOT_APPLICABLE",
+                      "annotation" : "The rule doesn't apply to resources of type " +
+                      configuration_item["resourceType"] + "."
+                  }
+
+              if configuration_item["configurationItemStatus"] == "ResourceDeleted":
+                  return {
+                      "compliance_type": "NOT_APPLICABLE",
+                      "annotation": "The configurationItem was deleted and therefore cannot be validated."
+                  }
+
+              group_id = configuration_item["configuration"]["groupId"]
+              client = boto3.client("ec2");
+
+              try:
+                  response = client.describe_security_groups(GroupIds=[group_id])
+              except botocore.exceptions.ClientError as e:
+                  return {
+                      "compliance_type" : "NON_COMPLIANT",
+                      "annotation" : "describe_security_groups failure on group " + group_id
+                  }
+
+              if debug_enabled:
+                  print(("security group definition: ", json.dumps(response, indent=2)))
+
+              ip_permissions = response["SecurityGroups"][0]["IpPermissions"]
+              authorize_permissions = [item for item in REQUIRED_PERMISSIONS]
+              revoke_permissions = [item for item in ip_permissions]
+
+              if authorize_permissions or revoke_permissions:
+                  annotation_message = "Permissions were modified."
+              else:
+                  annotation_message = "Permissions are correct."
+
+              if revoke_permissions:
+                  if debug_enabled:
+                      print(("revoking for ", group_id, ", ip_permissions ", json.dumps(revoke_permissions, indent=2)))
+
+                  try:
+                      client.revoke_security_group_ingress(GroupId=group_id, IpPermissions=revoke_permissions)
+                      annotation_message += " " + str(len(revoke_permissions)) +" new revocation(s)."
+                  except botocore.exceptions.ClientError as e:
+                      return {
+                          "compliance_type" : "NON_COMPLIANT",
+                          "annotation" : "revoke_security_group_ingress failure on group " + group_id
+                      }
+
+              if authorize_permissions:
+                  if debug_enabled:
+                      print(("authorizing for ", group_id, ", ip_permissions ", json.dumps(authorize_permissions, indent=2)))
+
+                  try:
+                      client.authorize_security_group_ingress(GroupId=group_id, IpPermissions=authorize_permissions)
+                      annotation_message += " " + str(len(authorize_permissions)) +" new authorization(s)."
+                  except botocore.exceptions.ClientError as e:
+                      print(("Error - "+ str(e)))
+                      return {
+                          "compliance_type" : "NON_COMPLIANT",
+                          "annotation" : "authorize_security_group_ingress failure on group " + group_id
+                      }
+
+              return {
+                  "compliance_type": "COMPLIANT",
+                  "annotation": annotation_message
+              }
+
+
+          def lambda_handler(event, context):
+              invoking_event = json.loads(event['invokingEvent'])
+              configuration_item = invoking_event["configurationItem"]
+              rule_parameters = normalize_parameters(json.loads(event["ruleParameters"]))
+
+              debug_enabled = False
+
+              if "debug" in rule_parameters:
+                  debug_enabled = rule_parameters["debug"]
+
+              if debug_enabled:
+                  print("Received event: " + json.dumps(event, indent=2))
+
+              evaluation = evaluate_compliance(configuration_item, debug_enabled)
+
+              config = boto3.client('config')
+
+              response = config.put_evaluations(
+                Evaluations=[
+                    {
+                        'ComplianceResourceType': invoking_event['configurationItem']['resourceType'],
+                        'ComplianceResourceId': invoking_event['configurationItem']['resourceId'],
+                        'ComplianceType': evaluation["compliance_type"],
+                        "Annotation": evaluation["annotation"],
+                        'OrderingTimestamp': invoking_event['configurationItem']['configurationItemCaptureTime']
+                    },
+                ],
+                ResultToken=event['resultToken'])
+
+      Timeout: 300
+  
+  # resource-based permission to allow AWS Config to invoke the Lambda function
+  LambdaPermission:
+    Type: "AWS::Lambda::Permission"
+    DependsOn: MyLambdaFunction
+    Properties:
+      FunctionName: !Ref MyLambdaFunction
+      Action: lambda:InvokeFunction
+      Principal: config.amazonaws.com
+      SourceAccount: !Ref AWS::AccountId
+
+  AWSConfigTopic:
+    Type: 'AWS::SNS::Topic'
+    Properties:
+      TopicName: !Sub 'ust-${ITSCAccountString}-config-topic'
+      DisplayName: 'EC2 SecurityGroup Change Notifications'
+
+  AWSConfigTopicPolicy:
+    Type: 'AWS::SNS::TopicPolicy'
+    Properties:
+      # The Topics property is a LIST of topic ARNs this policy applies to
+      Topics: [!Ref AWSConfigTopic]
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: AWSConfigSNSPolicy
+            Effect: 'Allow'
+            Principal:
+              AWS: '*'
+            Action: 'sns:Publish'
+            Resource: !Ref AWSConfigTopic
+            Condition:
+              StringEquals:
+                AWS:SourceOwner: !Ref AWS::AccountId            
+          - Sid: 'Statement3' 
+            Effect: 'Allow'
+            Principal:
+              AWS: '*'
+            Action:
+              - 'SNS:Subscribe'
+            Resource: !Ref AWSConfigTopic
+
+  EmailSubscription:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      Protocol: email-json
+      Endpoint: !Ref SubscriptionEmail
+      TopicArn: !Ref AWSConfigTopic
+      FilterPolicyScope: MessageBody
+      FilterPolicy:
+        messageType:
+          - ComplianceChangeNotification
+        resourceType:
+          - AWS::EC2::SecurityGroup
+
+        # The subscription filter policy below may generate too many notifications.
+
+        # $or:
+        #   - messageType: [ConfigurationItemChangeNotification]
+        #     configurationItem:
+        #       resourceType: [AWS::EC2::SecurityGroup]
+        #   - messageType: [ComplianceChangeNotification]
+        #     resourceType: [AWS::EC2::SecurityGroup]
+        # 
+        # Reference: https://docs.aws.amazon.com/sns/latest/dg/message-filtering-apply.html
+        # https://docs.aws.amazon.com/sns/latest/dg/and-or-logic.html#or-operator
+        # https://docs.aws.amazon.com/config/latest/developerguide/example-sns-notification.html
+
+Outputs:
+  LambdaFunctionARN:
+    Description: 'ARN of the Lambda function'
+    Value: !GetAtt MyLambdaFunction.Arn
+    Export:
+      Name: LambdaFunctionARN 

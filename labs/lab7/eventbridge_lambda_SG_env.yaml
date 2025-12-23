@@ -1,0 +1,389 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Create the lab environment for the logging and monitoring lab'
+
+Parameters:
+
+  ITSCAccountString:
+    Description: 'Email address to receive SNS notifications'
+    Type: String
+    AllowedPattern: '^[a-zA-Z0-9_-]+'  
+
+Resources:
+  
+  # 1. S3 Bucket for CloudTrail Logs
+  # Delete procedure: For Amazon S3 buckets, you must delete all objects in the bucket for deletion to succeed.
+  CloudTrailLogsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'ust-${ITSCAccountString}-cloudtrail-logs-${AWS::AccountId}'
+      # Required: Enable versioning for log file validation
+      VersioningConfiguration:
+        Status: Enabled
+      # Security best practice: Block public access
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+  
+  # 2. Bucket Policy to allow CloudTrail to write to it
+  CloudTrailBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref CloudTrailLogsBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: 'AWSCloudTrailAclCheck'
+            Effect: Allow
+            Principal:
+              Service: 'cloudtrail.amazonaws.com'
+            Action: 's3:GetBucketAcl'
+            Resource: !Sub 'arn:aws:s3:::${CloudTrailLogsBucket}'
+          - Sid: 'AWSCloudTrailWrite'
+            Effect: Allow
+            Principal:
+              Service: 'cloudtrail.amazonaws.com'
+            Action: 's3:PutObject'
+            Resource: !Sub 'arn:aws:s3:::${CloudTrailLogsBucket}/AWSLogs/${AWS::AccountId}/*'
+            Condition:
+              StringEquals:
+                's3:x-amz-acl': 'bucket-owner-full-control'
+    
+    # If you specify template parameter names or resource logical IDs, such as ${InstanceTypeParameter}, 
+    # CloudFormation returns the same values as if you used the Ref intrinsic function.
+
+
+  # 3. The CloudTrail Trail 
+  # Events like the AuthorizeSecurityGroupIngress API call can be sent directly 
+  # from CloudTrail to the default EventBridge event bus
+  MonitoringTrail:
+    Type: AWS::CloudTrail::Trail
+    DependsOn:
+      - CloudTrailBucketPolicy
+    Properties:
+      TrailName: !Sub 'ust-${ITSCAccountString}-monitoring-trail'
+      S3BucketName: !Ref CloudTrailLogsBucket
+      # To record events with one of the CloudTrail detail-type values, 
+      # you must enable a CloudTrail trail with logging.
+      # https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event-cloudtrail.html
+      # https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-log-api-call.html
+      IsLogging: true
+      EnableLogFileValidation: true
+      IncludeGlobalServiceEvents: true # Includes IAM, STS, CloudFront events
+      EventSelectors:
+        - IncludeManagementEvents: true
+          ReadWriteType: All
+      
+  RemediationEventBridgeRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: SGEventBridgeRule
+      EventPattern:
+        source:
+          - "aws.ec2"
+        detail-type:
+          - "AWS API Call via CloudTrail"
+        detail:
+          eventName:
+            - AuthorizeSecurityGroupIngress
+            - RevokeSecurityGroupIngress
+          eventSource:
+            - ec2.amazonaws.com
+      State: ENABLED
+      EventBusName: default
+      Targets:
+        - Id: !Sub '${AWS::StackName}-LambdaTarget'  # Id must be unique per target in the rule (if you have multiple targets)
+          Arn: !GetAtt RemediationLambdaFunction.Arn
+          RoleArn: !GetAtt EventBridgeInvokeRole.Arn
+
+
+  EventBridgeInvokeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: EventBridgeInvokeRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: events.amazonaws.com
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                AWS:SourceAccount: !Ref AWS::AccountId
+                AWS:SourceArn: !Sub 'arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/SGEventBridgeRule'     
+      Policies:
+        - PolicyName: EventBridgeInvokeLambdaPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource: !GetAtt RemediationLambdaFunction.Arn
+
+
+
+  RemediationLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: SGRemediationFunction
+      Runtime: python3.12
+      Handler: index.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          DEBUG_ENABLED: "true"
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import os
+          import botocore
+
+
+          REQUIRED_PERMISSIONS = [
+              {
+                  "IpProtocol": "tcp",
+                  "FromPort": 80,
+                  "ToPort": 80,
+                  "UserIdGroupPairs": [],
+                  "IpRanges": [{"CidrIp": "0.0.0.0/0"}],
+                  "PrefixListIds": []
+              },
+              {
+                  "IpProtocol": "tcp",
+                  "FromPort": 443,
+                  "ToPort": 443,
+                  "UserIdGroupPairs": [],
+                  "IpRanges": [{"CidrIp": "0.0.0.0/0"}],
+                  "PrefixListIds": []
+              }
+          ]
+
+
+          def lambda_handler(event, context):
+
+              # Enable debug logging if environment variable is set
+              debug_enabled = os.environ.get('DEBUG_ENABLED', 'false').lower() == 'true'
+
+              if debug_enabled:
+                  print("Received event: " + json.dumps(event, indent=2))
+
+              detail = event.get('detail', {})    
+              event_name = detail.get('eventName', '')  
+              print(f"triggering event: {event_name}")
+              evaluate_remediate(detail, debug_enabled)
+
+
+          def evaluate_remediate(detail, debug_enabled):
+
+              
+              group_id = detail["requestParameters"]["groupId"]
+              client = boto3.client("ec2")
+
+              try:
+                  # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2/client/describe_security_groups.html
+                  
+                  response = client.describe_security_groups(GroupIds=[group_id])
+                  
+              except botocore.exceptions.ClientError as e:
+                  print(f"Failed to describe security groups: {str(e)}")
+
+              
+              if debug_enabled:
+                  
+                  print(("security group definition: ", json.dumps(response, indent=2)))
+              
+
+              security_group = response['SecurityGroups'][0]
+              # Get current ingress permissions
+              current_permissions = security_group.get('IpPermissions', [])
+
+
+              # Find which required permissions are missing
+              authorize_permissions = []
+              for required_perm in REQUIRED_PERMISSIONS:
+                  found = False
+                  for current_perm in current_permissions:
+                      if permission_matches(required_perm, current_perm):
+                          found = True
+                          break
+                  if not found:
+                      authorize_permissions.append(required_perm)
+                  
+
+              revoke_permissions = []
+              for current_perm in current_permissions:
+                  is_required = False
+
+                          
+                  for required_perm in REQUIRED_PERMISSIONS:
+                      if permission_matches(current_perm, required_perm):
+                          is_required = True
+                          break
+                  if not is_required:
+                      revoke_permissions.append(current_perm)
+
+
+              if revoke_permissions:
+                  
+                  if debug_enabled:
+                      print(("revoking for ", group_id, ", ip_permissions ", json.dumps(revoke_permissions, indent=2)))
+
+                  try:
+                      client.revoke_security_group_ingress(GroupId=group_id, IpPermissions=revoke_permissions)
+                      annotation_message = str(len(revoke_permissions)) + " new revocation(s);"
+                      
+                  except botocore.exceptions.ClientError as e:
+                      print(f"revoke_security_group_ingress failure on group {group_id}; {str(e)}")
+
+
+              if authorize_permissions:
+                  
+                  if debug_enabled:
+                      
+                      print(("authorizing for ", group_id, ", ip_permissions ", json.dumps(authorize_permissions, indent=2)))
+
+                  try:
+                      client.authorize_security_group_ingress(GroupId=group_id, IpPermissions=authorize_permissions)
+                      annotation_message += " " + str(len(authorize_permissions)) +" new authorization(s)."
+                      
+                  except botocore.exceptions.ClientError as e:
+
+                      print(f"authorize_security_group_ingress failure on group {group_id}; {str(e)}")
+
+
+          def normalize_permission(permission):
+              """
+              Normalize a permission object for comparison
+              This handles variations in how permissions are represented
+              """
+              normalized = {
+                  # In AWS Security Groups, "IpProtocol": "-1" is a special value that means "ALL IP protocols".
+                  "IpProtocol": permission.get("IpProtocol", "-1").lower(),
+                  "FromPort": permission.get("FromPort", 0),
+                  "ToPort": permission.get("ToPort", 65535),
+                  "UserIdGroupPairs": sorted(
+                      [pair.get("GroupId", "") for pair in permission.get("UserIdGroupPairs", [])]
+                  ),
+                  "IpRanges": sorted([ip_range.get("CidrIp", "") for ip_range in permission.get("IpRanges", [])]),
+                  
+                  "PrefixListIds": sorted(
+                      [pid.get("PrefixListId", "") for pid in permission.get("PrefixListIds", [])]
+                  )
+              }
+              return normalized
+
+          def permission_matches(permission1, permission2):
+              """
+              Check if two permission objects match (considering normalization)
+              """
+              norm1 = normalize_permission(permission1)
+              norm2 = normalize_permission(permission2)
+              
+              # Compare key fields
+              if (norm1["IpProtocol"] != norm2["IpProtocol"] or
+                  norm1["FromPort"] != norm2["FromPort"] or
+                  norm1["ToPort"] != norm2["ToPort"]):
+                  return False
+              
+              # Compare IP ranges (simplified - check if 0.0.0.0/0 is in both)
+              ip_ranges1 = set(norm1["IpRanges"])
+              ip_ranges2 = set(norm2["IpRanges"])
+              
+              # Check if they have overlapping problematic ranges
+              if "0.0.0.0/0" in ip_ranges1 and "0.0.0.0/0" in ip_ranges2:
+                  return True
+              
+              # For more complex comparisons, we'd need to handle CIDR overlaps
+              # For now, just check exact match of CIDR lists
+              return ip_ranges1 == ip_ranges2
+
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: LambdaSGRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: lambda_ec2_sg_role_policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:DescribeSecurityGroups
+                  - ec2:AuthorizeSecurityGroupIngress
+                  - ec2:RevokeSecurityGroupIngress
+                Resource: '*'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+  
+  DemoSG1:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: DemoSG1
+      VpcId: !Ref DemoVPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Name
+        Value: Demo SG1
+
+  DemoVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      CidrBlock: 10.0.0.0/16
+      Tags:
+        - Key: Name
+          Value: Demo VPC
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref DemoVPC
+      InternetGatewayId: !Ref InternetGateway
+
+  DemoPublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref DemoVPC
+      MapPublicIpOnLaunch: true
+      CidrBlock: 10.0.1.0/24
+      Tags:
+        - Key: Name
+          Value: Demo PublicSubnet
+
+  DemoRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref DemoVPC
+
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref DemoRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  Subnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref DemoPublicSubnet
+      RouteTableId: !Ref DemoRouteTable
