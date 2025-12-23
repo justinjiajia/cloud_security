@@ -1,0 +1,166 @@
+
+# In recorder setup wizard:
+# Select AWS EC2 SecurityGroup for Resource type for recording
+# AWS Managed Rule: restricted-ssh
+# After the recorder is set up, choose Rules. Choose Action > Manage Remediation
+# Select AWS-DisableIncomingSSHOnPort22 to automatically remediate non-compliant resources
+# Configure IAM role and security groups needed for remediation
+# evernote contains the instructions to do this step by step
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Use AWS Config + SSM Automation runbooks to manage Security Group rules.
+
+
+Resources:
+
+  AwsConfigRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: AwsConfigRole
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - config.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: S3Access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject*
+                Resource:
+                  - arn:aws:s3:::*/AWSLogs/*/*
+                Condition:
+                  StringLike:
+                    s3:x-amz-acl: bucket-owner-full-control
+              - Effect: Allow
+                Action:
+                  - s3:GetBucketAcl
+                Resource: arn:aws:s3:::*
+        - PolicyName: SNSPublish
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sns:Publish
+                Resource:
+                  - !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:*-config-topic'               
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AWS_ConfigRole'          
+
+  AWSConfigAutoRemediationRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: AWSConfigAutoRemediationRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: 'ssm.amazonaws.com'
+            Action: 'sts:AssumeRole'
+      Policies:
+        - PolicyName: AWSConfigAutoRemediation
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: Statement1
+                Effect: Allow
+                Action:
+                  - 'ssm:SendAutomationSignal'
+                  - 'ssm:Get*'
+                  - 'ssm:CreateDocument'
+                  - 'ssm:UpdateDocumentMetadata'
+                  - 'ssm:StartChangeRequestExecution'
+                  - 'ssm:Describe*'
+                  - 'ssm:List*'
+                  - 'ec2:Describe*'
+                  - 'ec2:RevokeSecurityGroupIngress'
+                  - 'cloudwatch:Describe*'
+                Resource: '*'
+
+  OpenHTTPSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: LabSG1
+      VpcId:
+        Ref: LabVPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Name
+        Value: OpenHTTPSG
+
+  OpenSSHSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: OpenSSHSG
+      VpcId:
+        Ref: LabVPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Name
+        Value: OpenSSHSG
+
+  LabVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      CidrBlock: 10.0.0.0/16
+      Tags:
+        - Key: Name
+          Value: Lab VPC
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref LabVPC
+      InternetGatewayId: !Ref InternetGateway
+
+  LabPublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LabVPC
+      MapPublicIpOnLaunch: true
+      CidrBlock: 10.0.1.0/24
+      Tags:
+        - Key: Name
+          Value: LabPublicSubnet
+
+  LabRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref LabVPC
+
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref LabRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  Subnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref LabPublicSubnet
+      RouteTableId: !Ref LabRouteTable
+
+   
