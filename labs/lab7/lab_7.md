@@ -635,3 +635,12 @@ Use the delete-configuration-recorder command:
 $ aws configservice delete-configuration-recorder --configuration-recorder-name default
 ```  
 https://canvas.ust.hk/courses/65501/assignments/410319
+
+
+
+
+##  EventBridge + Lambda without using AWS Config
+
+
+https://github.com/justinjiajia/cloud_security/blob/main/labs/lab7/eventbridge_lambda_SG_env.yaml
+https://github.com/justinjiajia/cloud_security/blob/main/labs/lab7/code_analysis_aws_lambda_lab_7.ipynb
