@@ -404,19 +404,19 @@ CloudTrail logging is more detailed and structured than server access logging. C
 
 Both have events and fields that are not logged by the other.
 
-<img width="1420" height="1372" alt="image" src="https://github.com/user-attachments/assets/823fb149-906c-4c5c-b578-8a61e85e60f8" />
+<img width="700" src="https://github.com/user-attachments/assets/823fb149-906c-4c5c-b578-8a61e85e60f8" />
 
  
 
 | Server access logging | CloudTrail logging |
 |---|---|
-| Logs bucket and object operations using Amazon S3 APIs. | |
+| Logs bucket and object operations using Amazon S3 APIs. | Logs bucket and object operations using Amazon S3 APIs.|
 | Only enabled at the bucket level so actions such as creating or deleting a bucket will not be included. | Can be enabled to log at the account, bucket, and object level. |
 | Logs lifecycle transitions, expirations, and restores. | |
 | Logs keys in a batch delete operation. | |
 | Contains fields for Object Size, Total Time, Turn-Around Time, and HTTP Referrer for log records. | |
 | Logs authentication failures. | Does not deliver logs for requests that fail authentication, but includes logs for requests in which authorization fails and requests that are made by anonymous users. |
-| Only gives a canonical user ID for the user. | Gives more user identity details such as username, ARN, and account ID. |
 | Includes full payload details (such as the ACL definition). | |
-| Able to log a subset of objects (prefix) instead of the full bucket. | |
-| Able to filter what events should be logged. | |
+| Only gives a canonical user ID for the user. | Gives more user identity details such as username, ARN, and account ID. |
+| | Able to log a subset of objects (prefix) instead of the full bucket. |
+|  |Able to filter what events should be logged. |
