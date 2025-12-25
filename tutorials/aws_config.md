@@ -323,8 +323,122 @@ AWS Config works with numerous AWS services to extend its capabilities and provi
   When AWS Config detects a non-compliant resource, it can trigger an Automation document to correct the issue. For example, if a security group is found with overly permissive rules, an Automation document can automatically modify the rules to match your security requirements.
 
 
+
+
 - Amazon EventBridge
   AWS Config works with Amazon EventBridge to trigger automated responses to configuration changes and compliance events. This integration supports event-driven architecture for configuration management.
 
   EventBridge can detect AWS Config events and route them to target services based on rules you define. With this capability, you can build sophisticated workflows that respond to specific configuration changes or compliance violations, such as creating tickets, sending alerts, or executing remediation scripts.
+
+
+
+## Integration considerations
+
+When integrating AWS Config with other services, consider security, scalability, and data management requirements to help ensure optimal performance and reliability.
+
+
+- Security
+
+  Use IAM roles and policies to manage service access to AWS Config, implement encryption for sensitive data, and follow security best practices for authentication. Regularly audit access patterns and permissions to maintain a strong security posture. Consider implementing additional security layers such as VPC endpoints or private links where applicable to minimize exposure to public networks.
+
+ 
+
+- Scalability
+
+  Design integrations with AWS Config to handle varying workloads by implementing proper error handling and retry mechanisms. Monitor service quotas and request increases when needed to accommodate growth. Use asynchronous processing patterns where appropriate to decouple components and improve system resilience during peak loads.
+
+ 
+
+- Monitoring
+
+  Set up comprehensive monitoring for AWS Config using Amazon CloudWatch metrics and create appropriate alarms to detect potential issues early. Implement logging for troubleshooting and optimization, and consider setting up dashboards to visualize key performance indicators. Establish automated notification systems to alert teams when predefined thresholds are exceeded.
+
+
+
+## Check your knowledge
+
+ 
+
+1. What is an element of AWS Config service architecture?
+
+
+- Initial detection through continuous monitoring
+- Data encryption at rest and in transit
+- Regional replication of configuration data
+- Monthly configuration auditing schedules
+
+ 
+The AWS Config service architecture includes initial detection as a core component where configuration changes are continuously monitored in the AWS environment.
+
+2. What is a service that integrates with AWS Config?
+
+
+- AWS Rekognition
+
+- AWS AppSync
+
+- Amazon Polly
+- AWS Systems Manager
+
+ 
+AWS Systems Manager integrates with AWS Config to automate remediation of non-compliant resources when compliance issues are detected.
+
+# AWS Config Demonstrations
+
+ 
+
+By the end of this lesson, you will recognize how to use the AWS Management Console to perform the basic functions of AWS Config.
+
+This lesson contains the following demonstrations:
+
+- Setting Up AWS Config
+
+- Configuring AWS Config Rules
+
+- Exploring the AWS Config Dashboard and Findings
+
+- Deleting AWS Config Resources
+
+Note: Performing the following demonstrations in an AWS account can have an associated cost. To avoid incurring fees, do not perform these demonstrations in your AWS environment. If you choose to perform the demonstrations in your environment, you will need to clean up any resources you create to avoid incurring additional unwanted fees.
+
+https://www.youtube.com/watch?v=1LbONxEu8JM
+
+https://www.youtube.com/watch?v=zHYwtCWPanM
+https://www.youtube.com/watch?v=zl6Uk-QDMxk
+https://www.youtube.com/watch?v=eVrdHxHcwuM
+
+
+### AWS Config user guides
+
+To learn more information about AWS Config, review the following.
+
+https://docs.aws.amazon.com/config/
+https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html
+
+### Use cases and best practices for AWS Config
+
+To learn more about the use cases and best practices for implementing AWS Config, review the following.
+
+[AWS Config blogs](https://aws.amazon.com/blogs/mt/category/management-tools/aws-config/)
+
+  
+[AWS RE:POST](https://repost.aws/)
+
+
+[AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
+
+The AWS Well-Architected Framework helps you understand the pros and cons of decisions you make while building systems on AWS. 
+
+ 
+### AWS Config pricing
+
+To learn more about pricing for AWS Config, review the following.
+
+[AWS Config pricing](https://aws.amazon.com/config/pricing/)
+
+  
+[AWS Pricing Calculator](https://calculator.aws/#/)
+To estimate the cost for your architecture solution, choose PRICING CALCULATOR.
+
+
 
