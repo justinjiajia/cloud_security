@@ -1,4 +1,5 @@
-<img width="1680" height="391" alt="image" src="https://github.com/user-attachments/assets/aea1ed00-de74-44a1-a824-c67712fa9c8d" />https://skillbuilder.aws/learn/531665225Z/auditing-amazon-simple-storage-service-amazon-s3-security
+ 
+https://skillbuilder.aws/learn/531665225Z/auditing-amazon-simple-storage-service-amazon-s3-security
 
 
 # Introduction to auditing Amazon S3 security
@@ -110,7 +111,7 @@ AWS CloudTrail is a service that provides records of actions taken by a user, ro
 You can use CloudTrail to audit your account by logging and monitoring all activity. You can also use CloudTrail to detect unusual activity in your account. 
 
 
-<img width="1000" src="https://github.com/user-attachments/assets/d84144cb-e4b7-479c-9932-b244e6ac458b" />
+<img width="800" src="https://github.com/user-attachments/assets/d84144cb-e4b7-479c-9932-b244e6ac458b" />
 
 ### Why use CloudTrail for logging S3 actions
 
@@ -127,7 +128,7 @@ You do not need to manage any infrastructure with Athena, and you pay only for t
 
 ### Why use Amazon Athena for analyzing logs
 
-<img width="1680" height="406" alt="image" src="https://github.com/user-attachments/assets/5cb79d52-8aeb-4446-b8e4-e1e8f8cef27f" />
+<img width="800" src="https://github.com/user-attachments/assets/5cb79d52-8aeb-4446-b8e4-e1e8f8cef27f" />
 
 Actions taken on your S3 bucket get logged and then those logs can be analyzed by Amazon Athena.
 Once you enable server access logs and store them in your target S3 bucket, you might want to analyze or search through them. 
@@ -170,6 +171,252 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/LogFormat.html
 
 - Step 1:
 
-  <img width="1106" height="399" alt="image" src="https://github.com/user-attachments/assets/ca5635f3-b977-4ff4-aa87-c169773d8d61" />
+  <img width="800" src="https://github.com/user-attachments/assets/ca5635f3-b977-4ff4-aa87-c169773d8d61" />
 
-  In the buckets list of the Amazon S3 console, select the bucket you would like to enable server access logging for. 
+  In the buckets list of the Amazon S3 console, select the bucket you would like to enable server access logging for.
+
+- Step 2
+  
+  <img width="1095" height="329" alt="image" src="https://github.com/user-attachments/assets/c0de46bc-dae1-4c77-b2d1-6e4dc3bbd839" />
+
+  Select Properties.
+
+- Step 3
+  <img width="800" src="https://github.com/user-attachments/assets/5775f3a8-4459-406f-8aa1-6db9bc410a10" />
+  In the Server access logging section, select Edit.
+
+- Step 4
+  
+  <img width="800" src="https://github.com/user-attachments/assets/baa321f5-69b0-41b5-a12d-50aa855129c0" />
+
+
+  Under Server access logging, select Enable. Enter the name of the target S3 bucket you want to receive the log record objects. (The target bucket must be in the same account and Region as the source bucket and must not have a default retention period(opens in a new tab) configuration.)
+  Select Save changes.
+
+- After a few hours, you can see logs in your target bucket.
+
+
+### Analyzing server access logs with Amazon Athena
+
+To analyze server access logs with Amazon Athena, you need to create a structure. In Athena, you can create a database and then create a table that points to your target S3 bucket.
+
+Once you have set up your table, you can use SQL commands in Athena to query your access logs.
+
+<img width="1680" height="406" alt="image" src="https://github.com/user-attachments/assets/405a0d12-8582-4278-ab5e-67a44b281970" />
+
+
+https://www.youtube.com/watch?v=NZ8P5imrfGU
+
+https://repost.aws/knowledge-center/analyze-logs-athena
+
+
+# Using AWS CloudTrail
+
+## Components of CloudTrail
+
+ 
+- Event
+  A record of an activity in an AWS account.
+  
+  - Management events (control plane operations): Management operations performed on resources such as security or logging operations.
+    Management events are enabled by default.
+    
+  - Data events (data plane operations): Resource operations performed on resources such as getting or putting objects in an S3 bucket.
+    Data operations are disabled by default.
+
+- Trail
+
+  A trail enables CloudTrail to deliver log files to an Amazon S3 bucket, CloudWatch logs, and CloudWatch events.
+
+
+- Log bucket
+
+  The target S3 bucket where logs files are delivered.
+
+## Logs
+
+CloudTrail logs contain detailed API tracking for your operations. The log files are JSON files that can include records for each event.
+
+https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-record-contents.html
+
+Example log record:
+
+```json
+"eventVersion": "1.08",
+"userIdentity": {
+    "type": "AssumedRole",
+    "principalId": "ABCDEFGHIJKLMN1234567:AMSPortalWebsite+P-username",
+    "arn": "arn:aws:sts:: 111222333444:assumed-role/MyAdminAccess/AMSPortalWebsite+P-username",
+    "accountId": "111222333444",
+    "accessKeyId": "ABCDEFGHIJKLMNOPQRST",
+    "sessionContext": {
+        "sessionIssuer": {
+            "type": "Role",
+            "principalId": "ABCDEFGHIJKLMN1234567",
+            "arn": "arn:aws:iam:: 111222333444:role/MyAdminAccess",
+            "accountId": "111222333444",
+            "userName": "MyAdminAccess"
+        },
+        "webIdFederationData": {},
+        "attributes": {
+            "mfaAuthenticated": "false",
+            "creationDate": "2020-12-03T13:33:46Z"
+        }
+    }
+},
+"eventTime": "2020-12-03T13:40:55Z",
+"eventSource": "s3.amazonaws.com",
+"eventName": "GetBucketVersioning",
+"awsRegion": "us-east-1",
+"sourceIPAddress": "72.0.2.3",
+"userAgent": "[S3Console/0.4, aws-internal/3 aws-sdk-java/1.11.888 Linux/4.9.217-0.3.ac.206.84.332.metal1.x86_64 OpenJDK_64-Bit_Server_VM/25.262-b10 java/1.8.0_262 vendor/Oracle_Corporation]",
+"requestParameters": {
+    "bucketName": "testloggingbucket123",
+    "Host": "s3.amazonaws.com",
+    "versioning": ""
+},
+"responseElements": null,
+"additionalEventData": {
+    "SignatureVersion": "SigV4",
+    "CipherSuite": "ECDHE-RSA-AES128-SHA",
+    "bytesTransferredIn": 0,
+    "AuthenticationMethod": "AuthHeader",
+    "x-amz-id-2": "2s9K0NCVoGyvMhvlGeS+iQscrRVT3/1wSt5NFGAgOoYJPqkuFHnyvXOrA9PlU=",
+    "bytesTransferredOut": 113
+},
+"requestID": "38B1A4190D231413",
+"eventID": "13f1b7af-8770-4185-871f-ed554f9821dd",
+"readOnly": true,
+"resources": [
+    {
+        "accountId": "111222333444",
+        "type": "AWS::S3::Bucket",
+        "ARN": "arn:aws:s3:::testloggingbucket123"
+    }
+],
+"eventType": "AwsApiCall",
+"managementEvent": true,
+"eventCategory": "Management",
+"recipientAccountId": "111222333444",
+"vpcEndpointId": "vpce-a11b22c"
+```
+
+## Amazon S3 API calls logged with CloudTrail
+
+CloudTrail can log three different levels of Amazon S3 API calls:
+
+- account-level actions
+
+  These are actions in Amazon S3 that apply to the full account and not specific objects or buckets.
+  For example, getting the PublicAccessBlock configuration for your account.
+
+
+- bucket-level actions
+  These are actions that are taken on S3 buckets.  For example, changing a bucket policy.
+
+
+- object-level actions
+  These are actions that are taken on objects in an Amazon S3 bucket. For example, putting, getting, or deleting objects.
+
+By default, account-level and bucket-level actions are recorded with CloudTrail. CloudTrail logging for object-level actions can be enabled by configuring CloudTrail in the properties of the bucket.
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/cloudtrail-logging.html  
+
+### Enabling object-level logging
+
+- Step 1
+
+  <img width="1302" height="694" alt="image" src="https://github.com/user-attachments/assets/f7d6f8f1-65d2-4395-ba5d-acf314ca98e0" />
+
+  Open the AWS CloudTrail console and choose Dashboard from the navigation menu.
+
+- Step 2
+
+  Select Create trail.
+
+- Step 3
+
+  <img width="800" src="https://github.com/user-attachments/assets/82fe6d9e-075f-4fdb-84c2-76657d7ccbb5" />
+
+  Choose trail attributes including a trail name and a target S3 bucket for the logs. Then select Next.
+
+- Step 4
+
+  <img width="800" src="https://github.com/user-attachments/assets/32e0458d-ef84-4c8b-897c-8e24e11eabc7" />
+
+  Choose the log types you would like. For object-level logging, check the checkbox for Data events.
+
+- Step 5
+
+
+  <img width="864" height="550" alt="image" src="https://github.com/user-attachments/assets/96bfdd86-3549-4f79-ab56-21f0644d4d58" />
+
+  Under Data events, choose S3 as the data event source. 
+  You can leave data event logging on for all buckets, or choose an individual bucket.
+  Select Next when you finish adding all your log events.
+
+- Step 6
+
+  Review your trail and select Create trail.
+
+
+## Analyzing CloudTrail logs with Amazon CloudWatch
+
+In addition to sending CloudTrail logs to Amazon S3, you can also send them to Amazon CloudWatch. 
+
+Using CloudWatch, you can monitor the logs and take specific actions based on the logs, such as invoking an AWS Lambda function, or sending an SNS notification. 
+
+You can also use CloudWatch to search through your logs to filter events based on specific criteria.  
+
+<img width="800" src="https://github.com/user-attachments/assets/0dfd6822-31a6-42b1-ad16-1bfb2e2de172" />
+
+
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SearchDataFilterPattern.html
+
+CloudWatch log insights can also be used to query specific log fields to sort or filter your logs. This can help you visualize the data.
+
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html
+
+
+## Analyzing CloudTrail logs with Amazon Athena
+
+Using Athena with CloudTrail logs is even easier than server access logs. With server access logs, you had to go to the Athena console to create a database and table, but with CloudTrail logging, Athena will automatically create a table for you.
+
+To use Athena with CloudTrail logs, simply go to the CloudTrail event history and select Run advanced queries in Amazon Athena.
+
+Once your table is set up in Amazon Athena, you can then query your logs.
+
+<img width="1680" height="721" alt="image" src="https://github.com/user-attachments/assets/de15c770-c18e-40e3-a203-938b892e4b9e" />
+
+https://www.youtube.com/watch?v=SSB5q0lAP0Q
+
+https://repost.aws/knowledge-center/athena-tables-search-cloudtrail-logs
+
+https://repost.aws/knowledge-center/find-cloudtrail-object-level-events
+
+
+# Comparing server access logging to CloudTrail logging
+
+
+While Amazon S3 server access logging and CloudTrail object-level logging might seem similar, there are a few distinct differences.
+
+CloudTrail logging is more detailed and structured than server access logging. CloudTrail logging is more advanced, but also has additional costs.
+
+Both have events and fields that are not logged by the other.
+
+<img width="1420" height="1372" alt="image" src="https://github.com/user-attachments/assets/823fb149-906c-4c5c-b578-8a61e85e60f8" />
+
+ 
+
+| Server access logging | CloudTrail logging |
+|---|---|
+| Logs bucket and object operations using Amazon S3 APIs. | |
+| Only enabled at the bucket level so actions such as creating or deleting a bucket will not be included. | Can be enabled to log at the account, bucket, and object level. |
+| Logs lifecycle transitions, expirations, and restores. | |
+| Logs keys in a batch delete operation. | |
+| Contains fields for Object Size, Total Time, Turn-Around Time, and HTTP Referrer for log records. | |
+| Logs authentication failures. | Does not deliver logs for requests that fail authentication, but includes logs for requests in which authorization fails and requests that are made by anonymous users. |
+| Only gives a canonical user ID for the user. | Gives more user identity details such as username, ARN, and account ID. |
+| Includes full payload details (such as the ACL definition). | |
+| Able to log a subset of objects (prefix) instead of the full bucket. | |
+| Able to filter what events should be logged. | |
