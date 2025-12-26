@@ -131,12 +131,15 @@ in account 123456789010 was rejected. You can refer to the Amazon Virtual Privat
 
 <img width="898" height="121" alt="image" src="https://github.com/user-attachments/assets/dd048d6a-d58a-4e14-92dc-4ef7b9804c3b" />
 
-1.
-<img width="305" height="220" alt="image" src="https://github.com/user-attachments/assets/a56b83df-32e5-4d46-98a0-18380b3afb95" />
+1. account-id
 
-2.
-<img width="315" height="148" alt="image" src="https://github.com/user-attachments/assets/7a96ed08-dfff-4268-8ba6-43589cba4498" />
+  The AWS account ID of the owner of the source network interface for which traffic is recorded.
+  If the network interface is created by an AWS service (for example, when creating a VPC endpoint or Network Load Balancer), the record may display unknown for this field.
+ 
+2. interface-id
 
+   The ID of the network interface for which the traffic is recorded.
+ 
 3.
 <img width="315" height="213" alt="image" src="https://github.com/user-attachments/assets/b955fd00-4a7d-48de-81ba-457121591846" />
 
