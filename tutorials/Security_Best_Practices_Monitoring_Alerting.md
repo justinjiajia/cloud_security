@@ -923,6 +923,211 @@ With CloudTrail logging back on, it can automatically resolve the finding in the
 
 <img width="1673" height="665" alt="image" src="https://github.com/user-attachments/assets/38c3e449-61c9-4622-ae24-14e1ea1a9430" />
 
+<img width="838" height="366" alt="image" src="https://github.com/user-attachments/assets/410c5a6f-f2b4-43a6-908a-0b5cd5f7ce11" />
+
+1. Step 1
+
+   Integrated services send their findings to Security Hub.
+ 
+2. Step 2
+   From the Security Hub console, you’ll choose a custom action for a finding. Each custom action is then emitted as a CloudWatch event.
+
+3. Step 3
+   The CloudWatch event rule initiates a Lambda function. This function is mapped to a custom action based on the custom action’s Amazon Resource Name (ARN).
+
+4. Step 4
+   Depending on the particular rule, the Lambda function that is invoked will perform a remediation action on your behalf.
+
+
+   
+Read more about how to implement this auto remediation from the AWS security blog [Automated Response and Remediation with AWS Security Hub](https://aws.amazon.com/blogs/security/automated-response-and-remediation-with-aws-security-hub/).
 
 
   
+## Centralized logging solution overview
+
+The following diagram presents an architecture you can automatically deploy in about 30 minutes, using an implementation guide and accompanying CloudFormation templates (provided by AWS). This solution contains log ingestion, log indexing, and visualization. The implementation guide and CloudFormation template are provided free of charge; however, the customer is responsible for the cost of running and using various services contained within the solution.
+
+<img width="1377" height="873" alt="image" src="https://github.com/user-attachments/assets/5051d9e1-0570-4260-bf86-6d60f0a0cef9" />
+
+<img width="885" height="571" alt="image" src="https://github.com/user-attachments/assets/67b441a0-1380-4a0c-b7aa-305547d0b80d" />
+
+1. Log ingestion
+   
+   CloudWatch Logs destinations deploy in the primary account and are created with the required permissions in each of the selected Regions. CloudWatch Logs subscription filters can be configured for log groups to be streamed to the Centralized Logging account.
+
+2. Log indexing
+
+   A centralized Kinesis Data Streams and Kinesis Data Firehose are provisioned to index log events on the centralized Amazon OpenSearch Service domain. The CloudWatch Logs destinations created to stream log events have Kinesis Data Streams as their target. After the log events stream to Kinesis Data Streams, the service invokes a Lambda function to transform each log event to an Amazon OpenSearch Service document, which is then put into Kinesis Data Firehose. You can monitor Kinesis Data Firehose while it sends custom CloudWatch Logs containing detailed monitoring data for each delivery stream.
+
+3. Log indexing
+   A centralized Kinesis Data Streams and Kinesis Data Firehose are provisioned to index log events on the centralized Amazon OpenSearch Service domain. The CloudWatch Logs destinations created to stream log events have Kinesis Data Streams as their target. After the log events stream to Kinesis Data Streams, the service invokes a Lambda function to transform each log event to an Amazon OpenSearch Service document, which is then put into Kinesis Data Firehose. You can monitor Kinesis Data Firehose while it sends custom CloudWatch Logs containing detailed monitoring data for each delivery stream.
+
+   https://aws.amazon.com/solutions/
+   https://aws.amazon.com/solutions/implementations/centralized-logging-with-opensearch
+
+
+# Auditing Your AWS Environment
+ 
+## AWS Audit Manager
+
+Continuous assessments of your environment provide a way to maintain your security posture, compliance standing, and readiness for an audit. Audit Manager is a managed service that helps you to establish a framework of choice, along with standard or custom configuration for policies, procedures, and activities (known as controls).
+ 
+- Provides an automated and continuous process. 
+- Collects and reviews data. 
+- Assesses whether controls are operating effectively.
+  
+Continuous and automated gathering of evidence related to your EC2 instances and other AWS resources helps streamline risk assessment and compliance with regulations and industry standards. This process helps you maintain a continuous, audit-ready posture across your compute resources.   
+
+
+> The evidence that is collected through Audit Manager might not include all the information about your AWS usage that is needed for an audit performed by an enforcing entity. Audit Manager is a valuable resource but it is NOT a substitute for legal counsel or compliance experts.
+
+
+### Using Audit Manager
+
+With Audit Manager, you can build custom frameworks, either from scratch to address your organizational requirements or based on existing frameworks with your necessary modifications. You can use one of the many prebuilt frameworks available with the service if you don't require any modifications or additions to the assessment. Next, we will examine the steps in assessing your environment. 
+
+
+#### Choose a framework
+
+<img width="800" src="https://github.com/user-attachments/assets/9c317229-02e3-4209-8c3e-6a3224b7864e" />
+
+- There are numerous frameworks, specific to industry, location-based regulatory guidance, and international standards.
+
+- Here, you can see the NIST Cybersecurity Framework is selected.
+
+#### Exploring framework controls
+
+<img width="800" src="https://github.com/user-attachments/assets/0b62a047-ab20-4b00-982a-d69f8f822b07" />
+
+- Each framework has a number of controls assigned.
+- Controls are categorized by type and data source.
+- Data source is the service or artifact from which the evidence is derived.
+
+#### Define the audit scope by selecting:
+
+<img width="800" src="https://github.com/user-attachments/assets/baa89a88-cce3-4a68-a91b-2e068747a923" />
+
+- Accounts in scope
+- Services in scope
+- Audit owners
+
+>Audit owners drive the audit preparation across your organization and have full permission to manage the assessment they are assigned to.
+
+#### Gather evidence
+
+<img width="853" height="203" alt="image" src="https://github.com/user-attachments/assets/dec6be61-1013-45c2-8219-5132e234d093" />
+
+- Evidence is automatically collected and stored in folders with a default name of the date it was collected.  
+- You can also manually upload evidence. This is required by some control types.
+
+### Evidence folder summary
+
+The summary section provides a high-level overview of the items in the evidence folder.
+
+<img width="1630" height="406" alt="image" src="https://github.com/user-attachments/assets/a24933a6-dc89-483e-96e0-f1d7b1b1fc97" />
+
+1. Control name
+   The name of the control associated with the evidence folder
+
+2. Added to assessment report
+   The number of evidence items that were manually selected for inclusion in the assessment report
+
+3. Total evidence
+   The total number of evidence items in the evidence folder
+
+4. Resources
+   The total number of AWS resources that were assessed when generating the evidence in this folder
+
+5. User activity
+   The number of evidence items that fall under the user activity category; This evidence is collected from AWS cCloudTrail logs
+
+6. Configuration data
+   The number of evidence items that fall under the configuration data category;
+   this evidence is collected from configuration snapshots of other AWS services such as AWS EC2, Amazon S3, or IAM
+
+7. Manual
+   The number of evidence items that fall under the manual category; This evidence is uploaded manually
+
+8. Compliance check
+   The number of evidence items that fall under the compliance check category;
+   This evidence is collected from AWS Config or AWS Security Hub
+   
+9. Compliance check status
+   The number of issues that were reported directly from AWS Config, AWS Security Hub, or both.
+   
+### Compile a report
+
+After you select the evidence to include in your assessment report, you can generate the final assessment report to share with auditors.
+When you generate an assessment report, it is placed in the S3 bucket that you designated as your assessment report destination.
+For more information about generating a report, see the [Audit Manager User Guide](https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html).
+
+
+### Reducing effort
+
+The controls offered by Audit Manager through the prebuilt frameworks do not guarantee that you will pass an assessment associated with that framework. Instead, they help reduce effort and time in your assessment preparation and review. 
+In addition to Audit Manager, AWS Artifact should be used to help gather supplemental evidence to assist in the assessment preparation and review. 
+
+
+## AWS Trusted Advisor
+
+Trusted Advisor provides recommendations that help you follow AWS best practices. Trusted Advisor evaluates your account by using checks. These checks identify ways to optimize your AWS infrastructure, improve security and performance, reduce costs, and monitor service quotas. You can then follow the check recommendations to optimize your services and resources. Remember that Trusted Advisor is a passive service; it cannot perform remediation on its findings.
+
+ <img width="1170" height="628" alt="image" src="https://github.com/user-attachments/assets/59d53ece-6487-421f-a7ca-31cad573b44b" />
+
+
+The AWS Trusted Advisor dashboard
+
+Some of the security configuration checks of your AWS environment include: Open ports
+
+- Unrestricted access
+- CloudTrail logging
+- S3 bucket permissions
+- MFA
+- Password policy
+- DB access risk
+- DNS records
+- Load balancer config
+
+AWS Basic Support and AWS Developer Support customers can access core security checks and all checks for service quotas. AWS Business Support and AWS Enterprise Support customers can access all checks, including cost optimization, security, fault tolerance, performance, and service quotas. 
+For a complete list of checks and descriptions, see the [Trusted Advisor](https://aws.amazon.com/premiumsupport/technology/trusted-advisor/best-practice-checklist/) check reference. 
+
+
+## IAM credential report
+
+Verification is an important part of security. Are your users following security best practices? To prevent compromise in your environment, it is important that MFA is turned on for administrative-level users, passwords are regularly changed, and unused or stale credentials are being removed after they are no longer needed.
+
+To verify these and other security issues, you can generate a credential report that lists your IAM users and the status of their AWS security credentials. This can be download as a CSV file. These reports contain details such as whether MFA is activated, when their password was last rotated, and more. You can generate a new report as often as every 4 hours.
+
+<img width="1680" height="869" alt="image" src="https://github.com/user-attachments/assets/fdd76ba6-cd71-488e-8071-30dfbe9a9c2b" />
+An IAM credential report; highlighted areas show accounts where MFA has been turned on
+
+
+https://docs.aws.amazon.com/awssupport/latest/user/get-started-with-aws-trusted-advisor.html
+https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
+
+
+# Knowledge check
+
+1. Which services can VPC Flow Log records be published to? (SELECT TWO)
+
+- [x] Amazon CloudWatch Logs
+- Amazon DynamoDB
+- [x] Amazon S3
+- AWS CloudTrail
+- Amazon RDS
+
+ 
+The two destinations that VPC Flow logs can be published to are Amazon S3 and Amazon CloudWatch Log
+
+2. Which of the following may be used to capture the event history of user and API activity?
+
+- [x] AWS CloudTrail
+- VPC Flow Logs
+- Amazon CloudWatch
+- Amazon EventBridge
+
+ 
+AWS CloudTrail provides event history of user and API activity
+
+
