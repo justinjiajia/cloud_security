@@ -466,6 +466,7 @@ IAM policy changes take effect immediately after they are saved.
 
 <img width="652" height="487" alt="image" src="https://github.com/user-attachments/assets/728ee8a1-0ccc-4422-b1b0-a28c4f2ab323" />
 
+<img width="1162" height="739" alt="image" src="https://github.com/user-attachments/assets/2b7be89f-eb8e-427e-976f-6787c1aa8de1" />
 
 DIY Goals
 Troubleshoot the compliance officer's application errors.
