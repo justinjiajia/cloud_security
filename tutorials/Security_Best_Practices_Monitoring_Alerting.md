@@ -131,28 +131,41 @@ in account 123456789010 was rejected. You can refer to the Amazon Virtual Privat
 
 <img width="898" height="121" alt="image" src="https://github.com/user-attachments/assets/dd048d6a-d58a-4e14-92dc-4ef7b9804c3b" />
 
-1. account-id
+1. `account-id`
 
-  The AWS account ID of the owner of the source network interface for which traffic is recorded.
-  If the network interface is created by an AWS service (for example, when creating a VPC endpoint or Network Load Balancer), the record may display unknown for this field.
+   The AWS account ID of the owner of the source network interface for which traffic is recorded.
+   If the network interface is created by an AWS service (for example, when creating a VPC endpoint or Network Load Balancer), the record may display unknown for this field.
  
-2. interface-id
+2. `interface-id`
 
    The ID of the network interface for which the traffic is recorded.
  
-3.
-<img width="315" height="213" alt="image" src="https://github.com/user-attachments/assets/b955fd00-4a7d-48de-81ba-457121591846" />
+3. `srcaddr`
 
-4.
-<img width="313" height="210" alt="image" src="https://github.com/user-attachments/assets/992ad0e1-b451-4970-ae60-91256361c731" />
+   The source address for incoming traffic, or the IPv4 or IPv6 address of the network interface for outgoing traffic on the network interface.
+   The IPv4 address of the network interface is always its private IPv4 address.
+ 
 
-5. srcport: The source port of the traffic
-6. dstport: The destination port of the traffic
-7.
-   <img width="319" height="150" alt="image" src="https://github.com/user-attachments/assets/e1b0163b-eb70-44e7-b89f-21c2d93501f0" />
+5. `dataddr`
 
-8.
-<img width="316" height="291" alt="image" src="https://github.com/user-attachments/assets/7b2cdde9-aa0a-4a9a-8f72-351bd368a2b9" />
+   The destination address for outgoing traffic, or the IPv4 or IPv6 address of the network interface for incoming traffic on the network interface.
+   The IPv4 address of the network interface is always its private IPv4 address.
+
+6. `srcport`: The source port of the traffic
+
+7. `dstport`: The destination port of the traffic
+
+8. `protocol`
+
+   The Internet Assigned Numbers Authority (IANA) protocol number of the traffic.
+ 
+
+9. `action`
+
+   The action that is associated with the traffic:
+   - ACCEPT — The recorded traffic was permitted by the security groups and network access control lists (network ACLs).
+   - REJECT — The recorded traffic was not permitted by the security groups or network ACLs.
+ 
 
 ### Custom format
 
@@ -296,7 +309,9 @@ Review the [AWS CloudTrail Service Level Agreement](http://aws.amazon.com/cloudt
 
 
 - Security analysis: Perform security analysis and detect user behavior patterns by ingesting CloudTrail API call history into log management and analytics solutions such as CloudWatch Logs, CloudWatch Events, Athena, Amazon OpenSearch Service, or another third-party solution.
+  
 - Compliance aid: CloudTrail facilitates compliance with internal policies and regulatory standards by providing a history of API calls in your AWS account.
+  
 - Automated remediation: Detect data exfiltration by collecting activity data on S3 objects through object-level API events recorded in CloudTrail. After data is collected, use other AWS services, such as Amazon EventBridge and Lambda, to initiate response procedures.
 
 ## Log dissection
@@ -455,7 +470,7 @@ Example topology depicting log centralization without using AWS Organizations
 Example topology depicting log centralization using AWS Organizations
 
 - Turn on CloudTrail once in the management account and have it applied to all AWS accounts.
-- Log prefix changes from "/AWSLogs/<accountID>/" to "/AWSLogs/<OrganizationID>/".
+- Log prefix changes from `"/AWSLogs/<accountID>/"` to `"/AWSLogs/<OrganizationID>/"`.
 - There is no more updating of the bucket policy.
 
 Watch out for multiple trails when turning on CloudTrail in an existing organization.
@@ -468,4 +483,446 @@ Watch out for multiple trails when turning on CloudTrail in an existing organiza
 You can encrypt CloudTrail logs through AWS Key Management Service (AWS KMS). 
 By default, the files are encrypted using the S3 server-side encryption (SSE-S3) and then transparently decrypted when you read them. 
 Optionally, you can specify an AWS KMS key (SSE-KMS) and it will be used to encrypt your log files. 
+
+
+ <img width="800" src="https://github.com/user-attachments/assets/df915377-30f7-4d8d-8ff8-9708ec2d7fd6" />
+<img width="828" height="343" alt="image" src="https://github.com/user-attachments/assets/8b8d2021-9512-405a-88de-8460895c8336" />
+
+1. Create an AWS KMS key: Create or use an existing KMS key and apply key policy to allow AWS CloudTrail to encrypt and the SecOps engineers to decrypt the logs.
+
+2. Specify the KMS key: Specify the key to CloudTrail.
+3. Retrieve the object: Use the S3 GetObject API call to retrieve the desired log file.
+4. Decrypt the log files: The SecOps engineer uses the key to decrypt the log files.
+
+
+
+## Storing logs in Amazon S3
+
+<img width="1493" height="531" alt="image" src="https://github.com/user-attachments/assets/37147a50-b1e1-433a-89de-9d1444cb1604" />
+
+- A default descriptive folder structure makes it efficient to store log files from multiple accounts and Regions in the same S3 bucket.
+- A detailed log file name helps identify the contents of the log file.
+- A unique identifier in the file name prevents overwriting log files.
+
+
+### Amazon S3 lifecycle management
+
+You can define an S3 object lifecycle configuration rule to move log objects to different storage classes or delete them during their lifecycle, according to your security policy or regulatory requirements.
+
+A lifecycle configuration comprises a set of rules with predefined actions that you want Amazon S3 to perform on objects during their lifetime.
+
+- Transition actions
+
+  define when objects transition to another Amazon S3 storage class. For example, move a log object to the Amazon S3 Infrequent Access storage class 30 days after creation or archive objects to the S3 Glacier storage class 1 year after creation.
+  
+- Expiration actions
+  specify when the objects expire (are deleted) on your behalf.
+  Note: This option deletes all objects in the bucket that meet the criteria regardless of the file type. When an object has been expired, it cannot be recovered.
+
+
+#### Log storage lifecycle example
+
+Let's assume the following rule has been set up for a target bucket used to hold CloudTrail logs:
+
+<img width="1144" height="573" alt="image" src="https://github.com/user-attachments/assets/f6a4b607-ea99-47b1-8d5b-cb5074b3bcdf" />
+The movement and retrieval options available for CloudTrail logs based on a defined S3 lifecycle
+
+- Transition to Glacier 30 days after creation date.
+- Expire 100 days after creation date.
+
+
+ <img width="1437" height="290" alt="image" src="https://github.com/user-attachments/assets/9c4ef9be-9652-4096-adc8-839e4377717c" />
+<img width="834" height="135" alt="image" src="https://github.com/user-attachments/assets/b52c8394-daa7-4409-9f89-c4d653482445" />
+
+1. January 1
+   Day 0: The object is uploaded to the target bucket on January 1 and the creation date is set to the same date.
+
+2. January 31
+
+   Day 30: 30 days after the creation date, on January 31, the lifecycle policy takes effect and the object's storage class transitions to Glacier.
+
+3. April 11
+   Day 100: 100 days after the object's creation, on April 11 (non-leap year), the lifecycle policy takes effect and the object expires.
+
+
+### Integrity validation
+
+To determine whether a log file was modified, deleted, or unchanged after CloudTrail delivered it, you can use CloudTrail log file integrity validation. Validated log files are invaluable in security and forensic investigations. 
+
+This feature is built using industry standard algorithms: SHA-256 for hashing and SHA-256 with RSA for digital signing. You can use the AWS Command Line Interface (AWS CLI) to validate the files in the location where CloudTrail delivered them.
+
+Once you turn on log file integrity validation, CloudTrail will start delivering digest files on an hourly basis to the same S3 bucket where you receive your CloudTrail log files, but with a different prefix.
+
+CloudTrail log files are delivered to: `/optional_prefix/AWSLogs/AccountID/CloudTrail/*`
+
+CloudTrail digest files are delivered to: `/optional_prefix/AWSLogs/AccountID/CloudTrail-Digest/*`
+
+
+## CloudTrail best practices
+
  
+- Turn on in all Regions
+
+  - Unused Regions are tracked.
+  - A single configuration step is required.
+
+- Turn on log file validation
+  - Log file integrity is ensured.
+  - Validated log files are invaluable in security and forensic investigations.
+  - Industry standard algorithms (SHA-256 or SHA-256 with RSA) are used.
+  - CloudTrail starts delivering digest files on an hourly basis.
+  - Digest files contain hash values of log files delivered, signed by CloudTrail.
+
+- Encrypt logs
+  - Log files are encrypted using SSE-S3 by default.
+  - You can choose to encrypt using SSE-KMS.
+  - Amazon S3 will decrypt on your behalf if your credentials have decrypt permissions.
+
+- Integrate with CloudWatch Logs
+  - A simple search is provided.
+  - You can configure alerting on events.
+
+- Centralize logs from all accounts
+  - You can configure all accounts to send logs to a central security account.
+  - There is a reduced risk for log tampering.
+  - This can be achieved with AWS Organizations.
+  - This can be combined with S3 cross-Region replication.
+
+- Apply lifecycle policies to logging buckets
+  - This limits the storage costs of log files.
+  - This prevents manual pruning and the risk of altering of log files.
+  - You can automate archiving of log files for long-term storage.
+ 
+# Log Analytics
+ 
+## Amazon OpenSearch Service for Analytics
+
+Amazon OpenSearch Service streamlines the performance of interactive log analytics, real-time application monitoring, and more. 
+You can use Amazon OpenSearch Service to centralize and analyze logs from disparate applications and systems across your network and enhance threat detection and incident management.
+
+<img width="800" src="https://github.com/user-attachments/assets/855127be-f784-4708-9702-9e1ec1b48831" />
+
+<img width="800" src="https://github.com/user-attachments/assets/f7a2de8e-3a7b-4928-acda-5af594414794" />
+
+1. Capture, process, and load data into Amazon OpenSearch Service
+2. OpenSearch dashboards and kibana are built in
+3. Search, analyze, and visualize logs to get real-time insights
+
+   
+ OpenSearch Service is an open source, distributed search and analytics suite derived from Elasticsearch. Amazon OpenSearch Service offers the latest versions of OpenSearch, support for 19 versions of Elasticsearch (1.5 to 7.10 versions), and visualization capabilities powered by OpenSearch dashboards and Kibana (1.5 to 7.10 versions).
+
+### Loading streaming data into Amazon OpenSearch Service
+
+You can load streaming data into your Amazon OpenSearch Service from many different sources. Some sources, such as Amazon Kinesis Data Firehose and CloudWatch Logs, have built-in support for Amazon OpenSearch Service. Others, such as Amazon S3, Amazon Kinesis Data Streams, and Amazon DynamoDB, use Lambda functions as event handlers. The Lambda functions respond to new data by processing it and streaming it to your domain. See the [Amazon OpenSearch Service Developer Guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/integrations.html) for more information about delivering streaming data to the OpenSearch service. 
+
+
+### Amazon OpenSearch Service advantages
+
+- Secure log analysis: The service offers encryption, authentication, authorization, and auditing features. It includes integrations with Active Directory, LDAP, SAML, Kerberos, JSON web tokens, and more. Amazon OpenSearch Service also provides fine-grained, role-based access control to indices, documents, and fields. 
+
+- Compliance assistance
+
+- Support for multiple query languages: Amazon OpenSearch Service supports domain-specific language (DSL), OpenSearch SQL, and OpenSearch Piped Processing Language (PPL).
+
+
+- Integration with open source tools: OpenSearch and Kibana dashboards are built in. The service integrates with Logstach and allows direct access to Elasticsearch APIs and plugins such as Kuromoji, Phonetic Analysis, Ingest Processor Attachment, Ingest User Agent Processor, and Mapper Murmur3.
+
+
+- Event monitoring and alerting: Use machine learning anomaly detection based on the Random Cut Forest (RCF) algorithm to automatically detect anomalies as your data is ingested. Combine this with alerting to send notifications to stakeholders. 
+
+
+ ## OpenSearch and the ELK stack
+
+The ELK stack fulfills a need in the log analytics space, providing a log management and analytics solution for gaining valuable insights on failure diagnosis, application performance, and infrastructure monitoring. 
+
+Although you can choose to deploy and manage the ELK stack yourself with Apache 2.0 licensed versions of Elasticsearch and Kibana (up until version 7.10.2), there is an open source alternative to the ELK stack with OpenSearch, OpenSearch Dashboards, and Logstash through AWS.
+
+ 
+
+- E = Elasticsearch
+
+  Elasticsearch is a distributed search and analytics engine built on Apache Lucene. Support for various languages, high performance, and schema-free JSON documents makes Elasticsearch an ideal choice for various log analytics and search use cases.
+
+  On January 21, 2021, Elastic NV announced that they would change their software licensing strategy. New versions are not open source and do not offer users the same freedoms.
+
+  To ensure that the open source community and AWS users continue to have a secure, high-quality, fully open source search and analytics suite, AWS introduced the OpenSearch project, a community-driven, ALv2 licensed fork of open source Elasticsearch and Kibana.
+
+- L = Logstash
+
+  Logstash is an open source data ingestion tool to collect data from a variety of sources, transform it, and send it to your desired destination. With prebuilt filters and support for more than 200 plugins, Logstash users can ingest data regardless of the data source or type.
+
+  The open source version of Logstash (Logstash OSS) provides a convenient way to use the bulk API to upload data into your Amazon OpenSearch Service domain. The service supports all standard Logstash input plugins, including the Amazon S3 input plugin.
+
+  Amazon OpenSearch Service currently supports the following Logstash output plugins depending on your Logstash version, authentication method, and whether your domain is running Elasticsearch or OpenSearch:
+
+  - Standard Elasticsearch plugin
+
+  - logstash-output-amazon_es, which uses IAM credentials to sign and export Logstash events to OpenSearch Service
+
+  - logstash-output-opensearch, which currently only supports basic authentication  
+
+
+- K = Kibana
+  Kibana is a data visualization and exploration tool for reviewing logs and events. Kibana offers straightforward interactive charts, prebuilt aggregations and filters, and geospatial support. It is the preferred choice for visualizing data stored in Elasticsearch.
+
+  The open source successor for Kibana in OpenSearch is OpenSearch Dashboards. Amazon OpenSearch Service provides an installation of OpenSearch Dashboards with every Amazon OpenSearch Service domain.
+
+
+### Partner solutions
+
+In addition to the Amazon OpenSearch Service, there are numerous AWS Partners that offer services and products to enhance log processing and analytics. The AWS Partner Network (APN) and AWS Marketplace are robust resources for finding solutions to meet unique organizational requirements.
+
+<img width="1680" height="745" alt="image" src="https://github.com/user-attachments/assets/48fd779e-1106-48ae-b424-649147184745" />
+There are numerous Partner solutions available to enhance logging, analytics, and alerting, such as those depicted in the logos shown here.
+
+
+# Visibility with Amazon CloudWatch
+ 
+## Indicators of Compromise
+
+Indicators of Compromise (IoC) are largely similar in cloud environments to how they are in traditional IT environments. Alerting on anomalies is helpful in recognizing potential malware, malicious activities, or other indicators of a compromised system. Some of the types of anomalies that may be recognized through the use of CloudWatch alarms include:
+
+<img width="400" height="401" alt="image" src="https://github.com/user-attachments/assets/a6ff2f98-82ed-466f-ab71-51d261359b62" />
+A malware infection often produces indicators of compromise in the affected system.
+
+
+- Abnormal CPU utilization
+- Significant or sudden increases in database reads
+- HTML response sizes
+- Mismatched port-application traffic
+- Unusual DNS requests
+- Unusual outbound network traffic
+- Anomalies in privileged user account activity
+- Geographical irregularities (source or destination of traffic)
+- Unusually high traffic at irregular hours
+- Multiple, repeated, or irregular log-in attempts
+
+## CloudWatch Alarms
+
+You can create two types of alarms: a metric alarm and a composite alarm. 
+
+Metric alarms watch a single CloudWatch metric or the result of a math expression based on CloudWatch metrics. The alarm performs one or more actions based on the result, such as sending a notification to an Amazon SNS topic, performing an Amazon EC2 action or an Amazon EC2 Auto Scaling action, or creating an OpsItem or incident in AWS Systems Manager.
+
+A metric alarm has the following possible states:
+
+- OK – The metric or expression is within the defined threshold.
+
+- ALARM – The metric or expression is outside the defined threshold.
+
+- INSUFFICIENT_DATA – The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.
+
+### Composite alarms
+
+With composite alarms, you can combine multiple alarms into alarm hierarchies. This reduces alarm noise by initiating just once when multiple alarms are initiated at the same time. You can use this to provide an overall state for a grouping of resources such as an application, AWS Region, or Availability Zone.
+
+> Currently, composite alarms only support an action of notifying SNS topics. 
+
+
+<img width="400" height="401" alt="image" src="https://github.com/user-attachments/assets/e785502b-29c6-473e-b97e-23cb6f53b9e0" />
+> Attention: False positives and false negatives can be issues with logging. Composite alarms can help balance what you capture to reduce false positives and can catch false negatives based on an accumulation of other indicators.
+
+
+A single event in a complex environment can generate multiple alarms. A continuous large volume of alarms can overwhelm you or mislead the triage and investigation process. If this happens, you can end up dealing with alarm fatigue or wasting time reviewing false positives. 
+
+With composite alarms, you can add logic and group alarms into a single high-level alarm, initiated when the underlying conditions are met. This means you can introduce intelligent decisions and minimize false positives.
+
+Composite alarms are created using one or more alarm states combined with Boolean operators AND, OR, and NOT and constants TRUE and FALSE. A composite alarm is initiated when its expression evaluates to be TRUE.
+
+
+> False positive: An alert that incorrectly indicates that malicious activity is occurring.
+
+## Using CloudWatch anomaly detection 
+
+When you turn on anomaly detection for a metric, CloudWatch applies statistical and machine learning algorithms. These algorithms continuously analyze metrics of systems and applications, determine normal baselines, and surface anomalies with minimal user intervention.
+
+The algorithms generate an anomaly detection model. The model generates a range of expected values that represent normal behavior. With this feature, you can create anomaly detection alarms based on a metric's expected value. This type of metric alarm doesn't have a static threshold. Instead, the alarm compares the metric's value to the expected value based on the anomaly detection model. You can initiate an alarm when a metric value is above or below the band of expected values.
+
+<img width="544" height="183" alt="image" src="https://github.com/user-attachments/assets/84a5aff8-00a8-4084-9130-6b3b9d40faee" />
+
+A CPU utilization graph
+
+In a graph with anomaly detection, the expected range of values is shown as a wide gray band. If the metric's actual value goes beyond this band, it is shown as red (the points extending above the wide band) during that time.
+
+
+
+<img width="552" height="183" alt="image" src="https://github.com/user-attachments/assets/df6f9cb0-e9b0-4812-aafd-ec53152bef3b" />
+A CPU utilization graph with a baseline change
+
+
+
+Anomaly detection algorithms account for the seasonality and trend changes of metrics. 
+The seasonality changes could be hourly, daily, or weekly, as shown in this example.
+
+
+### Alarm actions
+
+You can specify what actions an alarm takes when it changes state between the `OK`, `ALARM`, and `INSUFFICIENT_DATA` states. 
+These actions may include one or many of the following:
+
+- Notify one or more people by sending a message to an Amazon SNS topic.
+- Perform EC2 actions (for alarms based on EC2 metrics).
+- Perform actions to scale an Auto Scaling group.
+- Initiate a Lambda function.
+- Create OpsItems in Systems Manager Ops Center or create incidents in AWS Systems Manager Incident Manager (performed only when the alarm goes into ALARM state).
+
+<img width="1333" height="749" alt="image" src="https://github.com/user-attachments/assets/5ce759e9-6724-41f1-b390-08e6fb5e722c" />
+API activity notification example
+
+
+### CloudWatch Synthetics
+ 
+- Synthetic Monitoring
+  You can use CloudWatch Synthetics to create canaries, configurable scripts that run on a schedule, to monitor your endpoints and APIs. 
+
+- Why use a canary?
+  Canaries follow the same routes and perform the same actions as a customer, which makes it possible for you to continually verify your customer experience even when you don't have any customer traffic on your applications. By using canaries, you can discover issues before your customers do! 
+
+- CloudWatch Synthetics Demo
+  CloudWatch Synthetics can be used to create canaries to monitor your endpoints and APIs. Synthetics canaries help you to continually verify your customer experience, discovering issues before your customers do and reacting quickly to fix them. You can use CloudWatch Synthetics to monitor your REST APIs, URLs, and website content, and perform checks for unauthorized changes from phishing, code injection, and cross-site scripting.  To learn more, view the demo video here https://www.youtube.com/watch?v=hF3NM9j-u7I
+
+
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
+
+
+# Enhancing Monitoring and Alerting
+ 
+## Amazon GuardDuty
+
+Logs are also a useful source of information for automated threat detection. GuardDuty is a managed, continuous security monitoring service that analyzes and processes events from several sources, such as VPC Flow Logs, CloudTrail management event logs, CloudTrail Amazon S3 data event logs, and DNS logs. It uses threat intelligence feeds, such as lists of malicious IP addresses and domains, and machine learning to identify unexpected and potentially unauthorized and malicious activity within your AWS environment. GuardDuty is a passive service; however, it can be used in a multi-service workflow to initiate remediation through Lambda or other AWS services and features.
+
+<img width="980" height="320" alt="image" src="https://github.com/user-attachments/assets/5ea5724f-6526-44df-9654-f15c4af56b06" />
+
+<img width="605" height="193" alt="image" src="https://github.com/user-attachments/assets/93da6049-9ee9-4191-a805-2c90e2163f4e" />
+
+1. Turn on GuardDuty
+   With a few clicks in the AWS Management Console, monitor all your AWS accounts without additional security software or infrastructure to deploy or manage.
+
+2. Continuously analyze
+   
+   Automatically analyze network and account activity at scale and provide broad, continuous monitoring of your AWS accounts. Review events through CloudTrail logs, VPC Flow Logs, and DNS logs.
+
+3. Intelligently detect threats
+
+   GuardDuty combines managed rule-sets, threat intelligence from AWS Security and third-party intelligence partners, anomaly detection, and machine learning to efficiently detect malicious or unauthorized behavior.
+
+4. Take action
+   Review detailed findings in the console, integrate into event management or workflow systems, or initiate Lambda for automated remediation or prevention.
+
+- One-click activation without architectural or performance impact
+- Continuous monitoring of AWS accounts and resources
+- Instant On provides findings in minutes
+- No agents, no sensors, no network appliances
+- Global coverage, regional results
+- Built-in anomaly detection with machine learning
+- Partner integrations for additional protections
+
+### GuardDuty data sources
+ 
+
+
+- DNS logs
+  - DNS logs are based on queries made from EC2 instances to known questionable domains.
+  - DNS logs are in addition to Route 53 query logs. Route 53 is not required for GuardDuty to generate DNS based findings.
+
+- VPC flow logs
+  - Flow logs for VPCs do not need to be turned on to generate findings. Data is consumed through independent duplicate stream.
+  - Turn on VPC Flow Logs to augment data analysis (charges apply).
+
+- CloudTrail events
+
+  - CloudTrail history of AWS API calls used to access the console, SDKs , AWS CLI, and so on, parsed by GuardDuty.
+  - Identification of user and account activity including source IP address is used to make the calls.
+
+
+Protect data wherever it goes. You can't protect what you don't know about, so visibility is key. You can combine visibility with continuous monitoring through GuardDuty.
+
+<img width="800" src="https://github.com/user-attachments/assets/f0abaa97-02eb-488b-9038-10a45340b90f" />
+An example workflow using GuardDuty that enhanced an organization's ability to respond to threats indicated by various logging systems
+
+
+### GuardDuty findings
+
+When GuardDuty detects suspicious or unexpected behavior, it generates a finding. A finding is a notification that contains the details about a potential security issue that GuardDuty discovers. One very useful piece of information in the finding details is a finding type. The purpose of the finding type is to provide a concise yet readable description of the potential security issue. 
+
+<img width="800" src="https://github.com/user-attachments/assets/de8105e5-a8a7-4bea-8ee5-1a9e612da22d" />
+
+Summary and line details for various findings detected by GuardDuty
+
+For example, the GuardDuty `UnauthorizedAccess:EC2/SSHBruteForce` finding type quickly informs you that somewhere in your AWS environment, an EC2 instance has been targeted by an attacker trying to gain access.
+
+https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-format.html
+
+
+## AWS Security Hub
+
+ 
+
+Security Hub is a fully managed AWS service offering that is turned on within a Region in minutes and aggregates findings across a customer's accounts. 
+
+With Security Hub, you can manage security and compliance findings in one location, reducing the time spent wrangling data from different locations within the AWS Management Console. 
+
+In addition to the default insights that are provided by AWS and AWS Partners, you can also create your own insights to track issues that are unique to their environment. This benefit provides you with a certain level of customization that can come in handy when dealing with company security requirements and regulations.
+
+### Security standards and controls
+
+Security Hub provides controls for the following standards.
+
+- Center for Internet Security (CIS) AWS Foundations
+
+- Payment Card Industry Data Security Standard (PCI DSS)
+
+- AWS Foundational Security Best Practices
+
+### Exploring CIS AWS Foundations
+
+Depending on your organization's needs, you may choose to select a standard such as the CIS AWS Foundations Benchmark standard. 
+Let's explore this standard and how Security Hub helps you to meet it.
+
+
+
+#### Compliance check
+
+<img width="904" height="502" alt="image" src="https://github.com/user-attachments/assets/f2e1185a-b43e-4f8e-af7f-6f97cba3af27" />
+Example CIS AWS Foundations compliance statistics from Security Hub
+
+<img width="1680" height="865" alt="image" src="https://github.com/user-attachments/assets/1f7cdb8d-8202-4e41-a192-f905f3a90898" />
+Example CIS AWS Foundations compliance rules
+
+<img width="1680" height="774" alt="image" src="https://github.com/user-attachments/assets/2cea944a-6f2b-4568-99a6-98045669a521" />
+Example CIS AWS Foundations compliance rule findings and details through AWS Security Hub
+
+
+Example of checks includes:
+
+- Ensure that no root account access key exists.
+- Ensure that multi-factor authentication (MFA) is turned on for all IAM users who have a console password.
+- Ensure that the S3 bucket CloudTrail logs to is not publicly accessible.
+- Security Hub conducts 43 continuous automated checks against CIS AWS Foundations Benchmark rules.
+- Custom actions and remediation can be setup to correct noncompliant rules and send notifications.
+ 
+### Remediation with Security Hub
+
+Security Hub integrates with EventBridge, helping you create custom response and remediation workflows. Response and remediation actions can be fully automated or they can be initiated manually in the console. You can also use Systems Manager Automation documents, AWs Step Functions, and Lambda functions to build automated remediation workflows that can be initiated from Security Hub.
+
+#### Auto or manual remediation?
+ 
+
+- Automatic remediation is best when there is a low risk of a negative impact to the workloads in the account. For example, you would not want an auto remediation that stops an EC2 instance because that could jeopardize your workload.
+  
+- Manual remediation is best for anything that has the potential to impact business objectives. This type of intervention is slower, but notifications can help expedite response. This is also an option that should be used to test newly created automatic remediations, before they are put into a production environment.
+
+> Even for low-impact workloads, automatic remediation should be thoroughly tested before being deployed into a production environment.
+
+
+#### Auto remediation example
+
+An example of a safe and good use for auto remediation is CloudTrail logging. It is a best practice to have CloudTrail logging on. If it is turned off, whether accidentally or maliciously, an auto remediation task could be set up to turn CloudTrail logging back on. 
+
+With CloudTrail logging back on, it can automatically resolve the finding in the Security Hub workflow status and send an SNS message to the security team to let them know it was remediated.
+
+
+<img width="1673" height="665" alt="image" src="https://github.com/user-attachments/assets/38c3e449-61c9-4622-ae24-14e1ea1a9430" />
+
+
+
+  
