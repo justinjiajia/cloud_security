@@ -1,4 +1,4 @@
-
+https://skillbuilder.aws/learn/S8ZA3HS5C9/aws-security-best-practices-monitoring-and-alerting
 
 # Course Introduction
  
@@ -1130,4 +1130,44 @@ The two destinations that VPC Flow logs can be published to are Amazon S3 and Am
  
 AWS CloudTrail provides event history of user and API activity
 
+3. Amazon CloudWatch Metrics can be used to alarm when certain metrics are exceeded. An exceeded metric may be an Indicator of Compromise (IoC). 
 
+
+
+Which of the following are common IoCs that can monitor with CloudWatch? (SELECT TWO)
+
+- Repeated attempts to access websites such as social media or streaming services
+- Insider threats copying information to personal drives
+- [x] Unusually high traffic at irregular hours
+- [x] Abnormal CPU utilization
+- Social engineering attempts such as phishing
+
+ 
+Abnormal CPU utilization and unusually high traffic at irregular hours may be indicators of compromise.
+
+CloudWatch Metrics cannot capture or alarm instances of insider threats copying information to personal drives or social engineering.
+
+Repeated attempts to access websites such as social media or streaming services alone are not indicators of compromise. 
+
+
+4. AWS CloudTrail can do provide all of the following except: 
+
+- Discover and troubleshoot security and operational issues by capturing a comprehensive history of changes that occurred in an AWS account
+- [x] Provide managed anomaly detection and automated response to alarms
+- Increase visibility into user and resource activity
+- Simplify compliance audits by automatically recording and storing activity logs for an AWS account
+
+ 
+AWS CloudTrails does not provide managed anomaly detection and automated response to alarms.
+
+5. AWS CloudTrail log file integrity validation is invaluable in security and forensic investigations. Which industry standard algorithm is used for validation hashing?
+
+- SHA-256
+- DES
+- MD5
+- AES
+
+ 
+SHA-256 is the industry standard algorithm used for validation hashing.
+
+ 
