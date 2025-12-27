@@ -5,12 +5,11 @@ https://skillbuilder.aws/learn/D579XW9VXM/aws-simulearn-lambda-security
 The head of the IT department wants a solution that helps ensure that the IT cloud infrastructure meets strict data security rules. The company requires that no company data is exposed to the public internet.
 
 
->Arnav Desai
-Hello! Thank you for coming. I am the head of the IT department, and I am worried about some security issues. We want to ensure that we meet our strict data security rules. In particular, our company requires that we expose no data to the public internet.
-You
-Sure. I am happy to help. Can you tell me more?
-Arnav Desai
-We recently migrated to a microservice architecture using AWS Lambda to build our applications. Our Lambda functions need to access an Amazon RDS database for data queries, and we aren't sure what configurations we need to meet our security requirements.
+> Arnav Desai: Hello! Thank you for coming. I am the head of the IT department, and I am worried about some security issues. We want to ensure that we meet our strict data security rules. In particular, our company requires that we expose no data to the public internet.
+
+> You: Sure. I am happy to help. Can you tell me more?
+
+> Arnav Desai: We recently migrated to a microservice architecture using AWS Lambda to build our applications. Our Lambda functions need to access an Amazon RDS database for data queries, and we aren't sure what configurations we need to meet our security requirements.
 You
 Let's start with Lambda. You can configure your Lambda functions to connect to private subnets in a virtual private cloud, which we call a VPC. After the Lambda function is VPC-enabled, you can securely access private resources, such as an Amazon RDS database.
 Arnav Desai
