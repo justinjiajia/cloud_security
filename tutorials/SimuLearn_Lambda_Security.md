@@ -1027,3 +1027,24 @@ After the object is in the bucket, you can open it, download it, and move it. Wh
 1. On your device, open the downloaded results.json file with a text editor or JSON viewer, and then review the Amazon RDS queried results.
 
 - The results include the people in the database with Toxicologist as their occupation.
+
+
+### DIY 
+
+DIY Goals
+Update the custom Amazon RDS query in the lambda_function code to find all people records with Data Scientist as the occupation.
+Run the Lambda function test event again.
+Make sure the new query results are placed into the provided DIY S3 bucket. 
+
+
+<img width="749" height="397" alt="image" src="https://github.com/user-attachments/assets/3403d2bc-9548-4f06-ad7e-ef7330d8608e" />
+
+Solution Validation Method
+Our test service will validate that your specified S3 bucket received the file that contains the results of the new custom query of the Amazon RDS database. 
+
+Hint: 
+1. Update the lambda_function code as follows:
+- Change the custom query in Amazon RDS to find records with Data Scientist as the occupation.
+- Change the S3 bucket name to the one that ends with -diy. Check the buckets in the Amazon S3 console. This DIY bucket was provisioned for you.
+
+2. The same gateway VPC endpoint that you created in the practice lab can be used here. There is no need to create another endpoint.
