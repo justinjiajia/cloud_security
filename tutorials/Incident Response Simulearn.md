@@ -1,3 +1,22 @@
+### Simulated business scenario
+
+A fast food security analyst wants to automate Amazon EC2 instance isolation in order to respond to security events in a timely manner.
+
+### Overview
+
+In this AWS SimuLearn assignment, you review a real-world scenario, helping a fictional customer design a solution on AWS.
+
+After the design is completed, you build the proposed solution through structured, step-by-step guidance in a lab within a live AWS Management Console environment.
+
+You gain hands-on experience working with AWS services, developing job-ready competencies using the same tools technology professionals use to construct AWS solutions.
+
+### How it works
+
+AWS SimuLearn is powered by generative AI to help develop your soft skills, such as communication and problem-solving, in life-like conversations with AI-generated customers. An AI quiz agent evaluates your conversation responses, and an AI helper agent, Dr. Newton, is available when you get stuck.
+
+After each solution-building conversation, you build and validate the solution in a live AWS Console environment, gaining practical skills with real-world application for career advancement.
+
+
 
 https://skillbuilder.aws/learn/S3RE7GSSBH/aws-simulearn-incident-response/
 
