@@ -150,7 +150,10 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 - This file can be used as a code reference in later steps if needed.
 
 2. Choose the checkbox to select the lambda_function.zip file.
-3. Click Copy S3 URI, and then paste it in the text editor of your choice on your device.
+
+ backup:  https://github.com/justinjiajia/cloud_security/blob/main/tutorials/resources/lambda_function.zip
+   
+4. Click Copy S3 URI, and then paste it in the text editor of your choice on your device.
 
 The content of the lambda_function_solution.py file
 
