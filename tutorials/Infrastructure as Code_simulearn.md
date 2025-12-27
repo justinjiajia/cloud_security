@@ -1,5 +1,8 @@
 
+https://skillbuilder.aws/learn/7G5R5VSXK1/aws-simulearn-infrastructure-as-code
 
+
+Incomplete due to the change due to the  conversion of the scheduler feature 
 
 ## Simulated business scenario
  
@@ -673,4 +676,5 @@ A rule can run in response to an event or at certain time intervals. For example
 
 ### Step 34
 
- 
+ <img width="1090" height="302" alt="image" src="https://github.com/user-attachments/assets/4bd10414-91bf-45ed-a8b4-4c1eb32e9a79" />
+
