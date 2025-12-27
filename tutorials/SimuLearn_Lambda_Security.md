@@ -10,24 +10,24 @@ The head of the IT department wants a solution that helps ensure that the IT clo
 > You: Sure. I am happy to help. Can you tell me more?
 
 > Arnav Desai: We recently migrated to a microservice architecture using AWS Lambda to build our applications. Our Lambda functions need to access an Amazon RDS database for data queries, and we aren't sure what configurations we need to meet our security requirements.
-You
-Let's start with Lambda. You can configure your Lambda functions to connect to private subnets in a virtual private cloud, which we call a VPC. After the Lambda function is VPC-enabled, you can securely access private resources, such as an Amazon RDS database.
-Arnav Desai
-I see. How about the database credentials? We do not want to hardcode the credentials in the Lambda function code. Is there a better way?
-You
-Absolutely! You can use AWS Secrets Manager to store the database credentials. Secrets Manager protects secrets, such as passwords, and you can rotate, manage, and retrieve secrets throughout their lifecycle.
-You
-The Lambda function can quickly retrieve the credentials with API calls to Secrets Manager.
-Arnav Desai
-Sounds great! However, if Lambda is in a private VPC subnet, how can we access other AWS services without going through the internet? We also need to access the Amazon S3 buckets in which we store the queried results.
-You
-No worries. You can use a VPC endpoint, which provides connections between a VPC and supported services, such as AWS Secrets Manager and Amazon S3, without requiring an internet gateway. Calling a service through a VPC endpoint keeps all the request traffic on the AWS network.
-You
-There are different types of VPC endpoints. To access Secrets Manager, for example, you can use an interface VPC endpoint.
-You
-To access your S3 buckets, you can create a gateway VPC endpoint that provides a private connection between the VPC and the S3 buckets. The traffic between your VPC and Amazon S3 does not leave the AWS network.
-Arnav Desai
-Fantastic! It sounds like your solution will help meet our security requirements.
+
+> You: Let's start with Lambda. You can configure your Lambda functions to connect to private subnets in a virtual private cloud, which we call a VPC. After the Lambda function is VPC-enabled, you can securely access private resources, such as an Amazon RDS database.
+
+> Arnav Desai: I see. How about the database credentials? We do not want to hardcode the credentials in the Lambda function code. Is there a better way?
+
+> You: Absolutely! You can use AWS Secrets Manager to store the database credentials. Secrets Manager protects secrets, such as passwords, and you can rotate, manage, and retrieve secrets throughout their lifecycle.
+
+> You: The Lambda function can quickly retrieve the credentials with API calls to Secrets Manager.
+
+> Arnav Desai: Sounds great! However, if Lambda is in a private VPC subnet, how can we access other AWS services without going through the internet? We also need to access the Amazon S3 buckets in which we store the queried results.
+
+> You: No worries. You can use a VPC endpoint, which provides connections between a VPC and supported services, such as AWS Secrets Manager and Amazon S3, without requiring an internet gateway. Calling a service through a VPC endpoint keeps all the request traffic on the AWS network.
+
+> You: There are different types of VPC endpoints. To access Secrets Manager, for example, you can use an interface VPC endpoint.
+
+> You: To access your S3 buckets, you can create a gateway VPC endpoint that provides a private connection between the VPC and the S3 buckets. The traffic between your VPC and Amazon S3 does not leave the AWS network.
+
+> Arnav Desai: Fantastic! It sounds like your solution will help meet our security requirements.
 
 
 
