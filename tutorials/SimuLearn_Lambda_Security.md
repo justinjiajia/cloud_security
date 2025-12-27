@@ -1,4 +1,8 @@
+https://skillbuilder.aws/learn/D579XW9VXM/aws-simulearn-lambda-security
 
+## Simulated business scenario
+
+The head of the IT department wants a solution that helps ensure that the IT cloud infrastructure meets strict data security rules. The company requires that no company data is exposed to the public internet.
 
 
 >Arnav Desai
