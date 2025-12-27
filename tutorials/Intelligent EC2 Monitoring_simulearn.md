@@ -1,3 +1,8 @@
+
+## Simulated business scenario
+
+The city’s IT department is organizing a cloud-based hackathon session for its employees. They want to prevent any unauthorized resource creation, especially Amazon EC2 instances, to mitigate potential cost issues and resource misuse. The department is looking for an efficient, cost-effective solution that safeguards against resource misuse while promoting effective resource management.
+
 https://skillbuilder.aws/learn/EPXBP3KKZV/aws-simulearn-intelligent-ec2-monitoring
 
 >Mateo Jackson
