@@ -85,9 +85,10 @@ In this task, you will use the VPC and more option in the VPC console to create 
    - Expand the Customize subnets CIDR blocks section
 
      - Change Public subnet CIDR block in us-east-1a to *10.0.0.0/24*
+       
      - Change Private subnet CIDR block in us-east-1a to *10.0.1.0/24*
 
-     <img width="370" height="431" alt="image" src="https://github.com/user-attachments/assets/b7abaaef-1bda-4cb1-b697-30499f210e52" />
+       <img width="370" height="431" alt="image" src="https://github.com/user-attachments/assets/b7abaaef-1bda-4cb1-b697-30499f210e52" />
 
        
 
@@ -98,7 +99,7 @@ In this task, you will use the VPC and more option in the VPC console to create 
    - Keep both DNS hostnames and DNS resolution enabled.
 
 
-   <img width="372" height="360" alt="image" src="https://github.com/user-attachments/assets/c9b6db18-aaa3-46bb-9818-e661aa254bc6" />
+     <img width="372" height="360" alt="image" src="https://github.com/user-attachments/assets/c9b6db18-aaa3-46bb-9818-e661aa254bc6" />
 
 
 
