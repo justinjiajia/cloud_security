@@ -32,6 +32,9 @@ In this lab you build the following infrastructure:
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_foundation/L2-architecture.png" alt="Architecture" />
 
 
+---
+
+<br>
 
 ## Task 1: Create Your VPC
 
@@ -151,7 +154,9 @@ The diagram below summarizes the VPC resources you have just created and how the
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_foundation/L2-task1.png" alt="Task 1" />
 
 ​         
+---
 
+<br>
  
 
 ## Task 2: Create Additional Subnets
@@ -249,7 +254,9 @@ Now, the VPC has public and private subnets configured in two Availability Zones
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_foundation/L2-task2.png" alt="Task 2" />
 
 
+---
 
+<br>
 
 
 
@@ -416,10 +423,13 @@ The complete architecture you deployed is:
 
 <img src="https://raw.githubusercontent.com/justinjiajia/img/refs/heads/master/aws/cloud_foundation/L2-end-architecture.png" alt="Architecture" />
 
+---
+
+<br>
 
 # Task 4: Connect to and Manage Your Amazon EC2 Instance
 
- In this task, you will establish a secure connection to your EC2 instance using the browser-based *EC2 Instance Connect*. Once connected, you will use the Linux command line to verify, stop, and restart the Apache web service.
+In this task, you will establish a secure connection to your EC2 instance using the browser-based *EC2 Instance Connect*. Once connected, you will use the Linux command line to verify, stop, and restart the Apache web service.
 
 
 
