@@ -1,6 +1,6 @@
 
 
-### How to set up your AWS CLI credential
+## How to set up your AWS CLI credential
 
 The credentials and config file are updated when you run the command `aws configure`. 
 The config file is located at *~/.aws/config* on Linux or macOS, or at *C:\Users\USERNAME\.aws\config* on Windows.
@@ -14,7 +14,7 @@ aws configure
 ```
 
 
-### How to create AWS member accounts in batches
+## How to create AWS member accounts in batches
 
 
 https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
@@ -94,11 +94,75 @@ OR payments:CreatePaymentInstrument and payments:UpdatePaymentPreferences permis
 Also, the member account must have IAM user access to billing enabled.
 
 
+Service control policies (SCPs) for member accounts to leave an organization
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:List*",
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:DeleteBucket",
+        "s3:DeleteObject*",
+        "s3:*BucketPolicy",
+        "sns:ListTopics",
+        "sns:Unsubscribe",
+        "sns:DeleteTopic",
+        "sns:SetTopicAttributes",
+        "sns:GetTopicAttributes",
+        "cloudtrail:DeleteTrail",
+        "cloudtrail:StopLogging",
+        "cloudtrail:ListTrails",
+        "cloudtrail:DescribeTrails",
+        "cloudwatch:DeleteAlarms",
+        "ec2:TerminateInstances",
+        "ec2:Describe*",
+        "ec2:DeleteVpc",
+        "ec2:DeleteSubnet",
+        "ec2:DeleteSecurityGroup",
+        "ec2:DetachInternetGateway",
+        "ec2:DeleteInternetGateway",
+        "ec2:DisassociateRouteTable",
+        "ec2:DeleteRouteTable",
+        "ec2:DeleteRoute",
+        "iam:DeleteRole",
+        "iam:DetachRolePolicy",
+        "iam:DeleteRolePolicy",
+        "iam:RemoveRoleFromInstanceProfile",
+        "iam:ListRoles",
+        "lambda:DeleteFunction",
+        "lambda:RemovePermission",
+        "lambda:ListFunctions",
+        "config:StopConfigurationRecorder",
+        "config:ListConfigurationRecorders",
+        "config:Describe*",
+        "config:DeleteConfigRule",
+        "organizations:DescribeOrganization",
+        "organizations:LeaveOrganization",
+        "cloudformation:ListStacks",
+        "cloudformation:DescribeStacks",
+        "cloudformation:DeleteStack",
+        "cloudformation:DescribeStackEvents",
+        "cloudformation:ListStackResources",
+        "logs:DescribeLogGroups",
+        "logs:DeleteLogGroup",
+        "aws-portal:ModifyBilling",
+        "aws-portal:ModifyPaymentMethods",
+        "payments:CreatePaymentInstrument",
+        "payments:UpdatePaymentPreferences"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
 
 
-
-
-###  Give an admin user billing access
+##  Give an admin user billing access
 
 1. Activate IAM Access (Root User): Sign in as the root user, go to the Account page, find "IAM user and role access to Billing information," and select Edit > Activate IAM access, then Update.
 
