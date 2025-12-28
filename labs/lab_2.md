@@ -129,16 +129,15 @@ In this task, you will use the VPC and more option in the VPC console to create 
 
 5. At the bottom of the screen, choose *Create VPC*.
 
-<img width="728" height="441" alt="image" src="https://github.com/user-attachments/assets/47d7d162-76a9-4d3d-aecd-35ee1c34802f" />
+   <img width="728" height="441" alt="image" src="https://github.com/user-attachments/assets/47d7d162-76a9-4d3d-aecd-35ee1c34802f" />
+
+
+   The VPC resources are created. The NAT Gateway will take a few minutes to activate. Please wait until all the resources are created before proceeding to the next step.
+
 
    
 
-The VPC resources are created. The NAT Gateway will take a few minutes to activate. Please wait until all the resources are created before proceeding to the next step.
-
-
-   
-
-6. Once it is complete, choose *View VPC*
+7. Once it is complete, choose *View VPC*
 
 
 
