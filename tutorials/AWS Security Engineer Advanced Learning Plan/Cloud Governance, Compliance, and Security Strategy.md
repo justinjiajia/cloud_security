@@ -1,6 +1,14 @@
 https://skillbuilder.aws/learn/B8J2BM84K4/aws-security-engineer--cloud-governance-compliance-and-security-strategy
 
 
+This course teaches you how to architect and manage security at scale by developing robust cloud governance frameworks and fostering a security-first organizational culture. You will learn strategic implementation techniques for AWS Config, Security Hub, and Audit Manager to establish automated compliance monitoring across your cloud infrastructure.
+
+The curriculum covers how to master evidence collection processes, perform architectural evaluations using the Well-Architected Framework, and develop continuous improvement strategies for ongoing security enhancement. By the end of this course, you will have gained the skills necessary to design secure, compliant, and efficient enterprise cloud environments with a proactive security approach.
+
+This course is part of the AWS Security Engineer Advanced Learning Plan. If you are preparing for this role please refer to the other courses in the learning plan as needed.
+
+
+
 # Course Overview
 Welcome! In this course, you will move beyond individual security services to master overarching strategies promoting organizational security at scale. You will learn to establish governance frameworks, foster security-first culture, and leverage AWS tools for automated compliance monitoring and audit readiness.
 
