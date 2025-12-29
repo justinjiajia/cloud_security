@@ -45,6 +45,7 @@ Various icons are used throughout this lab to call attention to different types 
 ---
  
 ## Lab environment
+
 The following diagram shows the basic architecture of the lab environment:
 
 <img width="747" height="464" alt="image" src="https://github.com/user-attachments/assets/fcdbe95a-d9ad-4564-98cc-c39e2054649c" />
@@ -128,7 +129,7 @@ One S3 bucket with a Resource identifier that starts with versioned-bucket- foll
 One S3 bucket with a Resource identifier that starts with versioned-logged-bucket- followed by a random number
 There are additional buckets in your inventory that are outside the scope of this lab. For example, the config-bucket was created when you set up AWS Config and is used for recording updates and actions taken by the service.
 
-    <img width="1011" height="548" alt="image" src="https://github.com/user-attachments/assets/d8b490f6-0f96-4907-a76c-41b9f1bcc06e" />
+ <img width="1011" height="548" alt="image" src="https://github.com/user-attachments/assets/d8b490f6-0f96-4907-a76c-41b9f1bcc06e" />
 
  Task complete: You have successfully identified resources in the inventory to manage using AWS Config.
 
