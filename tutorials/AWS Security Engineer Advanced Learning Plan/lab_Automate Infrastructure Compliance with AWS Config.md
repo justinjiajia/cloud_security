@@ -536,6 +536,5 @@ Used the AWS Config dashboard to monitor resource compliance.
 [s3-bucket-versioning-enabled rule](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-versioning-enabled.html)
 [s3-bucket-logging-enabled rule](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html)
 [Viewing Configuration Compliance](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_view-compliance.html)
-For more information about AWS Training and Certification, see https://aws.amazon.com/training/.
-
+ 
   
