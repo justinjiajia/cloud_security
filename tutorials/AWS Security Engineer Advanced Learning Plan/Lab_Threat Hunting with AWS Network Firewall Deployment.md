@@ -835,15 +835,16 @@ In this task, you use Amazon CloudWatch to identify rogue instances. CloudWatch 
      <img width="735" height="652" alt="image" src="https://github.com/user-attachments/assets/34e640d8-2bc9-4193-98d7-a7ae0a571b49" />
      
      Expected output:
-     ```
-     #	event.tls.sni	event.src_ip
-      1	www.example.net	10.1.1.230
-     ```
+     
+     |#	| event.tls.sni | event.src_ip|
+     |---|---|---|
+     |1	|www.example.net| 10.1.1.230| 
+ 
      This time only one result is returned, showing that an instance queried www.example.net.
 
-     Note: Recall that when you created your domain list, you connected to an EC2 instance and ran the following command to test your domain list: curl https://www.example.net --max-time 5. This alert corresponds to that command, so you can safely ignore it.
+     Note: Recall that when you created your domain list, you connected to an EC2 instance and ran the following command to test your domain list: `curl https://www.example.net --max-time 5`. This alert corresponds to that command, so you can safely ignore it.
 
-107. Now that we’ve concluded that the domain list is not responsible for the alerts, enter the following query to see if any of them were triggered by the IcmpAlert-RuleGroup:
+108. Now that we’ve concluded that the domain list is not responsible for the alerts, enter the following query to see if any of them were triggered by the IcmpAlert-RuleGroup:
      ```
      fields @timestamp, @message
      | filter event.proto like /ICMP/
@@ -856,7 +857,7 @@ In this task, you use Amazon CloudWatch to identify rogue instances. CloudWatch 
      - Searches for messages that contain the string ICMP
      - Sorts the results by IP address
 
-108. Choose the Run query button.
+109. Choose the Run query button.
 
      <img width="734" height="647" alt="image" src="https://github.com/user-attachments/assets/6968e218-fa2d-4289-82da-0c87034b50cf" />
      
