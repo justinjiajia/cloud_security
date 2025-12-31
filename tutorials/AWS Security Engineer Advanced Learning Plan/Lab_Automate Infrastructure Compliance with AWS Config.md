@@ -1,6 +1,6 @@
 https://skillbuilder.aws/learn/83BMEAWGUC/lab--automate-infrastructure-compliance-with-aws-config
 
-https://skillbuilder.aws/learning-plan/NTDPRSFC3F/aws-security-engineer-advanced-learning-plan-includes-labs
+
 
 # Automate Infrastructure Compliance with AWS Config
 
