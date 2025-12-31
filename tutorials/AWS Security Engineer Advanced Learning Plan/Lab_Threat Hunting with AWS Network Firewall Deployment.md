@@ -767,87 +767,81 @@ So far, so good. AnyCompany’s network has been re-architected using a hub-and-
 
 In this task, you use Amazon CloudWatch to identify rogue instances. CloudWatch provides multiple interfaces enabling administrators to query and visualize log data. Let’s start by configuring a Contributor Insights rule that looks for instances querying domains on your RestrictedDomains domain list.
 
-At the top of the AWS Management Console, in the search bar, search for and choose CloudWatch.
 
-In the panel on the left side of the screen, open the  Logs menu and select Contributor Insights.
+93. At the top of the AWS Management Console, in the search bar, search for and choose CloudWatch.
+94. In the panel on the left side of the screen, open the  Logs menu and select Contributor Insights.
 
-You are brought to the Contributor Insights page.
+    You are brought to the Contributor Insights page.
 
- Note: Contributor Insights helps you understand usage patterns by providing visualizations and summaries of your log data. It is ideal for examining logs with a large number of URLS, IP addresses or unique identifiers.
+    Note: Contributor Insights helps you understand usage patterns by providing visualizations and summaries of your log data. It is ideal for examining logs with a large number of URLS, IP addresses or unique identifiers.
 
-Choose the Create rule button.
+95. Choose the Create rule button.
+96. Configure a rule using the following parameters:
 
-Configure a rule using the following parameters:
+    - Select log group(s): Select the checkbox next to /Lab/Route53/QueryLogs.
+    - Rule type: Choose the radio button next to Custom rule.
+    - Log format: Choose the radio button next to JSON.
+    - Contribution: Choose the Add new key button and enter srcids.instance then choose the Add new key button again and enter query_name.
+    - Filters: Expand the  Filters menu and then press the Add new filter button and add the following filter:
 
-Select log group(s): Select the checkbox next to /Lab/Route53/QueryLogs.
-Rule type: Choose the radio button next to Custom rule.
-Log format: Choose the radio button next to JSON.
-Contribution: Choose the Add new key button and enter srcids.instance then choose the Add new key button again and enter query_name.
-Filters: Expand the  Filters menu and then press the Add new filter button and add the following filter:
-Match	Condition	Value
-firewall_rule_action	In	BLOCK
-Aggregation: Choose the radio button next to Count.
-At the bottom of the screen, choose the Next button.
+      | Match	| Condition |	Value|
+      |---|---|---|	
+      |	firewall_rule_action	|	In|		BLOCK|
+      
+    - Aggregation: Choose the radio button next to Count.
 
-In the Rule name field, enter Blocked-DNS-Queries.
+97. At the bottom of the screen, choose the Next button.
+98. In the Rule name field, enter `Blocked-DNS-Queries`.
+99. Scroll to the bottom of the page and choose the Next button.
+100. Review the rule settings and choose the **Create rule** button.
 
-Scroll to the bottom of the page and choose the Next button.
+     It takes several minutes before data begins to be captured by your rule. In the meantime, use CloudWatch Log Insights to see if the AWS Network Firewall has discovered any unusual traffic.
 
-Review the rule settings and choose the Create rule button.
+101. In the CloudWatch panel on the left of the screen, open the  Logs menu and select Log Insights.
 
-It takes several minutes before data begins to be captured by your rule. In the meantime, use CloudWatch Log Insights to see if the AWS Network Firewall has discovered any unusual traffic.
+     You are brought to the Log Insights console, which enables you to search your logs using query syntax.
 
-In the CloudWatch panel on the left of the screen, open the  Logs menu and select Log Insights.
+102. Recall that your AWS Network Firewall rule groups send data to a log group called /Lab/NetworkFirewall/Alert. Open the dropdown menu at the top of the Log Insights panel and select `/Lab/NetworkFirewall/Alert`.
 
-You are brought to the Log Insights console, which enables you to search your logs using query syntax.
-
-Recall that your AWS Network Firewall rule groups send data to a log group called /Lab/NetworkFirewall/Alert. Open the dropdown menu at the top of the Log Insights panel and select /Lab/NetworkFirewall/Alert.
-
- Command: Enter the following query in the text area to see if any of your rule groups triggered alerts:
-
-```
-fields @timestamp, @message
-| display event.timestamp
-```
-
-
- Note: The following list provides an explanation of how this query works:
-
-Selects fields @timestamp and @message from the logs
-Displays the timestamp for any matching logs
+103. Command: Enter the following query in the text area to see if any of your rule groups triggered alerts:
+     ```
+     fields @timestamp, @message
+     | display event.timestamp
+     ```
+     Note: The following list provides an explanation of how this query works:
+     - Selects fields @timestamp and @message from the logs
+     - Displays the timestamp for any matching logs
 
 
 104. Choose the Run query button.
 
-<img width="736" height="602" alt="image" src="https://github.com/user-attachments/assets/e122c124-abb4-4635-83a0-4ee481daa457" />
+     <img width="736" height="602" alt="image" src="https://github.com/user-attachments/assets/e122c124-abb4-4635-83a0-4ee481daa457" />
+     
+     The query returns a large number of matching logs from the Alert log group. Remember that not all matches are necessarily indicative of a threat. It requires further investigation to determine exactly what is going on. Let’s start by checking to see if any EC2 instances attempted to connect to the domains listed in the AWS Network Firewall domain list you created.
 
-The query returns a large number of matching logs from the Alert log group. Remember that not all matches are necessarily indicative of a threat. It requires further investigation to determine exactly what is going on. Let’s start by checking to see if any EC2 instances attempted to connect to the domains listed in the AWS Network Firewall domain list you created.
+105. Command: AWS Network Firewall assigns an alert signature to logs that match a rule group. You can use these alert signatures to filter your results. Update the query as follows:
+     ```
+     fields @timestamp, @message
+     | filter event.alert.signature like /denylisted FQDNs/
+     | display event.tls.sni, event.src_ip
+     ```
+     Note: The following list provides an explanation of how this query works:
+     - Selects fields @timestamp and @message from the logs
+     - Searches for alert signatures that contain denylisted FQDNs
+     - Displays the target FQDN and the source IP
 
- Command: AWS Network Firewall assigns an alert signature to logs that match a rule group. You can use these alert signatures to filter your results. Update the query as follows:
+106. Choose the Run query button.
 
-```
-fields @timestamp, @message
-| filter event.alert.signature like /denylisted FQDNs/
-| display event.tls.sni, event.src_ip
-```
- 
- Note: The following list provides an explanation of how this query works:
+     <img width="735" height="652" alt="image" src="https://github.com/user-attachments/assets/34e640d8-2bc9-4193-98d7-a7ae0a571b49" />
+     
+     Expected output:
+     ```
+     #	event.tls.sni	event.src_ip
+      1	www.example.net	10.1.1.230
+     ```
+     This time only one result is returned, showing that an instance queried www.example.net.
 
-Selects fields @timestamp and @message from the logs
-Searches for alert signatures that contain denylisted FQDNs
-Displays the target FQDN and the source IP
-Choose the Run query button.
-
-<img width="735" height="652" alt="image" src="https://github.com/user-attachments/assets/34e640d8-2bc9-4193-98d7-a7ae0a571b49" />
-
- Expected output:
-```
-#	event.tls.sni	event.src_ip
- 1	www.example.net	10.1.1.230
-```
-This time only one result is returned, showing that an instance queried www.example.net.
-
- Note: Recall that when you created your domain list, you connected to an EC2 instance and ran the following command to test your domain list: curl https://www.example.net --max-time 5. This alert corresponds to that command, so you can safely ignore it.
+     Note: Recall that when you created your domain list, you connected to an EC2 instance and ran the following command to test your domain list: curl https://www.example.net --max-time 5. This alert corresponds to that command, so you can safely ignore it.
 
 107. Now that we’ve concluded that the domain list is not responsible for the alerts, enter the following query to see if any of them were triggered by the IcmpAlert-RuleGroup:
      ```
