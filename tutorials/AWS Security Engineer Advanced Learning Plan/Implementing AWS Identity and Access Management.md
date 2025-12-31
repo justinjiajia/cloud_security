@@ -86,8 +86,47 @@ This account should never be used for daily operational tasks.
   5. Complete the MFA setup process
   6. Store backup codes securely
 
-Grant only the necessary permissions.
+## > Grant only the necessary permissions.
 
-Principle of Least Privilege: Minimizing security risk
+## Principle of Least Privilege: Minimizing security risk
 
-The principle of least privilege is fundamental to secure IAM management. Users should receive only the minimum permissions required to perform their specific job functions.
+The principle of least privilege is fundamental to secure IAM management. 
+Users should receive only the minimum permissions required to perform their specific job functions.
+
+- Example Scenario
+  A database administrator needs access to Amazon Relational Database Service (RDS) instances but doesn't require EC2 management capabilities. Rather than granting broad administrative access, provide only Amazon RDS-specific permissions such as `rds:DescribeDBInstances`, `rds:ModifyDBInstance`, and related database management actions.
+
+- Implementation steps
+  - Start with no permissions and gradually add only what's needed
+  - Regularly review and audit user permissions
+  - Use AWS managed policies when possible, as they're maintained and updated by AWS
+  - Create custom policies only when managed policies don't meet specific requirements
+  - Document the business justification for each permission granted
+
+
+## > Implement robust password policies to strengthen authentication security.
+
+## Strong password and access key management
+
+As your organization's cloud footprint grows, robust authentication is needed to protect against unauthorized access.
+
+- Password policy Configuration
+  Recommended Password Requirements:
+  - Minimum length: 14 characters
+  - Require uppercase and lowercase letters
+  - Require numbers and special characters
+  - Prevent password reuse for the last 12 passwords
+  - Set password expiration to 90 days maximum
+  - Account lockout after 5 failed login attempts
+
+
+
+
+- Access Key Rotation Strategy
+  Access Key Best Practices:
+  - Rotate access keys every 90 days
+  - Never embed access keys in application code
+  - Use IAM roles for applications running on AWS resources
+  - Monitor access key usage through CloudTrail
+  - Implement automated rotation using AWS Secrets Manager when possible
+  - Maintain an inventory of all active access keys
