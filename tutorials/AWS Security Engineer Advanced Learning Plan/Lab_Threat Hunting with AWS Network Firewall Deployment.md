@@ -893,11 +893,12 @@ In this task, you use Amazon CloudWatch to identify rogue instances. CloudWatch 
 
 It appears that you’ve identified another potentially compromised EC2 instance. Let’s take a closer look at the log message.
 
-Choose the  arrow next to any of the results to display the message.
+112. Choose the  arrow next to any of the results to display the message.
 
- Expected output: The log message should look similar to the image below:
+     Expected output: The log message should look similar to the image below:
 
-A log message displayed in Amazon Cloudwatch.
+     <img width="857" height="649" alt="image" src="https://github.com/user-attachments/assets/165f36cd-671f-4d97-bd39-17e431ac3214" />
+
 
 Image description: The preceding diagram shows an alert captured in Amazon Cloudwatch. The log message indicates that an instance was using the FTP protocol on port 443.
 
@@ -911,73 +912,75 @@ In the panel on the left side of the screen, open the  Logs menu and select Cont
 
 You are brought to the Contributor Insights Rules page.
 
-Choose the Blocked-DNS-Queries link.
+115. Choose the Blocked-DNS-Queries link.
 
-In order for results to show up on screen, you may need to adjust the display settings. Configure the following settings:
+116. In order for results to show up on screen, you may need to adjust the display settings. Configure the following settings:
+     - Contributors: Open the dropdown menu and select Top 50
+     - Period: Open the dropdown menu and select 1 Minute
+     - Order by: Open the dropdown menu and select Max
+     - Widget type: Open the dropdown menu and select Stacked area
+     - Time range: Select 30m
+     - Refresh: Open the dropdown menu and select 10s
+       
+     The Contributors chart reloads showing a series of dots in a vertical line. Each dot represents a blocklisted domain that was queried by an EC2 instance on AnyCompany’s network.
 
-Contributors: Open the dropdown menu and select Top 50
-Period: Open the dropdown menu and select 1 Minute
-Order by: Open the dropdown menu and select Max
-Widget type: Open the dropdown menu and select Stacked area
-Time range: Select 30m
- Refresh: Open the dropdown menu and select 10s
-The Contributors chart reloads showing a series of dots in a vertical line. Each dot represents a blocklisted domain that was queried by an EC2 instance on AnyCompany’s network.
-
-The Amazon CloudWatch Contributor Insights concole.
-
-Image description: The preceding diagram shows a chart with a series of dots aligned vertically.
-
-Scroll down the page and review the table beneath the chart. Expand the column labelled $.srcids.instance - $.query_name so that you are able to see the entirety of its contents.
-
- Note: This table shows the instance ID and target domain that was queried. Note that all of the queries were sent by the same instance. This is the complete list of queries that were blocked:
+     <img width="838" height="692" alt="image" src="https://github.com/user-attachments/assets/785b0641-8bbd-450d-bd32-9823b89c679b" />
 
 
-IyBTYW1wbGUgUmVwb3J0IC0gTm8gaWRlbnRpZmljYXRpb24gb2YgYWN0dWFsIHB.example.xyz
-lcnNvbnMKIyBvciBzZWN1cml0eSBjcmVkZW50aWFscyBpcyBpbnRlbmRlZCBvci.example.xyz
-BzaG91bGQgYmUgaW5mZXJyZWQuCk5hbWUsQWNjZXNzIEtleSxTZWNyZXQgQWNjZ.example.xyz
-XNzIEtleQpKb3JnZSBTb3V6YSxBS0lBSU9TRk9ETk43RVhBTVBMRSx3SmFsclhV.example.xyz
-dG5GRU1JL0s3TURFTkcvYlB4UmZpQ1lFWEFNUExFS0VZCkFybmF2IERlc2FpLEF.example.xyz
-LSUFJNDRRSDhESEJFWEFNUExFLGplN010R2JDbHdCRi8yWnA5VXRrL2gzeUNvOG.example.xyz
-52YkVYQU1QTEVLRVkKTmlra2kgV29sZixBS0lBSUpIM1hVWjlFWEFNUExFLDdnU.example.xyz
-m1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKUGF0IENhbmRl.example.xyz
-bGxhLEFLSUFJOUs4WjVXNkVYQU1QTEUsM0hsUm1JNnhIa01qTjhnN01ERU5HLzZ.example.xyz
-IazlKa1lpQ0VYQU1QTEVLRVkKWmhhbmcgV2VpLEFLSUFJNUszWjhRN0VYQU1QTE.example.xyz
-UsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKQWxla.example.xyz
-mFuZHJvIFJvc2FsZXosQUtJQUk2SzNaOFE4RVhBTVBMRSw5SmtSbUk2eEhrTWpO.example.xyz
-OGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpBa3VhIE1hbnNhLEFLSUFJN0s.example.xyz
-zWjhROUVYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU.example.xyz
-1QTEVLRVkKQW5hIENhcm9saW5hIFNpbHZhLEFLSUFJOEszWjhRMEVYQU1QTEUsO.example.xyz
-UprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKQXJuYXYg.example.xyz
-RGVzYWksQUtJQUk5SzNaOFExRVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TURFTkc.example.xyz
-vNkhrOUprWWlDRVhBTVBMRUtFWQpDYXJsb3MgU2FsYXphcixBS0lBSTBLM1o4UT.example.xyz
-JFWEFNUExFLDlKa1JtSTZ4SGtNak44ZzdNREVORy82SGs5SmtZaUNFWEFNUExFS.example.xyz
-0VZCkRpZWdvIFJhbWlyZXosQUtJQUkxSzNaOFEzRVhBTVBMRSw5SmtSbUk2eEhr.example.xyz
-TWpOOGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpFZnVhIE93dXN1LEFLSUF.example.xyz
-JMkszWjhRNEVYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0.example.xyz
-VYQU1QTEVLRVkKSmFuZSBEb2UsQUtJQUkzSzNaOFE1RVhBTVBMRSw5SmtSbUk2e.example.xyz
-EhrTWpOOGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpKb2huIERvZSxBS0lB.example.xyz
-STRLM1o4UTZFWEFNUExFLDlKa1JtSTZ4SGtNak44ZzdNREVORy82SGs5SmtZaUN.example.xyz
-FWEFNUExFS0VZCkpvaG4gU3RpbGVzLEFLSUFJNUszWjhRN0VYQU1QTEUsOUprUm.example.xyz
-1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKSm9yZ2UgU291e.example.xyz
-mEsQUtJQUk2SzNaOFE4RVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TURFTkcvNkhr.example.xyz
-OUprWWlDRVhBTVBMRUtFWQpLd2FrdSBNZW5zYWgsQUtJQUk3SzNaOFE5RVhBTVB.example.xyz
-MRSw5SmtSbUk2eEhrTWpOOGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpLd2.example.xyz
-VzaSBNYW51LEFLSUFJOEszWjhRMEVYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ER.example.xyz
-U5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKTGkgSnVhbixBS0lBSTlLM1o4UTFFWEFN.example.xyz
-UExFLDlKa1JtSTZ4SGtNak44ZzdNREVORy82SGs5SmtZaUNFWEFNUExFS0VZCkx.example.xyz
-pdSBKaWUsQUtJQUkwSzNaOFEyRVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TURFTk.example.xyz
-cvNkhrOUprWWlDRVhBTVBMRUtFWQpNw6FyY2lhIE9saXZlaXJhLEFLSUFJMUszW.example.xyz
-jhRM0VYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1Q.example.xyz
-TEVLRVkKTWFyw61hIEdhcmPDrWEsQUtJQUkySzNaOFE0RVhBTVBMRSw5SmtSbUk.example.xyz
-2eEhrTWpOOGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpNYXJ0aGEgUml2ZX.example.xyz
-JhLEFLSUFJM0szWjhRNUVYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIa.example.xyz
-zlKa1lpQ0VYQU1QTEVLRVkKTWFyeSBNYWpvcixBS0lBSTRLM1o4UTZFWEFNUExF.example.xyz
-LDlKa1JtSTZ4SGtNak44ZzdNREVORy82SGs5SmtZaUNFWEFNUExFS0VZCk1hdGV.example.xyz
-vIEphY2tzb24sQUtJQUk1SzNaOFE3RVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TU.example.xyz
-RFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpOaWtoaWwgSmF5YXNoYW5rYXIsQUtJQ.example.xyz
-Uk2SzNaOFE4RVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TURFTkcvNkhrOUprWWlD.example.xyz
-RVhBTVBMRUtFWQpOaWtraSBXb2xmLEFLSUFJN0szWjhROUVYQU1QTEUsOUprUm1.example.xyz
-JNnhIa00K.example.xyz
+     Image description: The preceding diagram shows a chart with a series of dots aligned vertically.
+
+117. Scroll down the page and review the table beneath the chart. Expand the column labelled $.srcids.instance - $.query_name so that you are able to see the entirety of its contents.
+
+     Note: This table shows the instance ID and target domain that was queried. Note that all of the queries were sent by the same instance. This is the complete list of queries that were blocked:
+     
+     ```
+     IyBTYW1wbGUgUmVwb3J0IC0gTm8gaWRlbnRpZmljYXRpb24gb2YgYWN0dWFsIHB.example.xyz
+     lcnNvbnMKIyBvciBzZWN1cml0eSBjcmVkZW50aWFscyBpcyBpbnRlbmRlZCBvci.example.xyz
+     BzaG91bGQgYmUgaW5mZXJyZWQuCk5hbWUsQWNjZXNzIEtleSxTZWNyZXQgQWNjZ.example.xyz
+     XNzIEtleQpKb3JnZSBTb3V6YSxBS0lBSU9TRk9ETk43RVhBTVBMRSx3SmFsclhV.example.xyz
+     dG5GRU1JL0s3TURFTkcvYlB4UmZpQ1lFWEFNUExFS0VZCkFybmF2IERlc2FpLEF.example.xyz
+     LSUFJNDRRSDhESEJFWEFNUExFLGplN010R2JDbHdCRi8yWnA5VXRrL2gzeUNvOG.example.xyz
+     52YkVYQU1QTEVLRVkKTmlra2kgV29sZixBS0lBSUpIM1hVWjlFWEFNUExFLDdnU.example.xyz
+     m1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKUGF0IENhbmRl.example.xyz
+     bGxhLEFLSUFJOUs4WjVXNkVYQU1QTEUsM0hsUm1JNnhIa01qTjhnN01ERU5HLzZ.example.xyz
+     IazlKa1lpQ0VYQU1QTEVLRVkKWmhhbmcgV2VpLEFLSUFJNUszWjhRN0VYQU1QTE.example.xyz
+     UsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKQWxla.example.xyz
+     mFuZHJvIFJvc2FsZXosQUtJQUk2SzNaOFE4RVhBTVBMRSw5SmtSbUk2eEhrTWpO.example.xyz
+     OGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpBa3VhIE1hbnNhLEFLSUFJN0s.example.xyz
+     zWjhROUVYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU.example.xyz
+     1QTEVLRVkKQW5hIENhcm9saW5hIFNpbHZhLEFLSUFJOEszWjhRMEVYQU1QTEUsO.example.xyz
+     UprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKQXJuYXYg.example.xyz
+     RGVzYWksQUtJQUk5SzNaOFExRVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TURFTkc.example.xyz
+     vNkhrOUprWWlDRVhBTVBMRUtFWQpDYXJsb3MgU2FsYXphcixBS0lBSTBLM1o4UT.example.xyz
+     JFWEFNUExFLDlKa1JtSTZ4SGtNak44ZzdNREVORy82SGs5SmtZaUNFWEFNUExFS.example.xyz
+     0VZCkRpZWdvIFJhbWlyZXosQUtJQUkxSzNaOFEzRVhBTVBMRSw5SmtSbUk2eEhr.example.xyz
+     TWpOOGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpFZnVhIE93dXN1LEFLSUF.example.xyz
+     JMkszWjhRNEVYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0.example.xyz
+     VYQU1QTEVLRVkKSmFuZSBEb2UsQUtJQUkzSzNaOFE1RVhBTVBMRSw5SmtSbUk2e.example.xyz
+     EhrTWpOOGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpKb2huIERvZSxBS0lB.example.xyz
+     STRLM1o4UTZFWEFNUExFLDlKa1JtSTZ4SGtNak44ZzdNREVORy82SGs5SmtZaUN.example.xyz
+     FWEFNUExFS0VZCkpvaG4gU3RpbGVzLEFLSUFJNUszWjhRN0VYQU1QTEUsOUprUm.example.xyz
+     1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKSm9yZ2UgU291e.example.xyz
+     mEsQUtJQUk2SzNaOFE4RVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TURFTkcvNkhr.example.xyz
+     OUprWWlDRVhBTVBMRUtFWQpLd2FrdSBNZW5zYWgsQUtJQUk3SzNaOFE5RVhBTVB.example.xyz
+     MRSw5SmtSbUk2eEhrTWpOOGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpLd2.example.xyz
+     VzaSBNYW51LEFLSUFJOEszWjhRMEVYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ER.example.xyz
+     U5HLzZIazlKa1lpQ0VYQU1QTEVLRVkKTGkgSnVhbixBS0lBSTlLM1o4UTFFWEFN.example.xyz
+     UExFLDlKa1JtSTZ4SGtNak44ZzdNREVORy82SGs5SmtZaUNFWEFNUExFS0VZCkx.example.xyz
+     pdSBKaWUsQUtJQUkwSzNaOFEyRVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TURFTk.example.xyz
+     cvNkhrOUprWWlDRVhBTVBMRUtFWQpNw6FyY2lhIE9saXZlaXJhLEFLSUFJMUszW.example.xyz
+     jhRM0VYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIazlKa1lpQ0VYQU1Q.example.xyz
+     TEVLRVkKTWFyw61hIEdhcmPDrWEsQUtJQUkySzNaOFE0RVhBTVBMRSw5SmtSbUk.example.xyz
+     2eEhrTWpOOGc3TURFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpNYXJ0aGEgUml2ZX.example.xyz
+     JhLEFLSUFJM0szWjhRNUVYQU1QTEUsOUprUm1JNnhIa01qTjhnN01ERU5HLzZIa.example.xyz
+     zlKa1lpQ0VYQU1QTEVLRVkKTWFyeSBNYWpvcixBS0lBSTRLM1o4UTZFWEFNUExF.example.xyz
+     LDlKa1JtSTZ4SGtNak44ZzdNREVORy82SGs5SmtZaUNFWEFNUExFS0VZCk1hdGV.example.xyz
+     vIEphY2tzb24sQUtJQUk1SzNaOFE3RVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TU.example.xyz
+     RFTkcvNkhrOUprWWlDRVhBTVBMRUtFWQpOaWtoaWwgSmF5YXNoYW5rYXIsQUtJQ.example.xyz
+     Uk2SzNaOFE4RVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TURFTkcvNkhrOUprWWlD.example.xyz
+     RVhBTVBMRUtFWQpOaWtraSBXb2xmLEFLSUFJN0szWjhROUVYQU1QTEUsOUprUm1.example.xyz
+     JNnhIa00K.example.xyz
+     ```
  Security: Note that all of the subdomains in these queries look like they may be base64 encoded strings. Also note the large number of queries made to the same domain (example.xyz) in a very short period of time. Taken together, this looks highly suspect and could be indicative of DNS exfiltration. DNS exfiltration is a technique used by attackers to extract sensitive data from a target network by encoding the data and transmitting it over DNS requests. This is done to bypass security measures, as DNS is often allowed to pass through firewalls and is not typically monitored as closely as other protocols like HTTP or HTTPS. Fortunately, your DNS firewall stopped this exfiltration attempt.
 
 Make a note of the instance ID listed next to the queried domains.
@@ -1001,7 +1004,7 @@ Choose Connect.
 
  Command: Start by entering the following command to write the complete list of requested DNS domains to a file:
 
-
+```shell
 cd ~
 cat << 'EOF' > dnsqueries.txt
 IyBTYW1wbGUgUmVwb3J0IC0gTm8gaWRlbnRpZmljYXRpb24gb2YgYWN0dWFsIHB.example.xyz
@@ -1051,6 +1054,7 @@ Uk2SzNaOFE4RVhBTVBMRSw5SmtSbUk2eEhrTWpOOGc3TURFTkcvNkhrOUprWWlD.example.xyz
 RVhBTVBMRUtFWQpOaWtraSBXb2xmLEFLSUFJN0szWjhROUVYQU1QTEUsOUprUm1.example.xyz
 JNnhIa00K.example.xyz
 EOF
+```
  Expected output:
 
 None, unless there is an error.
