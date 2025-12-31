@@ -1,7 +1,7 @@
 In this lab, you use public and private subnets, security groups, and ACLs to create a three-security zone network infrastructure. 
 You then use VPC flow logs to monitor the traffic that reaches the resources in each zone to verify only the required traffic is allowed.
 
-
+https://skillbuilder.aws/learn/BQTYG4FDFG/controlling-the-network/
 
 # Controlling the Network
 
@@ -445,34 +445,27 @@ In the Details pane at the bottom of the page, choose the Flow logs tab.
 
 At the right of the Flow logs section, choose Create flow log.
 
-On the Create flow log page:
+79. On the Create flow log page:
 
-In the Flow log settings section, for Name, enter vpc-flow-logs-for-blog.
-For Filter, select All.
-For Maximum aggregation interval, select 1 minute.
- Learn more: You select 1 minute in this lab to shorten the time before you can see the resulting logs. For more information, refer to Aggregation interval in the Additional resources section at the end of this lab.
-For Destination, select Send to CloudWatch Logs.
-For Destination log group, select blog-access-logs.
-For Service role, select VpcFlowLogsRole.
-For Log record format, select Custom format.
-On the Log format drop-down menu, select the following options in this order:
-account-id
+- In the Flow log settings section, for Name, enter vpc-flow-logs-for-blog.
+- For Filter, select All.
+- For Maximum aggregation interval, select 1 minute.
+  - Learn more: You select 1 minute in this lab to shorten the time before you can see the resulting logs. For more information, refer to Aggregation interval in the Additional resources section at the end of this lab.
 
-interface-id
-
-srcaddr
-
-srcport
-
-dstaddr
-
-dstport
-
-subnet-id
-
-flow-direction
-
-action
+- For Destination, select Send to CloudWatch Logs.
+- For Destination log group, select blog-access-logs.
+- For Service role, select VpcFlowLogsRole.
+- For Log record format, select Custom format.
+- On the Log format drop-down menu, select the following options in this order:
+  - account-id
+  - interface-id
+  - srcaddr
+  - srcport
+  - dstaddr
+  - dstport
+  - subnet-id
+  - flow-direction
+  - action
 
 
  Expected output: The Format preview box should look like this:
@@ -513,11 +506,9 @@ The policy allows the VPC Flow Logs service to create CloudWatch log groups and 
 
 Next, visit the WordPress blog site to generate traffic to the web and database servers.
 
-Copy the WordPressUrl value from the list to the left of these instructions. Paste the URL into a new web browser tab and press Enter to navigate to the WordPress blog site, or refresh the page if you still have the web browser tab open.
-
-Refresh the page three times to generate additional traffic.
-
-Update the URL to HTTP:// and then attempt to access the blog site again.
+81. Copy the WordPressUrl value from the list to the left of these instructions. Paste the URL into a new web browser tab and press Enter to navigate to the WordPress blog site, or refresh the page if you still have the web browser tab open.
+82. Refresh the page three times to generate additional traffic.
+83. Update the URL to `HTTP://` and then attempt to access the blog site again.
 
 Because you have only allowed HTTPS traffic from the load balancer to the web server, the request should time out. When you view the flow logs, you should find rejection messages for traffic on port 80.
 
@@ -549,22 +540,30 @@ If you followed the log format listed in task 3.1, the log messages should appea
 
  Task complete: You have successfully created VPC Flow Logs to monitor the network traffic within your VPC.
 
-Conclusion
+## Conclusion
 You successfully did the following:
 
-Created a three-security zone network infrastructure
-Implemented network segmentation using security groups, network ACLs, and public and private subnets
-Monitored network traffic to EC2 instances using VPC flow logs
+- Created a three-security zone network infrastructure
+- Implemented network segmentation using security groups, network ACLs, and public and private subnets
+- Monitored network traffic to EC2 instances using VPC flow logs
  
 ## Additional resources
 
-Elastic Load Balancing product comparisons
-Ephemeral ports
-Network ACLs for load balancers in a VPC
-Aggregation interval
-Logging IP traffic with VPC Flow Logs
-Publish flow logs to CloudWatch Logs
-Answer key
+[Elastic Load Balancing product comparisons](https://aws.amazon.com/elasticloadbalancing/features/?nc=sn&loc=2&dn=1)
+
+[Ephemeral ports](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#nacl-ephemeral-ports)
+
+[Network ACLs for load balancers in a VPC](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-nacl)
+
+[Aggregation interval](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-logs-aggregration-interval)
+
+[Logging IP traffic with VPC Flow Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html)
+
+[Publish flow logs to CloudWatch Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-cwl.html)
+
+
+
+## Answer key
 
 ### Task 2.2 solution
 Return to your web browser tab with the EC2 management console.
