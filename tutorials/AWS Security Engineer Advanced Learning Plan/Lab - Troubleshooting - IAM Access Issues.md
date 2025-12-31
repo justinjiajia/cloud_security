@@ -232,7 +232,7 @@ Expand the Detailed instructions below for the full solution.
   
 </details>
 
-<i class="far fa-check-square" style="color:#0073bb"></i>
+ 
 
 
 ### Verify the solution
@@ -264,17 +264,12 @@ Conclusion
 Viewed and updated IAM permissions of a user identity-based policy to allow the user to assume an IAM role.
 Viewed and updated IAM role trust policy to allow a user to assume an IAM role.
 Verified the solution.
-End lab
-Follow these steps to close the console and end your lab.
 
-Return to the AWS Management Console.
 
-At the upper-right corner of the page, choose AWSLabsUser, and then choose Sign out.
+ 
 
-Choose End Lab and then confirm that you want to end your lab.
-
-Additional resources
-Digital Course: Introduction to AWS Identity and Access Management (IAM).
-Digital Course: AWS Identity and Access Management (IAM) - Troubleshooting.
-Digital Course: Deep Dive with Security: AWS Identity and Access Management (IAM).
-Lab: Introduction to AWS Identity and Access Management (IAM).
+## Additional resources
+- [Digital Course: Introduction to AWS Identity and Access Management (IAM)](https://explore.skillbuilder.aws/learn/course/external/view/elearning/120/introduction-to-aws-identity-and-access-management-iam).
+- [Digital Course: AWS Identity and Access Management (IAM) - Troubleshooting](https://explore.skillbuilder.aws/learn/course/external/view/elearning/15564/troubleshooting-aws-identity-and-access-management-iam).
+- [Digital Course: Deep Dive with Security: AWS Identity and Access Management (IAM)](https://explore.skillbuilder.aws/learn/course/external/view/elearning/104/deep-dive-with-security-aws-identity-and-access-management-iam).
+- [Lab: Introduction to AWS Identity and Access Management (IAM)](https://explore.skillbuilder.aws/learn/course/external/view/elearning/880/introduction-to-aws-identity-and-access-management-iam).
