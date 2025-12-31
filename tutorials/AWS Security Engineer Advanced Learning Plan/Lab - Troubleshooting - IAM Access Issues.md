@@ -1,4 +1,6 @@
 
+This lab demonstrates the concepts of assuming an AWS Identity and Access Management (IAM) role from the Management Console. As a member of the cloud team at AnyCompany, your company requires that all users who need access to AWS must not have the IAM permissions attached directly to their users identities. Instead, the users permissions only allow them to assume an IAM role which has the required permissions. The company's policy also requires that least privilege concepts are strictly applied where possible. The lab is based on a break/fix scenario where you are presented with a problem of a user failing to switch roles from the Management Console. You need to troubleshoot and fix the issue. High-level guidance and references are provided to assist in fixing the issue. The detailed solution instructions are provided in a hidden collapsible section which you can expand.
+
 https://skillbuilder.aws/learn/68UNZXPYUZ/lab--troubleshooting--iam-access-issues
 
 # Troubleshooting - IAM Access Issues
