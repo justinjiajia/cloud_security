@@ -78,6 +78,7 @@ Hence, the user is unable perform the duties of his/her role. Your task is to tr
 <img width="269" height="388" alt="image" src="https://github.com/user-attachments/assets/9566d5c7-0fa2-4554-b38c-5dd1dd9482a6" />
 
 ## Task 1: Accessing the lab
+
 In this task, you are introduced on how to access the lab using the Operator-User IAM user and how to attempt switching roles to assume the Operator-Role IAM role.
 
 When you followed the instructions in the Start lab section, you are logged to the console with the AWSLabUser. This is the user representing the cloud team member who needs to troubleshoot and fix the issue.
@@ -149,7 +150,7 @@ Expand the Detailed instructions below for the full solution.
 
 
 <details>
-  <summary><h3> Detailed instructions</h3></summary>
+  <summary><h4> Detailed instructions</h4></summary>
   There are two things involved when assuming an IAM role:
 
   - The IAM entity (Operator-User in this example) must have permissions to assume the role in its identity-based policy.
@@ -157,13 +158,11 @@ Expand the Detailed instructions below for the full solution.
   
   To troubleshoot, you need to check both of them.
   
-  Choose the AWS Management Console browser tab which has the AWSLabUser at the upper-right corner of the page.
+  11. Choose the AWS Management Console browser tab which has the AWSLabUser at the upper-right corner of the page.
   
-  At the top of the AWS Management Console, in the search bar, search for and choose IAM.
-  
-  In the navigation pane at the left of the page, under Access management, choose Users.
-  
-  In the Users page, choose the link for Operator-User.
+  12. At the top of the AWS Management Console, in the search bar, search for and choose IAM.
+  13. In the navigation pane at the left of the page, under Access management, choose Users.
+  14. In the Users page, choose the link for Operator-User.
   
   In the Operator-User page, under the Permission tab, check the available Permissions policies.
   
@@ -232,6 +231,8 @@ Expand the Detailed instructions below for the full solution.
 
   
 </details>
+
+<i class="far fa-check-square" style="color:#0073bb"></i>
 
 
 ### Verify the solution
