@@ -93,26 +93,25 @@ You also need to access the AWS Management Console as the Operator-User who is n
 3. In your preferred browser, open a new Private, Incognito, or InPrivate window.
 
 4. Copy the ConsoleAccessURL value that is listed to the left of these instructions. Paste the URL into the new web browser window you just opened and press Enter.
+5. In the IAM user sign in page:
+- For IAM username, enter `Operator-User`.
+- For the Password, paste the **OperatorUserPassword** value listed to the left of these instructions.
+- Choose *Sign in*.
 
-In the IAM user sign in page:
-
-For IAM username, enter Operator-User.
-For the Password, paste the OperatorUserPassword value listed to the left of these instructions.
-Choose Sign in.
 You are logged in to the Console Home page as the Operator-User.
 
 Now, you assume the Operator-Role IAM role from the AWS Management Console to verify the user issue.
 
-At the upper-right corner of the page, choose the Operator-User drop-down menu, and then choose Switch role.
+6. At the upper-right corner of the page, choose the Operator-User drop-down menu, and then choose Switch role.
+7. If you are presented with a Switch role page that has a Get started in 3 simple steps section, then choose Switch Role.
+8. On the Switch Role page:
 
-If you are presented with a Switch role page that has a Get started in 3 simple steps section, then choose Switch Role.
+- For Account, copy and paste the **AWSAccountID** value listed to the left of these instructions.
+- For Role, enter `Operator-Role`.
+- For Display Name, leave blank as this is just a descriptive name.
 
-On the Switch Role page:
+9. Choose Switch Role.
 
-For Account, copy and paste the AWSAccountID value listed to the left of these instructions.
-For Role, enter Operator-Role.
-For Display Name, leave blank as this is just a descriptive name.
-Choose Switch Role.
 The following message is displayed Invalid information in one or more fields. Check your information or contact your administrator. This indicates that the role switch is not successful and confirms the user issue.
 
 You can re-visit this section whenever you need guidance on how to login as the Operator-User and switch roles to assume the Operator-Role IAM role.
@@ -128,8 +127,8 @@ After you confirmed the user issue in the previous task, you need to switch back
 10. Choose the AWS Management Console browser tab which has the AWSLabUser at the upper-right corner of the page to troubleshoot and remediate the Operator-User issue.
 Your solution should allow the Operator-User to assume the Operator-Role successfully and also should strictly adhere to the following least privilege guidelines:
 
-The Operator-User has the permissions to only assume the Operator-Role.
-The Operator-Role can only be assumed by the Operator-User.
+- The Operator-User has the permissions to only assume the Operator-Role.
+- The Operator-Role can only be assumed by the Operator-User.
 
 <img width="984" height="383" alt="image" src="https://github.com/user-attachments/assets/692c19ac-be4b-41e4-a104-c1a2bbe7ec2c" />
 
@@ -275,6 +274,18 @@ Verified the solution.
 
 ## Additional resources
 - [Digital Course: Introduction to AWS Identity and Access Management (IAM)](https://explore.skillbuilder.aws/learn/course/external/view/elearning/120/introduction-to-aws-identity-and-access-management-iam).
+  
 - [Digital Course: AWS Identity and Access Management (IAM) - Troubleshooting](https://explore.skillbuilder.aws/learn/course/external/view/elearning/15564/troubleshooting-aws-identity-and-access-management-iam).
+  
 - [Digital Course: Deep Dive with Security: AWS Identity and Access Management (IAM)](https://explore.skillbuilder.aws/learn/course/external/view/elearning/104/deep-dive-with-security-aws-identity-and-access-management-iam).
 - [Lab: Introduction to AWS Identity and Access Management (IAM)](https://explore.skillbuilder.aws/learn/course/external/view/elearning/880/introduction-to-aws-identity-and-access-management-iam).
+
+
+
+## CloudFormation Templates
+
+Cannot load
+
+<img width="1041" height="426" alt="image" src="https://github.com/user-attachments/assets/d0b924e3-2c34-4f8c-a6d9-cbaa4d6d4852" />
+
+
