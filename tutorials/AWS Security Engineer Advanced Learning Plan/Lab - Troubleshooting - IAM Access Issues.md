@@ -1,4 +1,7 @@
-Troubleshooting - IAM Access Issues
+
+https://skillbuilder.aws/learn/68UNZXPYUZ/lab--troubleshooting--iam-access-issues
+
+# Troubleshooting - IAM Access Issues
 SPL-TF-200-SITIAI-1 - Version 1.0.7
 
 © 2025 Amazon Web Services, Inc. or its affiliates. All rights reserved. This work may not be reproduced or redistributed, in whole or in part, without prior written permission from Amazon Web Services, Inc. Commercial copying, lending, or selling is prohibited. All trademarks are the property of their owners.
